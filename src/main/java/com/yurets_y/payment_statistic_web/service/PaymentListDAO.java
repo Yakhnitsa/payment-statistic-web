@@ -157,11 +157,11 @@ public class PaymentListDAO {
     }
 
     private void loadBackupFile(PaymentList paymentList){
-        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
-        if(!file.exists()){
-            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
-        }
-        paymentList.setBackupFile(file);
+//        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
+//        if(!file.exists()){
+//            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
+//        }
+//        paymentList.setBackupFile(file);
     }
 
 
