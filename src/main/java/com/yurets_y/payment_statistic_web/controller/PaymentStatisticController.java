@@ -10,6 +10,7 @@ import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import static com.monitorjbl.json.Match.match;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PaymentStatisticController {
@@ -40,7 +42,7 @@ public class PaymentStatisticController {
         return paymentLists;
     }
 
-    @GetMapping("test")
+    @GetMapping("payments")
     @ResponseBody
     public String getTestJSon() throws JsonProcessingException {
 
@@ -49,8 +51,13 @@ public class PaymentStatisticController {
         return marshallJSON(paymentLists);
     }
 
-    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
+    @GetMapping("payments/{id}")
+    public PaymentList getPayment(@PathVariable String id) {
+        System.out.println(id);
+        return null;
+    }
 
+    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
