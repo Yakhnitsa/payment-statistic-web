@@ -3,38 +3,52 @@ package com.yurets_y.payment_statistic_web.entity;
 import javax.persistence.*;
 import java.io.File;
 import java.util.*;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @IdClass(PaymentListId.class)
 @Table(name = "PAYMENT_LIST")
 public class PaymentList {
-    private Long id;
     @Id
     @Column(updatable = false)
+    @JsonView(Views.ShortView.class)
     private int number;
     @Id
     @Column(updatable = false)
+    @JsonView(Views.ShortView.class)
     private int payerCode;
 
     @Temporal(TemporalType.DATE)
+    @JsonView(Views.ShortView.class)
     private Date date;
+
     private int taxCode;
     private String payerName;
     private String contractNumber;
 
+    @JsonView(Views.ShortView.class)
     private long openingBalance;
+
+    @JsonView(Views.ShortView.class)
     private long closingBalance;
 
+    @JsonView(Views.NormalView.class)
     private long payments;
+
+    @JsonView(Views.NormalView.class)
     private long paymentTaxes;
+
+    @JsonView(Views.ShortView.class)
     private long paymentVsTaxes;
 
     @OneToMany(mappedBy="paymentList", cascade=CascadeType.ALL, orphanRemoval=true)
+    @JsonView(Views.FullView.class)
     private List<PaymentDetails> paymentDetailsList = new ArrayList<>();
 
     @Transient
     private File backupFile;
 
+    @JsonView(Views.ShortView.class)
     private String backupFilePath;
 
     public int getNumber() {

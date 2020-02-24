@@ -15,8 +15,10 @@
                     </div>
                     <div class="modal-body">
                         <p>{{loadedPayments}}</p>
-                        <label v-for="file in files">{{file.name}}</label>
-                        <p>{{files}}</p>
+                        <ul>
+                            <li v-for="file in files">{{file.name}}</li>
+                        </ul>
+
                     </div>
                     <div class="modal-footer">
                         <div class="form-row">

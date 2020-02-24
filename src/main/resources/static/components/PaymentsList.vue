@@ -18,6 +18,10 @@
                     <td scope="col">{{payment.openingBalance | formatPayment }}</td>
                     <td scope="col">{{payment.closingBalance | formatPayment}}</td>
                     <td scope="col">{{payment.paymentVsTaxes | formatPayment}}</td>
+                    <td scope="col">
+                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">show</button>
+                    </td>
+
                 </tr>
             </tbody>
         </table>
@@ -28,7 +32,9 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
+
         name: "PaymentsTable",
         props: ['payments'],
         data: function(){
@@ -67,7 +73,27 @@
             // } );
         },
         methods:{
+            showPayment(payment){
+                var formData = new FormData();
 
+                formData.append("listNumber",payment.number);
+                formData.append("payerCode",payment.payerCode)
+
+                axios.post('/api/single-payment',
+                    formData, {
+                        // headers: {
+                        //     'Content-Type': 'multipart/form-data'
+                        // }
+
+                    }
+                ).then(function (response) {
+                    console.log(response)
+                    console.log('SUCCESS!')
+                })
+                    .catch((error) => console.log(error))
+
+
+            }
         }
     }
 </script>

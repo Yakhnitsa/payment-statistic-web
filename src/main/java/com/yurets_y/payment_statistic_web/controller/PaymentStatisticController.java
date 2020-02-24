@@ -6,12 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitorjbl.json.JsonView;
 import com.monitorjbl.json.JsonViewSerializer;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
+import com.yurets_y.payment_statistic_web.entity.PaymentListId;
+import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -32,7 +32,7 @@ public class PaymentStatisticController {
         return "index";
     }
 
-    @GetMapping("last-payments")
+    @GetMapping("/api/last-payments")
     @ResponseBody
     public List<PaymentList> getLastPayments(){
 
@@ -42,19 +42,27 @@ public class PaymentStatisticController {
         return paymentLists;
     }
 
-    @GetMapping("payments")
+    @GetMapping("/api/payments")
     @ResponseBody
-    public String getTestJSon() throws JsonProcessingException {
+    @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
+    public List<PaymentList> getTestJSon() throws JsonProcessingException {
 
         List<PaymentList> paymentLists = paymentListDAO.getAll();
 
-        return marshallJSON(paymentLists);
+        return paymentLists;
     }
 
-    @GetMapping("payments/{id}")
-    public PaymentList getPayment(@PathVariable String id) {
-        System.out.println(id);
-        return null;
+
+    @PostMapping("/api/single-payment")
+    @ResponseBody
+    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
+    public PaymentList getPayment(
+            @RequestParam(value = "payerCode",required = false) Integer payerCode,
+            @RequestParam(value = "listNumber",required = false) Integer listNumber
+    ) {
+        PaymentListId id = new PaymentListId(payerCode,listNumber);
+        PaymentList paymentList = paymentListDAO.getById(id);
+        return paymentList;
     }
 
     private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {

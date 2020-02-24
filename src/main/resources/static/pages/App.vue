@@ -7,7 +7,7 @@
         <p>{{message}}</p>
         <loading-window></loading-window>
         <!--<daily-statistic></daily-statistic>-->
-        <!--<payment-list :payments="payments"></payment-list>-->
+        <payment-list :payments="payments"></payment-list>
     </div>
 </template>
 
@@ -31,7 +31,7 @@
             }
         },
         created: function(){
-            axios.get('/payments')
+            axios.get('/api/payments')
                 .then(response => {
                     console.log(response);
                     response.data.forEach( payment => this.payments.push(payment))

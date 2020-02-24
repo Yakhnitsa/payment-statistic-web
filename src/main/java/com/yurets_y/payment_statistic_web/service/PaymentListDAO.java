@@ -4,6 +4,7 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,7 @@ public class PaymentListDAO {
         openEntityManager();
         beginTransaction();
         PaymentList listFromRepo = em.find(PaymentList.class, id);
+        Hibernate.initialize(listFromRepo.getPaymentDetailsList());
         commitTransaction();
         closeEntityManager();
         loadBackupFile(listFromRepo);
@@ -107,6 +109,7 @@ public class PaymentListDAO {
         closeEntityManager();
         return list;
     }
+
     public List<PaymentDetails> getPaymentDetailsByDate(Date from, Date until){
         openEntityManager();
         beginTransaction();
@@ -118,6 +121,20 @@ public class PaymentListDAO {
         commitTransaction();
         closeEntityManager();
         return list;
+    }
+
+    public List<PaymentList> getAllFromTempDB(){
+        return null;
+    }
+
+
+    public PaymentList saveListToTempDB(PaymentList paymentList){
+        return null;
+    }
+
+    public PaymentList saveTempListsToMainDB(PaymentList list){
+//        File file = Files.createTempFile();
+        return null;
     }
 
     private void openEntityManager(){
@@ -157,12 +174,16 @@ public class PaymentListDAO {
     }
 
     private void loadBackupFile(PaymentList paymentList){
-//        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
-//        if(!file.exists()){
-//            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
-//        }
-//        paymentList.setBackupFile(file);
+        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
+        if(!file.exists()){
+            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
+        }
+        paymentList.setBackupFile(file);
     }
+
+
+
+
 
 
 }
