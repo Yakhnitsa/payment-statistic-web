@@ -32,6 +32,9 @@ public class PaymentDetails {
     private long taxPayment;
     private long totalPayment;
 
+    public PaymentDetails() {
+    }
+
     public PaymentList getPaymentList() {
         return paymentList;
     }

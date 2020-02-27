@@ -51,6 +51,9 @@ public class PaymentList {
     @JsonView(Views.ShortView.class)
     private String backupFilePath;
 
+    public PaymentList() {
+    }
+
     public int getNumber() {
         return number;
     }
@@ -168,5 +171,14 @@ public class PaymentList {
 
     public void setBackupFilePath(String backupFilePath) {
         this.backupFilePath = backupFilePath;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentList{" +
+                "number=" + number +
+                ", payerCode=" + payerCode +
+                ", date=" + date +
+                '}';
     }
 }

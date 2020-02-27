@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class PaymentListDAO {
 
     @Value("${service.backup-path}")
     private String backupDir;
+
+    private List<PaymentList> tempList = new ArrayList<>();
 
 
     public PaymentListDAO(@Qualifier("defaultEMF") EntityManagerFactory entityManager) {
@@ -75,7 +79,7 @@ public class PaymentListDAO {
     public List<PaymentList> getAll() {
         openEntityManager();
         beginTransaction();
-        List<PaymentList> paymentLists = em.createQuery("from PaymentList", PaymentList.class).getResultList();
+        List<PaymentList> paymentLists = em.createQuery("FROM PaymentList", PaymentList.class).getResultList();
         paymentLists.forEach(this::loadBackupFile);
         commitTransaction();
         closeEntityManager();
@@ -124,16 +128,18 @@ public class PaymentListDAO {
     }
 
     public List<PaymentList> getAllFromTempDB(){
-        return null;
+        return Collections.unmodifiableList(tempList);
     }
 
 
     public PaymentList saveListToTempDB(PaymentList paymentList){
+
+        if(tempList.add(paymentList)) return paymentList;
         return null;
     }
 
     public PaymentList saveTempListsToMainDB(PaymentList list){
-//        File file = Files.createTempFile();
+
         return null;
     }
 
@@ -174,11 +180,11 @@ public class PaymentListDAO {
     }
 
     private void loadBackupFile(PaymentList paymentList){
-        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
-        if(!file.exists()){
-            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
-        }
-        paymentList.setBackupFile(file);
+//        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
+//        if(!file.exists()){
+//            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
+//        }
+//        paymentList.setBackupFile(file);
     }
 
 

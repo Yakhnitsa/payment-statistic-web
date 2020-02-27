@@ -55,7 +55,7 @@ public class PaymentStatisticController {
 
     @PostMapping("/api/single-payment")
     @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
+    @com.fasterxml.jackson.annotation.JsonView(Views.FullView.class)
     public PaymentList getPayment(
             @RequestParam(value = "payerCode",required = false) Integer payerCode,
             @RequestParam(value = "listNumber",required = false) Integer listNumber

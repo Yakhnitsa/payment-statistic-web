@@ -5,6 +5,7 @@
         <h1>Перечни УТЛ-2</h1>
 
         <p>{{message}}</p>
+        <button @click="test">TEST</button>
         <loading-window></loading-window>
         <!--<daily-statistic></daily-statistic>-->
         <payment-list :payments="payments"></payment-list>
@@ -33,11 +34,20 @@
         created: function(){
             axios.get('/api/payments')
                 .then(response => {
-                    console.log(response);
                     response.data.forEach( payment => this.payments.push(payment))
                 }
 
             )
+        },
+        methods:{
+            test(){
+                var formData = new FormData();
+                var json = [{ "firstName" : "Hammond", "lastName" : "Fergison" },
+                    { "firstName" : "Elmer", "lastName" : "Fudd" }];
+                formData.append("pojo",json)
+                axios.post('/api/test',json)
+                    .then(result => console.log(result))
+            }
         }
     }
 
