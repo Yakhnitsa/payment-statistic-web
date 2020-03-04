@@ -10,16 +10,16 @@ import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import static com.monitorjbl.json.Match.match;
 
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class PaymentStatisticController {
@@ -63,6 +63,23 @@ public class PaymentStatisticController {
         PaymentListId id = new PaymentListId(payerCode,listNumber);
         PaymentList paymentList = paymentListDAO.getById(id);
         return paymentList;
+    }
+
+    @PostMapping("/api/delete-payment")
+    @ResponseBody
+    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
+    public ResponseEntity<?> deleteList(@RequestBody PaymentList paymentList){
+        if(paymentListDAO.contains(paymentList)){
+            paymentListDAO.remove(paymentList);
+        }else{
+            return new ResponseEntity<>(paymentList,HttpStatus.NOT_FOUND);
+        }
+        if(paymentListDAO.contains(paymentList)){
+            return new ResponseEntity<>(paymentList,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(paymentList,HttpStatus.OK);
+
     }
 
     private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {

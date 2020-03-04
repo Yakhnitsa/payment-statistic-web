@@ -68,14 +68,35 @@ public class UploadController {
         return new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
-    @PostMapping("/api/save-selected")
+    @PostMapping("/api/save-temp-selected")
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> saveSelectedToMainDB(
             @RequestBody PaymentList[] paymentLists
     ){
-        System.out.println(paymentLists);
+        for(PaymentList list : paymentLists){
+            PaymentList listFromTemp = tempListService.deleteFromTempDB(list);
+            if(listFromTemp == null) continue;
+            if(paymentListDAO.contains(list))
+                paymentListDAO.update(list);
+            else{
+                paymentListDAO.add(listFromTemp);
+            }
+
+        }
         return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
+
+    @PostMapping("/api/delete-temp-selected")
+    @JsonView(Views.ShortView.class)
+    public ResponseEntity<?> deleteSelectedFromTemp(
+            @RequestBody PaymentList[] paymentLists
+    ){
+        for(PaymentList list : paymentLists){
+            tempListService.deleteFromTempDB(list);
+        }
+        return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
+    }
+
     @PostMapping("/api/test")
     public ResponseEntity<?> test(
             @RequestBody POJO[] pojo
@@ -133,4 +154,6 @@ public class UploadController {
             this.date = date;
         }
     }
+
+
 }

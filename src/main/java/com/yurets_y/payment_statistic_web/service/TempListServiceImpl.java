@@ -1,8 +1,8 @@
 package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
+import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,20 +11,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TempListServiceImpl implements TempListService {
-
-
 
     private Path tempDir;
 
     private DocParser htmlDocParser;
 
-    private List<PaymentList> paymentLists = new ArrayList<>();
+    private Map<PaymentListId,PaymentList> tempDBMap = new LinkedHashMap<>();
 
     public TempListServiceImpl(){
         try {
@@ -39,11 +35,13 @@ public class TempListServiceImpl implements TempListService {
     public PaymentList putToTempDB(MultipartFile multipartFile) {
         String filePath = tempDir.toAbsolutePath().toString() + File.separator + multipartFile.getOriginalFilename();
         try {
-            File file = Files.createFile(Paths.get(filePath)).toFile();
+            File file = Paths.get(filePath).toFile();
+            if(!file.exists())
+                file = Files.createFile(Paths.get(filePath)).toFile();
             multipartFile.transferTo(file);
 
             PaymentList list = htmlDocParser.parseFromFile(file);
-            paymentLists.add(list);
+            tempDBMap.put(getIdFromList(list),list);
 
             return list;
         } catch (IOException e) {
@@ -52,19 +50,31 @@ public class TempListServiceImpl implements TempListService {
         return null;
     }
 
+
     @Override
-    public PaymentList saveToMainDB(PaymentList paymentList) {
-        return null;
+    public PaymentList deleteFromTempDB(PaymentList paymentList) {
+        PaymentList listFromTemp = tempDBMap.remove(getIdFromList(paymentList));
+        return listFromTemp;
     }
 
     @Override
-    public List<PaymentList> getAllFromTempDB() {
-        return Collections.unmodifiableList(paymentLists);
+    public Collection<PaymentList> getAllFromTempDB() {
+        return Collections.unmodifiableCollection(tempDBMap.values());
     }
 
 
     @Autowired
     public void setHtmlDocParser(DocParser htmlDocParser) {
         this.htmlDocParser = htmlDocParser;
+    }
+
+    private PaymentListId getIdFromList(PaymentList paymentList){
+        int code = paymentList.getPayerCode();
+        int number = paymentList.getNumber();
+        if((code!= 0) && (number)!= 0)
+            return new PaymentListId(code,number);
+        else{
+            throw new RuntimeException("Неверный ID " + paymentList.toString());
+        }
     }
 }

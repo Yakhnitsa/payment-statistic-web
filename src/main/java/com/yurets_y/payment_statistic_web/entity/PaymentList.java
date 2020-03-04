@@ -160,6 +160,10 @@ public class PaymentList {
         return paymentDetailsList.remove(o);
     }
 
+    public PaymentListId getId(){
+        return new PaymentListId(this.payerCode,this.number);
+    }
+
     public boolean addAll(Collection<? extends PaymentDetails> c) {
         c.forEach(pl -> pl.setPaymentList(this));
         return paymentDetailsList.addAll(c);
@@ -180,5 +184,23 @@ public class PaymentList {
                 ", payerCode=" + payerCode +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PaymentList that = (PaymentList) o;
+
+        if (number != that.number) return false;
+        return payerCode == that.payerCode;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = number;
+        result = 31 * result + payerCode;
+        return result;
     }
 }

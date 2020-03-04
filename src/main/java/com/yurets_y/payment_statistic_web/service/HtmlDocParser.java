@@ -93,6 +93,7 @@ public class HtmlDocParser implements DocParser {
         }
 
         if (!checkSumTest(paymentList)) {
+            //TODO вернуть проверку на место после исправления
             throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList.getNumber());
         }
         return paymentList;
@@ -160,6 +161,7 @@ public class HtmlDocParser implements DocParser {
             case "Накопичувальні карточки":
             case "Коригування сум нарахованих платежів минулі періоди":
             case "Коригування сум нарахованих платежів":
+            case "Штрафи":
                 return getStationPayments(type, iterator);
             case "Платіжні доручення":
                 return getPayments(type, iterator);

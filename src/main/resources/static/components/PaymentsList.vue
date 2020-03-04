@@ -19,9 +19,9 @@
                     <td scope="col">{{payment.closingBalance | formatPayment}}</td>
                     <td scope="col">{{payment.paymentVsTaxes | formatPayment}}</td>
                     <td scope="col">
-                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">show</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)"><i class="fas fa-cloud"></i></button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">delete</button>
                     </td>
-
                 </tr>
             </tbody>
         </table>
@@ -91,8 +91,14 @@
                     console.log('SUCCESS!')
                 })
                     .catch((error) => console.log(error))
-
-
+            },
+            deletePayment(payment){
+                axios.post('/api/delete-payment',payment)
+                    .then(response =>{
+                        console.log(response)
+                        this.$emit('update-list')
+                    })
+                    .catch(error => console.log(error))
             }
         }
     }

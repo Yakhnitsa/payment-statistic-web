@@ -58,7 +58,8 @@ public class PaymentListDAO {
 
     public void remove(PaymentList paymentList) {
         openEntityManager();
-        em.remove(paymentList);
+        beginTransaction();
+        em.remove(em.contains(paymentList) ? paymentList : em.merge(paymentList));
         commitTransaction();
         closeEntityManager();
     }
@@ -68,10 +69,13 @@ public class PaymentListDAO {
         openEntityManager();
         beginTransaction();
         PaymentList listFromRepo = em.find(PaymentList.class, id);
-        Hibernate.initialize(listFromRepo.getPaymentDetailsList());
-        commitTransaction();
-        closeEntityManager();
-        loadBackupFile(listFromRepo);
+        if(listFromRepo != null){
+            Hibernate.initialize(listFromRepo.getPaymentDetailsList());
+            commitTransaction();
+            closeEntityManager();
+            loadBackupFile(listFromRepo);
+        }
+
         return listFromRepo;
 
     }
@@ -127,22 +131,6 @@ public class PaymentListDAO {
         return list;
     }
 
-    public List<PaymentList> getAllFromTempDB(){
-        return Collections.unmodifiableList(tempList);
-    }
-
-
-    public PaymentList saveListToTempDB(PaymentList paymentList){
-
-        if(tempList.add(paymentList)) return paymentList;
-        return null;
-    }
-
-    public PaymentList saveTempListsToMainDB(PaymentList list){
-
-        return null;
-    }
-
     private void openEntityManager(){
         if(em == null || !em.isOpen()){
             this.em = emf.createEntityManager();
@@ -167,8 +155,13 @@ public class PaymentListDAO {
         fileExtension = fileExtension.substring(fileExtension.lastIndexOf("."));
         String fileName = paymentList.getPayerCode() + "_" + paymentList.getNumber() + fileExtension;
         File backupFile = new File(backupDir + File.separator + fileName);
+
         try {
-            Files.copy(paymentList.getBackupFile().toPath(),
+            File fileFromList = paymentList.getBackupFile();
+            if(!fileFromList.exists())
+                Files.createFile(backupFile.toPath());
+
+            Files.copy(fileFromList.toPath(),
                     backupFile.toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
@@ -187,9 +180,13 @@ public class PaymentListDAO {
 //        paymentList.setBackupFile(file);
     }
 
-
-
-
-
+    public boolean contains(PaymentList paymentList){
+        openEntityManager();
+        beginTransaction();
+        PaymentList listFromDB = em.find(PaymentList.class,paymentList.getId());
+        commitTransaction();
+        closeEntityManager();
+        return listFromDB != null;
+    }
 
 }

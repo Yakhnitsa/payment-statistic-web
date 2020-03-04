@@ -57,7 +57,6 @@
         },
         watch:{
             selectedPayments: function () {
-                // console.log(this.selectedPayments)
                 this.$emit('change-selected',this.selectedPayments)
             }
         },
@@ -80,15 +79,12 @@
                 }
             },
             formatDate(dateLong){
-                // var date = new Date(dateLong);
                 return new Date(dateLong).toLocaleDateString()
             }
         },
         created: function(){
-            console.log(this.$options.name + " created")
         },
         mounted: function(){
-            console.log(this.$options.name + " mounted")
         }
     }
 </script>

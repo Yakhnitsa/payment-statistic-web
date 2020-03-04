@@ -5,7 +5,7 @@
         </button>
         <!-- Modal -->
         <div class="modal fade" id="loadingPage" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Загрузка перечней</h5>
@@ -35,8 +35,9 @@
                             </div>
                         </div>
                         <button type="button" class="btn btn-secondary" @click="submitFileUpload()">Отправить на сервер</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                         <button type="button" class="btn btn-primary" @click="saveSelected()">Сохранить перечни в БД</button>
+                        <button type="button" class="btn btn-primary" @click="deleteSelected()">Удалить выбранные</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                     </div>
                 </div>
             </div>
@@ -65,8 +66,6 @@
         methods:{
             addFile(event){
                 var selectedFiles = event.target.files;
-                console.log("event.target.files:")
-                console.log(event.target.files);
                 Array.from(selectedFiles).forEach(file =>{
                     this.files.push(file);
                 });
@@ -89,7 +88,6 @@
                     if(response.status == 200){
                         this.files = []
                         this.loadedPayments = [];
-                        console.log(response)
                         response.data.forEach(list => this.loadedPayments.push(list))
                     }
                     else if(response.status == 204){
@@ -99,12 +97,7 @@
 
             },
             saveSelected(){
-                // var formData = new FormData();
-                // this.selectedPayments.forEach(element =>{
-                //     formData.append("selected", "" + element.number)
-                // });
-
-                axios.post('/api/save-selected',
+                axios.post('/api/save-temp-selected',
                     this.selectedPayments, {
                         // headers: {
                         //     'Content-Type': 'multipart/form-data'
@@ -114,9 +107,22 @@
                 ).then(response =>{
                     if(response.status == 200){
                         console.log(response)
-                    }
+                        this.loadedPayments = []
+                        response.data.forEach(list => this.loadedPayments.push(list))
 
+                        this.$emit('update-list')
+                    }
                 }).catch((error) => console.log(error));
+            },
+            deleteSelected(){
+                axios.post('/api/delete-temp-selected',this.selectedPayments)
+                    .then(response =>{
+                        if(response.status ==200){
+                            console.log(response)
+                            this.loadedPayments = []
+                            response.data.forEach(list => this.loadedPayments.push(list))
+                     }
+                }).catch(error => console.log(error))
             },
             changeSelected(selected){
                 this.selectedPayments = selected;
@@ -132,7 +138,6 @@
                 .then(response =>{
                 if(response.status == 200){
                     this.loadedPayments = response.data;
-                    console.log(response)
                 }
 
             }).catch((error) => console.log(error));
