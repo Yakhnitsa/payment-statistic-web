@@ -19,8 +19,12 @@
                     <td scope="col">{{payment.closingBalance | formatPayment}}</td>
                     <td scope="col">{{payment.paymentVsTaxes | formatPayment}}</td>
                     <td scope="col">
-                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)"><i class="fas fa-cloud"></i></button>
-                        <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">delete</button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
