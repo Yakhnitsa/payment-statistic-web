@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <h3> PaymentList component</h3>
+        <button type="button" @click="deleteTest">test</button>
         <table id="payments-table" class="table table-sm">
             <thead class="thead-light">
                 <tr>
@@ -96,8 +97,9 @@
                 })
                     .catch((error) => console.log(error))
             },
-            deletePayment(payment){
-                axios.post('/api/delete-payment',payment)
+            deletePayment(list){
+                var URL = '/api/delete-payment/' + list.payerCode + '_' + list.number
+                axios.delete(URL)
                     .then(response =>{
                         console.log(response)
                         this.$emit('update-list')

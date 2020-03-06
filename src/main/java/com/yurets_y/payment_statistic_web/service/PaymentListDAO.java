@@ -57,11 +57,25 @@ public class PaymentListDAO {
     }
 
     public void remove(PaymentList paymentList) {
+        removeById(paymentList.getId());
+    }
+
+    public boolean removeById(PaymentListId id){
         openEntityManager();
         beginTransaction();
-        em.remove(em.contains(paymentList) ? paymentList : em.merge(paymentList));
+        PaymentList list = em.find(PaymentList.class, id);
+        if (list != null) {
+
+            em.remove(list);
+            commitTransaction();
+            closeEntityManager();
+            return true;
+        }
+
+        //TODO Настроить удаление backup файлов!!!
         commitTransaction();
         closeEntityManager();
+        return false;
     }
 
 

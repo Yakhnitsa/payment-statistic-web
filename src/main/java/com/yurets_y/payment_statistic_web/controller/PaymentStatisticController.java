@@ -65,20 +65,15 @@ public class PaymentStatisticController {
         return paymentList;
     }
 
-    @PostMapping("/api/delete-payment")
+    @DeleteMapping("/api/delete-payment/{code}_{numb}")
     @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
-    public ResponseEntity<?> deleteList(@RequestBody PaymentList paymentList){
-        if(paymentListDAO.contains(paymentList)){
-            paymentListDAO.remove(paymentList);
-        }else{
-            return new ResponseEntity<>(paymentList,HttpStatus.NOT_FOUND);
-        }
-        if(paymentListDAO.contains(paymentList)){
-            return new ResponseEntity<>(paymentList,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> deleteTest(@PathVariable int code, @PathVariable int numb){
+        PaymentListId id = new PaymentListId(code,numb);
 
-        return new ResponseEntity<>(paymentList,HttpStatus.OK);
+        if(paymentListDAO.removeById(id)){
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
 
     }
 
