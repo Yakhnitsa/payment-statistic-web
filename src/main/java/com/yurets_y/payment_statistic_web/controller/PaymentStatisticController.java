@@ -53,7 +53,7 @@ public class PaymentStatisticController {
     }
 
 
-    @PostMapping("/api/single-payment")
+    @GetMapping("/api/single-payment")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.FullView.class)
     public PaymentList getPayment(

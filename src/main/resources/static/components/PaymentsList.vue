@@ -1,7 +1,6 @@
 <template>
     <div class="container">
         <h3> PaymentList component</h3>
-        <button type="button" @click="deleteTest">test</button>
         <table id="payments-table" class="table table-sm">
             <thead class="thead-light">
                 <tr>
@@ -66,7 +65,6 @@
                 }
             },
             formatDate(dateLong){
-                // var date = new Date(dateLong);
                 return new Date(dateLong).toLocaleDateString()
             }
         },
@@ -84,7 +82,7 @@
                 formData.append("listNumber",payment.number);
                 formData.append("payerCode",payment.payerCode)
 
-                axios.post('/api/single-payment',
+                axios.get('/api/single-payment',
                     formData, {
                         // headers: {
                         //     'Content-Type': 'multipart/form-data'
