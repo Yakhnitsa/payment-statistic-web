@@ -7,7 +7,7 @@
         <p>{{message}}</p>
         <!--<button @click="test">TEST</button>-->
         <loading-window v-on:update-list="updateList"></loading-window>
-        <!--<daily-statistic></daily-statistic>-->
+        <daily-statistic></daily-statistic>
         <payment-list :payments="payments" v-on:update-list="updateList"></payment-list>
     </div>
 </template>

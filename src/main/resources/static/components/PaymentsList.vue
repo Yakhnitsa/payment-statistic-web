@@ -82,8 +82,13 @@
                 formData.append("listNumber",payment.number);
                 formData.append("payerCode",payment.payerCode)
 
+                const params = {
+                    listNumber: payment.number,
+                    payerCode: payment.payerCode,
+                };
+
                 axios.get('/api/single-payment',
-                    formData, {
+                    {params}, {
                         // headers: {
                         //     'Content-Type': 'multipart/form-data'
                         // }

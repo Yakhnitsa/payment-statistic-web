@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitorjbl.json.JsonView;
 import com.monitorjbl.json.JsonViewSerializer;
+import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.entity.Views;
@@ -19,10 +20,15 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import static com.monitorjbl.json.Match.match;
 
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class PaymentStatisticController {
+
+    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
     private PaymentListDAO paymentListDAO;
@@ -75,6 +81,36 @@ public class PaymentStatisticController {
         }
         return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
 
+    }
+
+    @GetMapping("/api/daily-statistic")
+    @ResponseBody
+    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
+    public ResponseEntity<?> getDailyStatistic(
+            @RequestParam(value = "dateFrom",required = false) String from,
+            @RequestParam(value = "dateUntil",required = false) String until
+    ) throws ParseException {
+        Date dateFrom = null;
+        Date dateUntil = null;
+        if(!"".equals(dateFrom)){
+            dateFrom = DATE_FORMAT.parse(from);
+        }
+        if(!"".equals(until)){
+            dateUntil = DATE_FORMAT.parse(until);
+        }
+
+        List<PaymentDetails> paymentDetailsList = paymentListDAO.getPaymentDetailsByDate(dateFrom,dateUntil);
+        Map<String,Map<Date,Long>> map = paymentDetailsList
+                .stream()
+                .collect(Collectors.groupingBy(PaymentDetails::getType,
+                        Collectors.groupingBy(
+                                PaymentDetails::getDate,
+                                TreeMap::new,
+                                Collectors.summingLong(PaymentDetails::getTotalPayment))
+                        ));
+
+
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
 
     private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {

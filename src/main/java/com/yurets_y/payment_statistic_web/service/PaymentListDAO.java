@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -201,6 +200,22 @@ public class PaymentListDAO {
         commitTransaction();
         closeEntityManager();
         return listFromDB != null;
+    }
+
+    /*Методы для получения деталей платежей*/
+
+    public List<PaymentDetails> getDetailsByPeriod(Date from, Date until){
+        openEntityManager();
+        beginTransaction();
+        List<PaymentDetails> sortedList = em
+                .createQuery("FROM PaymentDetails WHERE date BETWEEN :dateFrom AND :dateUntil", PaymentDetails.class)
+                .setParameter("dateFrom",from, TemporalType.DATE)
+                .setParameter("dateUntil", until, TemporalType.DATE)
+                .getResultList();
+
+        commitTransaction();
+        closeEntityManager();
+        return sortedList;
     }
 
 }
