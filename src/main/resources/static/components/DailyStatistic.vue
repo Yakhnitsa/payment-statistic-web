@@ -18,8 +18,8 @@
             </div>
         </form>
 
-        <div class="table-responsive">
-            <table class="table table-sm table-striped table-hover">
+        <div class="overflow-auto">
+            <table class="table table-striped table-sm">
                 <thead>
                 <tr>
                     <th scope="col">Наименование платежа</th>
@@ -28,7 +28,7 @@
                 </thead>
                 <tr v-for="(value ,key) in this.detailsList">
                     <th>{{key}}</th>
-                    <td v-for="day in dateArray">{{showProps(value,day)}}</td>
+                    <td v-for="day in dateArray" class="text-right text-sm">{{showProps(value,day) | formatPayment}}</td>
                 </tr>
                 <tbody>
 
@@ -134,7 +134,17 @@
                 }
                 return ''
             }
-
+        },
+        filters:{
+            formatPayment(num) {
+                num = num/100;
+            return (
+                num
+                    .toFixed(2) // always two decimal digits
+                    .replace('.', ',') // replace decimal point character with ,
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+                ) // use . as a separator
+            }
         }
 
 
@@ -143,4 +153,17 @@
 
 <style scoped>
 
+    .scrolling-y {
+        height:150px;
+        overflow-y: scroll;
+    }
+    /*.right {*/
+        /*text-align: right;*/
+        /*margin-right: 1em;*/
+    /*}*/
+
+    /*.left {*/
+        /*text-align: left;*/
+        /*margin-left: 1em;*/
+    /*}*/
 </style>

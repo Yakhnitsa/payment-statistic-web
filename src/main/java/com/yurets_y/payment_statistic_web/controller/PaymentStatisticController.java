@@ -103,6 +103,7 @@ public class PaymentStatisticController {
         Map<String,Map<Date,Long>> map = paymentDetailsList
                 .stream()
                 .collect(Collectors.groupingBy(PaymentDetails::getType,
+                        LinkedHashMap::new,
                         Collectors.groupingBy(
                                 PaymentDetails::getDate,
                                 TreeMap::new,
