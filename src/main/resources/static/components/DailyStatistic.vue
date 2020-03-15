@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h3> Daily statistic component</h3>
-        <!--<button type="button" class="btn btn-primary" v-on:click="calculateDates">test</button>-->
+        <button type="button" class="btn btn-primary" v-on:click="test">test</button>
         <form>
             <div class="form-row">
                 <div class="form-group col-md-2">
@@ -28,7 +28,7 @@
                 </thead>
                 <tr v-for="(value ,key) in this.detailsList">
                     <th>{{key}}</th>
-                    <td>{{value.size}}</td>
+                    <td v-for="day in dateArray">{{showProps(value,day)}}</td>
                 </tr>
                 <tbody>
 
@@ -54,8 +54,8 @@
         },
         computed:{
             dateArray: function(){
-                var startPeriod = new Date(this.dateFrom);
-                var endPeriod = new Date(this.dateUntil);
+                var startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
+                var endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
                 var days = [];
                 var currentDay = startPeriod;
                 while(currentDay <= endPeriod){
@@ -68,15 +68,11 @@
         },
         methods:{
             submitForm(){
-                // var formData = new FormData();
 
                 const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 };
-
-                // formData.append("dateFrom",this.dateFrom);
-                // formData.append("dateUntil",this.dateUntil)
 
                 axios.get('/api/daily-statistic',
                     {params}, {
@@ -86,25 +82,58 @@
 
                     }
                 ).then(response => {
-                    console.log(response)
                     this.detailsList = response.data;
                 })
                     .catch((error) => console.log(error))
             },
 
-            calculateDates(){
-                var days = [];
-                var startPeriod = new Date(this.dateFrom);
-                var endPeriod = new Date(this.dateUntil);
-                var currentDay = startPeriod;
-                while(currentDay <= endPeriod){
-                    console.log(currentDay);
-                    days.push(currentDay)
-                    currentDay.setDate(currentDay.getDate()+1)
+            test(){;
+                console.log("test begin");
+                var arrival = this.detailsList['Прибуття - імпорт']
+                // this.showProps(arrival);
+                for(let day in this.dateArray){
+                    let data = this.showProps(arrival,this.dateArray[day]);
+                    console.log('found property='+data);
                 }
+                // for (var prop in arrival) {
+                //     // console.log('day=' + day);
+                //     console.log('property=' + prop);
+                //     // console.log("values: " + day.getTime() + '|' + new Date(prop).getTime() + '==' + (day.getTime()==new Date(prop).getTime()));
+                //     // if( obj.hasOwnProperty( prop ) ) {
+                //     //     if(day.getTime() == new Date(prop).getTime()){
+                //     //         console.log(prop + " = " + obj[prop]);
+                //     //         return obj[prop]
+                //     //     }
+                //     // }
+                // }
+
+            },
+
+            getDataFromList(obj,day){
+                for (let prop in obj) {
+                    // console.log('day=' + day);
+                    // console.log('property=' + prop);
+                    // console.log("values: " + day.getTime() + '|' + new Date(prop).getTime() + '==' + (day.getTime()==new Date(prop).getTime()));
+                    if( obj.hasOwnProperty( prop ) ) {
+                        if(day.getTime() == new Date(prop).getTime()){
+                            // console.log(prop + " = " + obj[prop]);
+                            return obj[prop]
+                        }
+                    }
+                    return '';
+                }
+            },
+            showProps(obj,day){
+                for (let prop in obj) {
+                    if(day.getTime() == Number(new Date(prop))){
+                        // console.log(day.getTime())
+                        // console.log(new Date(prop).getTime())
+                        return obj[prop]
+                    }
+
+                }
+                return ''
             }
-
-
 
         }
 
