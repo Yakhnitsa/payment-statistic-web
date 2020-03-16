@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container mx-5">
         <h3> Daily statistic component</h3>
-        <button type="button" class="btn btn-primary" v-on:click="test">test</button>
+        <!--<button type="button" class="btn btn-primary" v-on:click="test">test</button>-->
         <form>
             <div class="form-row">
                 <div class="form-group col-md-2">
@@ -18,7 +18,7 @@
             </div>
         </form>
 
-        <div class="overflow-auto">
+        <div style="overflow-x:auto;">
             <table class="table table-striped table-sm">
                 <thead>
                 <tr>
@@ -27,8 +27,8 @@
                 </tr>
                 </thead>
                 <tr v-for="(value ,key) in this.detailsList">
-                    <th>{{key}}</th>
-                    <td v-for="day in dateArray" class="text-right text-sm">{{showProps(value,day) | formatPayment}}</td>
+                    <th class="text-nowrap">{{key}}</th>
+                    <td v-for="day in dateArray" class="text-right text-sm text-nowrap">{{showProps(value,day) | formatPayment}}</td>
                 </tr>
                 <tbody>
 
@@ -153,10 +153,10 @@
 
 <style scoped>
 
-    .scrolling-y {
-        height:150px;
-        overflow-y: scroll;
-    }
+    /*.scrolling-y {*/
+        /*height:150px;*/
+        /*overflow-y: scroll;*/
+    /*}*/
     /*.right {*/
         /*text-align: right;*/
         /*margin-right: 1em;*/
