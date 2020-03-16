@@ -5,11 +5,9 @@
         <form>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <!--<label for="dateFrom">Date from</label>-->
                     <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <!--<label for="dateUntil">Date until</label>-->
                     <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
@@ -22,16 +20,17 @@
             <table class="table table-striped table-sm">
                 <thead>
                 <tr>
-                    <th scope="col">Наименование платежа</th>
+                    <th scope="col" @click="details = !details">Наименование платежа
+                        <span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>
+                    </th>
                     <th v-for="day in dateArray">{{day.getDate()}}</th>
                 </tr>
                 </thead>
-                <tr v-for="(value ,key) in this.detailsList">
-                    <th class="text-nowrap">{{key}}</th>
-                    <td v-for="day in dateArray" class="text-right text-sm text-nowrap">{{showProps(value,day) | formatPayment}}</td>
-                </tr>
                 <tbody>
-
+                    <tr v-show="details" v-for="(value ,key) in this.detailsList">
+                        <th class="text-nowrap">{{key}}</th>
+                        <td v-for="day in dateArray" class="text-right text-sm text-nowrap">{{getDataFromList(value,day) | formatPayment}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -49,7 +48,8 @@
             return{
                 dateFrom: '2020-02-01',
                 dateUntil: '2020-02-05',
-                detailsList:[]
+                detailsList:[],
+                details: true,
             }
         },
         computed:{
@@ -111,23 +111,7 @@
 
             getDataFromList(obj,day){
                 for (let prop in obj) {
-                    // console.log('day=' + day);
-                    // console.log('property=' + prop);
-                    // console.log("values: " + day.getTime() + '|' + new Date(prop).getTime() + '==' + (day.getTime()==new Date(prop).getTime()));
-                    if( obj.hasOwnProperty( prop ) ) {
-                        if(day.getTime() == new Date(prop).getTime()){
-                            // console.log(prop + " = " + obj[prop]);
-                            return obj[prop]
-                        }
-                    }
-                    return '';
-                }
-            },
-            showProps(obj,day){
-                for (let prop in obj) {
                     if(day.getTime() == Number(new Date(prop))){
-                        // console.log(day.getTime())
-                        // console.log(new Date(prop).getTime())
                         return obj[prop]
                     }
 
@@ -142,8 +126,8 @@
                 num
                     .toFixed(2) // always two decimal digits
                     .replace('.', ',') // replace decimal point character with ,
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
-                ) // use . as a separator
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
+                )
             }
         }
 

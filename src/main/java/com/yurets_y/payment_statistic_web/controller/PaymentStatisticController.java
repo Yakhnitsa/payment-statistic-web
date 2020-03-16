@@ -98,7 +98,7 @@ public class PaymentStatisticController {
         if(!"".equals(until)){
             dateUntil = DATE_FORMAT.parse(until);
         }
-
+        //TODO собрать статистику по отдельным перечням и отобразить в списке под  основными данными
         List<PaymentDetails> paymentDetailsList = paymentListDAO.getPaymentDetailsByDate(dateFrom,dateUntil);
         Map<String,Map<Date,Long>> map = paymentDetailsList
                 .stream()
