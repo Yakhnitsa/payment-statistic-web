@@ -98,9 +98,10 @@ public class PaymentStatisticController {
         if(!"".equals(until)){
             dateUntil = DATE_FORMAT.parse(until);
         }
-        //TODO собрать статистику по отдельным перечням и отобразить в списке под  основными данными
+        Map<String,Object> statistic = new LinkedHashMap<>();
+        List<PaymentList> payments = paymentListDAO.getByPeriod(dateFrom,dateUntil);
         List<PaymentDetails> paymentDetailsList = paymentListDAO.getPaymentDetailsByDate(dateFrom,dateUntil);
-        Map<String,Map<Date,Long>> map = paymentDetailsList
+        Map<String,Map<Date,Long>> details = paymentDetailsList
                 .stream()
                 .collect(Collectors.groupingBy(PaymentDetails::getType,
                         LinkedHashMap::new,
@@ -110,8 +111,9 @@ public class PaymentStatisticController {
                                 Collectors.summingLong(PaymentDetails::getTotalPayment))
                         ));
 
-
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        statistic.put("payments",payments);
+        statistic.put("details",details);
+        return new ResponseEntity<>(statistic,HttpStatus.OK);
     }
 
     private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
