@@ -62,6 +62,7 @@
 
 <script>
     import axios from 'axios'
+    import { mapGetters,mapState,mapActions } from 'vuex'
     export default {
         name: "DailyStatistic",
         props: [''],
@@ -76,6 +77,7 @@
             }
         },
         computed:{
+            ...mapState(['dailyStatistic']),
             dateArray: function(){
                 var startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
                 var endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
@@ -89,26 +91,26 @@
             }
 
         },
-        methods:{
-            submitForm(){
 
+        methods:{
+            ...mapActions(['getDailyStatisticAction']),
+            submitForm(){
+                //TODO запросить данные в Vuex
                 const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 };
 
-                axios.get('/api/daily-statistic',
-                    {params}, {
-                        // headers: {
-                        //     'Content-Type': 'multipart/form-data'
-                        // }
+                this.getDailyStatisticAction(params)
 
-                    }
-                ).then(response => {
-                    this.detailsList = response.data.details;
-                    this.paymentLists = response.data.payments;
-                })
-                    .catch((error) => console.log(error))
+                // axios.get('/api/daily-statistic',
+                //     {params}, {
+                //     }
+                // ).then(response => {
+                //     this.detailsList = response.data.details;
+                //     this.paymentLists = response.data.payments;
+                // })
+                //     .catch((error) => console.log(error))
             },
 
             test(){;
@@ -141,6 +143,7 @@
                 return 0;
             }
         },
+
         filters:{
             formatPayment(num) {
                 num = num/100;

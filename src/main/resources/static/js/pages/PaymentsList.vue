@@ -1,18 +1,33 @@
 <template>
     <div class="container">
         <h3> PaymentList component</h3>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <input type="date" v-model="dateFrom" class="form-control"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="date" v-model="dateUntil" class="form-control"/>
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="btn btn-primary" v-on:click="getData">Получить данные</button>
+                </div>
+            </div>
+        </form>
+
         <table id="payments-table" class="table table-sm">
             <thead class="thead-light">
-                <tr>
+                <tr class="text-center">
                     <th scope="col">№ перечня</th>
                     <th scope="col">Дата</th>
                     <th scope="col">Входящий остаток</th>
                     <th scope="col">Исходящий остаток</th>
                     <th scope="col">Всего проведено</th>
+                    <th scope="col">Действия</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="payment in payments">
+                <tr class="text-right text-nowrap" v-for="payment in payments">
                     <td scope="col">{{payment.number}}</td>
                     <td scope="col">{{payment.date | formatDate}}</td>
                     <td scope="col">{{payment.openingBalance | formatPayment }}</td>
@@ -25,57 +40,55 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
                             <i class="fas fa-trash-alt"></i>
                         </button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="downloadPayment(payment)">
+                            <i class="fas fa-file-download"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <!--<div v-for="payment in payments">-->
-            <!--<p>{{payment.number}}</p>-->
-        <!--</div>-->
     </div>
 </template>
 
 <script>
     import axios from 'axios'
     export default {
-
         name: "PaymentsTable",
-        props: ['payments'],
         data: function(){
             return{
-
+                payments:[],
+                dateFrom:'',
+                dateUntil:''
             }
         },
         filters:{
-            formatPayment(payment){
-                if (!parseInt(payment)) {
-                    return '';
-                }
-                if (payment > 99999) {
-                    var paymentString = (payment / 100).toFixed(2);
-                    var paymentArray = paymentString.split('').reverse();
-                    var index = 3;
-                    while (paymentArray.length > index + 3) {
-                        paymentArray.splice(index + 3, 0, ' ');
-                        index += 4;
-                    }
-                    return paymentArray.reverse().join('');
-                } else {
-                    return (payment / 100).toFixed(2);
-                }
+            formatPayment(num) {
+                num = num/100;
+                return (
+                    num
+                        .toFixed(2) // always two decimal digits
+                        .replace('.', ',') // replace decimal point character with ,
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
+                )
             },
             formatDate(dateLong){
                 return new Date(dateLong).toLocaleDateString()
             }
         },
+
         created: function(){
-            // console.log("created");
-            // $(document).ready(function() {
-            //     console.log("data table initialized")
-            //     $('#payments-table').DataTable();
-            // } );
+            this.updateList();
         },
         methods:{
+            updateList(){
+                this.payments = [];
+                axios.get('/api/payments')
+                    .then(response => {
+                            response.data.forEach( payment => this.payments.push(payment))
+                        }
+
+                    )
+            },
             showPayment(payment){
                 var formData = new FormData();
 
@@ -108,6 +121,13 @@
                         this.$emit('update-list')
                     })
                     .catch(error => console.log(error))
+            },
+            downloadPayment(list){
+                //TODO Реализовать функцию скачивания перечня по номеру
+                console.log(list)
+            },
+            getData(){
+            //    TODO Реализовать функцию загрузки перечней за определенный период
             }
         }
     }

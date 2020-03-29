@@ -43,4 +43,48 @@ The following guides illustrate how to use some features concretely:
     
 - Устанавливаем axios для отправки запросов на сервер:
     yarn add axios    
+
+## Установка и настройка Vue router
+    - Установка через консоль
+        yarn add vue-router   
     
+    Настройка Vue-router router/router
+    Делаем импорты страниц
+        import DailyStatistic from 'pages/DailyStatistic.vue'
+        import Payments from 'pages/PaymentsList.vue'
+    Прописываем пути:
+        routes:[
+                {
+                    path: '/',
+                    component: Home
+                },
+                {
+                    path: '/daily-statistic',
+                    component: DailyStatistic
+                },
+                {
+                    path: '/payments',
+                    component: Payments
+                }
+            ]    
+    Импорт роутера в main файле и в коренной экземпляр Vue
+        import router from 'router/router'
+        
+        new Vue({
+                el:'#app',
+                router, - передача роутера в экземлпяр Vue
+                render: a => a(App)
+        })
+## Настройка центрального хранилища данных:
+    Установка Vuex
+        yarn add vuex       
+    Настройка хранилища store/store
+    
+    Импорт хранилища в корневой экземпляр Vue
+        import store from 'store/store'
+        new Vue({
+                el:'#app',
+                router,
+                store, - Запиливание хранилища в приложение.
+                render: a => a(App)
+        });           

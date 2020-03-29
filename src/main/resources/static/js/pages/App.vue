@@ -1,21 +1,30 @@
 <template>
     <div>
+        <!--TODO Настроить Header с путями к разным данным приложения
+            - Ежедневная статистика
+            - Список перечней
+            - Окно загрузки перечней
+            - Прочья хрень
+        -->
+
+        <router-link to="/daily-statistic">Статистика по дням</router-link>
+        <router-link to="/payments">Список перечней</router-link>
+        <div>
+            <router-view></router-view>
+        </div>
 
 
-        <h1>Перечни УТЛ-2</h1>
-
-        <p>{{message}}</p>
         <!--<button @click="test">TEST</button>-->
-        <loading-window v-on:update-list="updateList"></loading-window>
-        <daily-statistic></daily-statistic>
-        <payment-list :payments="payments" v-on:update-list="updateList"></payment-list>
+        <!--<loading-window v-on:update-list="updateList"></loading-window>-->
+        <!--<daily-statistic></daily-statistic>-->
+        <!--<payment-list :payments="payments" v-on:update-list="updateList"></payment-list>-->
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-    import DailyStatistic from '../components/DailyStatistic.vue'
-    import PaymentList from '../components/PaymentsList.vue'
+    import DailyStatistic from './DailyStatistic.vue'
+    import PaymentList from './PaymentsList.vue'
     import LoadingWindow from '../components/LoadingWindow.vue'
 
     export default{
@@ -26,7 +35,6 @@
         },
         data: function() {
             return{
-                message: 'Yahooo!!!, эта хрень еще и работает!!!',
                 payments:[],
                 loadedPayments:[],
             }

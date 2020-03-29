@@ -49,7 +49,7 @@
 
 <script>
     import axios from 'axios'
-    import UploadedListTable from '../components/UploadedListTable.vue'
+    import UploadedListTable from './UploadedListTable.vue'
     export default {
         name: "LoadingWindow",
         components:{
