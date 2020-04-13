@@ -1,6 +1,6 @@
 <template>
-    <div class="container mx-5">
-        <h3> Daily statistic component</h3>
+    <div class="container-fluid mx-5">
+        <!--<h3> Daily statistic component</h3>-->
         <!--<button type="button" class="btn btn-primary" v-on:click="test">test</button>-->
         <form>
             <div class="form-row">
@@ -16,47 +16,99 @@
             </div>
         </form>
 
-        <div style="overflow-x:auto;">
-            <table class="table table-striped table-sm">
-                <thead>
-                <tr>
-                    <th >Наименование платежа</th>
-                    <th v-for="day in dateArray" class="text-center">{{day | formatDate}}</th>
-                </tr>
-                </thead>
-                <tbody>
+        <div class="zui-wrapper">
+            <div class="zui-scroller">
+                <table class="zui-table">
+                    <thead>
+                        <tr>
+                            <th class="zui-sticky-col">Наименование платежа</th>
+                            <th v-for="day in dateArray"
+                                class="text-center">
+                                {{day | formatDate}}
+                            </th>
+                            <th class="sticky-right-col">Сумма</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     <tr>
-                        <th>Сальдо на початок розрахункової доби</th>
+                        <td class="zui-sticky-col">Сальдо на початок розрахункової доби</td>
                         <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getPropertyByDate(day,'openingBalance')  | formatPayment}}
                         </td>
                     </tr>
-
                     <tr>
-                        <th>Сальдо на кінець розрахункової доби</th>
+                        <td class="zui-sticky-col">Сальдо на кінець розрахункової доби</td>
                         <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getPropertyByDate(day,'closingBalance')  | formatPayment}}
                         </td>
                     </tr>
-
                     <tr>
-                        <th scope="col" @click="details = !details">Всього проведено платежів
+                        <td class="zui-sticky-col" @click="details = !details">Всього проведено платежів
                             <span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>
-                        </th>
+                        </td>
                         <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}
                         </td>
                     </tr>
-
                     <tr v-show="details" v-for="(value ,key) in this.detailsList">
-                        <th class="text-nowrap text-sm pl-4">{{key}}</th>
-                        <td v-for="day in dateArray" class="text-right text-sm text-nowrap">
+                        <td class="zui-sticky-col pl-3">{{key}}</td>
+                        <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getDataFromList(value,day) | formatPayment}}
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
+                        <!--<th class="text-nowrap zui-sticky-col pl-4">{{key}}</th>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getDataFromList(value,day) | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <!--<div style="overflow-x:auto;">-->
+            <!--<table class="table table-striped table-sm">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th scope="col" class="col-3" >Наименование платежа</th>-->
+                    <!--<th v-for="day in dateArray" class="text-center">{{day | formatDate}}</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<th scope="col" class="col-3" >Сальдо на початок розрахункової доби</th>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getPropertyByDate(day,'openingBalance')  | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    <!--<tr>-->
+                        <!--<th>Сальдо на кінець розрахункової доби</th>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getPropertyByDate(day,'closingBalance')  | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    <!--<tr>-->
+                        <!--<th scope="col" @click="details = !details">Всього проведено платежів-->
+                            <!--<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>-->
+                        <!--</th>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
+                        <!--<th class="text-nowrap text-sm pl-4">{{key}}</th>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-sm text-nowrap">-->
+                            <!--{{getDataFromList(value,day) | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -68,16 +120,21 @@
         props: [''],
         data: function(){
             return{
-                dateFrom: '2020-02-01',
-                dateUntil: '2020-02-05',
-                paymentLists:[],
-                detailsList:[],
-                details: false,
+                dateFrom: '2020-02-10',
+                dateUntil: '2020-02-15',
+                details: true,
 
             }
         },
         computed:{
             ...mapState(['dailyStatistic']),
+            paymentLists: function(){
+                return this.dailyStatistic.payments
+            },
+            detailsList: function(){
+                return this.dailyStatistic.details
+            },
+
             dateArray: function(){
                 var startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
                 var endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
@@ -95,22 +152,11 @@
         methods:{
             ...mapActions(['getDailyStatisticAction']),
             submitForm(){
-                //TODO запросить данные в Vuex
                 const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 };
-
                 this.getDailyStatisticAction(params)
-
-                // axios.get('/api/daily-statistic',
-                //     {params}, {
-                //     }
-                // ).then(response => {
-                //     this.detailsList = response.data.details;
-                //     this.paymentLists = response.data.payments;
-                // })
-                //     .catch((error) => console.log(error))
             },
 
             test(){;
@@ -169,17 +215,74 @@
         font-size: smaller;
     }
 
-    /*.scrolling-y {*/
-        /*height:150px;*/
-        /*overflow-y: scroll;*/
-    /*}*/
-    /*.right {*/
-        /*text-align: right;*/
-        /*margin-right: 1em;*/
-    /*}*/
+    .scrolling-y {
+        height:150px;
+        overflow-y: scroll;
+    }
+    .right {
+        text-align: right;
+        margin-right: 1em;
+    }
 
-    /*.left {*/
+    .left {
+        text-align: left;
+        margin-left: 1em;
+    }
+    .zui-table {
+        /*border: none;*/
+        /*border-right: solid 1px #DDEFEF;*/
+        border-collapse: separate;
+        border-spacing: 1px;
+        font: normal 13px Arial, sans-serif;
+    }
+    .zui-table thead th {
+        background-color: #DDEFEF;
+        border: none;
+        color: #336B6B;
+        padding: 10px;
         /*text-align: left;*/
-        /*margin-left: 1em;*/
-    /*}*/
+        /*text-shadow: 1px 1px 1px #fff;*/
+        white-space: nowrap;
+    }
+    .zui-table tbody td {
+        border-bottom: solid 1px #DDEFEF;
+        color: #333;
+        padding: 10px;
+        /*text-shadow: 1px 1px 1px #fff;*/
+        white-space: nowrap;
+    }
+    .zui-wrapper {
+        position: relative;
+    }
+
+    .zui-table .zui-sticky-col {
+        border-left: solid 1px #DDEFEF;
+        border-right: solid 1px #DDEFEF;
+        left: 0;
+        position: absolute;
+        top: auto;
+        width: 25%;
+    }
+    .zui-scroller {
+        margin-left: 25%;
+        overflow-x: scroll;
+        overflow-y: visible;
+        padding-bottom: 5px;
+        width: 60%;
+    }
+    .zui-last-col {
+        margin-left: 85%;
+        border-left: solid 1px #DDEFEF;
+        border-right: solid 1px #DDEFEF;
+        left: 0;
+        position: absolute;
+        top: auto;
+        width: auto;
+    }
+    .sticky-right-col{
+        position: sticky;
+        right: 1px;
+
+    }
+
 </style>

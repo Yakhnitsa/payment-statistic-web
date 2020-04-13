@@ -83,6 +83,15 @@ public class PaymentStatisticController {
 
     }
 
+    @DeleteMapping("/api/remove-payment")
+    @ResponseBody
+    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentListId id){
+        if(paymentListDAO.removeById(id)){
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/api/daily-statistic")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)

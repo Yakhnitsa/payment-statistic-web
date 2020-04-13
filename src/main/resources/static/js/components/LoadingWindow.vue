@@ -50,97 +50,77 @@
 <script>
     import axios from 'axios'
     import UploadedListTable from './UploadedListTable.vue'
+    import { mapGetters } from 'vuex';
+    import { mapMutations } from 'vuex';
+    import { mapActions } from 'vuex';
+
     export default {
         name: "LoadingWindow",
         components:{
             UploadedListTable
         },
+        computed:{
+            ...mapGetters({
+                files: 'chosenFiles',
+                loadedPayments: 'tempUploadedLists',
+            })
+        },
         data: function(){
             return{
-                files:[],
-                loadedPayments:[],
                 selectedPayments:[],
                 chosenFile:'no file'
             }
         },
         methods:{
+            ...mapMutations(['addChosenFilesMutation']),
+            ...mapActions(['uploadListsOnServerAction']),
             addFile(event){
                 var selectedFiles = event.target.files;
-                Array.from(selectedFiles).forEach(file =>{
-                    this.files.push(file);
-                });
+                this.addChosenFilesMutation(Array.from(selectedFiles))
             },
             submitFileUpload(){
-                var formData = new FormData();
-
-                for(var index = 0; index < this.files.length; index++) {
-                    formData.append("files", this.files[index]);
-                }
-
-                axios.post('/api/upload-multiple',
-                    formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-
-                    }
-                ).then(response =>{
-                    if(response.status == 200){
-                        this.files = []
-                        this.loadedPayments = [];
-                        response.data.forEach(list => this.loadedPayments.push(list))
-                    }
-                    else if(response.status == 204){
-                        console.log("no content!");
-                    }
-                }).catch((error) => console.log(error));
+                console.log('uploading files....')
+                this.uploadListsOnServerAction();
 
             },
             saveSelected(){
-                axios.post('/api/save-temp-selected',
-                    this.selectedPayments, {
-                        // headers: {
-                        //     'Content-Type': 'multipart/form-data'
-                        // }
-
-                    }
-                ).then(response =>{
-                    if(response.status == 200){
-                        console.log(response)
-                        this.loadedPayments = []
-                        response.data.forEach(list => this.loadedPayments.push(list))
-
-                        this.$emit('update-list')
-                    }
-                }).catch((error) => console.log(error));
+                // axios.post('/api/save-temp-selected',
+                //     this.selectedPayments, {
+                //     }
+                // ).then(response =>{
+                //     if(response.status == 200){
+                //         console.log(response)
+                //         this.loadedPayments = []
+                //         response.data.forEach(list => this.loadedPayments.push(list))
+                //
+                //         this.$emit('update-list')
+                //     }
+                // }).catch((error) => console.log(error));
             },
             deleteSelected(){
-                axios.post('/api/delete-temp-selected',this.selectedPayments)
-                    .then(response =>{
-                        if(response.status ==200){
-                            console.log(response)
-                            this.loadedPayments = []
-                            response.data.forEach(list => this.loadedPayments.push(list))
-                     }
-                }).catch(error => console.log(error))
+                // axios.post('/api/delete-temp-selected',this.selectedPayments)
+                //     .then(response =>{
+                //         if(response.status ==200){
+                //             console.log(response)
+                //             this.loadedPayments = []
+                //             response.data.forEach(list => this.loadedPayments.push(list))
+                //      }
+                // }).catch(error => console.log(error))
             },
             changeSelected(selected){
                 this.selectedPayments = selected;
             }
         },
         created: function(){
-
-
-
         },
         mounted: function(){
-            axios.get('/api/download-temp')
-                .then(response =>{
-                if(response.status == 200){
-                    this.loadedPayments = response.data;
-                }
-
-            }).catch((error) => console.log(error));
+            // axios.get('/api/download-temp')
+            //     .then(response =>{
+            //     if(response.status == 200){
+            //         this.loadedPayments = response.data;
+            //     }
+            //
+            // }).catch((error) => console.log(error));
         }
 
     }

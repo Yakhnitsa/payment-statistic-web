@@ -3,15 +3,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import DailyStatistic from 'pages/DailyStatistic.vue'
 import Payments from 'pages/PaymentsList.vue'
-
- const Home = { template: '<div>Home page</div>' }
+import Test from 'pages/Test.vue'
 
 export default new VueRouter({
     mode: 'history',
     routes:[
         {
             path: '/',
-            component: Home
+            component: Test
         },
         {
             path: '/daily-statistic',

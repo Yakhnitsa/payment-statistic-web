@@ -64,19 +64,16 @@ public class PaymentListDAO {
         beginTransaction();
         PaymentList list = em.find(PaymentList.class, id);
         if (list != null) {
-
             em.remove(list);
+            deleteBackupFile(list);
             commitTransaction();
             closeEntityManager();
             return true;
         }
-
-        //TODO Настроить удаление backup файлов!!!
         commitTransaction();
         closeEntityManager();
         return false;
     }
-
 
     public PaymentList getById(PaymentListId id) {
         openEntityManager();
@@ -191,6 +188,21 @@ public class PaymentListDAO {
             throw new RuntimeException("Ошибка загрузки файла перечня " + file);
         }
         paymentList.setBackupFile(file);
+    }
+
+    private void deleteBackupFile(PaymentList list) {
+        File file = new File(backupDir + File.separator + list.getBackupFilePath());
+        if(file.exists()){
+            try {
+                Files.deleteIfExists(file.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка удаления файла перечня " + file);
+            }
+        }
+        if(file.exists()){
+            throw new RuntimeException("Файл какого-то хера не удалился " +  file);
+        }
+
     }
 
     public boolean contains(PaymentList paymentList){

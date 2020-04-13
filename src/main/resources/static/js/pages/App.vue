@@ -6,10 +6,23 @@
             - Окно загрузки перечней
             - Прочья хрень
         -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="#">ЖД статистика</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>
+                    <!--<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+                    <router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>
+                    <a class="nav-item nav-link" href="#">Pricing</a>
+                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </div>
+            </div>
+        </nav>
 
-        <router-link to="/daily-statistic">Статистика по дням</router-link>
-        <router-link to="/payments">Список перечней</router-link>
-        <div>
+        <div class="app-content">
             <router-view></router-view>
         </div>
 
@@ -40,33 +53,19 @@
             }
         },
         created: function(){
-            this.updateList();
+
         },
         methods:{
             test(event){
-                // var formData = new FormData();
-                // var json = [{ "firstName" : "Hammond", "lastName" : "Fergison" },
-                //     { "firstName" : "Elmer", "lastName" : "Fudd" }];
-                // formData.append("pojo",json)
-                // axios.post('/api/test',json)
-                //     .then(result => console.log(result))
                 console.log(event)
             },
-            updateList(){
-                this.payments = [];
-                axios.get('/api/payments')
-                    .then(response => {
-                            response.data.forEach( payment => this.payments.push(payment))
-                        }
-
-                    )
-            },
-
         }
     }
 
-</script>
+</script >
 
-<style>
-
+<style scoped>
+    .app-content {
+        margin-top: 80px
+    }
 </style>
