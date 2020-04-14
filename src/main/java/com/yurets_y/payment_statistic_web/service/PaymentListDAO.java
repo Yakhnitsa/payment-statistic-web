@@ -23,6 +23,7 @@ import java.util.List;
 
 @Service("paymentListDao")
 public class PaymentListDAO {
+//    TODO - Перейти на репозиторий и избавиться от ошибок синхронизации запросов
 
     private EntityManagerFactory emf;
 
@@ -33,33 +34,41 @@ public class PaymentListDAO {
 
     private List<PaymentList> tempList = new ArrayList<>();
 
-
     public PaymentListDAO(@Qualifier("defaultEMF") EntityManagerFactory entityManager) {
         this.emf = entityManager;
     }
 
-    public void add(PaymentList paymentList) {
+    public synchronized void add(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
         saveBackupFile(paymentList);
+        testBeforeSave(paymentList);
         em.persist(paymentList);
         commitTransaction();
         closeEntityManager();
     }
 
-    public void update(PaymentList paymentList) {
+    private void testBeforeSave(PaymentList paymentList) {
+        if (paymentList.getBackupFilePath() == null) {
+            throw new NullPointerException("Ошибка backup файла для перечня " + paymentList);
+        }
+    }
+
+    public synchronized void update(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
+        saveBackupFile(paymentList);
+        testBeforeSave(paymentList);
         em.merge(paymentList);
         commitTransaction();
         closeEntityManager();
     }
 
-    public void remove(PaymentList paymentList) {
+    public synchronized void remove(PaymentList paymentList) {
         removeById(paymentList.getId());
     }
 
-    public boolean removeById(PaymentListId id){
+    public synchronized boolean removeById(PaymentListId id) {
         openEntityManager();
         beginTransaction();
         PaymentList list = em.find(PaymentList.class, id);
@@ -75,11 +84,11 @@ public class PaymentListDAO {
         return false;
     }
 
-    public PaymentList getById(PaymentListId id) {
+    public synchronized PaymentList getById(PaymentListId id) {
         openEntityManager();
         beginTransaction();
         PaymentList listFromRepo = em.find(PaymentList.class, id);
-        if(listFromRepo != null){
+        if (listFromRepo != null) {
             Hibernate.initialize(listFromRepo.getPaymentDetailsList());
             commitTransaction();
             closeEntityManager();
@@ -90,7 +99,7 @@ public class PaymentListDAO {
 
     }
 
-    public List<PaymentList> getAll() {
+    public synchronized List<PaymentList> getAll() {
         openEntityManager();
         beginTransaction();
         List<PaymentList> paymentLists = em.createQuery("FROM PaymentList", PaymentList.class).getResultList();
@@ -100,12 +109,12 @@ public class PaymentListDAO {
         return paymentLists;
     }
 
-    public List<PaymentList> getByPeriod(Date from, Date until){
+    public synchronized List<PaymentList> getByPeriod(Date from, Date until) {
         openEntityManager();
         beginTransaction();
         List<PaymentList> sortedList = em
                 .createQuery("FROM PaymentList WHERE date BETWEEN :dateFrom AND :dateUntil", PaymentList.class)
-                .setParameter("dateFrom",from, TemporalType.DATE)
+                .setParameter("dateFrom", from, TemporalType.DATE)
                 .setParameter("dateUntil", until, TemporalType.DATE)
                 .getResultList();
 //        List<PaymentList> sortedList = em.createQuery("from PaymentList",PaymentList.class).getResultList();
@@ -116,51 +125,59 @@ public class PaymentListDAO {
         return sortedList;
     }
 
-    public List<PaymentDetails> getPaymentDetailsByStationCode(int stationCode){
+    public boolean contains(PaymentList paymentList) {
+        openEntityManager();
+        beginTransaction();
+        PaymentList listFromDB = em.find(PaymentList.class, paymentList.getId());
+        commitTransaction();
+        closeEntityManager();
+        return listFromDB != null;
+    }
+
+    /*Методы для получения деталей платежей*/
+
+    public synchronized List<PaymentDetails> getDetailsByPeriod(Date from, Date until) {
+        openEntityManager();
+        beginTransaction();
+        List<PaymentDetails> sortedList = em
+                .createQuery("FROM PaymentDetails WHERE date BETWEEN :dateFrom AND :dateUntil", PaymentDetails.class)
+                .setParameter("dateFrom", from, TemporalType.DATE)
+                .setParameter("dateUntil", until, TemporalType.DATE)
+                .getResultList();
+
+        commitTransaction();
+        closeEntityManager();
+        return sortedList;
+    }
+
+    public synchronized List<PaymentDetails> getPaymentDetailsByStationCode(int stationCode) {
         openEntityManager();
         beginTransaction();
         List<PaymentDetails> list = em
-                .createQuery("FROM PaymentDetails WHERE stationCode = :stationCode",PaymentDetails.class)
-                .setParameter("stationCode",stationCode)
+                .createQuery("FROM PaymentDetails WHERE stationCode = :stationCode", PaymentDetails.class)
+                .setParameter("stationCode", stationCode)
                 .getResultList();
         commitTransaction();
         closeEntityManager();
         return list;
     }
 
-    public List<PaymentDetails> getPaymentDetailsByDate(Date from, Date until){
+    public synchronized List<PaymentDetails> getPaymentDetailsByDate(Date from, Date until) {
         openEntityManager();
         beginTransaction();
         List<PaymentDetails> list = em
-                .createQuery("FROM PaymentDetails WHERE date BETWEEN :dateFrom and :dateUntil",PaymentDetails.class)
-                .setParameter("dateFrom",from)
-                .setParameter("dateUntil",until)
+                .createQuery("FROM PaymentDetails WHERE date BETWEEN :dateFrom and :dateUntil", PaymentDetails.class)
+                .setParameter("dateFrom", from)
+                .setParameter("dateUntil", until)
                 .getResultList();
         commitTransaction();
         closeEntityManager();
         return list;
     }
 
-    private void openEntityManager(){
-        if(em == null || !em.isOpen()){
-            this.em = emf.createEntityManager();
-        }
-    }
+    /*Служебные методы...*/
 
-    private void closeEntityManager(){
-        if(em.isOpen()) em.close();
-    }
-
-
-    private void beginTransaction() {
-        em.getTransaction().begin();
-    }
-
-    private void commitTransaction() {
-        em.getTransaction().commit();
-    }
-
-    private void saveBackupFile(PaymentList paymentList){
+    private void saveBackupFile(PaymentList paymentList) {
         String fileExtension = paymentList.getBackupFile().getName();
         fileExtension = fileExtension.substring(fileExtension.lastIndexOf("."));
         String fileName = paymentList.getPayerCode() + "_" + paymentList.getNumber() + fileExtension;
@@ -168,7 +185,7 @@ public class PaymentListDAO {
 
         try {
             File fileFromList = paymentList.getBackupFile();
-            if(!fileFromList.exists())
+            if (!fileFromList.exists())
                 Files.createFile(backupFile.toPath());
 
             Files.copy(fileFromList.toPath(),
@@ -178,56 +195,54 @@ public class PaymentListDAO {
             e.printStackTrace();
             throw new RuntimeException("Ошибка при сохранении файла " + fileName);
         }
+        if (fileName == null) {
+            throw new NullPointerException("Отсутствует файл для перечня " + paymentList);
+        }
         paymentList.setBackupFilePath(fileName);
 
     }
 
-    private void loadBackupFile(PaymentList paymentList){
-        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
-        if(!file.exists()){
-            throw new RuntimeException("Ошибка загрузки файла перечня " + file);
-        }
-        paymentList.setBackupFile(file);
-    }
-
     private void deleteBackupFile(PaymentList list) {
         File file = new File(backupDir + File.separator + list.getBackupFilePath());
-        if(file.exists()){
+        if (file.exists()) {
             try {
                 Files.deleteIfExists(file.toPath());
             } catch (IOException e) {
                 throw new RuntimeException("Ошибка удаления файла перечня " + file);
             }
         }
-        if(file.exists()){
-            throw new RuntimeException("Файл какого-то хера не удалился " +  file);
+        if (file.exists()) {
+            throw new RuntimeException("Файл какого-то хера не удалился " + file);
         }
 
     }
 
-    public boolean contains(PaymentList paymentList){
-        openEntityManager();
-        beginTransaction();
-        PaymentList listFromDB = em.find(PaymentList.class,paymentList.getId());
-        commitTransaction();
-        closeEntityManager();
-        return listFromDB != null;
+    private void loadBackupFile(PaymentList paymentList) {
+        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
+        if (!file.exists()) {
+
+            throw new RuntimeException("Ошибка загрузки файла для перечня " + paymentList.toString());
+        }
+        paymentList.setBackupFile(file);
     }
 
-    /*Методы для получения деталей платежей*/
 
-    public List<PaymentDetails> getDetailsByPeriod(Date from, Date until){
-        openEntityManager();
-        beginTransaction();
-        List<PaymentDetails> sortedList = em
-                .createQuery("FROM PaymentDetails WHERE date BETWEEN :dateFrom AND :dateUntil", PaymentDetails.class)
-                .setParameter("dateFrom",from, TemporalType.DATE)
-                .setParameter("dateUntil", until, TemporalType.DATE)
-                .getResultList();
+    private void openEntityManager() {
+        if (em == null || !em.isOpen()) {
+            this.em = emf.createEntityManager();
+        }
+    }
 
-        commitTransaction();
-        closeEntityManager();
-        return sortedList;
+    private void closeEntityManager() {
+        if (em.isOpen()) em.close();
+    }
+
+    private void beginTransaction() {
+        em.getTransaction().begin();
+    }
+
+    private void commitTransaction() {
+        em.getTransaction().commit();
     }
 
 }

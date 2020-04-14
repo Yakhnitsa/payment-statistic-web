@@ -21,9 +21,12 @@ export default new Vuex.Store({
     },
     // Изменяемые свойства объекта, computed properties, ets...
     getters:{
+        paymentLists: state => state.paymentLists,
         chosenFiles: state => state.uploadedData.files,
         tempUploadedLists: state => state.uploadedData.tempLists,
         selectedUploadedLists: state => state.uploadedData.selectedLists
+
+
         // sortedMessages: state => (state.messages || []).sort((a,b) => -(a.id - b.id))
     },
     // Методы для изменения объектов приолжения
@@ -84,6 +87,16 @@ export default new Vuex.Store({
         },
 
         /*Методы для загрузки перечней на сервер*/
+        loadTempListsFromServerAction({commit}){
+            axios.get('/api/download-temp')
+                .then(response =>{
+                if(response.status == 200){
+                    commit('setTepListsMutation',response.data)
+                }
+
+            }).catch((error) => console.log(error));
+        },
+
         uploadListsOnServerAction({commit,state}) {
             var formData = new FormData();
 
@@ -109,11 +122,27 @@ export default new Vuex.Store({
                 }
             }).catch((error) => console.log(error));
         },
-        //    TODO Реализовать методы загрузки данных на сервер...
-        saveSelectedListsAction({commit,state},lists){},
-        deleteSelectedListsAction({commit,state},lists){}
 
+        saveSelectedListsAction({commit,state},lists){
+            axios.post('/api/save-temp-selected',
+                lists, {
+                }
+            ).then(response =>{
+                if(response.status == 200){
+                    commit('setTepListsMutation',response.data)
+                }
+            }).catch((error) => console.log(error));
 
+        },
+
+        deleteSelectedListsAction({commit,state},lists){
+            axios.post('/api/delete-temp-selected',lists)
+                .then(response =>{
+                    if(response.status ==200){
+                        commit('setTepListsMutation',response.data)
+                    }
+            }).catch(error => console.log(error))
+        }
 
     }
 })

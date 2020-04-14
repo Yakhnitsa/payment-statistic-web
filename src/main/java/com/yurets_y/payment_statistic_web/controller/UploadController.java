@@ -77,7 +77,7 @@ public class UploadController {
             PaymentList listFromTemp = tempListService.deleteFromTempDB(list);
             if(listFromTemp == null) continue;
             if(paymentListDAO.contains(list))
-                paymentListDAO.update(list);
+                paymentListDAO.update(listFromTemp);
             else{
                 paymentListDAO.add(listFromTemp);
             }

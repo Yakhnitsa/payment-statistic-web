@@ -36,18 +36,18 @@ public class TempListServiceImpl implements TempListService {
         String filePath = tempDir.toAbsolutePath().toString() + File.separator + multipartFile.getOriginalFilename();
         try {
             File file = Paths.get(filePath).toFile();
-            if(!file.exists())
-                file = Files.createFile(Paths.get(filePath)).toFile();
+            Files.deleteIfExists(file.toPath());
+
+            file = Files.createFile(Paths.get(filePath)).toFile();
             multipartFile.transferTo(file);
 
             PaymentList list = htmlDocParser.parseFromFile(file);
-            tempDBMap.put(getIdFromList(list),list);
+            tempDBMap.put(list.getId(),list);
 
             return list;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Ошибка при сохранении во временную ДБ перечней" + filePath);
         }
-        return null;
     }
 
 

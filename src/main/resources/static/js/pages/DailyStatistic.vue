@@ -1,5 +1,10 @@
 <template>
     <div class="container-fluid mx-5">
+        <!--TODO Вытянуть отдельно статистику по платежам
+         - Изменить способ переполнения данных для названий перечней
+         - Выделить другим стилем детали перечней
+        -->
+
         <!--<h3> Daily statistic component</h3>-->
         <!--<button type="button" class="btn btn-primary" v-on:click="test">test</button>-->
         <form>

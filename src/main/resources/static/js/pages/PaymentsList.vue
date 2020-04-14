@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-right text-nowrap" v-for="payment in payments">
+                    <tr class="text-right text-nowrap" v-for="payment in sortedPayments">
                         <td scope="col" class="col-2">{{payment.number}}</td>
                         <td scope="col" class="col-2">{{payment.date | formatDate}}</td>
                         <td scope="col" class="col-2">{{payment.openingBalance | formatPayment }}</td>
@@ -67,8 +67,21 @@
         },
         computed: {
             payments: function(){
-                return this.$store.state.paymentLists
+                return this.$store.getters.paymentLists
             },
+            sortedPayments: function(){
+                // return this.payments.sort(function (a,b){
+                //         if (a.number > b.number) {
+                //             return 1;
+                //         }
+                //         if (a.number < b.number) {
+                //             return -1;
+                //         }
+                //         return 0;
+                //     }
+                // )
+                return this.payments.sort((a,b)=> a.number - b.number)
+            }
         },
 
         created: function(){
@@ -115,6 +128,7 @@
             test(list){
                 this.$store.commit('deletePaymentListMutation',list)
             }
+
         },
         filters:{
             formatPayment(num) {
@@ -142,7 +156,7 @@
         width: 100%;
     }
     .table-fixed tbody {
-        height: 500px;
+        height: 400px;
         overflow-y: auto;
         width: 100%;
     }

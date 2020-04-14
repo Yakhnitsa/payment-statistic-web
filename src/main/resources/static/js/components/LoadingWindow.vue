@@ -73,39 +73,26 @@
         },
         methods:{
             ...mapMutations(['addChosenFilesMutation']),
-            ...mapActions(['uploadListsOnServerAction']),
+            ...mapActions(['uploadListsOnServerAction',
+                'deleteSelectedListsAction',
+                'saveSelectedListsAction',
+                'loadTempListsFromServerAction',
+                'addPaymentListsAction'
+            ]),
             addFile(event){
                 var selectedFiles = event.target.files;
                 this.addChosenFilesMutation(Array.from(selectedFiles))
             },
             submitFileUpload(){
-                console.log('uploading files....')
                 this.uploadListsOnServerAction();
 
             },
             saveSelected(){
-                // axios.post('/api/save-temp-selected',
-                //     this.selectedPayments, {
-                //     }
-                // ).then(response =>{
-                //     if(response.status == 200){
-                //         console.log(response)
-                //         this.loadedPayments = []
-                //         response.data.forEach(list => this.loadedPayments.push(list))
-                //
-                //         this.$emit('update-list')
-                //     }
-                // }).catch((error) => console.log(error));
+                this.saveSelectedListsAction(this.selectedPayments)
+                this.addPaymentListsAction()
             },
             deleteSelected(){
-                // axios.post('/api/delete-temp-selected',this.selectedPayments)
-                //     .then(response =>{
-                //         if(response.status ==200){
-                //             console.log(response)
-                //             this.loadedPayments = []
-                //             response.data.forEach(list => this.loadedPayments.push(list))
-                //      }
-                // }).catch(error => console.log(error))
+                this.deleteSelectedListsAction(this.selectedPayments)
             },
             changeSelected(selected){
                 this.selectedPayments = selected;
@@ -114,13 +101,7 @@
         created: function(){
         },
         mounted: function(){
-            // axios.get('/api/download-temp')
-            //     .then(response =>{
-            //     if(response.status == 200){
-            //         this.loadedPayments = response.data;
-            //     }
-            //
-            // }).catch((error) => console.log(error));
+            this.loadTempListsFromServerAction()
         }
 
     }
