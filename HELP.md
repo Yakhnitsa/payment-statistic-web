@@ -87,4 +87,35 @@ The following guides illustrate how to use some features concretely:
                 router,
                 store, - Запиливание хранилища в приложение.
                 render: a => a(App)
-        });           
+        });  
+        
+        
+## Подготовка приложения к деплою
+   
+   - Вытягиваем файлы из static в корень приложения (в папке static будет только собранный main.js)
+   
+   - Устанавливаем приложение для зборки
+    
+    yarn add -D webpack-merge
+   
+   -  Разделяем файл webpack.config.js на несколько конфигураций dev и prod
+        создаем файлы:
+        webpack.common.js - общая конфигурация                   
+        webpack.dev.js - конфигурация для деплоя                  
+        webpack.prod.js - конфигурация для продакшена   
+        
+   - Устанавливаем сборщик мусора и добавляем в prod конфигурацию
+    
+    yarn add -D clean-webpack-plugin   
+    
+    const { CleanWebpackPlugin } = require('clean-webpack-plugin'); 
+       
+       plugins: [
+           new CleanWebpackPlugin()
+       ],      
+    
+   - Настраиваем файл сборки package.json
+        "scripts": {
+          "start": "webpack-dev-server --open --config webpack.dev.js",
+          "build": "webpack --config webpack.prod.js"
+        },                   
