@@ -4,7 +4,9 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
+import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,12 +31,23 @@ public class PaymentListDAO {
 
     private EntityManager em;
 
+    private PaymentDetailsRepo paymentDetailsRepo;
+
     @Value("${service.backup-path}")
     private String backupDir;
 
     private List<PaymentList> tempList = new ArrayList<>();
 
-    public PaymentListDAO(@Qualifier("defaultEMF") EntityManagerFactory entityManager) {
+    @Autowired
+    public PaymentListDAO(
+            @Qualifier("defaultEMF") EntityManagerFactory entityManager,
+            PaymentDetailsRepo paymentDetailsRepo) {
+        this.emf = entityManager;
+        this.paymentDetailsRepo = paymentDetailsRepo;
+    }
+
+    public PaymentListDAO(
+            @Qualifier("defaultEMF") EntityManagerFactory entityManager) {
         this.emf = entityManager;
     }
 
@@ -172,8 +185,13 @@ public class PaymentListDAO {
                 .getResultList();
         commitTransaction();
         closeEntityManager();
-        return list;
+//        return list;
+//        TODO протестить и отпустить
+//         paymentDetailsRepo.findAllByDateBetween(from,until);
+        List<PaymentDetails> result = paymentDetailsRepo.findAllByDateBetween(from,until);
+        return result;
     }
+
 
     /*Служебные методы...*/
 
