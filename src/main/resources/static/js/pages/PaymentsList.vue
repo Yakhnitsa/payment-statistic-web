@@ -70,16 +70,6 @@
                 return this.$store.getters.paymentLists
             },
             sortedPayments: function(){
-                // return this.payments.sort(function (a,b){
-                //         if (a.number > b.number) {
-                //             return 1;
-                //         }
-                //         if (a.number < b.number) {
-                //             return -1;
-                //         }
-                //         return 0;
-                //     }
-                // )
                 return this.payments.sort((a,b)=> a.number - b.number)
             }
         },

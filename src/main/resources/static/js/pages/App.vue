@@ -14,10 +14,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>
-                    <!--<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
                     <router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <!--<a class="nav-item nav-link" href="#">Pricing</a>-->
+                    <!--<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
                 </div>
             </div>
         </nav>
@@ -25,17 +24,10 @@
         <div class="app-content">
             <router-view></router-view>
         </div>
-
-
-        <!--<button @click="test">TEST</button>-->
-        <!--<loading-window v-on:update-list="updateList"></loading-window>-->
-        <!--<daily-statistic></daily-statistic>-->
-        <!--<payment-list :payments="payments" v-on:update-list="updateList"></payment-list>-->
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
     import DailyStatistic from './DailyStatistic.vue'
     import PaymentList from './PaymentsList.vue'
     import LoadingWindow from '../components/LoadingWindow.vue'

@@ -61,59 +61,12 @@
                             {{getDataFromList(value,day) | formatPayment}}
                         </td>
                     </tr>
-                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
-                        <!--<th class="text-nowrap zui-sticky-col pl-4">{{key}}</th>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getDataFromList(value,day) | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
 
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!--<div style="overflow-x:auto;">-->
-            <!--<table class="table table-striped table-sm">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th scope="col" class="col-3" >Наименование платежа</th>-->
-                    <!--<th v-for="day in dateArray" class="text-center">{{day | formatDate}}</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<th scope="col" class="col-3" >Сальдо на початок розрахункової доби</th>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'openingBalance')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-
-                    <!--<tr>-->
-                        <!--<th>Сальдо на кінець розрахункової доби</th>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'closingBalance')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-
-                    <!--<tr>-->
-                        <!--<th scope="col" @click="details = !details">Всього проведено платежів-->
-                            <!--<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>-->
-                        <!--</th>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-
-                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
-                        <!--<th class="text-nowrap text-sm pl-4">{{key}}</th>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-sm text-nowrap">-->
-                            <!--{{getDataFromList(value,day) | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
     </div>
 </template>
 
