@@ -117,7 +117,7 @@ public class HtmlDocParserTest {
 
     private File getTestFile(){
         if(testFile != null) return testFile;
-        testFile = new File("src/test/resources/testList/26022020_040331.html");
+        testFile = new File("src/test/resources/test_files/26022020_040331.html");
 
         return testFile;
     }

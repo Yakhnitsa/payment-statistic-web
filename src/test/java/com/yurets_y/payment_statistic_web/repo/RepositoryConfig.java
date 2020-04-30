@@ -8,4 +8,5 @@ import org.springframework.context.annotation.ComponentScan;
 @EntityScan(basePackages = "com.yurets_y.payment_statistic_web.entity")
 @ComponentScan(basePackages = "com.yurets_y.payment_statistic_web.repo")
 public class RepositoryConfig {
+
 }

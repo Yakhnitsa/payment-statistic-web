@@ -49,7 +49,7 @@ public class PaymentListDAOTest {
         List<PaymentDetails> testList = paymentListDAOImmutable.getPaymentDetailsByDate(dateFrom,dateUntil);
 
         testList.forEach(detail ->{
-            if(detail.getStationName() == null) detail.setStationName("other");
+            if(detail.getStationName() == null) detail.setStationName("resources");
         });
 
         Map<Date,Map<String,List<PaymentDetails>>> resultMap = testList.stream()
