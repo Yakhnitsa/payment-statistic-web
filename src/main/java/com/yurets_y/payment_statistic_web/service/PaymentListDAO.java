@@ -23,8 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 
-@Service("paymentListDao")
-public class PaymentListDAO {
+//@Service("paymentListDao")
+public class PaymentListDAO implements PaymentListService {
 //    TODO - Перейти на репозиторий и избавиться от ошибок синхронизации запросов
 
     private EntityManagerFactory emf;
@@ -51,6 +51,7 @@ public class PaymentListDAO {
         this.emf = entityManager;
     }
 
+    @Override
     public synchronized void add(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
@@ -67,6 +68,7 @@ public class PaymentListDAO {
         }
     }
 
+    @Override
     public synchronized void update(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
@@ -77,8 +79,9 @@ public class PaymentListDAO {
         closeEntityManager();
     }
 
-    public synchronized void remove(PaymentList paymentList) {
-        removeById(paymentList.getId());
+    @Override
+    public synchronized boolean remove(PaymentList paymentList) {
+        return removeById(paymentList.getId());
     }
 
     public synchronized boolean removeById(PaymentListId id) {
@@ -97,6 +100,7 @@ public class PaymentListDAO {
         return false;
     }
 
+    @Override
     public synchronized PaymentList getById(PaymentListId id) {
         openEntityManager();
         beginTransaction();
@@ -112,6 +116,7 @@ public class PaymentListDAO {
 
     }
 
+    @Override
     public synchronized List<PaymentList> getAll() {
         openEntityManager();
         beginTransaction();
@@ -122,6 +127,7 @@ public class PaymentListDAO {
         return paymentLists;
     }
 
+    @Override
     public synchronized List<PaymentList> getByPeriod(Date from, Date until) {
         openEntityManager();
         beginTransaction();
@@ -138,6 +144,7 @@ public class PaymentListDAO {
         return sortedList;
     }
 
+    @Override
     public boolean contains(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();

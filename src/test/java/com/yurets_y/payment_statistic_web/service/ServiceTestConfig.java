@@ -1,17 +1,20 @@
-package com.yurets_y.paymentstatisticweb.parser;
+package com.yurets_y.payment_statistic_web.service;
 
-import com.yurets_y.payment_statistic_web.service.DocParser;
-import com.yurets_y.payment_statistic_web.service.HtmlDocParser;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
-public class TestConfig {
+public class ServiceTestConfig {
 
         @Bean
         public DocParser getDocParser() {
 
             return new HtmlDocParser();
+        }
+
+        @Bean
+        public TempListService getTempListService(){
+            return new TempListServiceImpl();
         }
 
 

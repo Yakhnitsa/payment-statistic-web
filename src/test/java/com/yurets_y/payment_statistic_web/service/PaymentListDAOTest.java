@@ -1,9 +1,8 @@
-package com.yurets_y.paymentstatisticweb.service;
+package com.yurets_y.payment_statistic_web.service;
 
 
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
-import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Import;

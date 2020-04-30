@@ -5,18 +5,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.DocParser;
-import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
+import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.TempListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 @RestController
@@ -24,7 +20,7 @@ public class UploadController {
 
     private DocParser htmlDocParser;
 
-    private PaymentListDAO paymentListDAO;
+    private PaymentListService paymentListService;
 
     private TempListService tempListService;
 
@@ -76,10 +72,10 @@ public class UploadController {
         for(PaymentList list : paymentLists){
             PaymentList listFromTemp = tempListService.deleteFromTempDB(list);
             if(listFromTemp == null) continue;
-            if(paymentListDAO.contains(list))
-                paymentListDAO.update(listFromTemp);
+            if(paymentListService.contains(list))
+                paymentListService.update(listFromTemp);
             else{
-                paymentListDAO.add(listFromTemp);
+                paymentListService.add(listFromTemp);
             }
 
         }
@@ -113,8 +109,8 @@ public class UploadController {
     }
 
     @Autowired
-    public void setPaymentListDAO(PaymentListDAO paymentListDAO) {
-        this.paymentListDAO = paymentListDAO;
+    public void setPaymentListDAO(PaymentListService paymentListService) {
+        this.paymentListService = paymentListService;
     }
 
     @Autowired

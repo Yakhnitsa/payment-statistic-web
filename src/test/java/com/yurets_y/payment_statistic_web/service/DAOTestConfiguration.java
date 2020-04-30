@@ -1,16 +1,13 @@
-package com.yurets_y.paymentstatisticweb.service;
+package com.yurets_y.payment_statistic_web.service;
 
 
-import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.File;
 
 @Configuration
 //@ComponentScan(basePackages = "com.yurets_y.payment_statistic.model")
@@ -41,7 +38,7 @@ public class DAOTestConfiguration {
 //    }
 
     @Bean("dao-vs-immutable-db")
-    public PaymentListDAO paymentListDAOImmutable() {
+    public PaymentListService paymentListDAOImmutable() {
         return new PaymentListDAO(entityManagerFactoryImmutable());
     }
 

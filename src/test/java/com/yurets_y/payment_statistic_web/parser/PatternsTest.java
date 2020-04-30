@@ -1,4 +1,4 @@
-package com.yurets_y.paymentstatisticweb.parser;
+package com.yurets_y.payment_statistic_web.parser;
 
 
 import org.junit.Test;

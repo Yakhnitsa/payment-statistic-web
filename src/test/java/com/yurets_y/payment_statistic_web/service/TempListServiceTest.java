@@ -1,7 +1,7 @@
-package com.yurets_y.paymentstatisticweb.service;
+package com.yurets_y.payment_statistic_web.service;
 
 
-import com.yurets_y.paymentstatisticweb.parser.TestConfig;
+import com.yurets_y.payment_statistic_web.parser.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;

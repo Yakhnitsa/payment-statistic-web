@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+
 import DailyStatistic from '../pages/DailyStatistic.vue'
 import Payments from '../pages/PaymentsList.vue'
 import Test from '../pages/Test.vue'

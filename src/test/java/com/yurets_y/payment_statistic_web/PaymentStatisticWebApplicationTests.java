@@ -1,12 +1,11 @@
-package com.yurets_y.paymentstatisticweb;
+package com.yurets_y.payment_statistic_web;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class PaymentStatisticWebApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 
