@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Import(TestConfig.class)
+@Import(ParserTestConfig.class)
 @RunWith(SpringRunner.class)
 public class HtmlDocParserTest {
 

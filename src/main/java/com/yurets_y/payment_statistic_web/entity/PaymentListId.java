@@ -45,4 +45,12 @@ public class PaymentListId implements Serializable {
 
         return Objects.hash(payerCode, number);
     }
+
+    @Override
+    public String toString() {
+        return "PaymentListId{" +
+                "payerCode=" + payerCode +
+                ", number=" + number +
+                '}';
+    }
 }

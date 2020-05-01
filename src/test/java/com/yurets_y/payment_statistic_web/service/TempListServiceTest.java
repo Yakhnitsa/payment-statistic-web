@@ -1,7 +1,7 @@
 package com.yurets_y.payment_statistic_web.service;
 
 
-import com.yurets_y.payment_statistic_web.parser.TestConfig;
+import com.yurets_y.payment_statistic_web.parser.ParserTestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Import(TestConfig.class)
+@Import(ParserTestConfig.class)
 @RunWith(SpringRunner.class)
 public class TempListServiceTest {
     @Value("${service.temp-dir}")
