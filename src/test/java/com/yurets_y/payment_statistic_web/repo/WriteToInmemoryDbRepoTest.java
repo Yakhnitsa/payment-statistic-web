@@ -1,8 +1,6 @@
 package com.yurets_y.payment_statistic_web.repo;
 
-
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
-import com.yurets_y.payment_statistic_web.resources.TestFilesConfig;
 import com.yurets_y.payment_statistic_web.resources.TestListsConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,19 +14,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-import java.io.File;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest()
+@DataJpaTest(properties = {
+//        "spring.jpa.hibernate.ddl-auto=create"
+})
 @TestPropertySource(locations= "classpath:db_properties/immutable-db.properties")
 @Import({RepositoryConfig.class,
         TestListsConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class ImmutableRepoTest {
+public class WriteToInmemoryDbRepoTest {
 
     @Autowired
     private PaymentListRepo paymentListRepo;
@@ -48,6 +49,23 @@ public class ImmutableRepoTest {
     @Test
     public void autowiredRepositoryConfig() {
         assertNotNull(paymentListRepo);
+    }
+
+    @Test
+    public void writeToDbTest(){
+        this.paymentListRepo.save(testPaymentList);
+        assertTrue(this.paymentListRepo.existsById(testPaymentList.getId()));
+    }
+
+    @Test
+    public void writeMultipleListToDBTest(){
+        this.paymentListRepo.saveAll(paymentLists);
+        System.out.println("Count of records: " + this.paymentListRepo.count());
+    }
+
+    @Test
+    public void readFromDbTest(){
+        List<PaymentList> paymentLists = this.paymentListRepo.findAll();
     }
 
 }

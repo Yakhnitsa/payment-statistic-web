@@ -8,11 +8,13 @@ import com.yurets_y.payment_statistic_web.service.DocParser;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.TempListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 @RestController
@@ -32,8 +34,6 @@ public class UploadController {
             return new ResponseEntity<String>("No file!",HttpStatus.OK);
         }
         String fileName = file.getOriginalFilename();
-        System.out.println(fileName);
-
         return null;
     }
 
@@ -72,11 +72,12 @@ public class UploadController {
         for(PaymentList list : paymentLists){
             PaymentList listFromTemp = tempListService.deleteFromTempDB(list);
             if(listFromTemp == null) continue;
-            if(paymentListService.contains(list))
-                paymentListService.update(listFromTemp);
-            else{
-                paymentListService.add(listFromTemp);
-            }
+//            if(paymentListService.contains(list))
+//                paymentListService.update(listFromTemp);
+//            else{
+//                paymentListService.add(listFromTemp);
+//            }
+            paymentListService.add(listFromTemp);
 
         }
         return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
@@ -93,15 +94,6 @@ public class UploadController {
         return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
-    @PostMapping("/api/test")
-    public ResponseEntity<?> test(
-            @RequestBody POJO[] pojo
-    ){
-
-
-        return  new ResponseEntity<>("test called",HttpStatus.OK);
-    }
-
 
     @Autowired
     public void setHtmlDocParser(DocParser htmlDocParser) {
@@ -109,7 +101,7 @@ public class UploadController {
     }
 
     @Autowired
-    public void setPaymentListDAO(PaymentListService paymentListService) {
+    public void setPaymentListDAO( @Qualifier("paymentListServiceRepoBased") PaymentListService paymentListService) {
         this.paymentListService = paymentListService;
     }
 
@@ -117,39 +109,5 @@ public class UploadController {
     public void setTempListService(TempListService tempListService) {
         this.tempListService = tempListService;
     }
-
-    static class POJO{
-        String firstName;
-        String lastName;
-        Date date;
-
-        public POJO() {
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        public Date getDate() {
-            return date;
-        }
-
-        public void setDate(Date date) {
-            this.date = date;
-        }
-    }
-
 
 }

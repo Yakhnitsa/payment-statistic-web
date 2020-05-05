@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -83,13 +84,13 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         return paymentListRepo.existsById(paymentList.getId());
     }
 
-    private void testBeforeSave(PaymentList paymentList) {
+    private void testBeforeSave(@NotNull PaymentList paymentList) {
         if (paymentList.getBackupFilePath() == null) {
             throw new NullPointerException("Ошибка backup файла для перечня " + paymentList);
         }
     }
 
-    private void saveBackupFile(PaymentList paymentList) {
+    private void saveBackupFile(@NotNull PaymentList paymentList) {
         String fileExtension = paymentList.getBackupFile().getName();
         fileExtension = fileExtension.substring(fileExtension.lastIndexOf("."));
         String fileName = paymentList.getPayerCode() + "_" + paymentList.getNumber() + fileExtension;
@@ -114,7 +115,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     }
 
-    private void deleteBackupFile(PaymentList list) {
+    private void deleteBackupFile(@NotNull PaymentList list) {
         File file = new File(backupDir + File.separator + list.getBackupFilePath());
         if (file.exists()) {
             try {
@@ -129,7 +130,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     }
 
-    private void loadBackupFile(PaymentList paymentList) {
+    private void loadBackupFile(@NotNull PaymentList paymentList) {
         File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
         if (!file.exists()) {
 

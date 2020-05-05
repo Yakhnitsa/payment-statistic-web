@@ -2,6 +2,8 @@ package com.yurets_y.payment_statistic_web.repo;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +19,5 @@ public interface PaymentListRepo extends JpaRepository<PaymentList,PaymentListId
     PaymentList getOne(PaymentListId paymentListId);
 
     List<PaymentList> getAllByDateBetween(Date from,Date until);
+
 }

@@ -10,7 +10,9 @@ import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
+import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,8 +32,16 @@ public class PaymentStatisticController {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-    @Autowired
     private PaymentListDAO paymentListDAO;
+
+    private PaymentListService paymentListService;
+
+    @Autowired
+    public void setPaymentListDAO(PaymentListDAO paymentListDAO,
+                                  @Qualifier("paymentListServiceRepoBased") PaymentListService paymentListService) {
+        this.paymentListService = paymentListService;
+        this.paymentListDAO = paymentListDAO;
+    }
 
     @GetMapping
     public String paymentStatistic(){
@@ -42,7 +52,7 @@ public class PaymentStatisticController {
     @ResponseBody
     public List<PaymentList> getLastPayments(){
 
-        List<PaymentList> paymentLists = paymentListDAO.getAll();
+        List<PaymentList> paymentLists = paymentListService.getAll();
 
 
         return paymentLists;
@@ -53,7 +63,7 @@ public class PaymentStatisticController {
     @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
     public List<PaymentList> getTestJSon() throws JsonProcessingException {
 
-        List<PaymentList> paymentLists = paymentListDAO.getAll();
+        List<PaymentList> paymentLists = paymentListService.getAll();
 
         return paymentLists;
     }
@@ -67,26 +77,14 @@ public class PaymentStatisticController {
             @RequestParam(value = "listNumber",required = false) Integer listNumber
     ) {
         PaymentListId id = new PaymentListId(payerCode,listNumber);
-        PaymentList paymentList = paymentListDAO.getById(id);
+        PaymentList paymentList = paymentListService.getById(id);
         return paymentList;
-    }
-
-    @DeleteMapping("/api/delete-payment/{code}_{numb}")
-    @ResponseBody
-    public ResponseEntity<?> deleteTest(@PathVariable int code, @PathVariable int numb){
-        PaymentListId id = new PaymentListId(code,numb);
-
-        if(paymentListDAO.removeById(id)){
-            return new ResponseEntity<>(id,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
-
     }
 
     @DeleteMapping("/api/remove-payment")
     @ResponseBody
-    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentListId id){
-        if(paymentListDAO.removeById(id)){
+    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id){
+        if(paymentListService.remove(id)){
             return new ResponseEntity<>(id,HttpStatus.OK);
         }
         return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
@@ -108,7 +106,8 @@ public class PaymentStatisticController {
             dateUntil = DATE_FORMAT.parse(until);
         }
         Map<String,Object> statistic = new LinkedHashMap<>();
-        List<PaymentList> payments = paymentListDAO.getByPeriod(dateFrom,dateUntil);
+        List<PaymentList> payments = paymentListService.getByPeriod(dateFrom,dateUntil);
+//        TODO Написать сервис для перечней...
         List<PaymentDetails> paymentDetailsList = paymentListDAO.getPaymentDetailsByDate(dateFrom,dateUntil);
         Map<String,Map<Date,Long>> details = paymentDetailsList
                 .stream()
@@ -125,18 +124,18 @@ public class PaymentStatisticController {
         return new ResponseEntity<>(statistic,HttpStatus.OK);
     }
 
-    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(JsonView.class, new JsonViewSerializer());
-        mapper.registerModule(module);
-
-        String result = mapper.writeValueAsString(JsonView.with(paymentLists)
-                .onClass(PaymentList.class, match()
-                        .exclude("paymentDetailsList")));
-
-        return result;
-    }
+//    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        SimpleModule module = new SimpleModule();
+//        module.addSerializer(JsonView.class, new JsonViewSerializer());
+//        mapper.registerModule(module);
+//
+//        String result = mapper.writeValueAsString(JsonView.with(paymentLists)
+//                .onClass(PaymentList.class, match()
+//                        .exclude("paymentDetailsList")));
+//
+//        return result;
+//    }
 
 }

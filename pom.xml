@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
 
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
-        <com.h2database.version>1.4.196</com.h2database.version>
+        <com.h2database.version>1.4.200</com.h2database.version>
         <hibernate.version>5.4.0.Final</hibernate.version>
     </properties>
 

@@ -23,9 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 
-//@Service("paymentListDao")
+@Service("paymentListDao")
 public class PaymentListDAO implements PaymentListService {
-//    TODO - Перейти на репозиторий и избавиться от ошибок синхронизации запросов
 
     private EntityManagerFactory emf;
 

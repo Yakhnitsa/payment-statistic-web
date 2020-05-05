@@ -34,10 +34,10 @@ public class ResourcesTest {
 
     @Test
     public void testFilesExistTest() {
-        System.out.println("test html file: " + testHtmlFile);
+        System.out.println("test html file: " + testHtmlFile.getAbsolutePath());
         assertNotNull(testHtmlFile);
 
-        System.out.println("test html directory: " + testHtmlFilesDirectory);
+        System.out.println("test html directory: " + testHtmlFilesDirectory.getAbsolutePath());
         assertNotNull(testHtmlFilesDirectory);
     }
 
@@ -54,4 +54,6 @@ public class ResourcesTest {
         int testedFiles = testHtmlFilesDirectory.listFiles().length;
         assertTrue(parsedLists == testedFiles);
     }
+
+
 }

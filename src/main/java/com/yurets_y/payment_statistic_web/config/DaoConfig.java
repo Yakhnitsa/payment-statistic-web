@@ -15,5 +15,7 @@ public class DaoConfig {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("basic-persistence");
         return emf;
     }
+//    TODO Попробовать переопределить EMF и подменить Entity manager fartory
+//    Похоже он раздается основному контексту через автосвязывание бинов.
 
 }
