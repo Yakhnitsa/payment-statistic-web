@@ -20,11 +20,15 @@ import java.util.*;
 @RestController
 public class UploadController {
 
-    private DocParser htmlDocParser;
-
     private PaymentListService paymentListService;
 
     private TempListService tempListService;
+
+    @Autowired
+    public UploadController(PaymentListService paymentListService, TempListService tempListService) {
+        this.paymentListService = paymentListService;
+        this.tempListService = tempListService;
+    }
 
     @PostMapping("/api/upload-single")
     public ResponseEntity<?> uploadSingleList(
@@ -95,19 +99,19 @@ public class UploadController {
     }
 
 
-    @Autowired
-    public void setHtmlDocParser(DocParser htmlDocParser) {
-        this.htmlDocParser = htmlDocParser;
-    }
-
-    @Autowired
-    public void setPaymentListDAO( @Qualifier("paymentListServiceRepoBased") PaymentListService paymentListService) {
-        this.paymentListService = paymentListService;
-    }
-
-    @Autowired
-    public void setTempListService(TempListService tempListService) {
-        this.tempListService = tempListService;
-    }
+//    @Autowired
+//    public void setHtmlDocParser(DocParser htmlDocParser) {
+//        this.htmlDocParser = htmlDocParser;
+//    }
+//
+//    @Autowired
+//    public void setPaymentListDAO( PaymentListService paymentListService) {
+//        this.paymentListService = paymentListService;
+//    }
+//
+//    @Autowired
+//    public void setTempListService(TempListService tempListService) {
+//        this.tempListService = tempListService;
+//    }
 
 }

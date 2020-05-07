@@ -28,20 +28,20 @@ public class DAOTestConfiguration {
     private String testFileLocation;
 
 
-    @Bean("immutable-test-db")
-    public EntityManagerFactory entityManagerFactoryImmutable() {
-        return Persistence.createEntityManagerFactory("immutable-test-persistence");
-    }
+//    @Bean("immutable-test-db")
+//    public EntityManagerFactory entityManagerFactoryImmutable() {
+//        return Persistence.createEntityManagerFactory("immutable-test-persistence");
+//    }
 
 //    @Bean(name = {"in-memory-test-db", "defaultEMF"})
 //    public EntityManagerFactory entityManagerFactoryInMemory() {
 //        return Persistence.createEntityManagerFactory("in-memory-test-persistence");
 //    }
-
-    @Bean("dao-vs-immutable-db")
-    public PaymentListService paymentListDAOImmutable() {
-        return new PaymentListDAO(entityManagerFactoryImmutable());
-    }
+//
+//    @Bean("dao-vs-immutable-db")
+//    public PaymentListService paymentListDAOImmutable() {
+//        return new PaymentListDAO(entityManagerFactoryImmutable());
+//    }
 
 //    @Bean("dao-vs-in-memory-db")
 //    public PaymentListDAO paymentListDAOInMemory() {

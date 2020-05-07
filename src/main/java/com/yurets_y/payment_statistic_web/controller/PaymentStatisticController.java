@@ -9,6 +9,7 @@ import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.entity.Views;
+import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+
 import static com.monitorjbl.json.Match.match;
 
 
@@ -32,25 +34,32 @@ public class PaymentStatisticController {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-    private PaymentListDAO paymentListDAO;
+//    private PaymentListDAO paymentListDAO;
 
     private PaymentListService paymentListService;
 
+    private PaymentDetailsService paymentDetailsService;
+
     @Autowired
-    public void setPaymentListDAO(PaymentListDAO paymentListDAO,
-                                  @Qualifier("paymentListServiceRepoBased") PaymentListService paymentListService) {
+    public void setPaymentListDAO(
+            PaymentDetailsService paymentDetailsService,
+            PaymentListService paymentListService
+
+    ) {
         this.paymentListService = paymentListService;
-        this.paymentListDAO = paymentListDAO;
+//        this.paymentListDAO = paymentListDAO;
+        this.paymentDetailsService = paymentDetailsService;
+
     }
 
     @GetMapping
-    public String paymentStatistic(){
+    public String paymentStatistic() {
         return "index";
     }
 
     @GetMapping("/api/last-payments")
     @ResponseBody
-    public List<PaymentList> getLastPayments(){
+    public List<PaymentList> getLastPayments() {
 
         List<PaymentList> paymentLists = paymentListService.getAll();
 
@@ -73,43 +82,42 @@ public class PaymentStatisticController {
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.FullView.class)
     public PaymentList getPayment(
-            @RequestParam(value = "payerCode",required = false) Integer payerCode,
-            @RequestParam(value = "listNumber",required = false) Integer listNumber
+            @RequestParam(value = "payerCode", required = false) Integer payerCode,
+            @RequestParam(value = "listNumber", required = false) Integer listNumber
     ) {
-        PaymentListId id = new PaymentListId(payerCode,listNumber);
+        PaymentListId id = new PaymentListId(payerCode, listNumber);
         PaymentList paymentList = paymentListService.getById(id);
         return paymentList;
     }
 
     @DeleteMapping("/api/remove-payment")
     @ResponseBody
-    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id){
-        if(paymentListService.remove(id)){
-            return new ResponseEntity<>(id,HttpStatus.OK);
+    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id) {
+        if (paymentListService.remove(id)) {
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
-        return new ResponseEntity<>(id,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/api/daily-statistic")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
     public ResponseEntity<?> getDailyStatistic(
-            @RequestParam(value = "dateFrom",required = false) String from,
-            @RequestParam(value = "dateUntil",required = false) String until
+            @RequestParam(value = "dateFrom", required = false) String from,
+            @RequestParam(value = "dateUntil", required = false) String until
     ) throws ParseException {
         Date dateFrom = null;
         Date dateUntil = null;
-        if(!"".equals(dateFrom)){
+        if (!"".equals(dateFrom)) {
             dateFrom = DATE_FORMAT.parse(from);
         }
-        if(!"".equals(until)){
+        if (!"".equals(until)) {
             dateUntil = DATE_FORMAT.parse(until);
         }
-        Map<String,Object> statistic = new LinkedHashMap<>();
-        List<PaymentList> payments = paymentListService.getByPeriod(dateFrom,dateUntil);
-//        TODO Написать сервис для перечней...
-        List<PaymentDetails> paymentDetailsList = paymentListDAO.getPaymentDetailsByDate(dateFrom,dateUntil);
-        Map<String,Map<Date,Long>> details = paymentDetailsList
+        Map<String, Object> statistic = new LinkedHashMap<>();
+        List<PaymentList> payments = paymentListService.getByPeriod(dateFrom, dateUntil);
+        List<PaymentDetails> paymentDetailsList = paymentDetailsService.getPaymentDetailsByDate(dateFrom, dateUntil);
+        Map<String, Map<Date, Long>> details = paymentDetailsList
                 .stream()
                 .collect(Collectors.groupingBy(PaymentDetails::getType,
                         LinkedHashMap::new,
@@ -117,11 +125,11 @@ public class PaymentStatisticController {
                                 PaymentDetails::getDate,
                                 TreeMap::new,
                                 Collectors.summingLong(PaymentDetails::getTotalPayment))
-                        ));
+                ));
 
-        statistic.put("payments",payments);
-        statistic.put("details",details);
-        return new ResponseEntity<>(statistic,HttpStatus.OK);
+        statistic.put("payments", payments);
+        statistic.put("details", details);
+        return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
 
 //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {

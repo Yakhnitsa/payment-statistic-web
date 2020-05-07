@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@Service("paymentListDao")
+//@Service("paymentListDao")
 public class PaymentListDAO implements PaymentListService {
 
     private EntityManagerFactory emf;
@@ -32,23 +32,23 @@ public class PaymentListDAO implements PaymentListService {
 
     private PaymentDetailsRepo paymentDetailsRepo;
 
-    @Value("${service.backup-path}")
+//    @Value("${service.backup-path}")
     private String backupDir;
 
     private List<PaymentList> tempList = new ArrayList<>();
 
-    @Autowired
-    public PaymentListDAO(
-            @Qualifier("defaultEMF") EntityManagerFactory entityManager,
-            PaymentDetailsRepo paymentDetailsRepo) {
-        this.emf = entityManager;
-        this.paymentDetailsRepo = paymentDetailsRepo;
-    }
-
-    public PaymentListDAO(
-            @Qualifier("defaultEMF") EntityManagerFactory entityManager) {
-        this.emf = entityManager;
-    }
+//    @Autowired
+//    public PaymentListDAO(
+//            @Qualifier("defaultEMF") EntityManagerFactory entityManager,
+//            PaymentDetailsRepo paymentDetailsRepo) {
+//        this.emf = entityManager;
+//        this.paymentDetailsRepo = paymentDetailsRepo;
+//    }
+//
+//    public PaymentListDAO(
+//            @Qualifier("defaultEMF") EntityManagerFactory entityManager) {
+//        this.emf = entityManager;
+//    }
 
     @Override
     public synchronized void add(PaymentList paymentList) {

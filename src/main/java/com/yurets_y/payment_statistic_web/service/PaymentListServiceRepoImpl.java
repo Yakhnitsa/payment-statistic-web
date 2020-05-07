@@ -6,6 +6,7 @@ import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service("paymentListServiceRepoBased")
+@Primary
 public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Value("${service.backup-path}")
