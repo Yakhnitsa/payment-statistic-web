@@ -2,10 +2,12 @@ package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @Service
-public class TempListServiceImpl implements TempListService {
+public class TempListServiceImpl implements TempListService{
 
     private Path tempDir;
 
@@ -30,6 +32,11 @@ public class TempListServiceImpl implements TempListService {
         }
     }
 
+    @Autowired
+    public TempListServiceImpl(DocParser htmlDocParser) {
+        this();
+        this.htmlDocParser = htmlDocParser;
+    }
 
     @Override
     public PaymentList putToTempDB(MultipartFile multipartFile) {
@@ -62,12 +69,6 @@ public class TempListServiceImpl implements TempListService {
         return Collections.unmodifiableCollection(tempDBMap.values());
     }
 
-
-    @Autowired
-    public void setHtmlDocParser(DocParser htmlDocParser) {
-        this.htmlDocParser = htmlDocParser;
-    }
-
     private PaymentListId getIdFromList(PaymentList paymentList){
         int code = paymentList.getPayerCode();
         int number = paymentList.getNumber();
@@ -75,6 +76,17 @@ public class TempListServiceImpl implements TempListService {
             return new PaymentListId(code,number);
         else{
             throw new RuntimeException("Неверный ID " + paymentList.toString());
+        }
+    }
+
+    @PreDestroy
+    public void destroy(){
+        System.out.println("Удаление временного хранилища файлов");
+        System.out.println(tempDir.toAbsolutePath());
+        try {
+            Files.deleteIfExists(tempDir);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

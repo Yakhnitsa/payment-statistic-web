@@ -78,9 +78,9 @@
             this.updateList();
         },
         methods:{
-            ...mapActions(['addPaymentListsAction','deletePaymentListAction']),
+            ...mapActions(['getPaymentListsAction','deletePaymentListAction']),
             updateList(){
-                this.addPaymentListsAction()
+                this.getPaymentListsAction()
             },
             showPayment(payment){
 
@@ -89,14 +89,8 @@
                     payerCode: payment.payerCode,
                 };
 
-                axios.get('/api/single-payment',
-                    {params}, {
-                        // headers: {
-                        //     'Content-Type': 'multipart/form-data'
-                        // }
-
-                    }
-                ).then(function (response) {
+                axios.get('/api/single-payment',{ params})
+                    .then(function (response) {
                     console.log(response)
                     console.log('SUCCESS!')
                 })
@@ -113,7 +107,7 @@
             },
             getData(){
             //    TODO Реализовать функцию загрузки перечней за определенный период
-                this.addPaymentListsAction()
+                this.getPaymentListsAction()
             },
             test(list){
                 this.$store.commit('deletePaymentListMutation',list)

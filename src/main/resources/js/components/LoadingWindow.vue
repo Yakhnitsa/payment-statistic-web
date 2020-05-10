@@ -77,7 +77,7 @@
                 'deleteSelectedListsAction',
                 'saveSelectedListsAction',
                 'loadTempListsFromServerAction',
-                'addPaymentListsAction'
+                'getPaymentListsAction'
             ]),
             addFile(event){
                 var selectedFiles = event.target.files;
@@ -89,7 +89,7 @@
             },
             saveSelected(){
                 this.saveSelectedListsAction(this.selectedPayments)
-                this.addPaymentListsAction()
+                this.getPaymentListsAction()
             },
             deleteSelected(){
                 this.deleteSelectedListsAction(this.selectedPayments)

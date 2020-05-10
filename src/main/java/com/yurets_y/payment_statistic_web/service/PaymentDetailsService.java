@@ -17,7 +17,6 @@ public class PaymentDetailsService {
         this.paymentDetailsRepo = paymentDetailsRepo;
     }
 
-
     public List<PaymentDetails> getPaymentDetailsByDate(Date dateFrom, Date dateUntil) {
         return paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil);
     }

@@ -67,13 +67,16 @@ export default new Vuex.Store({
             })
                 .catch((error) => console.log(error))
         },
-        addPaymentListsAction({commit,state},params){
+        getPaymentListsAction({commit,state},params){
             axios.get('/api/payments',{params})
                 .then(response => {
                         commit('addPaymentListsMutation',response.data)
                     }
 
                 )
+        },
+        getSinglePaymentListAction(){
+        //        TODO
         },
         deletePaymentListAction({commit,state},data){
             axios.delete('/api/remove-payment', { data: data})
@@ -83,7 +86,7 @@ export default new Vuex.Store({
                 .catch((error) => console.log(error))
         },
         downloadPaymentListAction({commit,state},params){
-
+        //    TODO определить метод скачивания
         },
 
         /*Методы для загрузки перечней на сервер*/

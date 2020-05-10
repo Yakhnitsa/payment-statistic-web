@@ -3,7 +3,6 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
