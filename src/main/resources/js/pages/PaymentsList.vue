@@ -41,7 +41,7 @@
                             <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            <button type="button" class="btn btn-secondary btn-sm" @click="test(payment)">
+                            <button type="button" class="btn btn-secondary btn-sm" @click="downloadPayment(payment)">
                                 <i class="fas fa-file-download"></i>
                             </button>
                         </td>
@@ -102,15 +102,27 @@
 
             },
             downloadPayment(list){
-                //TODO Реализовать функцию скачивания перечня по номеру
-                console.log(list)
+
+                window.open('/api/download-file/' + list.backupFilePath)
+                //TODO перепроверить или будет работать после подключения spring security
+                // const params = {
+                //     filename: list.backupFilePath
+                // }
+
+                //
+                // axios.get('/api/download-file',{ params})
+                //     .then(function (response) {
+                //         console.log(response)
+                //         console.log('SUCCESS!')
+                //     })
+                //     .catch((error) => console.log(error))
             },
             getData(){
             //    TODO Реализовать функцию загрузки перечней за определенный период
                 this.getPaymentListsAction()
             },
             test(list){
-                this.$store.commit('deletePaymentListMutation',list)
+                // this.$store.commit('deletePaymentListMutation',list)
             }
 
         },

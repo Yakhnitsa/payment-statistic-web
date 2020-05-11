@@ -6,12 +6,18 @@ import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
@@ -138,5 +144,24 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
             throw new RuntimeException("Ошибка загрузки файла для перечня " + paymentList.toString());
         }
         paymentList.setBackupFile(file);
+    }
+
+    @Override
+    public Resource getFileAsResourse(String filename) throws FileNotFoundException  {
+        try {
+            Path file = Paths.get(backupDir,filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            }
+            else {
+                throw new FileNotFoundException(
+                        "Could not read file: " + filename);
+
+            }
+        }
+        catch (MalformedURLException e) {
+            throw new FileNotFoundException("Could not read file: " + filename);
+        }
     }
 }

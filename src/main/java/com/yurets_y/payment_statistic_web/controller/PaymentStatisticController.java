@@ -2,28 +2,26 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.monitorjbl.json.JsonView;
-import com.monitorjbl.json.JsonViewSerializer;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
-import com.yurets_y.payment_statistic_web.service.PaymentListDAO;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
-
-import static com.monitorjbl.json.Match.match;
+import javax.servlet.http.HttpServletRequest;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -99,6 +97,28 @@ public class PaymentStatisticController {
         return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/api/download-file/{fileName:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(
+            @PathVariable String fileName,
+            HttpServletRequest request
+            ) throws FileNotFoundException {
+
+        Resource resource = paymentListService.getFileAsResourse(fileName);
+
+        String contentType = "application/octet-stream";
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            System.out.println("Could not determine file type.");
+        }
+
+            return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
     @GetMapping("/api/daily-statistic")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
@@ -131,6 +151,8 @@ public class PaymentStatisticController {
         statistic.put("details", details);
         return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
+
+
 
 //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
 //

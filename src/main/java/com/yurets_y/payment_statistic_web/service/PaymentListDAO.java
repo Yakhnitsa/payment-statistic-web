@@ -9,12 +9,14 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TemporalType;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -151,6 +153,11 @@ public class PaymentListDAO implements PaymentListService {
         commitTransaction();
         closeEntityManager();
         return listFromDB != null;
+    }
+
+    @Override
+    public Resource getFileAsResourse(String filename) throws FileNotFoundException {
+        return null;
     }
 
     /*Методы для получения деталей платежей*/
