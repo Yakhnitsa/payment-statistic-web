@@ -103,19 +103,21 @@
             },
             downloadPayment(list){
 
-                window.open('/api/download-file/' + list.backupFilePath)
-                //TODO перепроверить или будет работать после подключения spring security
-                // const params = {
-                //     filename: list.backupFilePath
-                // }
+                // window.open('/api/download-file/' + list.backupFilePath)
 
-                //
-                // axios.get('/api/download-file',{ params})
-                //     .then(function (response) {
-                //         console.log(response)
-                //         console.log('SUCCESS!')
-                //     })
-                //     .catch((error) => console.log(error))
+                axios({
+                    url: '/api/download-file/' + list.backupFilePath,
+                    method: 'GET',
+                    params:{file: list.backupFilePath},
+                    responseType: 'blob', // important
+                }).then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', list.backupFilePath);
+                    document.body.appendChild(link);
+                    link.click();
+                });
             },
             getData(){
             //    TODO Реализовать функцию загрузки перечней за определенный период

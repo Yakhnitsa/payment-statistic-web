@@ -101,6 +101,7 @@ public class PaymentStatisticController {
     @ResponseBody
     public ResponseEntity<Resource> serveFile(
             @PathVariable String fileName,
+            @RequestParam String file,
             HttpServletRequest request
             ) throws FileNotFoundException {
 

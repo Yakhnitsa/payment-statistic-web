@@ -1,0 +1,1305 @@
+<?xml version="1.0"?>
+              <?mso-application progid="Excel.Sheet"?>
+              <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+                 xmlns:o="urn:schemas-microsoft-com:office:office"
+                 xmlns:x="urn:schemas-microsoft-com:office:excel"
+                 xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+                 xmlns:html="http://www.w3.org/TR/REC-html40">
+              <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+                <Title> Перелік залізничних документів по клієнту-8210260</Title>
+                <LastAuthor>Kulyna</LastAuthor>
+                <Created>2018-01-23T14:59:21Z</Created>
+                <Version>11.9999</Version>
+              </DocumentProperties>
+              <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+                <WindowHeight>8304</WindowHeight>
+                <WindowWidth>13248</WindowWidth>
+                <WindowTopX>480</WindowTopX>
+                <WindowTopY>48</WindowTopY>
+                <ProtectStructure>False</ProtectStructure>
+                <ProtectWindows>False</ProtectWindows>
+              </ExcelWorkbook>
+              <Styles>
+               <Style ss:ID="Default" ss:Name="Normal">
+                  <Alignment ss:Vertical="Bottom"/>
+                  <Borders/>
+                  <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204"/>
+                  <Interior/>
+                  <NumberFormat/>
+                  <Protection/>
+               </Style>
+               <Style ss:ID="m94718116">
+                  <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+                  <Borders>
+                  <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                  <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                  <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                  <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                  </Borders>
+                  <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204" ss:Bold="1"/>
+                  <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+               </Style>
+               <Style ss:ID="s21">
+                   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+               </Style>
+               <Style ss:ID="s33">
+                   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+                   <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204" ss:Bold="1"/>
+                   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+                </Style>
+                <Style ss:ID="s35">
+                   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+                   <NumberFormat ss:Format="Short Date"/>
+                </Style>
+                <Style ss:ID="s36">
+                   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+               </Style>
+               <Style ss:ID="s37">
+                   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+               </Style>
+               <Style ss:ID="s38">
+                   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+               </Style>
+               <Style ss:ID="s45">
+                   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                   </Borders>
+                   <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204" ss:Bold="1"/>
+                   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+                </Style>
+                <Style ss:ID="s54">
+                   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+                   <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204" ss:Bold="1"/>
+                   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+                </Style>
+                <Style ss:ID="s55">
+                    <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+                    <Font ss:FontName="Arial Cyr" ss:Size="7" x:CharSet="204" ss:Bold="1"/>
+                    <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+                </Style>
+                <Style ss:ID="s56">
+                    <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+                </Style>
+                <Style ss:ID="s58">
+                     <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+                     <Borders>
+                     <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                      ss:Color="#000000"/>
+                    </Borders>
+                 </Style>
+                 <Style ss:ID="s76">
+                     <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+                 </Style>
+                 <Style ss:ID="s77">
+                    <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+                    <Borders>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                    ss:Color="#000000"/>
+                    </Borders>
+                 </Style>
+                 <Style ss:ID="s2222">
+                   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+                   <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                   ss:Color="#000000"/>
+                  </Borders>
+                </Style>
+              </Styles>
+         
+        <Worksheet ss:Name="perelik">
+        <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="1000000" x:FullColumns="1"
+           x:FullRows="1" ss:DefaultRowHeight="11.0">
+           <Column ss:Width="41.0"/>
+           <Column ss:Width="41.0"/>
+           <Column ss:AutoFitWidth="0" ss:Width="62.0"/>
+           <Column ss:Width="50.0"/>
+           <Column ss:AutoFitWidth="0" ss:Width="55"/>
+           <Column ss:AutoFitWidth="0" ss:Width="73"/>
+           <Column ss:AutoFitWidth="0" ss:Width="50.0"/>
+           <Column ss:AutoFitWidth="0" ss:Width="47.0"/>
+           <Column ss:AutoFitWidth="0" ss:Width="48.0"/>
+
+   <Row>
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s54"><Data ss:Type="String"> ФІЛІЯ ЄДИНИЙ РОЗРАХУНКОВИЙ ЦЕНТР ЗАЛІЗНИЧНИХ ПЕРЕВЕЗЕНЬ АТ "УКРЗАЛІЗНИЦЯ"</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s54"><Data ss:Type="String"> Перелік № 20200212  від 12.02.2020</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="30">
+    <Cell ss:MergeAcross="4" ss:StyleID="s55"><Data ss:Type="String"> Назва платника: ТОВ "УТЛ-2"</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="s55"><Data ss:Type="String"> Код платника:8210260</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"><Data ss:Type="String"> Номер єдиного договору: 09359/ЦТЛ-2018  від 13.02.2018</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"><Data ss:Type="String">  ВСП Київський  </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="20">
+    <Cell ss:MergeAcross="2" ss:StyleID="s55"><Data ss:Type="String"> Розрахунковий рахунок: UA413003460000026009023927901</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s55"><Data ss:Type="String"> Код МФО:300346</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s55"><Data ss:Type="String"> ЄДРПОУ:41515562</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" />
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s55"><Data ss:Type="String"> Сальдо на початок розрахункової доби :      -5313704.17</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" />
+   </Row>
+              <Row ss:AutoFitHeight="0">
+               <Cell ss:MergeAcross="8" ss:StyleID="s33"><Data ss:Type="String"> Вiдправлення</Data></Cell>
+              </Row>
+              <Row ss:AutoFitHeight="0"  ss:Height="20">
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дата</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Станція</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Назва станції</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Документ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Тариф</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дод. збори та послуги</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String">  ПДВ</Data></Cell>
+               <Cell ss:MergeAcross="1" ss:StyleID="s33"><Data ss:Type="String"> Всього</Data></Cell>
+             </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">400108</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬКА (ДЛЯ ТІС)</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42304048</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   22115.70</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     4423.14</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">26538.84</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">400108</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬКА (ДЛЯ ТІС)</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42304055</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   17201.10</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     3440.22</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">20641.32</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42306662</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   41774.10</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     8354.82</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">50128.92</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42308874</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   10326.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     2065.20</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">12391.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311647</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   41304.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     8260.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">49564.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311654</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   13768.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     2753.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">16521.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311662</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   30978.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     6195.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">37173.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311795</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    6884.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     1376.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">8260.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311845</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   20652.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     4130.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">24782.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311852</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   24094.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     4818.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">28912.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">415207</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42311860</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    6884.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     1376.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">8260.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">400305</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ОДЕСА-ПОРТ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42312330</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   13583.50</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     2716.70</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">16300.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">402000</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬК-ПОРТ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42328880</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    9304.40</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     1860.88</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">11165.28</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">402000</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬК-ПОРТ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42328898</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   58152.50</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    11630.50</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">69783.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">402000</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬК-ПОРТ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42328906</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   53500.30</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    10700.06</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">64200.36</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">400108</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧОРНОМОРСЬКА (ДЛЯ ТІС)</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42333898</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   22115.70</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">     4423.14</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">26538.84</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">450605</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> НИЖНЬОДНІПРОВСЬК</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 45535150</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">    4148.80</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      829.76</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">4978.56</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="3" ss:StyleID="s2222"><Data ss:Type="String"> Всього</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">   396786.10</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">       0.00</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">   79357.22</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">   476143.32</Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. тар. 38:</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. послуги</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+           <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. охорона:</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+              <Row ss:AutoFitHeight="0">
+               <Cell ss:MergeAcross="8" ss:StyleID="s33"><Data ss:Type="String"> Вiдправлення - мiжнародне сполучення</Data></Cell>
+              </Row>
+              <Row ss:AutoFitHeight="0"  ss:Height="20">
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дата</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Станція</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Назва станції</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Документ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Тариф</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дод. збори та послуги</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> ПДВ</Data></Cell>
+               <Cell ss:MergeAcross="1" ss:StyleID="s33"><Data ss:Type="String"> Всього</Data></Cell>
+             </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33726597</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  115340.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23068.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  138408.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">341802</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> МИРОПІЛЬ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33727165</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   13776.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   2755.20</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   16531.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33727884</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  115340.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23068.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  138408.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">333401</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЗАКУПНЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33728619</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  116865.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23373.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  140238.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33729211</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  115202.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23040.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  138242.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33730532</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  115064.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23012.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  138076.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33732736</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  115202.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23040.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  138242.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33733734</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   45998.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   9199.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   55197.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">333401</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЗАКУПНЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 33735390</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  116865.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23373.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  140238.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">350801</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> РАДИВИЛІВ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 37976495</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  101773.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  20354.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  122127.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">350801</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> РАДИВИЛІВ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 37979853</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  101227.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  20245.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  121472.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42312546</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   59588.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  11917.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   71505.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 42340190</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   33979.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   6795.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   40774.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43173095</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  119036.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23807.20</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  142843.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43173129</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  118893.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23778.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  142671.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43174036</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  118750.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23750.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  142500.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43174655</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  118750.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23750.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  142500.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43175009</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  118750.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  23750.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  142500.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43175447</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   47500.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   9500.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   57000.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">448408</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СУПРУНІВКА</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43176890</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   64925.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  12985.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   77910.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">448501</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43177682</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  104078.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  20815.60</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  124893.60</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">449203</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВОДЯНА</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43177708</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   68376.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  13675.20</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   82051.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">449203</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> ВОДЯНА</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43178011</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   22792.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   4558.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   27350.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">448408</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СУПРУНІВКА</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 43178052</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  129691.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  25938.20</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  155629.20</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53694972</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   46632.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   9326.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   55958.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53694980</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   77720.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  15544.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   93264.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">498708</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> РУБІЖНЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53696241</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  187550.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  37510.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  225060.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53697660</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   46632.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   9326.40</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   55958.40</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53697678</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   77720.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  15544.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   93264.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">498708</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> РУБІЖНЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53699831</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   93775.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">  18755.00</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">  112530.00</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+           <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+           <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+           <Cell ss:StyleID="s37"><Data ss:Type="String"> 53699906</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   15544.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">      0.00</Data></Cell>
+           <Cell ss:StyleID="s38"><Data ss:Type="String">   3108.80</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s38"><Data ss:Type="String">   18652.80</Data></Cell>
+          </Row>
+          <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="3" ss:StyleID="s2222"><Data ss:Type="String"> Всього</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">  2743333.00</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">       0.00</Data></Cell>
+            <Cell ss:StyleID="s45"><Data ss:Type="String">  548666.60</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">  3291999.60</Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. тар. 38:</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+            <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. послуги:</Data></Cell>
+            <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+         <Row ss:AutoFitHeight="0">
+           <Cell ss:MergeAcross="6" ss:StyleID="s2222"><Data ss:Type="String"> т. ч. охорона:</Data></Cell>
+           <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">            </Data></Cell>
+         </Row>
+              <Row ss:AutoFitHeight="0">
+               <Cell ss:MergeAcross="8" ss:StyleID="s33"><Data ss:Type="String"> Вiдомостi плати за користування вагонами</Data></Cell>
+             </Row>
+             <Row ss:AutoFitHeight="0">
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дата</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Станція</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Назва станції</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Документ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Код</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Вид послуги</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Сума</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> ПДВ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Всього</Data></Cell>
+              </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">06.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 06020006р</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3245.10</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     649.02</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3894.12</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">350801</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> РАДИВИЛІВ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020020</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">268/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">       38.20</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">       7.64</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">       45.84</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">350801</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> РАДИВИЛІВ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020020</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1328.20</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     265.64</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1593.84</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020032</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">255/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     7350.80</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1470.16</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     8820.96</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020033</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">255/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     5484.40</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1096.88</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     6581.28</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020034</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">268/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3952.60</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     790.52</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4743.12</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020034</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     6284.80</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1256.96</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     7541.76</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020035</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">268/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3423.20</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     684.64</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4107.84</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020035</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1711.60</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     342.32</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     2053.92</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020064</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1730.40</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     346.08</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     2076.48</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020065</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">186/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо п/к на бала</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4770.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     954.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     5724.00</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">498905</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020001</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">186/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо п/к на бала</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4770.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     954.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     5724.00</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">498905</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020001</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">188/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3538.20</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     707.64</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4245.84</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020009</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">268/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">       60.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      12.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">       72.00</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020009</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">183/2</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     2443.60</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     488.72</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     2932.32</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020010</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">255/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     6966.80</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1393.36</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     8360.16</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">335801</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ВІННИЦЯ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020017</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">255/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     5695.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1139.00</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     6834.00</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">341802</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> МИРОПІЛЬ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020025</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">185/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо п/к на бала</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      608.80</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     121.76</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      730.56</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020030</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">188/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      884.50</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     176.90</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1061.40</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020031</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">251/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на мзк: плата на підставі ГУ-45,ГУ-23, скла</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     6244.70</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    1248.94</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     7493.64</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020032</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">188/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      884.50</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     176.90</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1061.40</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020033</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">251/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Користування вагонами УЗ на мзк: плата на підставі ГУ-45,ГУ-23, скла</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    13018.50</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    2603.70</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">    15622.20</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020066</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">186/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо п/к на бала</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     3578.90</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     715.78</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     4294.68</Data></Cell>
+        </Row>
+         <Row ss:Height="39.6">
+          <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+          <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020067</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">188/1</Data></Cell>
+          <Cell ss:StyleID="s37"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">      884.50</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     176.90</Data></Cell>
+          <Cell ss:StyleID="s38"><Data ss:Type="String">     1061.40</Data></Cell>
+        </Row>
+      <Row ss:AutoFitHeight="0">
+       <Cell ss:MergeAcross="5" ss:StyleID="s2222"><Data ss:Type="String"> Всього</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">    88897.30</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">   17779.46</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">   106676.76</Data></Cell>
+      </Row>
+              <Row ss:AutoFitHeight="0">
+               <Cell ss:MergeAcross="8" ss:StyleID="s33"><Data ss:Type="String"> Накопичувальнi карточки</Data></Cell>
+             </Row>
+             <Row ss:AutoFitHeight="0">
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Дата</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Станція</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Назва станції</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Документ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Код</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Вид послуги</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Сума</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> ПДВ</Data></Cell>
+               <Cell ss:StyleID="s33"><Data ss:Type="String"> Всього</Data></Cell>
+              </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020030</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       20.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       4.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       24.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">11.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">350801</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> РАДИВИЛІВ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 11020045</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      499.40</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      99.88</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      599.28</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">341802</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> МИРОПІЛЬ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020017</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">188/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      884.50</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     176.90</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     1061.40</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">426108</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ТАЛАЛАїВКА</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020031</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       20.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       4.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       24.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">328901</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ДУБОВ�ЯЗІВКА</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020034</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання у вагонах (у т.ч. у контейнерах) при перевезенні експо</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       96.70</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      19.34</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      116.04</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">330102</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ВОЛОЧИСЬК</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020038</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       10.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       2.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       12.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020047</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       30.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       6.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       36.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">332201</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ВЕНДИЧАНИ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020047</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     3079.40</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     615.88</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     3695.28</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020091</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      784.90</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     156.98</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      941.88</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020091</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       20.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       4.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       24.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020092</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      767.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     153.40</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      920.40</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">443300</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ЛИХАЧОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020092</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       20.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       4.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       24.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020185</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      285.30</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      57.06</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      342.36</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">499005</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020187</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">190/7</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> За зберігання власного або орендованого рухомого складу на своїх ося</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">      856.10</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     171.22</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     1027.32</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">498708</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> РУБІЖНЕ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020199</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">211/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       10.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       2.00</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">       12.00</Data></Cell>
+            </Row>
+           <Row ss:Height="39.6">
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">424206</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> ЧЕРКАСИ</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 12020358</Data></Cell><Cell ss:StyleID="s36"><Data ss:Type="String">195/1</Data></Cell>
+             <Cell ss:StyleID="s37"><Data ss:Type="String"> Зважування вантажів або пор.вагонів на вагах залізниці при перевезен</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     6364.40</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">    1272.88</Data></Cell>
+             <Cell ss:StyleID="s38"><Data ss:Type="String">     7637.28</Data></Cell>
+            </Row>
+      <Row ss:AutoFitHeight="0">
+       <Cell ss:MergeAcross="5" ss:StyleID="s2222"><Data ss:Type="String"> Всього</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">    13747.70</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">    2749.54</Data></Cell>
+       <Cell ss:StyleID="s45"><Data ss:Type="String">    16497.24</Data></Cell>
+      </Row>
+              <Row ss:AutoFitHeight="0">
+                <Cell ss:MergeAcross="8" ss:StyleID="s33"><Data ss:Type="String"> Платіжні доручення</Data></Cell>
+              </Row>
+              <Row ss:AutoFitHeight="0">
+                 <Cell ss:StyleID="s33"><Data ss:Type="String"> Дата</Data></Cell>
+                 <Cell ss:StyleID="s33"><Data ss:Type="String"> Документ</Data></Cell>
+                 <Cell ss:StyleID="s33"><Data ss:Type="String"> Підкод</Data></Cell>
+                 <Cell ss:StyleID="s33"><Data ss:Type="String"> Сума</Data></Cell>
+                 <Cell ss:MergeAcross="4" ss:StyleID="s33"/>
+              </Row>
+        <Row>
+            <Cell ss:StyleID="s35"><Data ss:Type="String">12.02.2020</Data></Cell>
+            <Cell ss:StyleID="s37"><Data ss:Type="String"> 8984</Data></Cell>
+            <Cell ss:StyleID="s36"><Data ss:Type="Number">500</Data></Cell>
+            <Cell ss:StyleID="s38"><Data ss:Type="String">      1000000.00</Data></Cell>
+            <Cell ss:MergeAcross="4" ss:StyleID="s38"/>
+        </Row>
+       <Row ss:AutoFitHeight="0">
+        <Cell ss:MergeAcross="2" ss:StyleID="s2222"><Data ss:Type="String"> Всього</Data></Cell>
+        <Cell ss:StyleID="s45"><Data ss:Type="String">  1000000.00</Data></Cell>
+        <Cell ss:MergeAcross="4" ss:StyleID="s2222"/>
+       </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s2222"><Data ss:Type="String"> </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="20">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Всього проведено платежів</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">      3242764.10</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m94718116"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> в т.ч. за ставкою 0%</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">                </Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Передоплата</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">      1000000.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> в т.ч. за ставкою 20%</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">      3242764.10</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> </Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String"> </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="30">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> в т.ч. звіл. від оподаткув, штрафи,пеня</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">                </Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Списано</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">                </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="20">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> За додатковi послуги</Data></Cell><Cell ss:MergeAcross="1" ss:StyleID="m94718116"/>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Зараховано</Data></Cell><Cell ss:MergeAcross="2" ss:StyleID="m94718116"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Зарезервовано</Data></Cell><Cell ss:MergeAcross="1" ss:StyleID="m94718116"/>
+    <Cell ss:MergeAcross="4" ss:StyleID="m94718116"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> ПДВ</Data></Cell><Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">       648552.82</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m94718116"/>
+   </Row>
+   <Row ss:AutoFitHeight="0"  ss:Height="20">
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Разом</Data></Cell><Cell ss:MergeAcross="1" ss:StyleID="s45"><Data ss:Type="String">      3891316.92</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> Сальдо на кінець розрахункової доби</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">     -2422387.25</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0"  ss:Height="20">
+    <Cell ss:MergeAcross="3" ss:StyleID="m94718116"><Data ss:Type="String"> </Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m94718116"><Data ss:Type="String"> в т.ч. резерв :</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">            0.00</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" />
+   </Row>
+   <Row>
+    <Cell ss:MergeAcross="8" ><Data ss:Type="String"> ПIБ вiдповiдального працiвника ________________</Data></Cell>
+   </Row>
+            </Table>
+            <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+            <PageSetup>
+            <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996"
+             x:Right="0.78740157499999996" x:Top="0.984251969"/>
+             </PageSetup>
+             <Selected/>
+             <DoNotDisplayGridlines/>
+             <ProtectObjects>False</ProtectObjects>
+             <ProtectScenarios>False</ProtectScenarios>
+             </WorksheetOptions>
+             </Worksheet>
+             </Workbook>
+           
