@@ -4,9 +4,11 @@ import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
@@ -16,26 +18,22 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @Service
-public class TempListServiceImpl implements TempListService{
+public class TempListServiceImpl implements TempListService {
 
     private Path tempDir;
 
     private DocParser htmlDocParser;
 
-    private Map<PaymentListId,PaymentList> tempDBMap = new LinkedHashMap<>();
+    private DocParser xmlDocParser;
 
-    public TempListServiceImpl(){
-        try {
-            tempDir = Files.createTempDirectory("doc-parser-web");
-        } catch (IOException e) {
-            throw new RuntimeException("Ошибка создания временного хранилища");
-        }
-    }
+    private Map<PaymentListId, PaymentList> tempDBMap = new LinkedHashMap<>();
+
 
     @Autowired
-    public TempListServiceImpl(DocParser htmlDocParser) {
-        this();
+    public TempListServiceImpl(@Qualifier("html-doc-parser") DocParser htmlDocParser,
+                               @Qualifier("xml-doc-parser") DocParser xmlDocParser) {
         this.htmlDocParser = htmlDocParser;
+        this.xmlDocParser = xmlDocParser;
     }
 
     @Override
@@ -48,8 +46,9 @@ public class TempListServiceImpl implements TempListService{
             file = Files.createFile(Paths.get(filePath)).toFile();
             multipartFile.transferTo(file);
 
-            PaymentList list = htmlDocParser.parseFromFile(file);
-            tempDBMap.put(list.getId(),list);
+            PaymentList list = parseFromFile(file);
+
+            tempDBMap.put(list.getId(), list);
 
             return list;
         } catch (IOException e) {
@@ -57,10 +56,21 @@ public class TempListServiceImpl implements TempListService{
         }
     }
 
+    private PaymentList parseFromFile(File file) throws IOException {
+
+        if (file.getName().toLowerCase().endsWith(".html")) {
+            return htmlDocParser.parseFromFile(file);
+        } else if (file.getName().toLowerCase().endsWith(".xml")) {
+            return xmlDocParser.parseFromFile(file);
+        } else {
+            throw new RuntimeException("Неверный формат файла " + file);
+        }
+    }
+
 
     @Override
     public PaymentList deleteFromTempDB(PaymentList paymentList) {
-        PaymentList listFromTemp = tempDBMap.remove(getIdFromList(paymentList));
+        PaymentList listFromTemp = tempDBMap.remove(paymentList.getId());
         return listFromTemp;
     }
 
@@ -69,18 +79,19 @@ public class TempListServiceImpl implements TempListService{
         return Collections.unmodifiableCollection(tempDBMap.values());
     }
 
-    private PaymentListId getIdFromList(PaymentList paymentList){
-        int code = paymentList.getPayerCode();
-        int number = paymentList.getNumber();
-        if((code!= 0) && (number)!= 0)
-            return new PaymentListId(code,number);
-        else{
-            throw new RuntimeException("Неверный ID " + paymentList.toString());
+    @PostConstruct
+    public void initTempDirectory() {
+        try {
+            tempDir = Files.createTempDirectory("doc-parser-web");
+        } catch (IOException e) {
+            throw new RuntimeException("Ошибка создания временного хранилища");
         }
+        System.out.println("Временное храниличе успешно создано:");
+        System.out.println(tempDir.toAbsolutePath());
     }
 
     @PreDestroy
-    public void destroy(){
+    public void destroy() {
         System.out.println("Удаление временного хранилища файлов");
         System.out.println(tempDir.toAbsolutePath());
         try {

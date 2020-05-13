@@ -7,14 +7,17 @@ import org.springframework.context.annotation.Bean;
 public class ServiceTestConfig {
 
         @Bean
-        public DocParser getDocParser() {
+        public DocParser getHtmlDocParser() {
 
             return new HtmlDocParser();
+        }
+        @Bean DocParser getXmlDocParser(){
+            return new XmlDocParser();
         }
 
         @Bean
         public TempListService getTempListService(){
-            return new TempListServiceImpl();
+            return new TempListServiceImpl(getHtmlDocParser(),getXmlDocParser());
         }
 
 

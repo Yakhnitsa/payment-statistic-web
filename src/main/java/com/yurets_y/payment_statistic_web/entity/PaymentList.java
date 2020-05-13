@@ -3,6 +3,8 @@ package com.yurets_y.payment_statistic_web.entity;
 import javax.persistence.*;
 import java.io.File;
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -20,6 +22,7 @@ public class PaymentList {
 
     @Temporal(TemporalType.DATE)
     @JsonView(Views.ShortView.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     private int taxCode;

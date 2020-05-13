@@ -73,6 +73,52 @@ public abstract class AbstractDocParser implements DocParser{
         return paymentList;
     }
 
+
+    protected void parseNumberAndCode(PaymentList paymentList, List<String> cellList) {
+        String first = cellList.get(0);
+        if (first.contains("Перелік")) {
+            try {
+                paymentList.setNumber(parserListNumb(first));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            paymentList.setDate(parseListDate(first));
+        }
+
+        String paymentCodePattern = "Код платника:(\\d*)";
+        if (cellList.size() >= 2 && cellList.get(1).matches(paymentCodePattern)) {
+            try {
+                paymentList.setPayerCode((int) getLongFromPattern(cellList.get(1), paymentCodePattern));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    protected int parserListNumb(String string) {
+        Pattern pattern = Pattern.compile(LIST_NUMBER_PATTERN);
+        Matcher m = pattern.matcher(string);
+        if (m.find()) {
+            return Integer.parseInt(m.group());
+        }
+        return -1;
+    }
+
+    protected Date parseListDate(String string) {
+        Pattern pattern = Pattern.compile(LIST_DATE_PATTERN);
+        Matcher m = pattern.matcher(string);
+
+        if (m.find()) {
+            try {
+                return DATE_FORMAT.parse(m.group());
+            } catch (ParseException e) {
+                throw new RuntimeException("Ошибка получения даты перечня");
+            }
+
+        }
+        return new Date();
+    }
+
     protected void parseTotalPayments(PaymentList paymentList, List<String> cellList) {
         String first = cellList.get(0);
         if (cellList.size() >= 2) {
@@ -87,26 +133,7 @@ public abstract class AbstractDocParser implements DocParser{
         }
     }
 
-    protected void parseNumberAndCode(PaymentList paymentList, List<String> cellList) {
-        String first = cellList.get(0);
-        if (first.contains("Перелік")) {
-            try {
-                paymentList.setNumber(parserListNumb(first));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            paymentList.setDate(getListDate(first));
-        }
 
-        String paymentCodePattern = "Код платника:(\\d*)";
-        if (cellList.size() >= 2 && cellList.get(1).matches(paymentCodePattern)) {
-            try {
-                paymentList.setPayerCode((int) getLongFromPattern(cellList.get(1), paymentCodePattern));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     protected void parseOpeningAndClosingBalance(PaymentList paymentList, List<String> cellList) {
         String openBalancePattern = "Сальдо на початок.+:.+?(-?\\d+[,.]\\d+)";
@@ -120,29 +147,7 @@ public abstract class AbstractDocParser implements DocParser{
         }
     }
 
-    protected int parserListNumb(String string) {
-        Pattern pattern = Pattern.compile(LIST_NUMBER_PATTERN);
-        Matcher m = pattern.matcher(string);
-        if (m.find()) {
-            return Integer.parseInt(m.group());
-        }
-        return -1;
-    }
 
-    protected Date getListDate(String string) {
-        Pattern pattern = Pattern.compile(LIST_DATE_PATTERN);
-        Matcher m = pattern.matcher(string);
-
-        if (m.find()) {
-            try {
-                return DATE_FORMAT.parse(m.group());
-            } catch (ParseException e) {
-                throw new RuntimeException("Ошибка получения даты перечня");
-            }
-
-        }
-        return new Date();
-    }
 
     protected long getLongFromPattern(String matchedString, String stringPattern) {
         Pattern pattern = Pattern.compile(stringPattern);
@@ -189,8 +194,10 @@ public abstract class AbstractDocParser implements DocParser{
                 return getTransportPayments(type, iterator);
             case "Відомості плати за користування вагонами":
             case "Накопичувальні карточки":
-            case "Коригування сум нарахованих платежів минулі періоди":
             case "Коригування сум нарахованих платежів":
+//            case "Коригування сум нарахованих платежів минулі періоди":
+//            case "Коригування сум нарахованих платежів - минулі місяці":
+//            case "Коригування сум нарахованих платежів - поточний місяць":
             case "Штрафи":
                 return getStationPayments(type, iterator);
             case "Платіжні доручення":
@@ -207,6 +214,11 @@ public abstract class AbstractDocParser implements DocParser{
     abstract List<PaymentDetails> getPayments(String type, Iterator<Element> iterator);
 
     private String fixType(String type){
+        if(type.matches("Коригування сум нарахованих платежів.*")){
+            return "Коригування сум нарахованих платежів";
+        }
+        if(type.equals("Прибуття імпорт"))
+            return "Прибуття - імпорт";
         return type
                 .trim()
                 .replaceAll("i","і");

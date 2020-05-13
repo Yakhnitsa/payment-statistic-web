@@ -48,16 +48,14 @@ public class UploadController {
             @RequestParam("files") MultipartFile[] files
     ){
         if(files.length == 0){
-            String fileName = "no file";
             return new ResponseEntity<String>("No file!!!",HttpStatus.NO_CONTENT);
         }
+        List<String> extensions = Arrays.asList("text/html","text/xml");
+
         for(MultipartFile file: files){
             String type = file.getContentType();
-            if(!"text/html".equals(type)){
-                continue;
-            }
-            PaymentList paymentList = tempListService.putToTempDB(file);
-
+            if(extensions.contains(type))
+                tempListService.putToTempDB(file);
         }
         return new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }

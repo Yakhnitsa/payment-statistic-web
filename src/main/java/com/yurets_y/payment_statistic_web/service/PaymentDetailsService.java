@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class PaymentDetailsService {
+
     private PaymentDetailsRepo paymentDetailsRepo;
 
     @Autowired
@@ -18,6 +19,6 @@ public class PaymentDetailsService {
     }
 
     public List<PaymentDetails> getPaymentDetailsByDate(Date dateFrom, Date dateUntil) {
-        return paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil);
+        return paymentDetailsRepo.findAllByDateBetween(dateFrom, dateUntil);
     }
 }

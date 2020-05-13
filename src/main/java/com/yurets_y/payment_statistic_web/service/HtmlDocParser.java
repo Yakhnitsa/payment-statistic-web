@@ -2,24 +2,15 @@ package com.yurets_y.payment_statistic_web.service;
 
 
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
-import com.yurets_y.payment_statistic_web.entity.PaymentList;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-@Service("htmlDocParser")
+@Service("html-doc-parser")
 public class HtmlDocParser extends AbstractDocParser{
 
     @Override
