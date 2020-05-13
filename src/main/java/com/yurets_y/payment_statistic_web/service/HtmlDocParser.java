@@ -20,74 +20,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service("htmlDocParser")
-public class HtmlDocParser extends AbstractDocParser implements DocParser {
+public class HtmlDocParser extends AbstractDocParser{
 
     @Override
-    public PaymentList parseFromFile(File file) throws IOException {
-        Document document = Jsoup.parse(file, "UTF-8");
-
-        if (!file.getName().toLowerCase().endsWith(".html")) {
-            throw new IOException("Неизвесный формат файла!!!");
-        }
-        PaymentList paymentList = parseFromJsoup(document);
-        paymentList.setBackupFile(file);
-        return paymentList;
-
+    String fileFormat() {
+        return ".html";
     }
 
-    private PaymentList parseFromJsoup(Document document) {
-        PaymentList paymentList = new PaymentList();
-        Iterator<Element> stringIterator = document.select("tr").iterator();
-
-        while (stringIterator.hasNext()) {
-            List<String> cellList = parseChartRow(stringIterator.next());
-
-            if (cellList.size() <= 0) {
-                continue;
-            }
-
-            parseNumberAndCode(paymentList, cellList);
-
-            parseOpeningAndClosingBalance(paymentList, cellList);
-
-            parseTotalPayments(paymentList, cellList);
-
-            List<PaymentDetails> pdList = getPaymentDetailsByType(cellList.get(0), stringIterator);
-            paymentList.addAll(pdList);
-        }
-
-        if (!checkSumTest(paymentList)) {
-            //TODO вернуть проверку на место после исправления
-            throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList.getNumber());
-        }
-        return paymentList;
+    @Override
+    String rowSeparator() {
+        return "tr";
     }
 
 
-    private List<PaymentDetails> getPaymentDetailsByType(String type, Iterator<Element> iterator) {
-        switch (type) {
-            case "Вiдправлення":
-            case "Вiдправлення - мiжнародне сполучення":
-            case "Прибуття":
-            case "Прибуття - імпорт":
-                return getTransportPayments(type, iterator);
-            case "Вiдомостi плати за користування вагонами":
-            case "Накопичувальні карточки":
-            case "Коригування сум нарахованих платежів минулі періоди":
-            case "Коригування сум нарахованих платежів":
-            case "Штрафи":
-                return getStationPayments(type, iterator);
-            case "Платіжні доручення":
-                return getPayments(type, iterator);
-            default:
-                return new ArrayList<>();
-        }
-    }
-
-    private List<PaymentDetails> getTransportPayments(String type, Iterator<Element> iterator) {
+    @Override
+    List<PaymentDetails> getTransportPayments(String type, Iterator<Element> iterator) {
         List<String> row = parseChartRow(iterator.next());
         List<PaymentDetails> paymentDetailsList = new ArrayList<>();
-        if (row.size() < 1) return paymentDetailsList;
+        if (row.size() <= 1) return paymentDetailsList;
         while (iterator.hasNext()) {
             try {
                 if (row.get(0).matches("Дата")) {
@@ -116,7 +66,9 @@ public class HtmlDocParser extends AbstractDocParser implements DocParser {
         return paymentDetailsList;
     }
 
-    private List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator) {
+
+    @Override
+    List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator) {
         List<String> row = parseChartRow(iterator.next());
         List<PaymentDetails> paymentDetailsList = new ArrayList<>();
         if (row.size() < 1) return paymentDetailsList;
@@ -149,7 +101,8 @@ public class HtmlDocParser extends AbstractDocParser implements DocParser {
         return paymentDetailsList;
     }
 
-    private List<PaymentDetails> getPayments(String type, Iterator<Element> iterator) {
+    @Override
+    List<PaymentDetails> getPayments(String type, Iterator<Element> iterator) {
         List<String> row = parseChartRow(iterator.next());
         List<PaymentDetails> paymentDetailsList = new ArrayList<>();
         if (row.size() < 1) return paymentDetailsList;

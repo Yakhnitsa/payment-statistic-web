@@ -2,6 +2,8 @@ package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.File;
@@ -15,13 +17,60 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class AbstractDocParser {
+public abstract class AbstractDocParser implements DocParser{
     protected final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
     protected final String NUMBER_PATTERN = "(-?\\d+[,.]\\d+)";
     private final String LIST_DATE_PATTERN = "\\d{2}\\.\\d{2}\\.\\d{4}";
     private final String LIST_NUMBER_PATTERN = "\\d{8}";
 
-    public abstract PaymentList parseFromFile(File file) throws IOException;
+    @Override
+    public PaymentList parseFromFile(File file) throws IOException {
+
+        if (!file.getName().toLowerCase().endsWith(fileFormat())) {
+            throw new IOException("Неизвесный формат файла!!!");
+        }
+
+        Document document = Jsoup.parse(file, "UTF-8");
+
+        PaymentList paymentList = parseFromJSoup(document,rowSeparator());
+
+        paymentList.setBackupFile(file);
+        return paymentList;
+    }
+
+    abstract String fileFormat();
+
+    abstract String rowSeparator();
+
+    private PaymentList parseFromJSoup(Document document,String rowSeparator) {
+        PaymentList paymentList = new PaymentList();
+
+        Iterator<Element> stringIterator = document.select(rowSeparator).iterator();
+
+        while (stringIterator.hasNext()) {
+            List<String> cellList = parseChartRow(stringIterator.next());
+
+            if (cellList.size() <= 0) {
+                continue;
+            }
+            parseNumberAndCode(paymentList, cellList);
+
+            parseOpeningAndClosingBalance(paymentList, cellList);
+
+            parseTotalPayments(paymentList, cellList);
+
+            List<PaymentDetails> pdList = getPaymentDetailsByType(cellList.get(0), stringIterator);
+
+            paymentList.addAll(pdList);
+
+        }
+
+//        if (!checkSumTest(paymentList)) {
+//            throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList.getNumber());
+//        }
+
+        return paymentList;
+    }
 
     protected void parseTotalPayments(PaymentList paymentList, List<String> cellList) {
         String first = cellList.get(0);
@@ -41,7 +90,7 @@ public abstract class AbstractDocParser {
         String first = cellList.get(0);
         if (first.contains("Перелік")) {
             try {
-                paymentList.setNumber(getListNumb(first));
+                paymentList.setNumber(parserListNumb(first));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -70,14 +119,16 @@ public abstract class AbstractDocParser {
         }
     }
 
-    protected int getListNumb(String string) {
+    protected int parserListNumb(String string) {
         Pattern pattern = Pattern.compile(LIST_NUMBER_PATTERN);
         Matcher m = pattern.matcher(string);
         if (m.find()) {
             return Integer.parseInt(m.group());
         }
         return -1;
-    }Date getListDate(String string) {
+    }
+
+    protected Date getListDate(String string) {
         Pattern pattern = Pattern.compile(LIST_DATE_PATTERN);
         Matcher m = pattern.matcher(string);
 
@@ -135,4 +186,30 @@ public abstract class AbstractDocParser {
         }
         return cellList;
     }
+
+    List<PaymentDetails> getPaymentDetailsByType(String type, Iterator<Element> iterator) {
+        switch (type) {
+            case "Вiдправлення":
+            case "Вiдправлення - мiжнародне сполучення":
+            case "Прибуття":
+            case "Прибуття - імпорт":
+                return getTransportPayments(type, iterator);
+            case "Вiдомостi плати за користування вагонами":
+            case "Накопичувальні карточки":
+            case "Коригування сум нарахованих платежів минулі періоди":
+            case "Коригування сум нарахованих платежів":
+            case "Штрафи":
+                return getStationPayments(type, iterator);
+            case "Платіжні доручення":
+                return getPayments(type, iterator);
+            default:
+                return new ArrayList<>();
+        }
+    }
+
+    abstract List<PaymentDetails> getTransportPayments(String type, Iterator<Element> iterator);
+
+    abstract List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator);
+
+    abstract List<PaymentDetails> getPayments(String type, Iterator<Element> iterator);
 }

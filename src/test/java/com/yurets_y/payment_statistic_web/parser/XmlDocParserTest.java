@@ -36,12 +36,6 @@ public class XmlDocParserTest {
     }
 
     @Test
-    public void parseFromFileTest() throws IOException {
-        PaymentList paymentList = docParser.parseFromFile(testXmlFile);
-    }
-
-
-    @Test
     public void docNumberAndDateTest() throws IOException{
         PaymentList paymentList = docParser.parseFromFile(testXmlFile);
         assertThat(paymentList.getNumber()).isEqualTo(20200206);
