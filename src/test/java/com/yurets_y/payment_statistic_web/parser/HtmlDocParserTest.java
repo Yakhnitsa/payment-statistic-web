@@ -40,27 +40,24 @@ public class HtmlDocParserTest {
     @Test
     public void parseDocDateAndNumberTest() throws IOException {
         PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
-        assertThat(paymentList.getNumber()).isEqualTo(20200225);
+        assertThat(paymentList.getNumber()).isEqualTo(20200111);
         assertThat(paymentList.getPayerCode()).isEqualTo(8210260);
     }
 
     @Test
-    public void parseOpeningBalanceTest() throws IOException {
+    public void parseOpeningAndClosingBalanceTest() throws IOException {
         PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
 
-        assertThat(paymentList.getOpeningBalance()).isEqualTo(314230959);
+        assertThat(paymentList.getOpeningBalance()).isEqualTo(102274877);
+        assertThat(paymentList.getClosingBalance()).isEqualTo(585993051);
     }
-    @Test
-    public void parseClosingBalanceTest() throws IOException {
-        PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
-        assertThat(paymentList.getClosingBalance()).isEqualTo(286605399);
-    }
+
     @Test
     public void totalPaymentAndTaxesTest() throws IOException {
         PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
-        assertThat(paymentList.getPayments()).isEqualTo(274421300);
-        assertThat(paymentList.getPaymentTaxes()).isEqualTo(53204260);
-        assertThat(paymentList.getPaymentVsTaxes()).isEqualTo(327625560);
+        assertThat(paymentList.getPayments()).isEqualTo(305810650);
+        assertThat(paymentList.getPaymentTaxes()).isEqualTo(60471176);
+        assertThat(paymentList.getPaymentVsTaxes()).isEqualTo(366281826);
     }
 
     @Test
@@ -68,20 +65,20 @@ public class HtmlDocParserTest {
         PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
         long departurePayment = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(pd -> pd.getType().equals("Вiдправлення"))
+                .filter(pd -> pd.getType().equals("Відправлення"))
                 .mapToLong(PaymentDetails::getPayment).sum();
         long internDeparturePayment = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(pd -> pd.getType().equals("Вiдправлення - мiжнародне сполучення"))
+                .filter(pd -> pd.getType().equals("Відправлення - міжнародне сполучення"))
                 .mapToLong(PaymentDetails::getPayment).sum();
         long deliverTotalPayment = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(pd -> pd.getType().equals("Прибуття"))
-                .mapToLong(PaymentDetails::getTotalPayment).sum();
+                .filter(pd -> pd.getType().equals("Прибуття - імпорт"))
+                .mapToLong(PaymentDetails::getPayment).sum();
 
-        assertThat(departurePayment).isEqualTo(58923390);
-        assertThat(internDeparturePayment).isEqualTo(181641800);
-        assertThat(deliverTotalPayment).isEqualTo(15423432);
+        assertThat(departurePayment).isEqualTo(98129890);
+        assertThat(internDeparturePayment).isEqualTo(179724800);
+        assertThat(deliverTotalPayment).isEqualTo(3444220);
     }
 
     @Test
@@ -89,15 +86,15 @@ public class HtmlDocParserTest {
         PaymentList paymentList = docParser.parseFromFile(testHtmlFile);
         long vagUsagePayment = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(pd -> pd.getType().equals("Вiдомостi плати за користування вагонами"))
+                .filter(pd -> pd.getType().equals("Відомості плати за користування вагонами"))
                 .mapToLong(PaymentDetails::getPayment).sum();
 
         long cumulativeCardsPayment = paymentList.getPaymentDetailsList()
                 .stream()
                 .filter(pd -> pd.getType().equals("Накопичувальні карточки"))
                 .mapToLong(PaymentDetails::getPayment).sum();
-        assertThat(vagUsagePayment).isEqualTo(12521570);
-        assertThat(cumulativeCardsPayment).isEqualTo(528520);
+        assertThat(vagUsagePayment).isEqualTo(23264750);
+        assertThat(cumulativeCardsPayment).isEqualTo(1236440);
     }
 
     @Test
@@ -107,7 +104,7 @@ public class HtmlDocParserTest {
                 .stream()
                 .filter(pd -> pd.getType().equals("Платіжні доручення"))
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
-        assertThat(totalPayment).isEqualTo(300000000);
+        assertThat(totalPayment).isEqualTo(850000000);
     }
 
 }
