@@ -32,6 +32,22 @@ public class HtmlDocParser extends AbstractDocParser{
         return "tr";
     }
 
+    @Override
+    protected List<String> parseChartRow(Element tableString) {
+
+        List<String> cellList = new ArrayList<String>();
+        Iterator<Element> cellIterator = tableString.select("th").iterator();
+        while (cellIterator.hasNext()) {
+            cellList.add(cellIterator.next().text());
+        }
+
+        cellIterator = tableString.select("tcol").iterator();
+        while (cellIterator.hasNext()) {
+            cellList.add(cellIterator.next().text());
+        }
+        return cellList;
+    }
+
 
     @Override
     List<PaymentDetails> getTransportPayments(String type, Iterator<Element> iterator) {
@@ -65,7 +81,6 @@ public class HtmlDocParser extends AbstractDocParser{
         }
         return paymentDetailsList;
     }
-
 
     @Override
     List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator) {

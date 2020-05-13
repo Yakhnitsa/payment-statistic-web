@@ -14,6 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PatternsTest {
     @Test
     public void matcherGroupTest(){
+        String one = "Накопичувальнi карточки";
+        String two = "Накопичувальні карточки";
+        System.out.println(one.equals(two));
         String testString = "Сальдо на початок розрахункової доби :      -1132310.14";
         String stringPattern = "Сальдо на початок.+:.+?(\\d+[,.]\\d+)";
         System.out.println(testString.matches(stringPattern));

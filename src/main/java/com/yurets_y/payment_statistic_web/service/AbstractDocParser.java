@@ -35,6 +35,9 @@ public abstract class AbstractDocParser implements DocParser{
         PaymentList paymentList = parseFromJSoup(document,rowSeparator());
 
         paymentList.setBackupFile(file);
+
+        checkSumTest(paymentList);
+
         return paymentList;
     }
 
@@ -59,15 +62,13 @@ public abstract class AbstractDocParser implements DocParser{
 
             parseTotalPayments(paymentList, cellList);
 
-            List<PaymentDetails> pdList = getPaymentDetailsByType(cellList.get(0), stringIterator);
+            String type = fixType(cellList.get(0));
+
+            List<PaymentDetails> pdList = getPaymentDetailsByType(type, stringIterator);
 
             paymentList.addAll(pdList);
 
         }
-
-//        if (!checkSumTest(paymentList)) {
-//            throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList.getNumber());
-//        }
 
         return paymentList;
     }
@@ -154,7 +155,7 @@ public abstract class AbstractDocParser implements DocParser{
         return -1L;
     }
 
-    protected boolean checkSumTest(PaymentList paymentList) {
+    void checkSumTest(PaymentList paymentList) {
         long openingBalance = paymentList.getOpeningBalance();
         long closingBalance = paymentList.getClosingBalance();
         long payments = paymentList.getPaymentDetailsList()
@@ -169,32 +170,24 @@ public abstract class AbstractDocParser implements DocParser{
 
         long checkSum = openingBalance + payments - totalPaymentsFromList;
 
-        return (checkSum == closingBalance) && (totalPaymentsVsTaxes == totalPaymentsFromList);
+        boolean totalPaymentsTest = totalPaymentsVsTaxes == totalPaymentsFromList;
+        boolean closingBalanceTest = closingBalance == checkSum;
+
+        if(!totalPaymentsTest || !closingBalanceTest){
+            throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList);
+        }
     }
 
-    protected List<String> parseChartRow(Element tableString) {
-
-        List<String> cellList = new ArrayList<String>();
-        Iterator<Element> cellIterator = tableString.select("th").iterator();
-        while (cellIterator.hasNext()) {
-            cellList.add(cellIterator.next().text());
-        }
-
-        cellIterator = tableString.select("tcol").iterator();
-        while (cellIterator.hasNext()) {
-            cellList.add(cellIterator.next().text());
-        }
-        return cellList;
-    }
+    abstract List<String> parseChartRow(Element tableString);
 
     List<PaymentDetails> getPaymentDetailsByType(String type, Iterator<Element> iterator) {
         switch (type) {
-            case "Вiдправлення":
-            case "Вiдправлення - мiжнародне сполучення":
+            case "Відправлення":
+            case "Відправлення - міжнародне сполучення":
             case "Прибуття":
             case "Прибуття - імпорт":
                 return getTransportPayments(type, iterator);
-            case "Вiдомостi плати за користування вагонами":
+            case "Відомості плати за користування вагонами":
             case "Накопичувальні карточки":
             case "Коригування сум нарахованих платежів минулі періоди":
             case "Коригування сум нарахованих платежів":
@@ -212,4 +205,10 @@ public abstract class AbstractDocParser implements DocParser{
     abstract List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator);
 
     abstract List<PaymentDetails> getPayments(String type, Iterator<Element> iterator);
+
+    private String fixType(String type){
+        return type
+                .trim()
+                .replaceAll("i","і");
+    }
 }
