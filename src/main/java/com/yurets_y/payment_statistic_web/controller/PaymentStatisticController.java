@@ -2,12 +2,10 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
-import com.yurets_y.payment_statistic_web.entity.PaymentList;
-import com.yurets_y.payment_statistic_web.entity.PaymentListId;
-import com.yurets_y.payment_statistic_web.entity.Views;
+import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import com.yurets_y.payment_statistic_web.util.PaymentDetailsByTypeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +30,8 @@ public class PaymentStatisticController {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-//    private PaymentListDAO paymentListDAO;
+    @javax.annotation.Resource(name="payment-details-by-type-comparator")
+    private Comparator<PaymentDetails> paymentDetailsComparator;
 
     private PaymentListService paymentListService;
 
@@ -138,6 +137,7 @@ public class PaymentStatisticController {
         Map<String, Object> statistic = new LinkedHashMap<>();
         List<PaymentList> payments = paymentListService.getByPeriod(dateFrom, dateUntil);
         List<PaymentDetails> paymentDetailsList = paymentDetailsService.getPaymentDetailsByDate(dateFrom, dateUntil);
+        Collections.sort(paymentDetailsList, paymentDetailsComparator);
         Map<String, Map<Date, Long>> details = paymentDetailsList
                 .stream()
                 .collect(Collectors.groupingBy(PaymentDetails::getType,
@@ -148,8 +148,23 @@ public class PaymentStatisticController {
                                 Collectors.summingLong(PaymentDetails::getTotalPayment))
                 ));
 
+        Map<String,Map<String,Long>> reformattedDetails = details
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue()
+                                .entrySet()
+                                .stream()
+                                .collect(Collectors.toMap(
+                                        innerEntry -> DATE_FORMAT.format(innerEntry.getKey()),
+                                        Map.Entry::getValue
+                                )),
+                        (first, second) -> first,
+                        LinkedHashMap::new
+                ));
         statistic.put("payments", payments);
-        statistic.put("details", details);
+        statistic.put("details", reformattedDetails);
         return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
 
