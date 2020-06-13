@@ -1,8 +1,10 @@
 package com.yurets_y.payment_statistic_web.service;
 
+import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Pageable;
 
 import java.io.FileNotFoundException;
 import java.util.Date;
@@ -17,11 +19,13 @@ public interface PaymentListService {
 
     PaymentList getById(PaymentListId id);
 
-    List<PaymentList> getAll();
+    PaymentListDto getAll(Pageable pageable);
+
+    PaymentListDto getPageByPeriod(Pageable pageable, Date from, Date until);
 
     List<PaymentList> getByPeriod(Date from, Date until);
 
     boolean contains(PaymentList paymentList);
 
-    Resource getFileAsResourse(String filename) throws FileNotFoundException;
+    Resource getFileAsResource(String filename) throws FileNotFoundException;
 }

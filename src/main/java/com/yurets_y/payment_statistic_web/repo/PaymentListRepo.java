@@ -18,6 +18,8 @@ public interface PaymentListRepo extends JpaRepository<PaymentList,PaymentListId
     @EntityGraph(attributePaths = {"paymentDetailsList"})
     PaymentList getOne(PaymentListId paymentListId);
 
-    List<PaymentList> getAllByDateBetween(Date from,Date until);
+    Page<PaymentList> findAllByDateBetween(Pageable pageable, Date from,Date until);
+
+    Page<PaymentList> findAll(Pageable pageable);
 
 }

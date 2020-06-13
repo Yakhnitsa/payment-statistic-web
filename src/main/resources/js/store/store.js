@@ -75,9 +75,10 @@ export default new Vuex.Store({
 
                 )
         },
-        getSinglePaymentListAction(){
-        //        TODO
+        getSinglePaymentListAction({commit,state},data){
+            console.log(data);
         },
+
         deletePaymentListAction({commit,state},data){
             axios.delete('/api/remove-payment', { data: data})
                 .then(function (response) {
@@ -85,8 +86,21 @@ export default new Vuex.Store({
             })
                 .catch((error) => console.log(error))
         },
-        downloadPaymentListAction({commit,state},params){
-        //    TODO определить метод скачивания
+
+        downloadPaymentListAction({commit,state},file){
+            axios({
+                url: '/api/download-file/' + file,
+                method: 'GET',
+                params:{file: file},
+                responseType: 'blob',
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', file);
+                document.body.appendChild(link);
+                link.click();
+            });
         },
 
         /*Методы для загрузки перечней на сервер*/

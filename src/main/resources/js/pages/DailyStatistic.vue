@@ -20,7 +20,7 @@
                 </div>
             </div>
         </form>
-
+        <h3>Статистика по перечням</h3>
         <div class="zui-wrapper">
             <div class="zui-scroller">
                 <table class="zui-table">
@@ -49,12 +49,39 @@
                     </tr>
                     <tr>
                         <td class="zui-sticky-col" @click="details = !details">Всього проведено платежів
-                            <span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>
+                            <!--<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>-->
                         </td>
                         <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}
                         </td>
                     </tr>
+                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
+                        <!--<td class="zui-sticky-col pl-3">{{key}}</td>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getDataFromList(value,day) | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Детализация затрат</h3>
+        <div class="zui-wrapper">
+            <div class="zui-scroller">
+                <table class="zui-table">
+                    <thead>
+                    <tr>
+                        <th class="zui-sticky-col">Наименование платежа</th>
+                        <th v-for="day in dateArray"
+                            class="text-center">
+                            {{day | formatDate}}
+                        </th>
+                        <th class="sticky-right-col">Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <tr v-show="details" v-for="(value ,key) in this.detailsList">
                         <td class="zui-sticky-col pl-3">{{key}}</td>
                         <td v-for="day in dateArray" class="text-right text-nowrap">
@@ -67,19 +94,21 @@
             </div>
         </div>
 
+        <p class="h2">Затраты по станциям</p>
+        <p>TODO Реализовать затраты по станциям</p>
+
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
     import { mapGetters,mapState,mapActions } from 'vuex'
     export default {
         name: "DailyStatistic",
         props: [''],
         data: function(){
             return{
-                dateFrom: '2020-02-10',
-                dateUntil: '2020-02-15',
+                dateFrom: '',
+                dateUntil: '',
                 details: true,
 
             }
@@ -94,10 +123,10 @@
             },
 
             dateArray: function(){
-                var startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
-                var endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
-                var days = [];
-                var currentDay = startPeriod;
+                const startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
+                const endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
+                const days = [];
+                let currentDay = startPeriod;
                 while(currentDay <= endPeriod){
                     days.push(new Date(currentDay))
                     currentDay.setDate(currentDay.getDate()+1)
@@ -119,35 +148,55 @@
 
             test(){;
                 console.log("test begin");
-                var day = this.dateArray[1];
-                console.log(day)
+                console.log(this.dateArray[0])
+                let day = this.dateArray[0]
 
-                var data = this.getPropertyByDate(day,'paymentVsTaxes');
-                console.log('data from method=' + data);
+                var dateString = this.getStringDate(day);
+
+                console.log(dateString);
             },
 
-            getDataFromList(obj,day){
-                for (let prop in obj) {
-                    if(day.getTime() == Number(new Date(prop))){
-                        return obj[prop]
-                    }
+            getStringDate(date){
+                return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
+                    .toISOString()
+                    .split("T")[0];
+            },
 
+            getDataFromList(dailyStatistic,lookupDay){
+                let dayString = this.getStringDate(lookupDay)
+                for (let day in dailyStatistic) {
+                    if(day == dayString){
+                        return dailyStatistic[day]
+                    }
                 }
                 return ''
             },
 
             getPropertyByDate(day,prop){
+                let dayString = day.toISOString().substring(0, 10);
                 for(let i in this.paymentLists){
                     let list = this.paymentLists[i];
-                    let listDate = Number(new Date(list.date + 'T00:00:00.000+0200'));
-                    if(listDate == day.getTime()){
+                    if(list.date == dayString){
                         return list[prop];
                     }
                 }
+
                 return 0;
+            },
+
+            setDefaultPeriod(){
+                if((this.dateFrom == '') && (this.dateUntil == '')){
+                    let today = new Date();
+                    let weekAgo = new Date(today.setDate(today.getDate()-7));
+                    this.dateFrom = weekAgo.toISOString().substring(0, 10);
+                    this.dateUntil = new Date().toISOString().slice(0,10);
+
+                }
+
+                const today = new Date();
+
             }
         },
-
         filters:{
             formatPayment(num) {
                 num = num/100;
@@ -162,6 +211,10 @@
             formatDate(dateLong){
                 return new Date(dateLong).toLocaleDateString()
             }
+        },
+        created(){
+           this.setDefaultPeriod();
+           this.submitForm();
         }
 
 

@@ -24,7 +24,12 @@
                         <th scope="col" class="col-2">Входящий остаток</th>
                         <th scope="col" class="col-2">Исходящий остаток</th>
                         <th scope="col" class="col-2">Всего проведено</th>
-                        <th scope="col" class="col-2">Действия</th>
+                        <th scope="col" class="col-2">
+                            Управление
+                            <button type="button" class="btn btn-secondary btn-sm" @click="downloadArchive()">
+                                <i class="fas fa-file-archive"></i>
+                            </button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,7 +83,7 @@
             this.updateList();
         },
         methods:{
-            ...mapActions(['getPaymentListsAction','deletePaymentListAction']),
+            ...mapActions(['getPaymentListsAction','deletePaymentListAction','downloadPaymentListAction']),
             updateList(){
                 this.getPaymentListsAction()
             },
@@ -91,40 +96,32 @@
 
                 axios.get('/api/single-payment',{ params})
                     .then(function (response) {
+                    //    TODO Реализовать отображение перечня в окне
                     console.log(response)
                     console.log('SUCCESS!')
                 })
                     .catch((error) => console.log(error))
             },
             deletePayment(list){
-                console.log(list)
-                this.deletePaymentListAction(list)
+                this.testAction(list)
 
             },
             downloadPayment(list){
-
-                // window.open('/api/download-file/' + list.backupFilePath)
-
-                axios({
-                    url: '/api/download-file/' + list.backupFilePath,
-                    method: 'GET',
-                    params:{file: list.backupFilePath},
-                    responseType: 'blob', // important
-                }).then((response) => {
-                    const url = window.URL.createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', list.backupFilePath);
-                    document.body.appendChild(link);
-                    link.click();
-                });
+                this.downloadPaymentListAction(list.backupFilePath)
             },
             getData(){
-            //    TODO Реализовать функцию загрузки перечней за определенный период
+                const params = {
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                };
+                // this.getDailyStatisticAction(params)
                 this.getPaymentListsAction()
             },
             test(list){
                 // this.$store.commit('deletePaymentListMutation',list)
+            },
+            downloadArchive(){
+                //TODO Реализовать скачивание архива перечней за весь период
             }
 
         },

@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.service;
 
+import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -73,17 +76,25 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public List<PaymentList> getAll() {
-        List<PaymentList> list = paymentListRepo.findAll();
-        list.forEach(this::loadBackupFile);
-        return list;
+    public PaymentListDto getAll(Pageable pageable) {
+        Page<PaymentList> page = paymentListRepo.findAll(pageable);
+//        list.forEach(this::loadBackupFile);
+        PaymentListDto dto = new PaymentListDto(
+                page.getContent(),
+                page.getNumber(),
+                page.getTotalPages());
+        return dto;
     }
 
     @Override
-    public List<PaymentList> getByPeriod(Date from, Date until) {
-        List<PaymentList> list = paymentListRepo.getAllByDateBetween(from,until);
-        list.forEach(this::loadBackupFile);
-        return list;
+    public PaymentListDto getPageByPeriod(Pageable pageable, Date from, Date until) {
+        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
+//        list.forEach(this::loadBackupFile);
+        PaymentListDto dto = new PaymentListDto(
+                page.getContent(),
+                page.getNumber(),
+                page.getTotalPages());
+        return dto;
     }
 
     @Override
@@ -147,7 +158,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public Resource getFileAsResourse(String filename) throws FileNotFoundException  {
+    public Resource getFileAsResource(String filename) throws FileNotFoundException  {
         try {
             Path file = Paths.get(backupDir,filename);
             Resource resource = new UrlResource(file.toUri());

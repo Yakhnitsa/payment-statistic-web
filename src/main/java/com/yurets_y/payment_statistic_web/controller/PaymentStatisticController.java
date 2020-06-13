@@ -2,12 +2,16 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
-import com.yurets_y.payment_statistic_web.util.PaymentDetailsByTypeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,8 +33,9 @@ import java.util.stream.Collectors;
 public class PaymentStatisticController {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private final int RECORDS_PER_PAGE = 30;
 
-    @javax.annotation.Resource(name="payment-details-by-type-comparator")
+    @javax.annotation.Resource(name = "payment-details-by-type-comparator")
     private Comparator<PaymentDetails> paymentDetailsComparator;
 
     private PaymentListService paymentListService;
@@ -44,7 +49,6 @@ public class PaymentStatisticController {
 
     ) {
         this.paymentListService = paymentListService;
-//        this.paymentListDAO = paymentListDAO;
         this.paymentDetailsService = paymentDetailsService;
 
     }
@@ -54,24 +58,31 @@ public class PaymentStatisticController {
         return "index";
     }
 
-    @GetMapping("/api/last-payments")
-    @ResponseBody
-    public List<PaymentList> getLastPayments() {
+//    @GetMapping("/api/last-payments")
+//    @ResponseBody
+//    public List<PaymentList> getLastPayments() {
+//
+//        List<PaymentList> paymentLists = paymentListService.getAll();
+//
+//
+//        return paymentLists;
+//    }
 
-        List<PaymentList> paymentLists = paymentListService.getAll();
-
-
-        return paymentLists;
-    }
 
     @GetMapping("/api/payments")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
-    public List<PaymentList> getTestJSon() throws JsonProcessingException {
+    public PaymentListDto getPayments(
+            @PageableDefault(size=RECORDS_PER_PAGE,
+                    sort={"id"},
+                    direction = Sort.Direction.DESC
+            ) Pageable pageable
 
-        List<PaymentList> paymentLists = paymentListService.getAll();
+    ) throws JsonProcessingException {
 
-        return paymentLists;
+        PaymentListDto dto = paymentListService.getAll(pageable);
+
+        return dto;
     }
 
 
@@ -102,9 +113,9 @@ public class PaymentStatisticController {
             @PathVariable String fileName,
             @RequestParam String file,
             HttpServletRequest request
-            ) throws FileNotFoundException {
+    ) throws FileNotFoundException {
 
-        Resource resource = paymentListService.getFileAsResourse(fileName);
+        Resource resource = paymentListService.getFileAsResource(fileName);
 
         String contentType = "application/octet-stream";
         try {
@@ -113,9 +124,9 @@ public class PaymentStatisticController {
             System.out.println("Could not determine file type.");
         }
 
-            return ResponseEntity.ok()
+        return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + resource.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
 
@@ -128,16 +139,22 @@ public class PaymentStatisticController {
     ) throws ParseException {
         Date dateFrom = null;
         Date dateUntil = null;
+
         if (!"".equals(dateFrom)) {
             dateFrom = DATE_FORMAT.parse(from);
         }
+
         if (!"".equals(until)) {
             dateUntil = DATE_FORMAT.parse(until);
         }
+
         Map<String, Object> statistic = new LinkedHashMap<>();
+
         List<PaymentList> payments = paymentListService.getByPeriod(dateFrom, dateUntil);
         List<PaymentDetails> paymentDetailsList = paymentDetailsService.getPaymentDetailsByDate(dateFrom, dateUntil);
+
         Collections.sort(paymentDetailsList, paymentDetailsComparator);
+
         Map<String, Map<Date, Long>> details = paymentDetailsList
                 .stream()
                 .collect(Collectors.groupingBy(PaymentDetails::getType,
@@ -148,7 +165,7 @@ public class PaymentStatisticController {
                                 Collectors.summingLong(PaymentDetails::getTotalPayment))
                 ));
 
-        Map<String,Map<String,Long>> reformattedDetails = details
+        Map<String, Map<String, Long>> reformattedDetails = details
                 .entrySet()
                 .stream()
                 .collect(Collectors.toMap(
@@ -163,11 +180,11 @@ public class PaymentStatisticController {
                         (first, second) -> first,
                         LinkedHashMap::new
                 ));
+
         statistic.put("payments", payments);
         statistic.put("details", reformattedDetails);
         return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
-
 
 
 //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
