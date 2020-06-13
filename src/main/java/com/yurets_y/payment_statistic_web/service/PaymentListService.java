@@ -4,6 +4,7 @@ import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.io.FileNotFoundException;
@@ -19,9 +20,9 @@ public interface PaymentListService {
 
     PaymentList getById(PaymentListId id);
 
-    PaymentListDto getAll(Pageable pageable);
+    Page<PaymentList> getAll(Pageable pageable);
 
-    PaymentListDto getPageByPeriod(Pageable pageable, Date from, Date until);
+    Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until);
 
     List<PaymentList> getByPeriod(Date from, Date until);
 

@@ -8,6 +8,7 @@ import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -35,23 +36,14 @@ public class PaymentStatisticController {
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final int RECORDS_PER_PAGE = 30;
 
-    @javax.annotation.Resource(name = "payment-details-by-type-comparator")
+//    @javax.annotation.Resource(name = "payment-details-by-type-comparator")
     private Comparator<PaymentDetails> paymentDetailsComparator;
 
     private PaymentListService paymentListService;
 
     private PaymentDetailsService paymentDetailsService;
 
-    @Autowired
-    public void setPaymentListDAO(
-            PaymentDetailsService paymentDetailsService,
-            PaymentListService paymentListService
 
-    ) {
-        this.paymentListService = paymentListService;
-        this.paymentDetailsService = paymentDetailsService;
-
-    }
 
     @GetMapping
     public String paymentStatistic() {
@@ -72,17 +64,17 @@ public class PaymentStatisticController {
     @GetMapping("/api/payments")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
-    public PaymentListDto getPayments(
+    public Page<PaymentList> getPayments(
             @PageableDefault(size=RECORDS_PER_PAGE,
-                    sort={"id"},
+                    sort={"date"},
                     direction = Sort.Direction.DESC
             ) Pageable pageable
 
     ) throws JsonProcessingException {
 
-        PaymentListDto dto = paymentListService.getAll(pageable);
+        Page<PaymentList> page = paymentListService.getAll(pageable);
 
-        return dto;
+        return page;
     }
 
 
@@ -186,8 +178,22 @@ public class PaymentStatisticController {
         return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
 
+    @Autowired
+    public void setPaymentListService(PaymentListService paymentListService) {
+        this.paymentListService = paymentListService;
+    }
 
-//    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
+    @Autowired
+    public void setPaymentDetailsService(PaymentDetailsService paymentDetailsService) {
+        this.paymentDetailsService = paymentDetailsService;
+    }
+
+    @Autowired
+    public void setPaymentDetailsComparator(Comparator<PaymentDetails> paymentDetailsComparator) {
+        this.paymentDetailsComparator = paymentDetailsComparator;
+    }
+
+    //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
 //
 //        ObjectMapper mapper = new ObjectMapper();
 //        SimpleModule module = new SimpleModule();

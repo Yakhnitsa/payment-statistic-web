@@ -85,7 +85,7 @@
         methods:{
             ...mapActions(['getPaymentListsAction','deletePaymentListAction','downloadPaymentListAction']),
             updateList(){
-                this.getPaymentListsAction()
+                this.getPaymentListsAction(1)
             },
             showPayment(payment){
 

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.FileNotFoundException;
 import java.util.Date;
@@ -23,12 +25,12 @@ public class ControllerTestConfig {
         return new PaymentListService() {
             @Override
             public void add(PaymentList paymentList) {
-                System.out.println("add payment list to DB");
+
             }
 
             @Override
             public void update(PaymentList paymentList) {
-                System.out.println("update payment list from DB");
+
             }
 
             @Override
@@ -42,7 +44,12 @@ public class ControllerTestConfig {
             }
 
             @Override
-            public List<PaymentList> getAll() {
+            public Page<PaymentList> getAll(Pageable pageable) {
+                return null;
+            }
+
+            @Override
+            public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
                 return null;
             }
 
@@ -57,7 +64,7 @@ public class ControllerTestConfig {
             }
 
             @Override
-            public Resource getFileAsResourse(String filename) throws FileNotFoundException {
+            public Resource getFileAsResource(String filename) throws FileNotFoundException {
                 return null;
             }
         };

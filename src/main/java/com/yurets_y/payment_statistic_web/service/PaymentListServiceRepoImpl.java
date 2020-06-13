@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -76,25 +78,32 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public PaymentListDto getAll(Pageable pageable) {
-        Page<PaymentList> page = paymentListRepo.findAll(pageable);
-//        list.forEach(this::loadBackupFile);
-        PaymentListDto dto = new PaymentListDto(
-                page.getContent(),
-                page.getNumber(),
-                page.getTotalPages());
-        return dto;
+    public Page<PaymentList> getAll(Pageable pageable) {
+//        Page<PaymentList> page = paymentListRepo.findAll(pageable);
+////        list.forEach(this::loadBackupFile);
+//        Page<PaymentList> page = new PaymentListDto(
+//                page.getContent(),
+//                page.getNumber(),
+//                page.getTotalPages());
+        return paymentListRepo.findAll(pageable);
     }
 
     @Override
-    public PaymentListDto getPageByPeriod(Pageable pageable, Date from, Date until) {
+    public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
         Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
 //        list.forEach(this::loadBackupFile);
         PaymentListDto dto = new PaymentListDto(
                 page.getContent(),
                 page.getNumber(),
                 page.getTotalPages());
-        return dto;
+        return page;
+    }
+
+    @Override
+    public List<PaymentList> getByPeriod(Date from, Date until) {
+        Pageable pageable = PageRequest.of(0,1000, Sort.by("date").descending());
+        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
+        return page.getContent();
     }
 
     @Override

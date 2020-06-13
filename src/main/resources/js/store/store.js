@@ -67,8 +67,9 @@ export default new Vuex.Store({
             })
                 .catch((error) => console.log(error))
         },
-        getPaymentListsAction({commit,state},params){
-            axios.get('/api/payments',{params})
+        getPaymentListsAction({commit,state},page){
+            console.log(page)
+            axios.get('/api/payments',{params:{page}})
                 .then(response => {
                         commit('addPaymentListsMutation',response.data)
                     }

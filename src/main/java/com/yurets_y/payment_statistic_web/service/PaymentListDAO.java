@@ -26,7 +26,9 @@ import java.util.List;
 
 
 //@Service("paymentListDao")
-public class PaymentListDAO implements PaymentListService {
+public class PaymentListDAO
+//        implements PaymentListService
+{
 
     private EntityManagerFactory emf;
 
@@ -52,7 +54,7 @@ public class PaymentListDAO implements PaymentListService {
 //        this.emf = entityManager;
 //    }
 
-    @Override
+//    @Override
     public synchronized void add(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
@@ -69,7 +71,7 @@ public class PaymentListDAO implements PaymentListService {
         }
     }
 
-    @Override
+//    @Override
     public synchronized void update(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
@@ -80,7 +82,7 @@ public class PaymentListDAO implements PaymentListService {
         closeEntityManager();
     }
 
-    @Override
+//    @Override
     public synchronized boolean remove(PaymentList paymentList) {
         return removeById(paymentList.getId());
     }
@@ -101,7 +103,7 @@ public class PaymentListDAO implements PaymentListService {
         return false;
     }
 
-    @Override
+//    @Override
     public synchronized PaymentList getById(PaymentListId id) {
         openEntityManager();
         beginTransaction();
@@ -117,7 +119,7 @@ public class PaymentListDAO implements PaymentListService {
 
     }
 
-    @Override
+//    @Override
     public synchronized List<PaymentList> getAll() {
         openEntityManager();
         beginTransaction();
@@ -128,7 +130,7 @@ public class PaymentListDAO implements PaymentListService {
         return paymentLists;
     }
 
-    @Override
+//    @Override
     public synchronized List<PaymentList> getByPeriod(Date from, Date until) {
         openEntityManager();
         beginTransaction();
@@ -145,7 +147,7 @@ public class PaymentListDAO implements PaymentListService {
         return sortedList;
     }
 
-    @Override
+//    @Override
     public boolean contains(PaymentList paymentList) {
         openEntityManager();
         beginTransaction();
@@ -155,7 +157,7 @@ public class PaymentListDAO implements PaymentListService {
         return listFromDB != null;
     }
 
-    @Override
+//    @Override
     public Resource getFileAsResourse(String filename) throws FileNotFoundException {
         return null;
     }
