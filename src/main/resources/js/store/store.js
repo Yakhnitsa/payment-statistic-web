@@ -12,6 +12,11 @@ export default new Vuex.Store({
             details:[],
             payments: []
         },
+        paymentListPage:{
+            paymentLists: [],
+            currentPage:0,
+            totalPages: 0,
+        },
         paymentLists: [],
         uploadedData:{
             files:[],
@@ -38,6 +43,12 @@ export default new Vuex.Store({
         },
         addPaymentListsMutation(state,data){
             state.paymentLists = [...data];
+        },
+        setCurrentPageMutation(state,pageNumb){
+            state.paymentListPage.currentPage = pageNumb;
+        },
+        setTotalPagesMutation(state,totPages){
+            state.paymentListPage.totalPages = totPages;
         },
         deletePaymentListMutation(state,list){
             const index = state.paymentLists.findIndex(element =>
@@ -67,11 +78,13 @@ export default new Vuex.Store({
             })
                 .catch((error) => console.log(error))
         },
-        getPaymentListsAction({commit,state},page){
-            console.log(page)
-            axios.get('/api/payments',{params:{page}})
+        getPaymentListsAction({commit,state},params){
+
+            axios.get('/api/payments',{params})
                 .then(response => {
-                        commit('addPaymentListsMutation',response.data)
+                        commit('addPaymentListsMutation',response.data.list)
+                        commit('setCurrentPageMutation',response.data.currentPage)
+                        commit('setTotalPagesMutation',response.data.totalPages)
                     }
 
                 )

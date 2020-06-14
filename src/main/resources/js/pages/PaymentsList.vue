@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <loading-window></loading-window>
-        <form class="sticky-top my-2">
+        <div class="sticky-top my-2">
             <div class="form-row ">
                 <div class="form-group col-md-2">
                     <input type="date" v-model="dateFrom" class="form-control"/>
@@ -10,12 +10,27 @@
                     <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <button type="button" class="btn btn-primary" v-on:click="getData">Получить данные</button>
+                    <button class="btn btn-primary" v-on:click="updateList()">Получить данные</button>
                 </div>
+                <div class="form-group col-md-2">
+                    <button class="btn btn-secondary" @click="downloadArchive()">Архив за период
+                        <i class="fas fa-file-archive"></i>
+                    </button>
+                </div>
+
             </div>
-        </form>
+        </div>
 
         <div class="container">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" ><i class="fas fa-caret-left"></i></a></li>
+                    <li v-for="page in totalPages" class="page-item"><a class="page-link" @click="loadPage(page)" >{{page}}</a></li>
+                    <!--<li class="page-item"><a class="page-link">2</a></li>-->
+                    <!--<li class="page-item"><a class="page-link">3</a></li>-->
+                    <li class="page-item"><a class="page-link"><i class="fas fa-caret-right"></i></a></li>
+                </ul>
+            </nav>
             <table id="payments-table" class="table table-fixed able-sm table-striped">
                 <thead class="thead-light">
                     <tr class="text-center">
@@ -23,12 +38,9 @@
                         <th scope="col" class="col-2">Дата</th>
                         <th scope="col" class="col-2">Входящий остаток</th>
                         <th scope="col" class="col-2">Исходящий остаток</th>
-                        <th scope="col" class="col-2">Всего проведено</th>
+                        <th scope="col" class="col-2">Сумма платежей</th>
                         <th scope="col" class="col-2">
-                            Управление
-                            <button type="button" class="btn btn-secondary btn-sm" @click="downloadArchive()">
-                                <i class="fas fa-file-archive"></i>
-                            </button>
+                            Действия
                         </th>
                     </tr>
                 </thead>
@@ -75,8 +87,15 @@
                 return this.$store.getters.paymentLists
             },
             sortedPayments: function(){
-                return this.payments.sort((a,b)=> a.number - b.number)
+                return this.payments.sort((a,b)=> a.date - b.date)
+            },
+            currentPage(){
+                return this.$store.state.paymentListPage.currentPage
+            },
+            totalPages(){
+                return this.$store.state.paymentListPage.totalPages
             }
+
         },
 
         created: function(){
@@ -85,7 +104,15 @@
         methods:{
             ...mapActions(['getPaymentListsAction','deletePaymentListAction','downloadPaymentListAction']),
             updateList(){
-                this.getPaymentListsAction(1)
+                this.loadPage(0)
+            },
+            loadPage(page){
+                const params = {
+                    page:0,
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                }
+                this.getPaymentListsAction(params)
             },
             showPayment(payment){
 
@@ -103,20 +130,20 @@
                     .catch((error) => console.log(error))
             },
             deletePayment(list){
-                this.testAction(list)
+                this.deletePayment(list)
 
             },
             downloadPayment(list){
                 this.downloadPaymentListAction(list.backupFilePath)
             },
-            getData(){
-                const params = {
-                    dateFrom: this.dateFrom,
-                    dateUntil: this.dateUntil,
-                };
-                // this.getDailyStatisticAction(params)
-                this.getPaymentListsAction()
-            },
+            // getData(){
+            //     const period = {
+            //         dateFrom: this.dateFrom,
+            //         dateUntil: this.dateUntil,
+            //     }
+            //     //TODO Реализовать...
+            //     this.getPaymentListsAction(,period);
+            // },
             test(list){
                 // this.$store.commit('deletePaymentListMutation',list)
             },
@@ -141,6 +168,14 @@
         },
     }
 </script>
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 <style scoped>
     .sticky-top {

@@ -64,17 +64,19 @@ public class PaymentStatisticController {
     @GetMapping("/api/payments")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
-    public Page<PaymentList> getPayments(
+    public PaymentListDto getPayments(
             @PageableDefault(size=RECORDS_PER_PAGE,
                     sort={"date"},
                     direction = Sort.Direction.DESC
-            ) Pageable pageable
+            ) Pageable pageable,
+            @RequestParam String dateFrom,
+            @RequestParam String dateUntil
 
     ) throws JsonProcessingException {
 
         Page<PaymentList> page = paymentListService.getAll(pageable);
 
-        return page;
+            return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());
     }
 
 

@@ -115,7 +115,7 @@
         },
         computed:{
             ...mapState(['dailyStatistic']),
-            paymentLists: function(){
+            list: function(){
                 return this.dailyStatistic.payments
             },
             detailsList: function(){
@@ -174,8 +174,8 @@
 
             getPropertyByDate(day,prop){
                 let dayString = day.toISOString().substring(0, 10);
-                for(let i in this.paymentLists){
-                    let list = this.paymentLists[i];
+                for(let i in this.list){
+                    let list = this.list[i];
                     if(list.date == dayString){
                         return list[prop];
                     }
