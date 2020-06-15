@@ -78,8 +78,8 @@
         components: {LoadingWindow},
         data: function(){
             return{
-                dateFrom:'',
-                dateUntil:''
+                dateFrom:'2020-05-01',
+                dateUntil:'2020-05-10'
             }
         },
         computed: {
@@ -163,14 +163,7 @@
                 )
             },
             formatDate(date){
-                // return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
-                //     .toISOString()
-                //     .split("T")[0];
-
-                console.log(date)
-                const x = new Date(date)
-                console.log(x);
-                return date
+                return new Date(date).toLocaleDateString()
             }
         },
     }

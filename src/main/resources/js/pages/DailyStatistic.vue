@@ -157,9 +157,13 @@
             },
 
             getStringDate(date){
+
                 return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
                     .toISOString()
                     .split("T")[0];
+                // return new Date(date.getTime())
+                //     .toISOString()
+                //     .split("T")[0];
             },
 
             getDataFromList(dailyStatistic,lookupDay){
@@ -173,7 +177,7 @@
             },
 
             getPropertyByDate(day,prop){
-                let dayString = day.toISOString().substring(0, 10);
+                let dayString = this.getStringDate(day)
                 for(let i in this.list){
                     let list = this.list[i];
                     if(list.date == dayString){

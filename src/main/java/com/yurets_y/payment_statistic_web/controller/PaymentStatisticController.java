@@ -73,7 +73,7 @@ public class PaymentStatisticController {
             @RequestParam(value = "page") Integer pageNumb,
             @RequestParam(value = "dateUntil") String until
 
-    ) throws JsonProcessingException,ParseException {
+    ) throws ParseException {
         Date dateFrom = null;
         Date dateUntil = null;
 
@@ -90,7 +90,6 @@ public class PaymentStatisticController {
 
         return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());
     }
-
 
     @GetMapping("/api/single-payment")
     @ResponseBody

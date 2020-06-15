@@ -6,6 +6,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @IdClass(PaymentListId.class)
@@ -22,6 +23,7 @@ public class PaymentList {
 
     @Temporal(TemporalType.DATE)
     @JsonView(Views.ShortView.class)
+//    @JsonSerialize(using = JsonDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
