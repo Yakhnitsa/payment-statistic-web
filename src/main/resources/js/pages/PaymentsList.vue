@@ -162,8 +162,15 @@
                         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
                 )
             },
-            formatDate(dateLong){
-                return new Date(dateLong).toLocaleDateString()
+            formatDate(date){
+                // return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
+                //     .toISOString()
+                //     .split("T")[0];
+
+                console.log(date)
+                const x = new Date(date)
+                console.log(x);
+                return date
             }
         },
     }

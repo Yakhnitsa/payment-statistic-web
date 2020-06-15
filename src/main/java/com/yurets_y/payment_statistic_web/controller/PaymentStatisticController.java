@@ -69,14 +69,26 @@ public class PaymentStatisticController {
                     sort={"date"},
                     direction = Sort.Direction.DESC
             ) Pageable pageable,
-            @RequestParam String dateFrom,
-            @RequestParam String dateUntil
+            @RequestParam(value = "dateFrom") String from,
+            @RequestParam(value = "page") Integer pageNumb,
+            @RequestParam(value = "dateUntil") String until
 
-    ) throws JsonProcessingException {
+    ) throws JsonProcessingException,ParseException {
+        Date dateFrom = null;
+        Date dateUntil = null;
 
-        Page<PaymentList> page = paymentListService.getAll(pageable);
+        if ((!"".equals(from)) && (!"".equals(until))) {
+            dateFrom = DATE_FORMAT.parse(from);
+            dateUntil = DATE_FORMAT.parse(until);
+        }
+        Page<PaymentList> page = null;
+        if(dateFrom == null || dateUntil == null){
+            page = paymentListService.getAll(pageable);
+        }else{
+            page = paymentListService.getPageByPeriod(pageable,dateFrom,dateUntil);
+        }
 
-            return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());
+        return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());
     }
 
 
