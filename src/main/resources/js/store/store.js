@@ -10,12 +10,16 @@ export default new Vuex.Store({
     state: {
         dailyStatistic: {
             details:[],
-            payments: []
+            payments: [],
+            dateFrom:'',
+            dateUntil:''
         },
         paymentListPage:{
             paymentLists: [],
             currentPage:0,
             totalPages: 0,
+            dateFrom:'',
+            dateUntil:''
         },
         paymentLists: [],
         uploadedData:{
@@ -39,7 +43,6 @@ export default new Vuex.Store({
         addDailyStatisticMutation(state, data){
             state.dailyStatistic.details = data.details;
             state.dailyStatistic.payments = data.payments;
-
         },
         addPaymentListsMutation(state,data){
             state.paymentLists = [...data];
@@ -64,6 +67,16 @@ export default new Vuex.Store({
         },
         setTepListsMutation(state,data){
             state.uploadedData.tempLists = [...data]
+        },
+
+        setDailyStatisticPeriod(state,period){
+            state.dailyStatistic.dateFrom = period.dateFrom
+            state.dailyStatistic.dateUntil = period.dateUntil
+        },
+
+        setPaymentListPeriod(state,period){
+            state.paymentListPage.dateFrom = period.dateFrom
+            state.paymentListPage.dateUntil = period.dateUntil
         }
 
     },

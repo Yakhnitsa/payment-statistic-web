@@ -143,6 +143,7 @@
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 };
+                this.$store.commit('setDailyStatisticPeriod',params);
                 this.getDailyStatisticAction(params)
             },
 
@@ -189,27 +190,31 @@
             },
 
             setDefaultPeriod(){
+                this.dateFrom = this.$store.state.dailyStatistic.dateFrom
+                this.dateUntil = this.$store.state.dailyStatistic.dateUntil
+
                 if((this.dateFrom == '') && (this.dateUntil == '')){
                     let today = new Date();
                     let weekAgo = new Date(today.setDate(today.getDate()-7));
                     this.dateFrom = weekAgo.toISOString().substring(0, 10);
                     this.dateUntil = new Date().toISOString().slice(0,10);
+                    let period = {
+                        dateFrom: this.dateFrom,
+                        dateUntil: this.dateUntil
+                    }
 
                 }
-
-                const today = new Date();
-
             }
         },
         filters:{
             formatPayment(num) {
                 num = num/100;
-            return (
-                num
-                    .toFixed(2) // always two decimal digits
-                    .replace('.', ',') // replace decimal point character with ,
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
-                )
+                return (
+                    num
+                        .toFixed(2) // always two decimal digits
+                        .replace('.', ',') // replace decimal point character with ,
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
+                    )
             },
 
             formatDate(dateLong){
@@ -217,6 +222,7 @@
             }
         },
         created(){
+
            this.setDefaultPeriod();
            this.submitForm();
         }

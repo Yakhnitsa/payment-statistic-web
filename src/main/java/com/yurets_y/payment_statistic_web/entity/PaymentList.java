@@ -23,7 +23,6 @@ public class PaymentList {
 
     @Temporal(TemporalType.DATE)
     @JsonView(Views.ShortView.class)
-//    @JsonSerialize(using = JsonDateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 

@@ -99,6 +99,8 @@
         },
 
         created: function(){
+            this.dateFrom = this.$store.state.paymentListPage.dateFrom
+            this.dateUntil = this.$store.state.paymentListPage.dateUntil
             this.updateList();
         },
         methods:{
@@ -112,6 +114,7 @@
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 }
+                this.$store.commit('setPaymentListPeriod',params)
                 this.getPaymentListsAction(params)
             },
             showPayment(payment){
@@ -136,19 +139,15 @@
             downloadPayment(list){
                 this.downloadPaymentListAction(list.backupFilePath)
             },
-            // getData(){
-            //     const period = {
-            //         dateFrom: this.dateFrom,
-            //         dateUntil: this.dateUntil,
-            //     }
-            //     //TODO Реализовать...
-            //     this.getPaymentListsAction(,period);
-            // },
             test(list){
                 // this.$store.commit('deletePaymentListMutation',list)
             },
             downloadArchive(){
                 //TODO Реализовать скачивание архива перечней за весь период
+            },
+            //Проверка размера периода, не больше 60 дней в архиве
+            checkPeriod(){
+
             }
 
         },
