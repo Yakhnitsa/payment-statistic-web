@@ -79,12 +79,6 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Override
     public Page<PaymentList> getAll(Pageable pageable) {
-//        Page<PaymentList> page = paymentListRepo.findAll(pageable);
-////        list.forEach(this::loadBackupFile);
-//        Page<PaymentList> page = new PaymentListDto(
-//                page.getContent(),
-//                page.getNumber(),
-//                page.getTotalPages());
         return paymentListRepo.findAll(pageable);
     }
 
@@ -101,9 +95,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Override
     public List<PaymentList> getByPeriod(Date from, Date until) {
-        Pageable pageable = PageRequest.of(0,1000, Sort.by("date").descending());
-        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
-        return page.getContent();
+        return paymentListRepo.findAllByDateBetween(from,until);
     }
 
     @Override
@@ -183,5 +175,12 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         catch (MalformedURLException e) {
             throw new FileNotFoundException("Could not read file: " + filename);
         }
+    }
+
+    @Override
+    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
+        List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
+//        TODO создать архивный файл и преобразовать в Resource
+        return null;
     }
 }

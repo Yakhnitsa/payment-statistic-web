@@ -22,4 +22,6 @@ public interface PaymentListRepo extends JpaRepository<PaymentList,PaymentListId
 
     Page<PaymentList> findAll(Pageable pageable);
 
+    List<PaymentList> findAllByDateBetween(Date from, Date until);
+
 }

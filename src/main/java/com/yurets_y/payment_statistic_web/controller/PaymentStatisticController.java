@@ -135,6 +135,35 @@ public class PaymentStatisticController {
                 .body(resource);
     }
 
+    @GetMapping("/api/download-archive")
+    @ResponseBody
+    public ResponseEntity<Resource> serveArchive(
+            @RequestParam(value = "dateFrom") String from,
+            @RequestParam(value = "dateUntil") String until,
+            HttpServletRequest request
+    ) throws ParseException {
+        Date dateFrom = null;
+        Date dateUntil = null;
+
+        if ((!"".equals(from)) && (!"".equals(until))) {
+            dateFrom = DATE_FORMAT.parse(from);
+            dateUntil = DATE_FORMAT.parse(until);
+        }
+        Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil);
+
+        String contentType = "application/octet-stream";
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            System.out.println("Could not determine file type.");
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+
     @GetMapping("/api/daily-statistic")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)

@@ -143,11 +143,29 @@
                 // this.$store.commit('deletePaymentListMutation',list)
             },
             downloadArchive(){
-                //TODO Реализовать скачивание архива перечней за весь период
+
+                const period = {
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil
+                }
+                const length = this.periodLength(period)
+                if(Number.isNaN(length) || length > 60 || length < 1){
+                    let message = 'Неверно выбранный период, период архива должен быль больше 0 и меньше 60 дней. ' +
+                        'Запрашиваемый период: ' + length + ' дней.'
+                    this.showWarningMessage(message)
+                    return
+                }
+                this.$store.dispatch('downloadPaymentListsArchiveAction', period)
             },
             //Проверка размера периода, не больше 60 дней в архиве
-            checkPeriod(){
-
+            periodLength(period){
+                const from  = new Date(period.dateFrom)
+                const until  = new Date(period.dateUntil)
+                return (until -  from)/(60 * 60 * 24 * 1000)
+            },
+            showWarningMessage(message){
+                console.log(message)
+            //    TODO Реализовать всплывающее окно о неправильном периоде
             }
 
         },

@@ -129,6 +129,22 @@ export default new Vuex.Store({
                 link.click();
             });
         },
+        downloadPaymentListsArchiveAction({},params){
+            axios({
+                url: '/api/download-archive',
+                method: 'GET',
+                params,
+                responseType: 'blob',
+            }).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                const achName = 'archive_' + period.dateFrom.replace('.','') + '__' + period.dateUntil.replace('.','')
+                link.href = url;
+                link.setAttribute('download', achName);
+                document.body.appendChild(link);
+                link.click();
+            });
+        },
 
         /*Методы для загрузки перечней на сервер*/
         loadTempListsFromServerAction({commit}){

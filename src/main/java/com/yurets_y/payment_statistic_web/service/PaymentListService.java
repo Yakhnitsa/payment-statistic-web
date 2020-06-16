@@ -29,4 +29,6 @@ public interface PaymentListService {
     boolean contains(PaymentList paymentList);
 
     Resource getFileAsResource(String filename) throws FileNotFoundException;
+
+    Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil);
 }
