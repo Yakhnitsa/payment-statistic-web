@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,6 +27,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service("paymentListServiceRepoBased")
 @Primary
@@ -178,9 +182,42 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
+    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil){
         List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
-//        TODO создать архивный файл и преобразовать в Resource
+        List<String> fileNames = paymentLists
+                .stream()
+                .map(PaymentList::getBackupFilePath)
+                .collect(Collectors.toList());
+
+
+        try {
+            Path file = getFilesArchive(fileNames);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+    private Path getFilesArchive(List<String> files) throws IOException {
+        Path zipFilePath = Files.createTempFile("zip_archive",".zip");
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFilePath))) {
+            files.forEach( filename ->{
+                ZipEntry zipEntry = new ZipEntry(filename);
+                try {
+                    zipOutputStream.putNextEntry(zipEntry);
+                    Path path = Paths.get(backupDir,filename);
+                    zipOutputStream.write(Files.readAllBytes(path));
+                    zipOutputStream.closeEntry();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            });
+
+            return zipFilePath;
+        }
     }
 }

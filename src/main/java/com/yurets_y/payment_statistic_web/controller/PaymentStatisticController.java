@@ -6,6 +6,7 @@ import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -21,10 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -141,7 +142,7 @@ public class PaymentStatisticController {
             @RequestParam(value = "dateFrom") String from,
             @RequestParam(value = "dateUntil") String until,
             HttpServletRequest request
-    ) throws ParseException {
+    ) throws ParseException, IOException {
         Date dateFrom = null;
         Date dateUntil = null;
 
@@ -151,7 +152,7 @@ public class PaymentStatisticController {
         }
         Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil);
 
-        String contentType = "application/octet-stream";
+        String contentType = "application/zip";
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
@@ -160,7 +161,9 @@ public class PaymentStatisticController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
+                .contentLength(resource.contentLength())
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+
                 .body(resource);
     }
 
@@ -248,5 +251,13 @@ public class PaymentStatisticController {
 //
 //        return result;
 //    }
+
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public void download(HttpServletResponse response) throws IOException {
+        InputStream inputStream = new FileInputStream(new File("application.properties")); //load the file
+        IOUtils.copy(inputStream, response.getOutputStream());
+        response.flushBuffer();
+
+    }
 
 }

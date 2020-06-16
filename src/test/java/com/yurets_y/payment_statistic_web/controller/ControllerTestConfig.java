@@ -67,6 +67,11 @@ public class ControllerTestConfig {
             public Resource getFileAsResource(String filename) throws FileNotFoundException {
                 return null;
             }
+
+            @Override
+            public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
+                return null;
+            }
         };
     }
 }
