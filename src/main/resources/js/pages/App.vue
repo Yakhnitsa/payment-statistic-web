@@ -36,7 +36,7 @@
         components:{
             DailyStatistic,
             PaymentList,
-            LoadingWindow
+            LoadingWindow,
         },
         data: function() {
             return{

@@ -118,4 +118,21 @@ The following guides illustrate how to use some features concretely:
         "scripts": {
           "start": "webpack-dev-server --open --config webpack.dev.js",
           "build": "webpack --config webpack.prod.js"
-        },                   
+        },        
+        
+        
+## Добавляем поддержку графиков:
+   - Установка [vue-chartjs](https://vue-chartjs.org/ru/guide/#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B0%D1%88%D0%B5%D0%B3%D0%BE-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0)       
+   Установка посредством yarn: `yarn add vue-chartjs chart.js`    
+   
+   - Создаем линейный график:
+   
+   
+       <script>
+           import {Line} from 'vue-chartjs' - Импорт компонента из библиотеки
+       
+           export default {
+               extends: Line,
+               name: "DailyExpensesChart"
+           }
+       </script>  

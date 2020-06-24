@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+        <line-chart></line-chart>
+    </div>
+
+</body>
+<script>
+    Vue.component('line-chart', {
+        extends: VueChartJs.Line,
+        mounted () {
+            this.renderChart({
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                datasets: [
+                    {
+                        label: 'Коммиты на GitHub',
+                        backgroundColor: '#f87979',
+                        data: [20, 12, 40, 29, 15, 42, 35, 80, 40, 20, 12, 11]
+                    }
+                ]
+            }, {responsive: true, maintainAspectRatio: false})
+        }
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    })
+</script>
+</html>
