@@ -201,6 +201,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         }
         return null;
     }
+
     private Path getFilesArchive(List<String> files) throws IOException {
         Path zipFilePath = Files.createTempFile("zip_archive",".zip");
 

@@ -34,9 +34,6 @@ export default new Vuex.Store({
         chosenFiles: state => state.uploadedData.files,
         tempUploadedLists: state => state.uploadedData.tempLists,
         selectedUploadedLists: state => state.uploadedData.selectedLists
-
-
-        // sortedMessages: state => (state.messages || []).sort((a,b) => -(a.id - b.id))
     },
     // Методы для изменения объектов приолжения
     mutations: {
@@ -91,6 +88,7 @@ export default new Vuex.Store({
             })
                 .catch((error) => console.log(error))
         },
+
         getPaymentListsAction({commit,state},params){
 
             axios.get('/api/payments',{params})
@@ -102,7 +100,9 @@ export default new Vuex.Store({
 
                 )
         },
+
         getSinglePaymentListAction({commit,state},data){
+            //TODO реализовать страницу перечня и данные по нем
             console.log(data);
         },
 
@@ -116,7 +116,7 @@ export default new Vuex.Store({
 
         downloadPaymentListAction({commit,state},file){
             axios({
-                url: '/api/download-file/' + file,
+                url: '/api/download/file/' + file,
                 method: 'GET',
                 params:{file: file},
                 responseType: 'blob',
@@ -129,9 +129,10 @@ export default new Vuex.Store({
                 link.click();
             });
         },
+
         downloadPaymentListsArchiveAction({},params){
             axios({
-                url: '/api/download-archive',
+                url: '/api/download/archive',
                 method: 'GET',
                 params,
                 responseType: 'blob',

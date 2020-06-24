@@ -25,7 +25,7 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item"><a class="page-link" ><i class="fas fa-caret-left"></i></a></li>
-                    <li v-for="page in totalPages" class="page-item"><a class="page-link" @click="loadPage(page)" >{{page}}</a></li>
+                    <li v-for="page in totalPages" class="page-item"><a class="page-link" @click="loadPage(page-1)" >{{page}}</a></li>
                     <!--<li class="page-item"><a class="page-link">2</a></li>-->
                     <!--<li class="page-item"><a class="page-link">3</a></li>-->
                     <li class="page-item"><a class="page-link"><i class="fas fa-caret-right"></i></a></li>
@@ -110,7 +110,7 @@
             },
             loadPage(page){
                 const params = {
-                    page:0,
+                    page,
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 }

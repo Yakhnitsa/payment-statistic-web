@@ -2,10 +2,12 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import com.yurets_y.payment_statistic_web.service.PaymentStatisticService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -32,17 +34,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
-public class PaymentStatisticController {
+public class MainController {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final int RECORDS_PER_PAGE = 30;
 
-//    @javax.annotation.Resource(name = "payment-details-by-type-comparator")
     private Comparator<PaymentDetails> paymentDetailsComparator;
 
     private PaymentListService paymentListService;
 
     private PaymentDetailsService paymentDetailsService;
+
+    private PaymentStatisticService paymentStatisticService;
 
 
 
@@ -50,17 +53,6 @@ public class PaymentStatisticController {
     public String paymentStatistic() {
         return "index";
     }
-
-//    @GetMapping("/api/last-payments")
-//    @ResponseBody
-//    public List<PaymentList> getLastPayments() {
-//
-//        List<PaymentList> paymentLists = paymentListService.getAll();
-//
-//
-//        return paymentLists;
-//    }
-
 
     @GetMapping("/api/payments")
     @ResponseBody
@@ -113,60 +105,6 @@ public class PaymentStatisticController {
         return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/api/download-file/{fileName:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serveFile(
-            @PathVariable String fileName,
-            @RequestParam String file,
-            HttpServletRequest request
-    ) throws FileNotFoundException {
-
-        Resource resource = paymentListService.getFileAsResource(fileName);
-
-        String contentType = "application/octet-stream";
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            System.out.println("Could not determine file type.");
-        }
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
-    }
-
-    @GetMapping("/api/download-archive")
-    @ResponseBody
-    public ResponseEntity<Resource> serveArchive(
-            @RequestParam(value = "dateFrom") String from,
-            @RequestParam(value = "dateUntil") String until,
-            HttpServletRequest request
-    ) throws ParseException, IOException {
-        Date dateFrom = null;
-        Date dateUntil = null;
-
-        if ((!"".equals(from)) && (!"".equals(until))) {
-            dateFrom = DATE_FORMAT.parse(from);
-            dateUntil = DATE_FORMAT.parse(until);
-        }
-        Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil);
-
-        String contentType = "application/zip";
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            System.out.println("Could not determine file type.");
-        }
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .contentLength(resource.contentLength())
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-
-                .body(resource);
-    }
-
     @GetMapping("/api/daily-statistic")
     @ResponseBody
     @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
@@ -184,43 +122,8 @@ public class PaymentStatisticController {
         if (!"".equals(until)) {
             dateUntil = DATE_FORMAT.parse(until);
         }
-
-        Map<String, Object> statistic = new LinkedHashMap<>();
-
-        List<PaymentList> payments = paymentListService.getByPeriod(dateFrom, dateUntil);
-        List<PaymentDetails> paymentDetailsList = paymentDetailsService.getPaymentDetailsByDate(dateFrom, dateUntil);
-
-        Collections.sort(paymentDetailsList, paymentDetailsComparator);
-
-        Map<String, Map<Date, Long>> details = paymentDetailsList
-                .stream()
-                .collect(Collectors.groupingBy(PaymentDetails::getType,
-                        LinkedHashMap::new,
-                        Collectors.groupingBy(
-                                PaymentDetails::getDate,
-                                TreeMap::new,
-                                Collectors.summingLong(PaymentDetails::getTotalPayment))
-                ));
-
-        Map<String, Map<String, Long>> reformattedDetails = details
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> entry.getValue()
-                                .entrySet()
-                                .stream()
-                                .collect(Collectors.toMap(
-                                        innerEntry -> DATE_FORMAT.format(innerEntry.getKey()),
-                                        Map.Entry::getValue
-                                )),
-                        (first, second) -> first,
-                        LinkedHashMap::new
-                ));
-
-        statistic.put("payments", payments);
-        statistic.put("details", reformattedDetails);
-        return new ResponseEntity<>(statistic, HttpStatus.OK);
+        DailyStatisticDto dto = paymentStatisticService.getDailyStatistic(dateFrom,dateUntil);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @Autowired
@@ -236,6 +139,11 @@ public class PaymentStatisticController {
     @Autowired
     public void setPaymentDetailsComparator(Comparator<PaymentDetails> paymentDetailsComparator) {
         this.paymentDetailsComparator = paymentDetailsComparator;
+    }
+
+    @Autowired
+    public void setPaymentStatisticService(PaymentStatisticService paymentStatisticService) {
+        this.paymentStatisticService = paymentStatisticService;
     }
 
     //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
