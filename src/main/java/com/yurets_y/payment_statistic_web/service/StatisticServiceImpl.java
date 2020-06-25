@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.service;
 
+import com.yurets_y.payment_statistic_web.dto.ChartDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
@@ -13,16 +14,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class PaymentStatisticServiceImpl implements PaymentStatisticService {
+public class StatisticServiceImpl implements StatisticService {
+
     private PaymentListRepo paymentListRepo;
+
     private PaymentDetailsRepo paymentDetailsRepo;
+
     private Comparator<PaymentDetails> paymentDetailsComparator;
+
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    public PaymentStatisticServiceImpl(PaymentListRepo paymentListRepo,
-                                       PaymentDetailsRepo paymentDetailsRepo,
-                                       Comparator<PaymentDetails> paymentDetailsComparator) {
+    public StatisticServiceImpl(PaymentListRepo paymentListRepo,
+                                PaymentDetailsRepo paymentDetailsRepo,
+                                Comparator<PaymentDetails> paymentDetailsComparator) {
         this.paymentListRepo = paymentListRepo;
         this.paymentDetailsRepo = paymentDetailsRepo;
         this.paymentDetailsComparator = paymentDetailsComparator;
@@ -66,5 +71,55 @@ public class PaymentStatisticServiceImpl implements PaymentStatisticService {
         dto.setDetails(reformattedDetails);
 
         return dto;
+    }
+
+    @Override
+    public ChartDto getChartStatistic(Date dateFrom, Date dateUntil) {
+        List<Date> dates = getDatesArray(dateFrom, dateUntil);
+        Map<Date,Long> expenses = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil)
+                .stream()
+                .collect(Collectors.groupingBy(PaymentList::getDate,
+                        LinkedHashMap::new,
+                        Collectors.summingLong(PaymentList::getPaymentVsTaxes)
+                ));
+
+        List<Long> expensesList = fillBlankDatesAndGetList(dates,expenses);
+        return null;
+    }
+
+    private List<Long> fillBlankDatesAndGetList(List<Date> dates, Map<Date,Long> expenses) {
+        List<Long> dataList = new ArrayList<>(dates.size());
+        dates.forEach(date ->{
+            dataList.add(expenses.get(date));
+
+        });
+        return dataList;
+    }
+
+    private List<Date> getDatesArray(Date dateFrom, Date dateUntil) {
+        List<Date> dates = new ArrayList<>();
+
+        dateFrom = getClearDate(dateFrom);
+        dateUntil = getClearDate(dateUntil);
+
+        GregorianCalendar instance = new GregorianCalendar();
+        instance.setTime(dateFrom);
+
+        while(instance.getTime().before(dateUntil)){
+            dates.add(instance.getTime());
+            instance.add(Calendar.DATE,1);
+        }
+        dates.add(dateUntil);
+        return dates;
+    }
+
+    private Date getClearDate(Date dateFrom) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(dateFrom);
+        return new GregorianCalendar(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+                ).getTime();
     }
 }
