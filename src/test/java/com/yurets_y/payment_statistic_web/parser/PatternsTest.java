@@ -31,7 +31,7 @@ public class PatternsTest {
     }
     @Test
     public void simplePatternTest(){
-        String testString1 = "Вiдправлення";
+        String testString1 = "Платіжні доручення";
         String testString2 = "Вiдправлення - мiжнародне сполучення";
         Pattern pattern = Pattern.compile("Вiдправлення.*");
         assertThat(pattern.matcher(testString1).matches()).isTrue();

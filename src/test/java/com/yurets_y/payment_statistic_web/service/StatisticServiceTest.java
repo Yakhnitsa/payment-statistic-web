@@ -69,7 +69,7 @@ public class StatisticServiceTest {
         calendar.set(2020, Calendar.MAY, 20,1,15);
         Date dateUntil = calendar.getTime();
 
-        statisticService.getChartStatistic(dateFrom,dateUntil);
+        statisticService.getChartStatistic(dateFrom,dateUntil,3);
     }
 
 }

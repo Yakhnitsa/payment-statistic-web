@@ -84,9 +84,6 @@ public class XmlDocParser extends AbstractDocParser{
 
     @Override
     List<PaymentDetails> getStationPayments(String type, Iterator<Element> iterator) {
-        if(type.matches("Накопичувальнi карточки")){
-            System.out.println("Накопичувальнi карточки");
-        }
         List<String> row = parseChartRow(iterator.next());
         List<PaymentDetails> paymentDetailsList = new ArrayList<>();
         if (row.size() < 1) return paymentDetailsList;

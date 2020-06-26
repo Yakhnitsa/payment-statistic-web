@@ -9,5 +9,5 @@ public interface StatisticService {
 
     DailyStatisticDto getDailyStatistic(Date dateFrom, Date dateUntil);
 
-    ChartDto getChartStatistic(Date dateFrom, Date datUntil);
+    ChartDto getChartStatistic(Date dateFrom, Date datUntil, Integer averageIndex);
 }

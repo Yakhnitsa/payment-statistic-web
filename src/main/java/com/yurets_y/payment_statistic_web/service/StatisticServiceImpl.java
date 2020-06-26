@@ -74,8 +74,9 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public ChartDto getChartStatistic(Date dateFrom, Date dateUntil) {
+    public ChartDto getChartStatistic(Date dateFrom, Date dateUntil,Integer averageIndex) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
+
         Map<Date,Long> expenses = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil)
                 .stream()
                 .collect(Collectors.groupingBy(PaymentList::getDate,
@@ -83,14 +84,54 @@ public class StatisticServiceImpl implements StatisticService {
                         Collectors.summingLong(PaymentList::getPaymentVsTaxes)
                 ));
 
+        Map<Date,Long> payments = paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil)
+                .stream()
+                .filter(details -> details.getType().equals("Платіжні доручення"))
+                .collect(Collectors.groupingBy(PaymentDetails::getDate,Collectors.summingLong(PaymentDetails::getTotalPayment)));
+
+
         List<Long> expensesList = fillBlankDatesAndGetList(dates,expenses);
-        return null;
+        List<Long> paymentsList = fillBlankDatesAndGetList(dates,payments);
+        List<Long> averageStatistic = getAverageStatistic(expensesList,averageIndex);
+        List<String> datesList = dates
+                .stream()
+                .map(date -> DATE_FORMAT.format(date))
+                .collect(Collectors.toList());
+        return new ChartDto(
+                datesList,
+                paymentsList,
+                expensesList,
+                averageStatistic,
+                1
+        );
     }
 
-    private List<Long> fillBlankDatesAndGetList(List<Date> dates, Map<Date,Long> expenses) {
+    private List<Long> getAverageStatistic(List<Long> list, Integer averageIndex) {
+        List<Long> averageList = new ArrayList<>();
+
+        for(int i = 0; i < list.size(); i++){
+            // Интексы микромассива
+            int startIndex = i - averageIndex/2;
+            int endIndex = startIndex + averageIndex;
+            //Корректировка индексов в пределах массива
+            startIndex = startIndex < 0 ? 0: startIndex;
+            endIndex = endIndex > list.size() ? list.size(): endIndex;
+
+            Double average = list.subList(startIndex,endIndex)
+                    .stream()
+                    .mapToLong(val->val)
+                    .average()
+                    .orElse(0.0);
+            averageList.add(average.longValue());
+
+        }
+        return averageList;
+    }
+
+    private List<Long> fillBlankDatesAndGetList(List<Date> dates, Map<Date,Long> map) {
         List<Long> dataList = new ArrayList<>(dates.size());
         dates.forEach(date ->{
-            dataList.add(expenses.get(date));
+            dataList.add(map.get(date));
 
         });
         return dataList;
@@ -113,9 +154,9 @@ public class StatisticServiceImpl implements StatisticService {
         return dates;
     }
 
-    private Date getClearDate(Date dateFrom) {
+    private Date getClearDate(Date date) {
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(dateFrom);
+        calendar.setTime(date);
         return new GregorianCalendar(
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),

@@ -163,14 +163,16 @@ public abstract class AbstractDocParser implements DocParser{
     void checkSumTest(PaymentList paymentList) {
         long openingBalance = paymentList.getOpeningBalance();
         long closingBalance = paymentList.getClosingBalance();
+        String incomePaymentPattern = "Платіжні доручення";
+
         long payments = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(paymentDetails -> paymentDetails.getType().equals("Платіжні доручення"))
+                .filter(paymentDetails -> paymentDetails.getType().equals(incomePaymentPattern))
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
         long totalPaymentsVsTaxes = paymentList.getPaymentVsTaxes();
         long totalPaymentsFromList = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(paymentDetails -> !paymentDetails.getType().equals("Платіжні доручення"))
+                .filter(paymentDetails -> !paymentDetails.getType().equals(incomePaymentPattern))
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
 
         long checkSum = openingBalance + payments - totalPaymentsFromList;
