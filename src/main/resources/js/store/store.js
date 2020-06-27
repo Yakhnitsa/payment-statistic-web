@@ -4,6 +4,8 @@ Vue.use(Vuex);
 
 import axios from 'axios'
 
+import statisticApi from '../api/statisticApi'
+
 // Централизованное хранилище Vuex для данных приложения
 export default new Vuex.Store({
     // Состояние объекта, массивы и прочее
@@ -11,6 +13,14 @@ export default new Vuex.Store({
         dailyStatistic: {
             details:[],
             payments: [],
+            dateFrom:'',
+            dateUntil:''
+        },
+        dailyChart:{
+            labels:[],
+            paymentStatistic:[],
+            expensesStatistic:[],
+            averageStatistic:[],
             dateFrom:'',
             dateUntil:''
         },
@@ -74,20 +84,25 @@ export default new Vuex.Store({
         setPaymentListPeriod(state,period){
             state.paymentListPage.dateFrom = period.dateFrom
             state.paymentListPage.dateUntil = period.dateUntil
+        },
+
+        addDailyChartMutation(state, data){
+            state.dailyChart.labels = data.labels;
+            state.dailyChart.paymentStatistic = data.paymentStatistic;
+            state.dailyChart.expensesStatistic = data.expensesStatistic;
+            state.dailyChart.averageStatistic = data.averageStatistic;
+        },
+
+        addDailyChartPeriodMutation(state,data){
+            state.dailyChart.dateFrom = data.dateFrom
+            state.dailyChart.dateUntil = data.dateUntil
         }
 
     },
     // Асинхронные запросы на изменение данных хранилища
     actions:{
         /**/
-        getDailyStatisticAction({commit,state},params){
-            axios.get('/api/daily-statistic',
-                {params}, {}
-            ).then(response => {
-                commit('addDailyStatisticMutation',response.data)
-            })
-                .catch((error) => console.log(error))
-        },
+
 
         getPaymentListsAction({commit,state},params){
 
@@ -205,7 +220,23 @@ export default new Vuex.Store({
             }).catch(error => console.log(error))
         },
 
+        // Методы обработки статистических данных
+        getDailyStatisticAction({commit,state},params){
+            statisticApi.getDailyStatistic(params).then(response => {
+                commit('addDailyStatisticMutation',response.data)
+            })
+                .catch((error) => console.log(error))
+        },
+
+        getDailyChartAction({commit,state},params) {
+            statisticApi.getDailyChart(params).then(response =>{
+                commit('addDailyChartMutation',response.data)
+                commit('addDailyChartPeriodMutation',params)
+            }).catch((error) => console.log(error))
+        }
+
 
 
     }
+
 })

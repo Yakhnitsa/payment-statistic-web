@@ -1,5 +1,6 @@
 <template>
     <div id="test">
+        <button @click="test()">test</button>
         <linear-chart :height="300" :width="500"
                 class="daily-chart"
                 :data="chartData"
@@ -11,7 +12,7 @@
     import LinearChart from '../components/LinearChart.vue'
 
     export default {
-        name: 'app',
+        name: 'ChartPage',
         components: {
             LinearChart
         },
@@ -38,6 +39,17 @@
                     responsive: false,
                     maintainAspectRatio: true},
             }
+        },
+        methods:{
+            test(){
+                var params = {
+                    dateFrom: '2020-05-01',
+                    dateUntil: '2020-05-20',
+                    averageIndex: 3
+                }
+                console.log(params);
+                this.$store.dispatch('getDailyChartAction', params)
+            },
         }
     }
 </script>

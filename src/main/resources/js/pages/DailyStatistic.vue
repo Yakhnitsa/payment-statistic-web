@@ -147,7 +147,7 @@
                 this.getDailyStatisticAction(params)
             },
 
-            test(){;
+            test(){
                 console.log("test begin");
                 console.log(this.dateArray[0])
                 let day = this.dateArray[0]

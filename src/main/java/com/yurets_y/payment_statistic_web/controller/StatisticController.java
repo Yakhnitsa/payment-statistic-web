@@ -1,6 +1,8 @@
 package com.yurets_y.payment_statistic_web.controller;
 
 import com.yurets_y.payment_statistic_web.dto.ChartDto;
+import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.apache.catalina.connector.Response;
@@ -9,10 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,9 +61,25 @@ public class StatisticController {
         if (dateFrom == null || dateUntil == null) {
             return new ResponseEntity<String>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
         }
+        //        TODO - сделать проверку периода
 
         ChartDto dto = statisticService.getChartStatistic(dateFrom,dateUntil,averageIndex);
         return new ResponseEntity<ChartDto>(dto,HttpStatus.OK);
 
+    }
+
+    @GetMapping("/daily-statistic")
+    @ResponseBody
+    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
+    public ResponseEntity<?> getDailyStatistic(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil
+    ) throws ParseException {
+        if (dateFrom == null || dateUntil == null) {
+            return new ResponseEntity<String>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
+        }
+//        TODO - сделать проверку периода
+        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

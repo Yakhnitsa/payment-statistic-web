@@ -13,6 +13,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <router-link to="/" class="nav-item nav-link">Графики затрат</router-link>
                     <router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>
                     <router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>
                     <!--<a class="nav-item nav-link" href="#">Pricing</a>-->

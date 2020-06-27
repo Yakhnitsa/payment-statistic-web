@@ -1,11 +1,10 @@
 package com.yurets_y.payment_statistic_web.dto;
 
-import java.util.Date;
 import java.util.List;
 
 public class ChartDto {
 
-    private List<String> titles;
+    private List<String> labels;
 
     private List<Long> paymentStatistic;
 
@@ -16,20 +15,20 @@ public class ChartDto {
     private int averageIndex;
 
 
-    public ChartDto(List<String> titles, List<Long> paymentStatistic, List<Long> expensesStatistic, List<Long> averageStatistic, int averageIndex) {
-        this.titles = titles;
+    public ChartDto(List<String> labels, List<Long> paymentStatistic, List<Long> expensesStatistic, List<Long> averageStatistic, int averageIndex) {
+        this.labels = labels;
         this.paymentStatistic = paymentStatistic;
         this.expensesStatistic = expensesStatistic;
         this.averageStatistic = averageStatistic;
         this.averageIndex = averageIndex;
     }
 
-    public List<String> getTitles() {
-        return titles;
+    public List<String> getLabels() {
+        return labels;
     }
 
-    public void setTitles(List<String> titles) {
-        this.titles = titles;
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
     }
 
     public List<Long> getPaymentStatistic() {
