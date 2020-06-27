@@ -7,6 +7,7 @@ import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
+import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,6 +40,9 @@ public class MainController {
     private PaymentDetailsService paymentDetailsService;
 
     private StatisticService statisticService;
+
+    @Autowired
+    private MessageProvider messageProvider;
 
 
 
@@ -152,13 +156,5 @@ public class MainController {
 //
 //        return result;
 //    }
-
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public void download(HttpServletResponse response) throws IOException {
-        InputStream inputStream = new FileInputStream(new File("application.properties")); //load the file
-        IOUtils.copy(inputStream, response.getOutputStream());
-        response.flushBuffer();
-
-    }
 
 }

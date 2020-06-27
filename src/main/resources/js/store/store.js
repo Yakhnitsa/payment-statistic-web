@@ -203,7 +203,9 @@ export default new Vuex.Store({
                         commit('setTepListsMutation',response.data)
                     }
             }).catch(error => console.log(error))
-        }
+        },
+
+
 
     }
 })

@@ -7,10 +7,8 @@ import java.util.Date;
 public class SimpleTest {
     @Test
     public void clearDateTest(){
-        Date date = new Date();
-        Long time = (date.getTime() / 86400000) * 86400000;
-        Date date2 = new Date(time);
-        System.out.println(date);
-        System.out.println(date2);
+        Long o = null;
+        long l = Long.valueOf(o);
+        System.out.println(l);
     }
 }

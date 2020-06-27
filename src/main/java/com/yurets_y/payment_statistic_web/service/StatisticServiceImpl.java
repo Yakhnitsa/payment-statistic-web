@@ -102,7 +102,7 @@ public class StatisticServiceImpl implements StatisticService {
                 paymentsList,
                 expensesList,
                 averageStatistic,
-                1
+                averageIndex
         );
     }
 
@@ -131,7 +131,8 @@ public class StatisticServiceImpl implements StatisticService {
     private List<Long> fillBlankDatesAndGetList(List<Date> dates, Map<Date,Long> map) {
         List<Long> dataList = new ArrayList<>(dates.size());
         dates.forEach(date ->{
-            dataList.add(map.get(date));
+            Long data = map.get(date);
+            dataList.add(data == null? 0L : data);
 
         });
         return dataList;
