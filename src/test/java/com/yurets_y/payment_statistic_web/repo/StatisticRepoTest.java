@@ -50,4 +50,24 @@ public class StatisticRepoTest {
         result = repo.getDailyStatisticByPaymentType(dateFrom,dateUntil,"Платіжні доручення");
         result.size();
     }
+
+    @Test
+    public void getStatisticByTypeTest() throws ParseException {
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-20");
+
+        List result = repo.getDailyStatisticByType(dateFrom,dateUntil);
+        result.size();
+
+    }
+
+    @Test
+    public void getStatisticByStationTest() throws ParseException {
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-20");
+
+        List result = repo.getDailyStatisticByStation(dateFrom,dateUntil);
+        result.size();
+
+    }
 }
