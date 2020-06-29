@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public class ChartDto {
@@ -62,4 +63,5 @@ public class ChartDto {
     public void setAverageIndex(int averageIndex) {
         this.averageIndex = averageIndex;
     }
+
 }

@@ -33,13 +33,8 @@ public class MainController {
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final int RECORDS_PER_PAGE = 30;
 
-    private Comparator<PaymentDetails> paymentDetailsComparator;
-
     private PaymentListService paymentListService;
 
-    private PaymentDetailsService paymentDetailsService;
-
-    private StatisticService statisticService;
 
     @Autowired
     private MessageProvider messageProvider;
@@ -102,48 +97,13 @@ public class MainController {
         return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/api/daily-statistic")
-    @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
-    public ResponseEntity<?> getDailyStatistic(
-            @RequestParam(value = "dateFrom", required = false) String from,
-            @RequestParam(value = "dateUntil", required = false) String until
-    ) throws ParseException {
-        Date dateFrom = null;
-        Date dateUntil = null;
-
-        if (!"".equals(dateFrom)) {
-            dateFrom = DATE_FORMAT.parse(from);
-        }
-
-        if (!"".equals(until)) {
-            dateUntil = DATE_FORMAT.parse(until);
-        }
-        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
-    }
 
     @Autowired
     public void setPaymentListService(PaymentListService paymentListService) {
         this.paymentListService = paymentListService;
     }
 
-    @Autowired
-    public void setPaymentDetailsService(PaymentDetailsService paymentDetailsService) {
-        this.paymentDetailsService = paymentDetailsService;
-    }
-
-    @Autowired
-    public void setPaymentDetailsComparator(Comparator<PaymentDetails> paymentDetailsComparator) {
-        this.paymentDetailsComparator = paymentDetailsComparator;
-    }
-
-    @Autowired
-    public void setStatisticService(StatisticService statisticService) {
-        this.statisticService = statisticService;
-    }
-
-    //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
+//    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
 //
 //        ObjectMapper mapper = new ObjectMapper();
 //        SimpleModule module = new SimpleModule();

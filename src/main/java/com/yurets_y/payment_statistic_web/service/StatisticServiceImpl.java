@@ -2,10 +2,12 @@ package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.dto.ChartDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.dto.DateLongEntry;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
+import com.yurets_y.payment_statistic_web.repo.StatisticRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class StatisticServiceImpl implements StatisticService {
 
     private PaymentDetailsRepo paymentDetailsRepo;
 
+    private StatisticRepo statisticRepo;
+
+
     private Comparator<PaymentDetails> paymentDetailsComparator;
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -27,10 +32,14 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     public StatisticServiceImpl(PaymentListRepo paymentListRepo,
                                 PaymentDetailsRepo paymentDetailsRepo,
-                                Comparator<PaymentDetails> paymentDetailsComparator) {
+                                Comparator<PaymentDetails> paymentDetailsComparator,
+                                StatisticRepo statisticRepo
+
+    ) {
         this.paymentListRepo = paymentListRepo;
         this.paymentDetailsRepo = paymentDetailsRepo;
         this.paymentDetailsComparator = paymentDetailsComparator;
+        this.statisticRepo = statisticRepo;
     }
 
     @Override
@@ -77,26 +86,21 @@ public class StatisticServiceImpl implements StatisticService {
     public ChartDto getChartStatistic(Date dateFrom, Date dateUntil,Integer averageIndex) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
 
-        Map<Date,Long> expenses = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil)
-                .stream()
-                .collect(Collectors.groupingBy(PaymentList::getDate,
-                        LinkedHashMap::new,
-                        Collectors.summingLong(PaymentList::getPaymentVsTaxes)
-                ));
+        List<DateLongEntry> expenses = statisticRepo.getDailyExpensesStatistic(dateFrom,dateUntil);
 
-        Map<Date,Long> payments = paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil)
-                .stream()
-                .filter(details -> details.getType().equals("Платіжні доручення"))
-                .collect(Collectors.groupingBy(PaymentDetails::getDate,Collectors.summingLong(PaymentDetails::getTotalPayment)));
+        String paymentType = "Платіжні доручення";
 
+        List<DateLongEntry> payments = statisticRepo.getDailyStatisticByPaymentType(dateFrom,dateUntil,paymentType);
 
         List<Long> expensesList = fillBlankDatesAndGetList(dates,expenses);
         List<Long> paymentsList = fillBlankDatesAndGetList(dates,payments);
         List<Long> averageStatistic = getAverageStatistic(expensesList,averageIndex);
+
         List<String> datesList = dates
                 .stream()
                 .map(date -> DATE_FORMAT.format(date))
                 .collect(Collectors.toList());
+
         return new ChartDto(
                 datesList,
                 paymentsList,
@@ -132,6 +136,21 @@ public class StatisticServiceImpl implements StatisticService {
         List<Long> dataList = new ArrayList<>(dates.size());
         dates.forEach(date ->{
             Long data = map.get(date);
+            dataList.add(data == null? 0L : data);
+
+        });
+        return dataList;
+    }
+
+    private List<Long> fillBlankDatesAndGetList(List<Date> dates, List<DateLongEntry> values) {
+        Map<Date,Long> valuesMap = values
+                .stream()
+                .collect(Collectors.toMap(DateLongEntry::getDate,DateLongEntry::getValue));
+
+        List<Long> dataList = new ArrayList<>(dates.size());
+
+        dates.forEach(date ->{
+            Long data = valuesMap.get(date);
             dataList.add(data == null? 0L : data);
 
         });

@@ -35,8 +35,6 @@ public class StatisticController {
 *   - движение графика в право-влево на 1 период (месяц, декада, неделя)
 * */
 
-    @Value("{application.controller.void-request-param}")
-    private String WRONG_PERIOD_MESSAGE;
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     private final String WRONG_PARAMETERS_MESSAGE = "application.controller.void-request-param";
