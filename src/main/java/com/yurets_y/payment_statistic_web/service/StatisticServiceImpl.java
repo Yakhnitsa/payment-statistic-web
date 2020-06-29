@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.dto.ChartDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.DateLongEntry;
+import com.yurets_y.payment_statistic_web.dto.StringLongEntry;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
@@ -27,7 +28,7 @@ public class StatisticServiceImpl implements StatisticService {
 
     private Comparator<PaymentDetails> paymentDetailsComparator;
 
-    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM");
 
     @Autowired
     public StatisticServiceImpl(PaymentListRepo paymentListRepo,
@@ -92,6 +93,12 @@ public class StatisticServiceImpl implements StatisticService {
 
         List<DateLongEntry> payments = statisticRepo.getDailyStatisticByPaymentType(dateFrom,dateUntil,paymentType);
 
+        List<StringLongEntry> typeChartData = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
+        List<StringLongEntry> stationChartData = statisticRepo.getDailyStatisticByStation(dateFrom,dateUntil)
+                .stream()
+                .filter(entity -> entity.getType() != null)
+                .collect(Collectors.toList());
+
         List<Long> expensesList = fillBlankDatesAndGetList(dates,expenses);
         List<Long> paymentsList = fillBlankDatesAndGetList(dates,payments);
         List<Long> averageStatistic = getAverageStatistic(expensesList,averageIndex);
@@ -106,6 +113,8 @@ public class StatisticServiceImpl implements StatisticService {
                 paymentsList,
                 expensesList,
                 averageStatistic,
+                typeChartData,
+                stationChartData,
                 averageIndex
         );
     }

@@ -16,6 +16,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,6 +37,8 @@ public class StatisticServiceTest {
 
     @Autowired
     PaymentListRepo paymentListRepo;
+
+    private SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
 
     @Test
     public void resourceIntegrationTest(){
@@ -61,13 +65,9 @@ public class StatisticServiceTest {
 
     }
     @Test
-    public void chartDtoTest(){
-        GregorianCalendar calendar = new GregorianCalendar(2020, Calendar.MAY, 1,0,15);
-
-        Date dateFrom = calendar.getTime();
-
-        calendar.set(2020, Calendar.MAY, 20,1,15);
-        Date dateUntil = calendar.getTime();
+    public void chartDtoTest() throws ParseException {
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-20");
 
         statisticService.getChartStatistic(dateFrom,dateUntil,3);
     }

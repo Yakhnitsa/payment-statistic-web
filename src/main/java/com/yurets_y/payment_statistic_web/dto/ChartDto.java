@@ -13,14 +13,20 @@ public class ChartDto {
 
     private List<Long> averageStatistic;
 
+    private List<StringLongEntry> typeChartData;
+
+    private List<StringLongEntry> stationChartData;
+
     private int averageIndex;
 
 
-    public ChartDto(List<String> labels, List<Long> paymentStatistic, List<Long> expensesStatistic, List<Long> averageStatistic, int averageIndex) {
+    public ChartDto(List<String> labels, List<Long> paymentStatistic, List<Long> expensesStatistic, List<Long> averageStatistic, List<StringLongEntry> typeChartData, List<StringLongEntry> stationChartData, int averageIndex) {
         this.labels = labels;
         this.paymentStatistic = paymentStatistic;
         this.expensesStatistic = expensesStatistic;
         this.averageStatistic = averageStatistic;
+        this.typeChartData = typeChartData;
+        this.stationChartData = stationChartData;
         this.averageIndex = averageIndex;
     }
 
