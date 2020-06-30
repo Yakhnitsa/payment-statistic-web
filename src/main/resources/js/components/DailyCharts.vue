@@ -26,6 +26,8 @@
 
     import { mapState } from 'vuex';
 
+    import numeral from 'numeral'
+
     export default {
         name: 'DailyChart',
         components: {
@@ -78,7 +80,31 @@
             chartOptions(){
                 return{
                     responsive: false,
-                    maintainAspectRatio: true
+                    maintainAspectRatio: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function(value, index, values) {
+                                    return numeral(value).format('₴0,0')
+                                }
+                            }
+                        }]
+                    },
+                    // Настройка отображения значений столбцов
+                    tooltips: {
+                        callbacks: {
+                            label(tooltipItem, data) {
+                                // Get the dataset label.
+                                const label = data.datasets[tooltipItem.datasetIndex].label;
+
+                                // Format the y-axis value.
+                                const value = numeral(tooltipItem.yLabel).format('₴0,0')
+
+                                return `${label}: ${value}`;
+                            }
+                        }
+                    }
                 }
             }
 

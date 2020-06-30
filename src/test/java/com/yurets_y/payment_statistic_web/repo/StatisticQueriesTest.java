@@ -44,9 +44,9 @@ public class StatisticQueriesTest {
     @Test
     public void simpleQueryTest() throws ParseException {
         SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
-        String stringQuery = "SELECT new com.yurets_y.payment_statistic_web.dto.DateLongEntry(pd.date, SUM(pd.totalPayment)) " +
-                "FROM PaymentDetails pd WHERE pd.date BETWEEN :date_from AND :date_until " +
-                "GROUP BY pd.date";
+        String stringQuery = "SELECT pd.date, pd.type, SUM(pd.totalPayment) from PaymentDetails pd " +
+                "WHERE pd.date BETWEEN :date_from AND :date_until " +
+                "GROUP BY pd.date, pd.type";
         Query query = entityManager.createQuery(stringQuery);
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");

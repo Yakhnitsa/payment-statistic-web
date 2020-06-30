@@ -136,3 +136,33 @@ The following guides illustrate how to use some features concretely:
                name: "DailyExpensesChart"
            }
        </script>  
+       
+   ### Настройка форматирования в графике:
+   В options добавляем следующую настройку:
+   
+   
+    options{
+    ....
+   
+        tooltips: {
+            callbacks: {
+                label(tooltipItem, data) {
+                   // Get the dataset label.
+                   const label = data.datasets[tooltipItem.datasetIndex].label;
+           
+                   // Format the y-axis value.
+                   const value = tooltipItem.yLabel;
+           
+                   return `${label}: ${value}`;
+                }
+            }        
+        }
+    }   
+    
+   - подключаем модуль для форматирования чисел
+    `$ npm install numeral`
+    Импортируем в приложение
+    `import numeral from 'numeral'`
+    Форматируем где это нужно:
+    var string = numeral(1000).format('0,0');
+     
