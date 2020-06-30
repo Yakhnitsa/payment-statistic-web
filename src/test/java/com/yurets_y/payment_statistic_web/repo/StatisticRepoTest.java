@@ -11,8 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,10 +42,10 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        List result = repo.getDailyExpensesStatistic(dateFrom,dateUntil);
+        List result = repo.getChartExpensesStatistic(dateFrom,dateUntil);
         result.size();
 
-        result = repo.getDailyStatisticByPaymentType(dateFrom,dateUntil,"Платіжні доручення");
+        result = repo.getChartStatisticByPaymentType(dateFrom,dateUntil,"Платіжні доручення");
         result.size();
     }
 
@@ -56,7 +54,7 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        List result = repo.getDailyStatisticByType(dateFrom,dateUntil);
+        List result = repo.getChartStatisticByType(dateFrom,dateUntil);
         result.size();
 
     }
@@ -66,7 +64,7 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        List result = repo.getDailyStatisticByStation(dateFrom,dateUntil);
+        List result = repo.getChartStatisticByStation(dateFrom,dateUntil);
         result.size();
 
     }

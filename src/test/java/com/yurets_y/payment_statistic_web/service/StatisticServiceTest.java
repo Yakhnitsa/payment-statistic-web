@@ -51,14 +51,9 @@ public class StatisticServiceTest {
         System.out.println(list.size());
     }
     @Test
-    public void paymentStatisticDtoTest(){
-        GregorianCalendar calendar = new GregorianCalendar();
-
-        calendar.set(2020, Calendar.MAY, 1,0,0,0);
-        Date dateFrom = calendar.getTime();
-
-        calendar.set(2020, Calendar.MAY, 20);
-        Date dateUntil = calendar.getTime();
+    public void paymentStatisticDtoTest() throws ParseException {
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-20");
 
         DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
         assertThat(dto.getPayments().size()).isEqualTo(20);

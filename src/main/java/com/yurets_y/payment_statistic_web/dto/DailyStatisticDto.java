@@ -10,25 +10,29 @@ import java.util.Map;
 
 public class DailyStatisticDto {
 
+    private List<Date> dates;
+
     @JsonView(Views.ShortView.class)
     private List<PaymentList> payments;
 
     @JsonView(Views.ShortView.class)
-    private Map<String, Map<String, Long>> details;
+    private Map<String, Map<Date, Long>> details;
+
+    public DailyStatisticDto(List<Date> dates, List<PaymentList> payments, Map<String, Map<Date, Long>> details) {
+        this.dates = dates;
+        this.payments = payments;
+        this.details = details;
+    }
+
+    public List<Date> getDates() {
+        return dates;
+    }
 
     public List<PaymentList> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<PaymentList> payments) {
-        this.payments = payments;
-    }
-
-    public Map<String, Map<String, Long>> getDetails() {
+    public Map<String, Map<Date, Long>> getDetails() {
         return details;
-    }
-
-    public void setDetails(Map<String, Map<String, Long>> details) {
-        this.details = details;
     }
 }

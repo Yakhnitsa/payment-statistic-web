@@ -12,6 +12,9 @@ target/
 .springBeans
 .sts4-cache
 
+###node js
+node_modules
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

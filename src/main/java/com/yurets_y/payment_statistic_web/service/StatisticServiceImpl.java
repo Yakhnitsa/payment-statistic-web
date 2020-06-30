@@ -1,9 +1,6 @@
 package com.yurets_y.payment_statistic_web.service;
 
-import com.yurets_y.payment_statistic_web.dto.ChartDto;
-import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
-import com.yurets_y.payment_statistic_web.dto.DateLongEntry;
-import com.yurets_y.payment_statistic_web.dto.StringLongEntry;
+import com.yurets_y.payment_statistic_web.dto.*;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
@@ -21,80 +18,83 @@ public class StatisticServiceImpl implements StatisticService {
 
     private PaymentListRepo paymentListRepo;
 
-    private PaymentDetailsRepo paymentDetailsRepo;
-
     private StatisticRepo statisticRepo;
 
-
-    private Comparator<PaymentDetails> paymentDetailsComparator;
+    private Comparator<String> paymentTypeComparator;
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM");
 
     @Autowired
     public StatisticServiceImpl(PaymentListRepo paymentListRepo,
-                                PaymentDetailsRepo paymentDetailsRepo,
-                                Comparator<PaymentDetails> paymentDetailsComparator,
+                                Comparator<String> paymentTypeComparator,
                                 StatisticRepo statisticRepo
 
     ) {
         this.paymentListRepo = paymentListRepo;
-        this.paymentDetailsRepo = paymentDetailsRepo;
-        this.paymentDetailsComparator = paymentDetailsComparator;
+        this.paymentTypeComparator = paymentTypeComparator;
         this.statisticRepo = statisticRepo;
     }
 
     @Override
     public DailyStatisticDto getDailyStatistic(Date dateFrom, Date dateUntil) {
+        List<Date> dates = getDatesArray(dateFrom, dateUntil);
         List<PaymentList> payments = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
-        DailyStatisticDto dto = new DailyStatisticDto();
-        dto.setPayments(payments);
-
-        List<PaymentDetails> paymentDetails = paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil);
-        Collections.sort(paymentDetails, paymentDetailsComparator);
-
-        Map<String, Map<Date, Long>> details = paymentDetails
+        List<DateStringLongDto> details = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
+//        TODO - Вставить сортировку
+        Map<String, Map<Date,Long>> detailsMap = details
                 .stream()
-                .collect(Collectors.groupingBy(PaymentDetails::getType,
-                        LinkedHashMap::new,
-                        Collectors.groupingBy(
-                                PaymentDetails::getDate,
-                                TreeMap::new,
-                                Collectors.summingLong(PaymentDetails::getTotalPayment))
-                ));
+                .collect(Collectors.groupingBy(DateStringLongDto::getType,
+                        Collectors.toMap(DateStringLongDto::getDate,DateStringLongDto::getValue)));
 
-        Map<String, Map<String, Long>> reformattedDetails = details
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> entry.getValue()
-                                .entrySet()
-                                .stream()
-                                .collect(Collectors.toMap(
-                                        innerEntry -> DATE_FORMAT.format(innerEntry.getKey()),
-                                        Map.Entry::getValue
-                                )),
-                        (first, second) -> first,
-                        LinkedHashMap::new
-                ));
+        TreeMap<String, Map<Date,Long>> sortedDetails = new TreeMap<>(paymentTypeComparator);
+        sortedDetails.putAll(detailsMap);
 
-        dto.setDetails(reformattedDetails);
+        return new DailyStatisticDto(dates,payments,sortedDetails);
 
-        return dto;
+
+
+//        List<PaymentDetails> paymentDetails = paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil);
+//        Collections.sort(paymentDetails, paymentDetailsComparator);
+//
+//        Map<String, Map<Date, Long>> details = paymentDetails
+//                .stream()
+//                .collect(Collectors.groupingBy(PaymentDetails::getType,
+//                        LinkedHashMap::new,
+//                        Collectors.groupingBy(
+//                                PaymentDetails::getDate,
+//                                TreeMap::new,
+//                                Collectors.summingLong(PaymentDetails::getTotalPayment))
+//                ));
+//
+//        Map<String, Map<String, Long>> reformattedDetails = details
+//                .entrySet()
+//                .stream()
+//                .collect(Collectors.toMap(
+//                        Map.Entry::getKey,
+//                        entry -> entry.getValue()
+//                                .entrySet()
+//                                .stream()
+//                                .collect(Collectors.toMap(
+//                                        innerEntry -> innerEntry.getKey(),
+//                                        Map.Entry::getValue
+//                                )),
+//                        (first, second) -> first,
+//                        LinkedHashMap::new
+//
     }
 
     @Override
     public ChartDto getChartStatistic(Date dateFrom, Date dateUntil,Integer averageIndex) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
 
-        List<DateLongEntry> expenses = statisticRepo.getDailyExpensesStatistic(dateFrom,dateUntil);
+        List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatistic(dateFrom,dateUntil);
 
         String paymentType = "Платіжні доручення";
 
-        List<DateLongEntry> payments = statisticRepo.getDailyStatisticByPaymentType(dateFrom,dateUntil,paymentType);
+        List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,paymentType);
 
-        List<StringLongEntry> typeChartData = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
-        List<StringLongEntry> stationChartData = statisticRepo.getDailyStatisticByStation(dateFrom,dateUntil)
+        List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticByType(dateFrom,dateUntil);
+        List<StringLongEntry> stationChartData = statisticRepo.getChartStatisticByStation(dateFrom,dateUntil)
                 .stream()
                 .filter(entity -> entity.getType() != null)
                 .collect(Collectors.toList());
