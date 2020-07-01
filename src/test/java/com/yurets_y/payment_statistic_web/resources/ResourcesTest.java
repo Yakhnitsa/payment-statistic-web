@@ -26,7 +26,7 @@ public class ResourcesTest {
     @Resource(name="test-html-directory")
     private File testHtmlFilesDirectory;
 
-    @Resource(name="test-list")
+    @Resource(name="test-paymentList")
     private PaymentList testPaymentList;
 
     @Resource(name="test-lists")

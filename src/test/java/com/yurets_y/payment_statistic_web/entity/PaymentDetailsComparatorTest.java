@@ -15,7 +15,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @Import({TestListsConfig.class})
 public class PaymentDetailsComparatorTest {
-    @Resource(name="test-list")
+    @Resource(name="test-paymentList")
     public PaymentList paymentList;
     @Test
     public void detailsSortTest(){

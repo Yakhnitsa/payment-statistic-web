@@ -102,6 +102,8 @@
 
 <script>
     import { mapGetters,mapState,mapActions } from 'vuex'
+    import numeral from 'numeral'
+
     export default {
         name: "DailyStatistic",
         props: [''],
@@ -115,23 +117,15 @@
         },
         computed:{
             ...mapState(['dailyStatistic']),
-            list: function(){
+            paymentList(){
                 return this.dailyStatistic.payments
             },
-            detailsList: function(){
+            detailsList(){
                 return this.dailyStatistic.details
             },
 
-            dateArray: function(){
-                const startPeriod = new Date(this.dateFrom + 'T00:00:00.000+0200');
-                const endPeriod = new Date(this.dateUntil + 'T00:00:00.000+0200');
-                const days = [];
-                let currentDay = startPeriod;
-                while(currentDay <= endPeriod){
-                    days.push(new Date(currentDay))
-                    currentDay.setDate(currentDay.getDate()+1)
-                }
-                return days;
+            dateArray(){
+                return this.dailyStatistic.dates;
             }
 
         },
@@ -148,29 +142,18 @@
             },
 
             test(){
-                console.log("test begin");
-                console.log(this.dateArray[0])
-                let day = this.dateArray[0]
-
-                var dateString = this.getStringDate(day);
-
-                console.log(dateString);
-            },
-
-            getStringDate(date){
-
-                return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
-                    .toISOString()
-                    .split("T")[0];
-                // return new Date(date.getTime())
-                //     .toISOString()
-                //     .split("T")[0];
+                // console.log("test begin");
+                // console.log(this.dateArray[0])
+                // let day = this.dateArray[0]
+                //
+                // var dateString = this.getStringDate(day);
+                //
+                // console.log(dateString);
             },
 
             getDataFromList(dailyStatistic,lookupDay){
-                let dayString = this.getStringDate(lookupDay)
                 for (let day in dailyStatistic) {
-                    if(day == dayString){
+                    if(day === lookupDay){
                         return dailyStatistic[day]
                     }
                 }
@@ -178,10 +161,9 @@
             },
 
             getPropertyByDate(day,prop){
-                let dayString = this.getStringDate(day)
-                for(let i in this.list){
-                    let list = this.list[i];
-                    if(list.date == dayString){
+                for(let i in this.paymentList){
+                    let list = this.paymentList[i];
+                    if(list.date === day){
                         return list[prop];
                     }
                 }
@@ -202,6 +184,7 @@
                         dateFrom: this.dateFrom,
                         dateUntil: this.dateUntil
                     }
+                    this.$store.commit('setDailyStatisticPeriod',period)
 
                 }
             }
@@ -217,8 +200,8 @@
                     )
             },
 
-            formatDate(dateLong){
-                return new Date(dateLong).toLocaleDateString()
+            formatDate(date){
+                return new Date(date).toLocaleDateString()
             }
         },
         created(){

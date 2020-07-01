@@ -37,7 +37,7 @@ public class WriteToInmemoryDbRepoTest {
     @Resource(name="test-lists")
     private List<PaymentList> paymentLists;
 
-    @Resource(name="test-list")
+    @Resource(name="test-paymentList")
     private PaymentList testPaymentList;
 
     @Test

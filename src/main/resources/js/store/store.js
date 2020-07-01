@@ -11,18 +11,21 @@ export default new Vuex.Store({
     // Состояние объекта, массивы и прочее
     state: {
         dailyStatistic: {
+            dates:[],
             details:[],
             payments: [],
             dateFrom:'',
             dateUntil:''
         },
         dailyChart:{
+            dateFrom:'',
+            dateUntil:'',
             labels:[],
             paymentStatistic:[],
             expensesStatistic:[],
             averageStatistic:[],
-            dateFrom:'',
-            dateUntil:''
+            typeChartData:[],
+            stationChartData:[]
         },
         paymentListPage:{
             paymentLists: [],
@@ -48,18 +51,17 @@ export default new Vuex.Store({
     // Методы для изменения объектов приолжения
     mutations: {
         addDailyStatisticMutation(state, data){
+            state.dailyStatistic.dates = data.dates
             state.dailyStatistic.details = data.details;
             state.dailyStatistic.payments = data.payments;
+
         },
         addPaymentListsMutation(state,data){
-            state.paymentLists = [...data];
+            state.paymentLists = [...data.list];
+            state.paymentListPage.currentPage = data.currentPage;
+            state.paymentListPage.totalPages = data.totalPages;
         },
-        setCurrentPageMutation(state,pageNumb){
-            state.paymentListPage.currentPage = pageNumb;
-        },
-        setTotalPagesMutation(state,totPages){
-            state.paymentListPage.totalPages = totPages;
-        },
+
         deletePaymentListMutation(state,list){
             const index = state.paymentLists.findIndex(element =>
                 (element.number === list.number) && (element.payerCode == list.payerCode)
@@ -91,6 +93,8 @@ export default new Vuex.Store({
             state.dailyChart.paymentStatistic = data.paymentStatistic;
             state.dailyChart.expensesStatistic = data.expensesStatistic;
             state.dailyChart.averageStatistic = data.averageStatistic;
+            state.dailyChart.typeChartData= data.typeChartData
+            state.dailyChart.stationChartData = data.stationChartData
         },
 
         addDailyChartPeriodMutation(state,data){
@@ -108,7 +112,7 @@ export default new Vuex.Store({
 
             axios.get('/api/payments',{params})
                 .then(response => {
-                        commit('addPaymentListsMutation',response.data.list)
+                        commit('addPaymentListsMutation',response.data)
                         commit('setCurrentPageMutation',response.data.currentPage)
                         commit('setTotalPagesMutation',response.data.totalPages)
                     }

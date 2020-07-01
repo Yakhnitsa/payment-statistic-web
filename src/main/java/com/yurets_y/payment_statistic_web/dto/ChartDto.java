@@ -70,4 +70,11 @@ public class ChartDto {
         this.averageIndex = averageIndex;
     }
 
+    public List<StringLongEntry> getTypeChartData() {
+        return typeChartData;
+    }
+
+    public List<StringLongEntry> getStationChartData() {
+        return stationChartData;
+    }
 }

@@ -8,8 +8,11 @@ import java.util.List;
 
 @JsonView(Views.NormalView.class)
 public class PaymentListDto {
+    @JsonView(Views.NormalView.class)
     private List<PaymentList> list;
+    @JsonView(Views.NormalView.class)
     private int currentPage;
+    @JsonView(Views.NormalView.class)
     private int totalPages;
 
     public PaymentListDto(List<PaymentList> list, int currentPage, int totalPages) {

@@ -89,7 +89,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     @Override
     public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
         Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
-//        list.forEach(this::loadBackupFile);
+//        paymentList.forEach(this::loadBackupFile);
         PaymentListDto dto = new PaymentListDto(
                 page.getContent(),
                 page.getNumber(),

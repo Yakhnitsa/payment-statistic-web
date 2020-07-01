@@ -200,7 +200,7 @@ public class PaymentListDAO
                 .getResultList();
         commitTransaction();
         closeEntityManager();
-//        return list;
+//        return paymentList;
 //        TODO протестить и отпустить
 //         paymentDetailsRepo.findAllByDateBetween(from,until);
         List<PaymentDetails> result = paymentDetailsRepo.findAllByDateBetween(from,until);

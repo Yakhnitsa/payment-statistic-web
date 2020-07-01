@@ -51,36 +51,6 @@ public class StatisticServiceImpl implements StatisticService {
 
         return new DailyStatisticDto(dates,payments,sortedDetails);
 
-
-
-//        List<PaymentDetails> paymentDetails = paymentDetailsRepo.findAllByDateBetween(dateFrom,dateUntil);
-//        Collections.sort(paymentDetails, paymentDetailsComparator);
-//
-//        Map<String, Map<Date, Long>> details = paymentDetails
-//                .stream()
-//                .collect(Collectors.groupingBy(PaymentDetails::getType,
-//                        LinkedHashMap::new,
-//                        Collectors.groupingBy(
-//                                PaymentDetails::getDate,
-//                                TreeMap::new,
-//                                Collectors.summingLong(PaymentDetails::getTotalPayment))
-//                ));
-//
-//        Map<String, Map<String, Long>> reformattedDetails = details
-//                .entrySet()
-//                .stream()
-//                .collect(Collectors.toMap(
-//                        Map.Entry::getKey,
-//                        entry -> entry.getValue()
-//                                .entrySet()
-//                                .stream()
-//                                .collect(Collectors.toMap(
-//                                        innerEntry -> innerEntry.getKey(),
-//                                        Map.Entry::getValue
-//                                )),
-//                        (first, second) -> first,
-//                        LinkedHashMap::new
-//
     }
 
     @Override
@@ -93,7 +63,11 @@ public class StatisticServiceImpl implements StatisticService {
 
         List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,paymentType);
 
-        List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticByType(dateFrom,dateUntil);
+        List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticByType(dateFrom,dateUntil)
+                .stream()
+                .filter(entity -> !entity.getType().equals(paymentType))
+                .collect(Collectors.toList());
+
         List<StringLongEntry> stationChartData = statisticRepo.getChartStatisticByStation(dateFrom,dateUntil)
                 .stream()
                 .filter(entity -> entity.getType() != null)

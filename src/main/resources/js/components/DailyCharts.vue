@@ -14,15 +14,40 @@
                 </div>
             </div>
         </form>
-        <linear-chart :height="300" :width="600"
-                      :chart-data="chartData"
-                      :options="chartOptions"></linear-chart>
+        <div class="row">
+            <linear-chart :height="300" :width="600"
+                          :chart-data="linearChartData"
+                          :options="linearChartOptions"
+                          class="col my-1"
+            ></linear-chart>
+
+
+        </div>
+        <div class="row">
+            <pie-chart :height="300"
+                       :chart-data="typesChartData"
+                       :options="typesChartOptions"
+                       class="col my-1"
+
+            ></pie-chart>
+            <pie-chart :height="300"
+                       :chart-data="stationsChartData"
+                       :options="stationsChartOptions"
+                       class="col my-1"
+
+            ></pie-chart>
+        </div>
+
+        <!--<linear-chart :height="300" :width="600"-->
+                      <!--:chart-data="linearChartData"-->
+                      <!--:options="linearChartOptions"></linear-chart>-->
     </div>
     
 </template>
 
 <script>
     import LinearChart from '../components/charts/LinearChart.vue'
+    import PieChart from '../components/charts/PieChart'
 
     import { mapState } from 'vuex';
 
@@ -31,23 +56,45 @@
     export default {
         name: 'DailyChart',
         components: {
-            LinearChart
+            LinearChart,
+            PieChart
         },
         data(){
             return{
                 dateFrom:'',
-                dateUntil:''
+                dateUntil:'',
+                colours:[
+                    '#E47514',
+                    '#ac4fe4',
+                    '#1abf60',
+                    '#ff37cc',
+                    '#28fff7',
+                    '#976948',
+                    '#149764',
+                    '#974a11',
+                    '#151f97',
+                    '#6ed617',
+                    '#0b9725',
+                    '#b313dc',
+                    '#1987e8',
+                    '#759725',
+                    '#13ffe2',
+                    '#15dd5a'
+                ]
+
             }
         },
         computed:{
             ...mapState({
+                dailyChart: state => state.dailyChart,
                 labels: state => state.dailyChart.labels,// ...
                 expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
                 payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
                 average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
+
             }),
 
-            chartData(){
+            linearChartData(){
                 return{
                     labels: this.labels,
                     datasets: [
@@ -77,7 +124,7 @@
                 }
             },
 
-            chartOptions(){
+            linearChartOptions(){
                 return{
                     responsive: false,
                     maintainAspectRatio: true,
@@ -106,7 +153,104 @@
                         }
                     }
                 }
-            }
+            },
+
+            typesChartData(){
+                return{
+                    // dataentry: null,
+                    // datalabel: null,
+                    labels: this.dailyChart.typeChartData.map(element => element.type),
+                    datasets: [
+                        {
+                            backgroundColor: this.colours,
+                            data: this.dailyChart.typeChartData
+                                .map(element => element.value / 100)
+                        }
+                    ]
+                }
+            },
+
+            typesChartOptions(){
+                return{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    pieceLabel: {
+                        mode: 'percentage',
+                        precision: 1
+                    },
+                    title: {
+                        display: true,
+                        fontsize: 14,
+                        text: 'По виду списаний'
+                    },
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+
+                    },
+                    tooltips:{
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                let label = data.labels[tooltipItem.index] || ''
+                                let value = data.datasets[0].data[tooltipItem.index]
+                                value = numeral(value).format('₴0,0')
+                                return label + ': ' + value
+                            }
+                        }
+
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    },
+                }
+            },
+
+            stationsChartData(){
+                return{
+                    dataentry: null,
+                    datalabel: null,
+                    labels: this.dailyChart.stationChartData.map(element => element.type),
+                    datasets: [
+                        {
+                            backgroundColor: this.colours,
+                            data: this.dailyChart.stationChartData.map(element => element.value / 100),
+                        }
+                    ]
+                }
+            },
+
+            stationsChartOptions(){
+                return{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    pieceLabel: {
+                        mode: 'percentage',
+                        precision: 1
+                    },
+                    title: {
+                        display: true,
+                        fontsize: 12,
+                        text: 'По станциям'
+                    },
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+
+                    },
+                    tooltips:{
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                let label = data.labels[tooltipItem.index] || ''
+                                let value = data.datasets[0].data[tooltipItem.index]
+                                value = numeral(value).format('₴0,0').replace(',','`')
+                                return label + ': ' + value
+                            }
+                        }
+
+                    },
+                }
+            },
 
         },
 
@@ -117,9 +261,31 @@
                     dateUntil: this.dateUntil,
                     averageIndex: 3
                 }
-                console.log(params);
                 this.$store.dispatch('getDailyChartAction', params)
             },
+
+            setDefaultPeriod(){
+                this.dateFrom = this.$store.state.dailyChart.dateFrom
+                this.dateUntil = this.$store.state.dailyChart.dateUntil
+
+                if((this.dateFrom == '') && (this.dateUntil == '')){
+                    let today = new Date();
+                    let weekAgo = new Date(today.setDate(today.getDate()-15));
+                    this.dateFrom = weekAgo.toISOString().substring(0, 10);
+                    this.dateUntil = new Date().toISOString().slice(0,10);
+                    let period = {
+                        dateFrom: this.dateFrom,
+                        dateUntil: this.dateUntil
+                    }
+                    this.$store.commit('addDailyChartPeriodMutation',period)
+
+                }
+            }
+        },
+
+        mounted(){
+            this.setDefaultPeriod()
+            this.updateChart()
         }
     }
 </script>
@@ -127,7 +293,7 @@
 <style scoped>
 
     .chart {
-        background: #8dffe6;
+        background: #70fff7;
         border-radius: 5px;
         box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
         margin:  25px 0;

@@ -140,7 +140,7 @@
                 this.downloadPaymentListAction(list.backupFilePath)
             },
             test(list){
-                // this.$store.commit('deletePaymentListMutation',list)
+                // this.$store.commit('deletePaymentListMutation',paymentList)
             },
             downloadArchive(){
 

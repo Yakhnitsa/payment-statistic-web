@@ -74,7 +74,7 @@ public class UploadController {
         for(PaymentList list : paymentLists){
             PaymentList listFromTemp = tempListService.deleteFromTempDB(list);
             if(listFromTemp == null) continue;
-//            if(paymentListService.contains(list))
+//            if(paymentListService.contains(paymentList))
 //                paymentListService.update(listFromTemp);
 //            else{
 //                paymentListService.add(listFromTemp);

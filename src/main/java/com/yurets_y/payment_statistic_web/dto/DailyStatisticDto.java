@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class DailyStatisticDto {
 
+    @JsonView(Views.ShortView.class)
     private List<Date> dates;
 
     @JsonView(Views.ShortView.class)
