@@ -1,6 +1,6 @@
 <template>
     <div class="chart">
-        <h2 class="h2 mx-1">Графики показателей по дням</h2>
+        <h2 class="h2 mx-1">График показателей за год</h2>
         <form>
             <div class="form-row mx-1">
                 <div class="form-group col-md-2">

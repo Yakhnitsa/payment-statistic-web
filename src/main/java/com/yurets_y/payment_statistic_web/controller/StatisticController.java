@@ -2,12 +2,11 @@ package com.yurets_y.payment_statistic_web.controller;
 
 import com.yurets_y.payment_statistic_web.dto.ChartDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/statistic")
@@ -61,7 +61,7 @@ public class StatisticController {
         }
         //        TODO - сделать проверку периода
 
-        ChartDto dto = statisticService.getChartStatistic(dateFrom,dateUntil,averageIndex);
+        ChartDto dto = statisticService.getDailyChartStatistic(dateFrom,dateUntil,averageIndex);
         return new ResponseEntity<ChartDto>(dto,HttpStatus.OK);
 
     }
@@ -80,4 +80,21 @@ public class StatisticController {
         DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @GetMapping("year-statistic")
+    public ResponseEntity<?> getYearStatistic(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil
+    ){
+        if (dateFrom == null || dateUntil == null) {
+            return new ResponseEntity<>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
+        }
+
+        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil);
+
+        return new ResponseEntity<>(dto,HttpStatus.OK);
+
+    }
+
+
 }

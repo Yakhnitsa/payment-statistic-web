@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.repo;
 import com.yurets_y.payment_statistic_web.dto.DateLongEntry;
 import com.yurets_y.payment_statistic_web.dto.DateStringLongDto;
 import com.yurets_y.payment_statistic_web.dto.StringLongEntry;
+import com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -45,6 +46,24 @@ public interface StatisticRepo extends org.springframework.data.repository.Repos
             "WHERE pd.date BETWEEN :date_from AND :date_until " +
             "GROUP BY pd.date, pd.type")
     List<DateStringLongDto> getDailyStatisticByType(@Param("date_from") Date dateFrom,
+                                                    @Param("date_until") Date dateUntil);
+
+
+    @Query("SELECT new com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry( " +
+                "function('YEAR',pl.date), function('MONTH',pl.date),1, SUM(pl.paymentVsTaxes)" +
+            ") from PaymentList pl " +
+            "WHERE pl.date BETWEEN :date_from AND :date_until " +
+            "GROUP BY function('YEAR',pl.date), function('MONTH',pl.date)")
+    List<YearStatisticDtoEntry> getYearExpensesStatisticGroupByMonth(@Param("date_from") Date dateFrom,
+                                                             @Param("date_until") Date dateUntil);
+
+
+    @Query("SELECT new com.yurets_y.payment_statistic_web.dto.DateStringLongDto(" +
+            "function('YEAR',pd.date), function('MONTH',pd.date),1 ,pd.type, SUM(pd.totalPayment))" +
+            "FROM PaymentDetails pd " +
+            "WHERE pd.date BETWEEN :date_from AND :date_until " +
+            "GROUP BY function('YEAR',pd.date), function('MONTH',pd.date), pd.type")
+    List<DateStringLongDto> getYearStatisticByMonthAndType(@Param("date_from") Date dateFrom,
                                                     @Param("date_until") Date dateUntil);
 
 

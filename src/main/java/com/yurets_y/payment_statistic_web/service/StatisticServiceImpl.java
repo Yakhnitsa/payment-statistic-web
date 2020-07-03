@@ -24,6 +24,8 @@ public class StatisticServiceImpl implements StatisticService {
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM");
 
+    private final String PAYMENT_TYPE =  "Платіжні доручення";
+
     @Autowired
     public StatisticServiceImpl(PaymentListRepo paymentListRepo,
                                 Comparator<String> paymentTypeComparator,
@@ -40,7 +42,7 @@ public class StatisticServiceImpl implements StatisticService {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
         List<PaymentList> payments = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
         List<DateStringLongDto> details = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
-//        TODO - Вставить сортировку
+
         Map<String, Map<Date,Long>> detailsMap = details
                 .stream()
                 .collect(Collectors.groupingBy(DateStringLongDto::getType,
@@ -54,18 +56,16 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public ChartDto getChartStatistic(Date dateFrom, Date dateUntil,Integer averageIndex) {
+    public ChartDto getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer averageIndex) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
 
         List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatistic(dateFrom,dateUntil);
 
-        String paymentType = "Платіжні доручення";
-
-        List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,paymentType);
+        List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,PAYMENT_TYPE);
 
         List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticByType(dateFrom,dateUntil)
                 .stream()
-                .filter(entity -> !entity.getType().equals(paymentType))
+                .filter(entity -> !entity.getType().equals(PAYMENT_TYPE))
                 .collect(Collectors.toList());
 
         List<StringLongEntry> stationChartData = statisticRepo.getChartStatisticByStation(dateFrom,dateUntil)
@@ -92,6 +92,46 @@ public class StatisticServiceImpl implements StatisticService {
                 averageIndex
         );
     }
+
+    @Override
+    public List<YearStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil) {
+        List<YearStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
+
+        List<DateStringLongDto> paymentsByType = statisticRepo.getYearStatisticByMonthAndType(dateFrom,dateUntil);
+
+        dtoEntryList.forEach(dtoEntry ->{
+            List<DateStringLongDto> dailyPayments = paymentsByType
+                    .stream()
+                    .filter(dateEntry -> dateEntry.getDate().equals(dtoEntry.getDate()))
+                    .collect(Collectors.toList());
+
+            List<DateStringLongDto> paymentsList = dailyPayments
+                    .stream()
+                    .filter(typeEntry -> typeEntry.getType().equals(PAYMENT_TYPE))
+                    .collect(Collectors.toList());
+
+            Long payment = paymentsList.stream().mapToLong(DateStringLongDto::getValue).sum();
+
+
+            dtoEntry.setPayments(payment);
+
+            List<DateStringLongDto> expensesList = dailyPayments
+                    .stream()
+                    .filter(typeEntry -> !typeEntry.getType().equals(PAYMENT_TYPE))
+                    .collect(Collectors.toList());
+
+            dtoEntry.setExpensesByType(expensesList);
+
+            }
+
+        );
+
+
+
+        return dtoEntryList;
+    }
+
+
 
     private List<Long> getAverageStatistic(List<Long> list, Integer averageIndex) {
         List<Long> averageList = new ArrayList<>();

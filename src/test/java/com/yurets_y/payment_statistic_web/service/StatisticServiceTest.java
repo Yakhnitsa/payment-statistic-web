@@ -2,10 +2,10 @@ package com.yurets_y.payment_statistic_web.service;
 
 
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import com.yurets_y.payment_statistic_web.repo.RepositoryConfig;
-import com.yurets_y.payment_statistic_web.resources.TestListsConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,7 +62,16 @@ public class StatisticServiceTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        statisticService.getChartStatistic(dateFrom,dateUntil,3);
+        statisticService.getDailyChartStatistic(dateFrom,dateUntil,3);
     }
+    @Test
+    public void yearChartDtoTest() throws ParseException {
+        Date dateFrom = format.parse("2020-04-01");
+        Date dateUntil = format.parse("2020-06-30");
+
+        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil);
+        dto.size();
+    }
+
 
 }

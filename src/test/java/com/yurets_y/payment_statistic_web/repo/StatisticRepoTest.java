@@ -68,4 +68,21 @@ public class StatisticRepoTest {
         result.size();
 
     }
+
+    @Test
+    public void getYearStatisticTest() throws ParseException {
+        Date dateFrom = format.parse("2020-02-01");
+        Date dateUntil = format.parse("2020-06-30");
+
+        List result = repo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
+        result.size();
+    }
+    @Test
+    public void getYearStatisticByTypesTest() throws ParseException {
+        Date dateFrom = format.parse("2020-02-01");
+        Date dateUntil = format.parse("2020-06-30");
+
+        List result = repo.getYearStatisticByMonthAndType(dateFrom,dateUntil);
+        result.size();
+    }
 }
