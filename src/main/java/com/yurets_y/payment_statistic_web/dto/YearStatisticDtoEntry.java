@@ -20,7 +20,7 @@ public class YearStatisticDtoEntry {
     }
 
     public YearStatisticDtoEntry(int year, int month, int day, Long expenses) {
-        this.date = new GregorianCalendar(year,month,day).getTime();
+        this.date = new GregorianCalendar(year,month-1,day).getTime();
         this.expenses = expenses;
     }
 

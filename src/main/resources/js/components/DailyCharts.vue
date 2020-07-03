@@ -79,6 +79,22 @@
                     '#1987e8',
                     '#759725',
                     '#13ffe2',
+                    '#15dd5a',
+                    '#E47514',
+                    '#ac4fe4',
+                    '#1abf60',
+                    '#ff37cc',
+                    '#28fff7',
+                    '#976948',
+                    '#149764',
+                    '#974a11',
+                    '#151f97',
+                    '#6ed617',
+                    '#0b9725',
+                    '#b313dc',
+                    '#1987e8',
+                    '#759725',
+                    '#13ffe2',
                     '#15dd5a'
                 ]
 
@@ -133,9 +149,12 @@
                             ticks: {
                                 // Include a dollar sign in the ticks
                                 callback: function(value, index, values) {
-                                    return numeral(value).format('₴0,0')
+                                    return numeral(value).format('0a')
                                 }
                             }
+                        }],
+                        xAxes: [{
+                            offset: true,
                         }]
                     },
                     // Настройка отображения значений столбцов
@@ -193,7 +212,7 @@
                             label: function(tooltipItem, data) {
                                 let label = data.labels[tooltipItem.index] || ''
                                 let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('₴0,0')
+                                value = numeral(value).format('0,0')
                                 return label + ': ' + value
                             }
                         }

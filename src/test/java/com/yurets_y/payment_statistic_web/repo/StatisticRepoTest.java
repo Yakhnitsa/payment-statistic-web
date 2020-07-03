@@ -82,7 +82,7 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-02-01");
         Date dateUntil = format.parse("2020-06-30");
 
-        List result = repo.getYearStatisticByMonthAndType(dateFrom,dateUntil);
+        List result = repo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
         result.size();
     }
 }

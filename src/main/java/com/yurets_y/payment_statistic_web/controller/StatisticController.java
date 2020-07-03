@@ -81,7 +81,7 @@ public class StatisticController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @GetMapping("year-statistic")
+    @GetMapping("year-chart")
     public ResponseEntity<?> getYearStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil

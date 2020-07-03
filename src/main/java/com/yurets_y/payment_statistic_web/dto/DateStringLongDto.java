@@ -18,7 +18,7 @@ public class DateStringLongDto {
     }
 
     public DateStringLongDto(int year, int month, int day, String type, Long value) {
-        this.date  = new GregorianCalendar(year,month,day).getTime();
+        this.date  = new GregorianCalendar(year,month-1,day).getTime();
         this.type = type;
         this.value = value;
     }

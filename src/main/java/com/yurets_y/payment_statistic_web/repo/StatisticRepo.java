@@ -63,8 +63,8 @@ public interface StatisticRepo extends org.springframework.data.repository.Repos
             "FROM PaymentDetails pd " +
             "WHERE pd.date BETWEEN :date_from AND :date_until " +
             "GROUP BY function('YEAR',pd.date), function('MONTH',pd.date), pd.type")
-    List<DateStringLongDto> getYearStatisticByMonthAndType(@Param("date_from") Date dateFrom,
-                                                    @Param("date_until") Date dateUntil);
+    List<DateStringLongDto> getYearStatisticGroupByMonthAndType(@Param("date_from") Date dateFrom,
+                                                                @Param("date_until") Date dateUntil);
 
 
 

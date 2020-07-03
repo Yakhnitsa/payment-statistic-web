@@ -27,6 +27,11 @@ export default new Vuex.Store({
             typeChartData:[],
             stationChartData:[]
         },
+        yearChart:{
+            dateFrom:'',
+            dateUntil:'',
+            chartData:[],
+        },
         paymentListPage:{
             paymentLists: [],
             currentPage:0,
@@ -93,13 +98,22 @@ export default new Vuex.Store({
             state.dailyChart.paymentStatistic = data.paymentStatistic;
             state.dailyChart.expensesStatistic = data.expensesStatistic;
             state.dailyChart.averageStatistic = data.averageStatistic;
-            state.dailyChart.typeChartData= data.typeChartData
+            state.dailyChart.typeChartData= data.typeChartData;
             state.dailyChart.stationChartData = data.stationChartData
         },
 
         addDailyChartPeriodMutation(state,data){
             state.dailyChart.dateFrom = data.dateFrom
             state.dailyChart.dateUntil = data.dateUntil
+        },
+
+        addYearChartMutation(state, data){
+            state.yearChart.chartData = data;
+        },
+
+        addYearChartPeriodMutation(state,data){
+            state.yearChart.dateFrom = data.dateFrom
+            state.yearChart.dateUntil = data.dateUntil
         }
 
     },
@@ -237,9 +251,14 @@ export default new Vuex.Store({
                 commit('addDailyChartMutation',response.data)
                 commit('addDailyChartPeriodMutation',params)
             }).catch((error) => console.log(error))
+        },
+
+        getYearChartAction({commit,state},params){
+            statisticApi.getYearChart(params).then(response =>{
+                commit('addYearChartMutation',response.data)
+                commit('addYearChartPeriodMutation',params)
+            }).catch((error) => console.log(error));
         }
-
-
 
     }
 

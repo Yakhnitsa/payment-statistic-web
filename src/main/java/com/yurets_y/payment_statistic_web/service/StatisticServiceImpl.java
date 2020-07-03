@@ -1,9 +1,7 @@
 package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.dto.*;
-import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
-import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import com.yurets_y.payment_statistic_web.repo.StatisticRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +95,7 @@ public class StatisticServiceImpl implements StatisticService {
     public List<YearStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil) {
         List<YearStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
 
-        List<DateStringLongDto> paymentsByType = statisticRepo.getYearStatisticByMonthAndType(dateFrom,dateUntil);
+        List<DateStringLongDto> paymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
 
         dtoEntryList.forEach(dtoEntry ->{
             List<DateStringLongDto> dailyPayments = paymentsByType
@@ -105,13 +103,10 @@ public class StatisticServiceImpl implements StatisticService {
                     .filter(dateEntry -> dateEntry.getDate().equals(dtoEntry.getDate()))
                     .collect(Collectors.toList());
 
-            List<DateStringLongDto> paymentsList = dailyPayments
+            Long payment = dailyPayments
                     .stream()
                     .filter(typeEntry -> typeEntry.getType().equals(PAYMENT_TYPE))
-                    .collect(Collectors.toList());
-
-            Long payment = paymentsList.stream().mapToLong(DateStringLongDto::getValue).sum();
-
+                    .mapToLong(DateStringLongDto::getValue).sum();
 
             dtoEntry.setPayments(payment);
 

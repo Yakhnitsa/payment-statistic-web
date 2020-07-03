@@ -4,3 +4,6 @@ curl -X GET 'http://localhost:9000/api/statistic/daily-chart?dateFrom=&dateUntil
 # wrong parameters requests:
 curl -v "http://localhost:9000/api/statistic/daily-chart?dateFrom=&dateUntil=2020-05-20&averageIndex=3"
 curl -v "http://localhost:9000/api/statistic/daily-chart?dateFrom=2020-05-20&dateUntil=2020-05-01&averageIndex=3"
+
+## Year statistic requests
+curl -v "http://localhost:9000/api/statistic/year-chart?dateFrom=2020-04-01&dateUntil=2020-06-30"

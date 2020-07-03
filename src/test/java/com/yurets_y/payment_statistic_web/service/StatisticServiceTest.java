@@ -67,7 +67,7 @@ public class StatisticServiceTest {
     @Test
     public void yearChartDtoTest() throws ParseException {
         Date dateFrom = format.parse("2020-04-01");
-        Date dateUntil = format.parse("2020-06-30");
+        Date dateUntil = format.parse("2020-04-30");
 
         List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil);
         dto.size();

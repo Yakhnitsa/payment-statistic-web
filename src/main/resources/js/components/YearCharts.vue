@@ -1,6 +1,6 @@
 <template>
     <div class="chart">
-        <h2 class="h2 mx-1">График показателей за год</h2>
+        <h2 class="h4 mx-1">Годовая статистика платежей и затрат</h2>
         <form>
             <div class="form-row mx-1">
                 <div class="form-group col-md-2">
@@ -15,7 +15,7 @@
             </div>
         </form>
         <div class="row">
-            <linear-chart :height="300" :width="600"
+            <linear-chart :height="300" :width="800"
                           :chart-data="linearChartData"
                           :options="linearChartOptions"
                           class="col my-1"
@@ -23,20 +23,20 @@
 
 
         </div>
-        <div class="row">
-            <pie-chart :height="300"
-                       :chart-data="typesChartData"
-                       :options="typesChartOptions"
-                       class="col my-1"
+        <!--<div class="row">-->
+            <!--<pie-chart :height="300"-->
+                       <!--:chart-data="typesChartData"-->
+                       <!--:options="typesChartOptions"-->
+                       <!--class="col my-1"-->
 
-            ></pie-chart>
-            <pie-chart :height="300"
-                       :chart-data="stationsChartData"
-                       :options="stationsChartOptions"
-                       class="col my-1"
+            <!--&gt;</pie-chart>-->
+            <!--<pie-chart :height="300"-->
+                       <!--:chart-data="stationsChartData"-->
+                       <!--:options="stationsChartOptions"-->
+                       <!--class="col my-1"-->
 
-            ></pie-chart>
-        </div>
+            <!--&gt;</pie-chart>-->
+        <!--</div>-->
 
         <!--<linear-chart :height="300" :width="600"-->
                       <!--:chart-data="linearChartData"-->
@@ -54,7 +54,7 @@
     import numeral from 'numeral'
 
     export default {
-        name: 'DailyChart',
+        name: 'YearChart',
         components: {
             LinearChart,
             PieChart
@@ -86,40 +86,40 @@
         },
         computed:{
             ...mapState({
-                dailyChart: state => state.dailyChart,
-                labels: state => state.dailyChart.labels,// ...
-                expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
-                payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
-                average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
+                yearChartData: state => state.yearChart.chartData,
+                // labels: state => state.dailyChart.labels,// ...
+                // expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
+                // payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
+                // average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
 
             }),
 
+            linearChartLabels(){
+                return this.yearChartData.map(element => element.date);
+            },
+            linearChartExpenses(){
+                return this.yearChartData.map(element => element.expenses/100);
+            },
+            linearChartPayments(){
+                return this.yearChartData.map(element => element.payments/100);
+            },
+
             linearChartData(){
                 return{
-                    labels: this.labels,
+                    labels: this.linearChartLabels,
                     datasets: [
                         {
                             type: 'bar',
                             label: 'Списания',
                             backgroundColor: 'rgba(255, 0, 0, .7)',
-                            data: this.expenses,
+                            data: this.linearChartExpenses,
                         },
                         {
                             type: 'bar',
                             label: 'Платежи',
                             backgroundColor: 'rgba(102,0,153,.7)',
-                            data: this.payments
+                            data: this.linearChartPayments
                         },
-                        {
-                            type: 'line',
-                            label: 'Среднее списание',
-                            borderColor: '#e17805',
-                            borderWidth: 1,
-                            pointBackgroundColor: 'white',
-                            pointBorderColor: '#e17805',
-                            backgroundColor: 'rgba(0,255,0,0.7)',
-                            data: this.average
-                        }
                     ],
                 }
             },
@@ -133,9 +133,12 @@
                             ticks: {
                                 // Include a dollar sign in the ticks
                                 callback: function(value, index, values) {
-                                    return numeral(value).format('₴0,0')
+                                    return numeral(value).format('(0a)')
                                 }
                             }
+                        }],
+                        xAxes: [{
+                            offset: true,
                         }]
                     },
                     // Настройка отображения значений столбцов
@@ -155,102 +158,6 @@
                 }
             },
 
-            typesChartData(){
-                return{
-                    // dataentry: null,
-                    // datalabel: null,
-                    labels: this.dailyChart.typeChartData.map(element => element.type),
-                    datasets: [
-                        {
-                            backgroundColor: this.colours,
-                            data: this.dailyChart.typeChartData
-                                .map(element => element.value / 100)
-                        }
-                    ]
-                }
-            },
-
-            typesChartOptions(){
-                return{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    pieceLabel: {
-                        mode: 'percentage',
-                        precision: 1
-                    },
-                    title: {
-                        display: true,
-                        fontsize: 14,
-                        text: 'По виду списаний'
-                    },
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-
-                    },
-                    tooltips:{
-                        callbacks: {
-                            label: function(tooltipItem, data) {
-                                let label = data.labels[tooltipItem.index] || ''
-                                let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('₴0,0')
-                                return label + ': ' + value
-                            }
-                        }
-
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    },
-                }
-            },
-
-            stationsChartData(){
-                return{
-                    dataentry: null,
-                    datalabel: null,
-                    labels: this.dailyChart.stationChartData.map(element => element.type),
-                    datasets: [
-                        {
-                            backgroundColor: this.colours,
-                            data: this.dailyChart.stationChartData.map(element => element.value / 100),
-                        }
-                    ]
-                }
-            },
-
-            stationsChartOptions(){
-                return{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    pieceLabel: {
-                        mode: 'percentage',
-                        precision: 1
-                    },
-                    title: {
-                        display: true,
-                        fontsize: 12,
-                        text: 'По станциям'
-                    },
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-
-                    },
-                    tooltips:{
-                        callbacks: {
-                            label: function(tooltipItem, data) {
-                                let label = data.labels[tooltipItem.index] || ''
-                                let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('₴0,0').replace(',','`')
-                                return label + ': ' + value
-                            }
-                        }
-
-                    },
-                }
-            },
 
         },
 
@@ -261,23 +168,23 @@
                     dateUntil: this.dateUntil,
                     averageIndex: 3
                 }
-                this.$store.dispatch('getDailyChartAction', params)
+                this.$store.dispatch('getYearChartAction', params)
             },
 
             setDefaultPeriod(){
-                this.dateFrom = this.$store.state.dailyChart.dateFrom
-                this.dateUntil = this.$store.state.dailyChart.dateUntil
+                this.dateFrom = this.$store.state.yearChart.dateFrom
+                this.dateUntil = this.$store.state.yearChart.dateUntil
 
-                if((this.dateFrom == '') && (this.dateUntil == '')){
-                    let today = new Date();
-                    let weekAgo = new Date(today.setDate(today.getDate()-15));
-                    this.dateFrom = weekAgo.toISOString().substring(0, 10);
+                if((this.dateFrom === '') && (this.dateUntil === '')){
+                    let yearAgo = new Date();
+                    yearAgo.setFullYear(yearAgo.getFullYear()-1)
+                    this.dateFrom = yearAgo.toISOString().substring(0, 10);
                     this.dateUntil = new Date().toISOString().slice(0,10);
                     let period = {
                         dateFrom: this.dateFrom,
                         dateUntil: this.dateUntil
-                    }
-                    this.$store.commit('addDailyChartPeriodMutation',period)
+                    };
+                    this.$store.commit('addYearChartPeriodMutation',period)
 
                 }
             }
