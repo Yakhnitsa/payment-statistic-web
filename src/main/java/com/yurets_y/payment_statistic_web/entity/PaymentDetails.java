@@ -21,6 +21,7 @@ public class PaymentDetails {
 
     private String type;
 
+
     private IncomeType incomeType;
 
     @Temporal(TemporalType.DATE)
@@ -152,7 +153,7 @@ public class PaymentDetails {
     }
 
     public static enum IncomeType{
-        INCOME_PAYMENT,
-        OUTCOME_PAYMENT
+        INCOME,
+        OUTCOME
     }
 }

@@ -175,7 +175,7 @@
                     .catch((error) => console.log(error))
             },
             deletePayment(list){
-                this.deletePayment(list)
+                this.deletePaymentListAction(list)
 
             },
             downloadPayment(list){

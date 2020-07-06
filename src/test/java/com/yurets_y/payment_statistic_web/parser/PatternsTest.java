@@ -17,13 +17,16 @@ public class PatternsTest {
 //        String one = "Накопичувальнi карточки";
 //        String two = "Накопичувальні карточки";
 //        System.out.println(one.equals(two));
-        String testString = "Сальдо на початок розрахункової доби :      -1132310.14";
-        String stringPattern = "Сальдо на початок.+:.+?(\\d+[,.]\\d+)";
+        String testString = "Сальдо на початок розрахункової доби :      -1132310.17";
+        String stringPattern = "Сальдо на початок.+:.+?(\\d+[,.]?\\d+)";
         System.out.println(testString.matches(stringPattern));
         Pattern pattern = Pattern.compile(stringPattern);
         Matcher matcher = pattern.matcher(testString);
         if(matcher.matches()){
+            Double numb = Double.parseDouble(matcher.group(1));
             System.out.println(matcher.group(1));
+            System.out.println("parsed: "+ numb.longValue());
+
 //            System.out.println(matcher.group(2));
 //            System.out.println(matcher.group(2).replaceAll("[,.]",""));
         }
@@ -39,8 +42,7 @@ public class PatternsTest {
     }
     @Test
     public void matchesTest(){
-        String testString = "Коригування сум нарахованих платежів - минулі місяці";
-        String stringPattern = "Коригування сум нарахованих платежів.*";
-        assertThat(testString.matches(stringPattern));
+        String testString = "-23326432";
+        System.out.println(testString.matches("\\d+"));
     }
 }

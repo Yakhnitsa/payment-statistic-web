@@ -5,6 +5,8 @@ import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +24,9 @@ public abstract class AbstractDocParser implements DocParser{
     protected final String NUMBER_PATTERN = "(-?\\d+[,.]\\d+)";
     private final String LIST_DATE_PATTERN = "\\d{2}\\.\\d{2}\\.\\d{4}";
     private final String LIST_NUMBER_PATTERN = "\\d{8}";
+    private final String PAYMENT_CODE_PATTERN = "Код платника:(\\d*)";
+
+    private Logger logger = LoggerFactory.getLogger(AbstractDocParser.class);
 
     @Override
     public PaymentList parseFromFile(File file) throws IOException {
@@ -36,7 +41,13 @@ public abstract class AbstractDocParser implements DocParser{
 
         paymentList.setBackupFile(file);
 
-        checkSumTest(paymentList);
+        try{
+            checkSumTest(paymentList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 
         return paymentList;
     }
@@ -85,14 +96,24 @@ public abstract class AbstractDocParser implements DocParser{
             paymentList.setDate(parseListDate(first));
         }
 
-        String paymentCodePattern = "Код платника:(\\d*)";
-        if (cellList.size() >= 2 && cellList.get(1).matches(paymentCodePattern)) {
+        if (cellList.size() >= 2 && cellList.get(1).matches(PAYMENT_CODE_PATTERN)) {
             try {
-                paymentList.setPayerCode((int) getLongFromPattern(cellList.get(1), paymentCodePattern));
+                int payerCode = parsePayerCode(cellList.get(1));
+                paymentList.setPayerCode(payerCode);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private int parsePayerCode(String s) {
+        Pattern pattern = Pattern.compile(PAYMENT_CODE_PATTERN);
+        Matcher m = pattern.matcher(s);
+        if (m.find()) {
+            return Integer.parseInt(m.group(1));
+        }
+        return -1;
     }
 
     protected int parserListNumb(String string) {
@@ -136,7 +157,7 @@ public abstract class AbstractDocParser implements DocParser{
 
 
     protected void parseOpeningAndClosingBalance(PaymentList paymentList, List<String> cellList) {
-        String openBalancePattern = "Сальдо на початок.+:.+?(-?\\d+[,.]\\d+)";
+        String openBalancePattern = "Сальдо на початок.+:.+?(-?\\d+[,.]?\\d+?)";
         if (cellList.size() > 1 && cellList.get(1).matches(openBalancePattern)) {
             paymentList.setOpeningBalance(-getLongFromPattern(cellList.get(1), openBalancePattern));
         }
@@ -153,8 +174,12 @@ public abstract class AbstractDocParser implements DocParser{
         Pattern pattern = Pattern.compile(stringPattern);
         Matcher matcher = pattern.matcher(matchedString);
         if (matcher.matches()) {
-            String numbString = matcher.group(1).replaceAll("[,.]", "");
-            return Long.parseLong(numbString);
+
+            String numbString = matcher.group(1);
+            if(numbString.matches("-?\\d+")){
+                numbString += "00";
+            }
+            return Long.parseLong(numbString.replaceAll("[,.]",""));
         }
 
         return -1L;
@@ -163,17 +188,16 @@ public abstract class AbstractDocParser implements DocParser{
     void checkSumTest(PaymentList paymentList) {
         long openingBalance = paymentList.getOpeningBalance();
         long closingBalance = paymentList.getClosingBalance();
-        String incomePaymentPattern = "Платіжні доручення";
 
         long payments = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(paymentDetails -> paymentDetails.getType().equals(incomePaymentPattern))
+                .filter(paymentDetails -> paymentDetails.getIncomeType() == PaymentDetails.IncomeType.INCOME)
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
         long totalPaymentsVsTaxes = paymentList.getPaymentVsTaxes();
 
         long totalPaymentsFromList = paymentList.getPaymentDetailsList()
                 .stream()
-                .filter(paymentDetails -> !paymentDetails.getType().equals(incomePaymentPattern))
+                .filter(paymentDetails -> paymentDetails.getIncomeType() == PaymentDetails.IncomeType.OUTCOME)
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
 
         long checkSum = openingBalance + payments - totalPaymentsFromList;
@@ -198,9 +222,6 @@ public abstract class AbstractDocParser implements DocParser{
             case "Відомості плати за користування вагонами":
             case "Накопичувальні карточки":
             case "Коригування сум нарахованих платежів":
-//            case "Коригування сум нарахованих платежів минулі періоди":
-//            case "Коригування сум нарахованих платежів - минулі місяці":
-//            case "Коригування сум нарахованих платежів - поточний місяць":
             case "Штрафи":
                 return getStationPayments(type, iterator);
             case "Платіжні доручення":

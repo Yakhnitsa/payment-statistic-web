@@ -71,6 +71,7 @@ public class XmlDocParser extends AbstractDocParser{
                 pd.setAdditionalPayment(getLongFromPattern(row.get(5), NUMBER_PATTERN));
                 pd.setTaxPayment(getLongFromPattern(row.get(6), NUMBER_PATTERN));
                 pd.setTotalPayment(getLongFromPattern(row.get(7), NUMBER_PATTERN));
+                pd.setIncomeType(PaymentDetails.IncomeType.OUTCOME);
 
                 paymentDetailsList.add(pd);
                 row = parseChartRow(iterator.next());
@@ -105,6 +106,7 @@ public class XmlDocParser extends AbstractDocParser{
                 pd.setPayment(getLongFromPattern(row.get(6), NUMBER_PATTERN));
                 pd.setTaxPayment(getLongFromPattern(row.get(7), NUMBER_PATTERN));
                 pd.setTotalPayment(getLongFromPattern(row.get(8), NUMBER_PATTERN));
+                pd.setIncomeType(PaymentDetails.IncomeType.OUTCOME);
 
                 paymentDetailsList.add(pd);
                 row = parseChartRow(iterator.next());
@@ -134,6 +136,7 @@ public class XmlDocParser extends AbstractDocParser{
                 pd.setDocumentNumber(row.get(1));
                 pd.setPaymentCode(row.get(2));
                 pd.setTotalPayment(getLongFromPattern(row.get(3), NUMBER_PATTERN));
+                pd.setIncomeType(PaymentDetails.IncomeType.INCOME);
                 paymentDetailsList.add(pd);
                 row = parseChartRow(iterator.next());
 
