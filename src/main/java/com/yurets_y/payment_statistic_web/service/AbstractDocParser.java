@@ -170,6 +170,7 @@ public abstract class AbstractDocParser implements DocParser{
                 .filter(paymentDetails -> paymentDetails.getType().equals(incomePaymentPattern))
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
         long totalPaymentsVsTaxes = paymentList.getPaymentVsTaxes();
+
         long totalPaymentsFromList = paymentList.getPaymentDetailsList()
                 .stream()
                 .filter(paymentDetails -> !paymentDetails.getType().equals(incomePaymentPattern))
@@ -203,6 +204,7 @@ public abstract class AbstractDocParser implements DocParser{
             case "Штрафи":
                 return getStationPayments(type, iterator);
             case "Платіжні доручення":
+            case "Зараховано на особовий рахунок":
                 return getPayments(type, iterator);
             default:
                 return new ArrayList<>();

@@ -27,6 +27,10 @@ public class HtmlDocParserTest {
     @Resource(name="test-html-file")
     private File testHtmlFile;
 
+    @Resource(name="corrupted-html-dir")
+    private File corruptedHtmlDir;
+
+
     @Test
     public void resourceIntegrationTest(){
         assertThat(this.docParser).isNotNull();
@@ -105,6 +109,13 @@ public class HtmlDocParserTest {
                 .filter(pd -> pd.getType().equals("Платіжні доручення"))
                 .mapToLong(PaymentDetails::getTotalPayment).sum();
         assertThat(totalPayment).isEqualTo(850000000);
+    }
+
+    @Test
+    public void parseCorruptedFilesTest() throws IOException {
+        for(File file: corruptedHtmlDir.listFiles()){
+            docParser.parseFromFile(file);
+        }
     }
 
 }

@@ -61,12 +61,12 @@ public class StatisticServiceImpl implements StatisticService {
 
         List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,PAYMENT_TYPE);
 
-        List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticByType(dateFrom,dateUntil)
+        List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticGroupByType(dateFrom,dateUntil)
                 .stream()
                 .filter(entity -> !entity.getType().equals(PAYMENT_TYPE))
                 .collect(Collectors.toList());
 
-        List<StringLongEntry> stationChartData = statisticRepo.getChartStatisticByStation(dateFrom,dateUntil)
+        List<StringLongEntry> stationChartData = statisticRepo.getChartStatisticGroupByStation(dateFrom,dateUntil)
                 .stream()
                 .filter(entity -> entity.getType() != null)
                 .collect(Collectors.toList());

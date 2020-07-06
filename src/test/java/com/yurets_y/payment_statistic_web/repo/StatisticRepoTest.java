@@ -54,7 +54,7 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        List result = repo.getChartStatisticByType(dateFrom,dateUntil);
+        List result = repo.getChartStatisticGroupByType(dateFrom,dateUntil);
         result.size();
 
     }
@@ -64,7 +64,7 @@ public class StatisticRepoTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
 
-        List result = repo.getChartStatisticByStation(dateFrom,dateUntil);
+        List result = repo.getChartStatisticGroupByStation(dateFrom,dateUntil);
         result.size();
 
     }

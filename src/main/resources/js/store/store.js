@@ -48,39 +48,47 @@ export default new Vuex.Store({
     },
     // Изменяемые свойства объекта, computed properties, ets...
     getters:{
-        paymentLists: state => state.paymentLists,
+        paymentLists: state => state.paymentListPage.paymentLists,
         chosenFiles: state => state.uploadedData.files,
         tempUploadedLists: state => state.uploadedData.tempLists,
         selectedUploadedLists: state => state.uploadedData.selectedLists
     },
     // Методы для изменения объектов приолжения
     mutations: {
-        addDailyStatisticMutation(state, data){
-            state.dailyStatistic.dates = data.dates
-            state.dailyStatistic.details = data.details;
-            state.dailyStatistic.payments = data.payments;
 
-        },
         addPaymentListsMutation(state,data){
-            state.paymentLists = [...data.list];
+            state.paymentListPage.paymentLists = [...data.list];
             state.paymentListPage.currentPage = data.currentPage;
             state.paymentListPage.totalPages = data.totalPages;
         },
 
+        setPaymentListPeriod(state,period){
+            state.paymentListPage.dateFrom = period.dateFrom
+            state.paymentListPage.dateUntil = period.dateUntil
+        },
+
         deletePaymentListMutation(state,list){
-            const index = state.paymentLists.findIndex(element =>
+            const index = state.paymentListPage.paymentLists.findIndex(element =>
                 (element.number === list.number) && (element.payerCode == list.payerCode)
             )
             if(index >-1){
-                state.paymentLists.splice(index, 1);
+                state.paymentListPage.paymentLists.splice(index, 1);
             }
         },
 
         addChosenFilesMutation(state,data){
             state.uploadedData.files = [...data]
         },
+
         setTepListsMutation(state,data){
             state.uploadedData.tempLists = [...data]
+        },
+
+        addDailyStatisticMutation(state, data){
+            state.dailyStatistic.dates = data.dates
+            state.dailyStatistic.details = data.details;
+            state.dailyStatistic.payments = data.payments;
+
         },
 
         setDailyStatisticPeriod(state,period){
@@ -88,10 +96,7 @@ export default new Vuex.Store({
             state.dailyStatistic.dateUntil = period.dateUntil
         },
 
-        setPaymentListPeriod(state,period){
-            state.paymentListPage.dateFrom = period.dateFrom
-            state.paymentListPage.dateUntil = period.dateUntil
-        },
+
 
         addDailyChartMutation(state, data){
             state.dailyChart.labels = data.labels;
@@ -127,8 +132,7 @@ export default new Vuex.Store({
             axios.get('/api/payments',{params})
                 .then(response => {
                         commit('addPaymentListsMutation',response.data)
-                        commit('setCurrentPageMutation',response.data.currentPage)
-                        commit('setTotalPagesMutation',response.data.totalPages)
+
                     }
 
                 )

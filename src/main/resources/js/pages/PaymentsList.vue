@@ -22,15 +22,7 @@
         </div>
 
         <div class="container">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" ><i class="fas fa-caret-left"></i></a></li>
-                    <li v-for="page in totalPages" class="page-item"><a class="page-link" @click="loadPage(page-1)" >{{page}}</a></li>
-                    <!--<li class="page-item"><a class="page-link">2</a></li>-->
-                    <!--<li class="page-item"><a class="page-link">3</a></li>-->
-                    <li class="page-item"><a class="page-link"><i class="fas fa-caret-right"></i></a></li>
-                </ul>
-            </nav>
+
             <table id="payments-table" class="table table-fixed able-sm table-striped">
                 <thead class="thead-light">
                     <tr class="text-center">
@@ -45,11 +37,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-right text-nowrap" v-for="payment in sortedPayments">
+                    <tr class="text-right text-nowrap" v-for="payment in checkedPayments">
                         <td scope="col" class="col-2">{{payment.number}}</td>
                         <td scope="col" class="col-2">{{payment.date | formatDate}}</td>
-                        <td scope="col" class="col-2">{{payment.openingBalance | formatPayment }}</td>
-                        <td scope="col" class="col-2">{{payment.closingBalance | formatPayment}}</td>
+                        <td scope="col" class="col-2"
+                            :class="{'text-danger': !payment.checkedOpeningBalance}">
+                            {{payment.openingBalance | formatPayment }}
+                        </td>
+                        <td scope="col" class="col-2"
+                            :class="{'text-danger': !payment.checkedClosingBalace}">
+                            {{payment.closingBalance | formatPayment}}</td>
                         <td scope="col" class="col-2">{{payment.paymentVsTaxes | formatPayment}}</td>
                         <td scope="col" class="col-2">
                             <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">
@@ -65,6 +62,24 @@
                     </tr>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"
+                        :class="{disabled: currentPage < 1}">
+                        <a class="page-link" @click="loadPage(currentPage-1)"><i class="fas fa-caret-left"></i></a>
+                    </li>
+                    <li v-for="page in totalPages"
+                        class="page-item"
+                        :class="{active: page === currentPage + 1}"
+                    ><a class="page-link" @click="loadPage(page-1)" >{{page}}</a></li>
+                    <!--<li class="page-item"><a class="page-link">2</a></li>-->
+                    <!--<li class="page-item"><a class="page-link">3</a></li>-->
+                    <li class="page-item"
+                        :class="{disabled: currentPage >= totalPages -1}">
+                        <a class="page-link" @click="loadPage(currentPage+1)"><i class="fas fa-caret-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </template>
@@ -88,6 +103,33 @@
             },
             sortedPayments: function(){
                 return this.payments.sort((a,b)=> a.date - b.date)
+            },
+            // проверка перечней по логике конец предыдущего = начало текущего периода
+            checkedPayments(){
+                const resultList = [...this.sortedPayments]
+                let i;
+                for (i = 0; i < resultList.length; i++) {
+                    let currentPl = resultList[i];
+                    //    checkClosingBalance
+                    if(i > 0){
+                        let prevPl = resultList[i-1];
+                        currentPl.checkedClosingBalace = currentPl.closingBalance === prevPl.openingBalance;
+                    }else{
+                        currentPl.checkedClosingBalace = true;
+                    }
+                    //    checkOpentingBalanct
+                    if(i < resultList.length -2){
+                        let nextPl = resultList[i+1];
+                        currentPl.checkedOpeningBalance = currentPl.openingBalance === nextPl.closingBalance
+                    }
+                    else{
+                        currentPl.checkedOpeningBalance = true;
+                    }
+
+                }
+
+                return resultList;
+
             },
             currentPage(){
                 return this.$store.state.paymentListPage.currentPage
@@ -214,4 +256,12 @@
         float: left;
         border-bottom-width: 0;
     }
+
+    .text-danger{
+        font-weight: bold;
+        font-style: italic;
+    }
+
+
+
 </style>

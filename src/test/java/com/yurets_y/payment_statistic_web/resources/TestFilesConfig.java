@@ -26,6 +26,9 @@ public class TestFilesConfig {
     @Value("${test.resources.xml-test-directory-location}")
     private String xmlTestDirectoryLocation;
 
+    @Value("${test.resources.html-corrupted-dir-location}")
+    private String htmlCorruptedDir;
+
 
 
     @Bean(name="test-html-file")
@@ -57,6 +60,13 @@ public class TestFilesConfig {
     public File testXmlDirectory() {
         File file = new File(xmlTestDirectoryLocation);
         if (!file.exists() || !file.isDirectory()) throw new RuntimeException("Путь не найден или не является директорией" + testDirectoryLocation);
+        return file;
+    }
+
+    @Bean(name="corrupted-html-dir")
+    public File corruptedDirLocation() {
+        File file = new File(htmlCorruptedDir);
+        if (!file.exists() || !file.isDirectory()) throw new RuntimeException("Путь не найден или не является директорией" + htmlCorruptedDir);
         return file;
     }
 }

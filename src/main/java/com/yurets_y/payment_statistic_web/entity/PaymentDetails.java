@@ -21,8 +21,9 @@ public class PaymentDetails {
 
     private String type;
 
+    private IncomeType incomeType;
+
     @Temporal(TemporalType.DATE)
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
     private int stationCode;
     private String stationName;
@@ -34,6 +35,18 @@ public class PaymentDetails {
     private long additionalPayment;
     private long taxPayment;
     private long totalPayment;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public IncomeType getIncomeType() {
+        return incomeType;
+    }
+
+    public void setIncomeType(IncomeType incomeType) {
+        this.incomeType = incomeType;
+    }
 
     public PaymentDetails() {
     }
@@ -136,5 +149,10 @@ public class PaymentDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public static enum IncomeType{
+        INCOME_PAYMENT,
+        OUTCOME_PAYMENT
     }
 }
