@@ -66,72 +66,29 @@
             </div>
         </div>
 
-        <h3>Детализация затрат</h3>
-        <div class="zui-wrapper">
-            <div class="zui-scroller">
-                <table class="zui-table">
-                    <thead>
-                    <tr>
-                        <th class="zui-sticky-col">Наименование платежа</th>
-                        <th v-for="day in dateArray"
-                            class="text-center">
-                            {{day | formatDate}}
-                        </th>
-                        <th class="sticky-right-col">Сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-show="details" v-for="(value ,key) in this.detailsList">
-                        <td class="zui-sticky-col pl-3">{{key}}</td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
-                            {{getDataFromList(value,day) | formatPayment}}
-                        </td>
-                        <td class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
-                    </tr>
+        <daily-statistic-table
+                tableHeader="Детализация по видам платежей"
+                :dateArray="dateArray"
+                :dataList="detailsList">
+        </daily-statistic-table>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <p class="h2">Затраты по станциям</p>
-        <div class="zui-wrapper">
-            <div class="zui-scroller">
-                <table class="zui-table">
-                    <thead>
-                    <tr>
-                        <th class="zui-sticky-col">Наименование платежа</th>
-                        <th v-for="day in dateArray"
-                            class="text-center">
-                            {{day | formatDate}}
-                        </th>
-                        <th class="sticky-right-col">Сумма</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="(value ,key) in expensesByStation">
-                        <td class="zui-sticky-col pl-3">{{key}}</td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
-                            {{getDataFromList(value,day) | formatPayment}}
-                        </td>
-                        <td class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <daily-statistic-table
+                tableHeader="Затраты по станциям"
+                :dateArray="dateArray"
+                :dataList="expensesByStation"
+        ></daily-statistic-table>
 
     </div>
 </template>
 
 <script>
     import { mapGetters, mapState ,mapActions, mapMutations } from 'vuex'
-    import numeral from 'numeral'
+    import DailyStatisticTable from '../components/DailyStatisticTable.vue'
 
     export default {
         name: "DailyStatistic",
         props: [''],
+        components:{DailyStatisticTable},
         data: function(){
             return{
                 dateFrom: '',
@@ -223,15 +180,15 @@
             }
         },
         filters:{
-            formatPayment(num) {
-                num = num/100;
-                return (
-                    num
-                        .toFixed(2) // always two decimal digits
-                        .replace('.', ',') // replace decimal point character with ,
-                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
-                    )
-            },
+            // formatPayment(num) {
+            //     num = num/100;
+            //     return (
+            //         num
+            //             .toFixed(2) // always two decimal digits
+            //             .replace('.', ',') // replace decimal point character with ,
+            //             .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
+            //         )
+            // },
 
             formatDate(date){
                 return new Date(date).toLocaleDateString()

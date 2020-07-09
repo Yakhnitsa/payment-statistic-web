@@ -3,6 +3,7 @@ import App from './pages/App.vue'
 import VueResouce from 'vue-resource'
 import router from 'router/router'
 import store from 'store/store'
+import 'util/filters'
 
 Vue.use(VueResouce)
 
