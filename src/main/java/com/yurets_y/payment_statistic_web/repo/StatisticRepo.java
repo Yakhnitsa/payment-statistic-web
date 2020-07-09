@@ -47,6 +47,13 @@ public interface StatisticRepo extends org.springframework.data.repository.Repos
     List<DateStringLongDto> getDailyStatisticByType(@Param("date_from") Date dateFrom,
                                                     @Param("date_until") Date dateUntil);
 
+    @Query("select new com.yurets_y.payment_statistic_web.dto.DateStringLongDto(pd.date, CONCAT(pd.stationCode,' ',pd.stationName), sum(pd.totalPayment)) " +
+            "from PaymentDetails pd " +
+            "where pd.date between :date_from and :date_until " +
+            "group by pd.date, pd.stationName")
+    List<DateStringLongDto> getDailyStatisticGroupByStation(@Param("date_from") Date dateFrom,
+                                                    @Param("date_until") Date dateUntil);
+
 
     @Query("select new com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry( " +
                 "function('YEAR',pl.date), function('MONTH',pl.date),1, sum(pl.paymentVsTaxes)" +

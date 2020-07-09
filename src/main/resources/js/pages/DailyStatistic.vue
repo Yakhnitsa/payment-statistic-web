@@ -31,7 +31,6 @@
                                 class="text-center">
                                 {{day | formatDate}}
                             </th>
-                            <th class="sticky-right-col">Сумма</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,6 +86,7 @@
                         <td v-for="day in dateArray" class="text-right text-nowrap">
                             {{getDataFromList(value,day) | formatPayment}}
                         </td>
+                        <td class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
                     </tr>
 
                     </tbody>
@@ -95,13 +95,38 @@
         </div>
 
         <p class="h2">Затраты по станциям</p>
-        <p>TODO Реализовать затраты по станциям</p>
+        <div class="zui-wrapper">
+            <div class="zui-scroller">
+                <table class="zui-table">
+                    <thead>
+                    <tr>
+                        <th class="zui-sticky-col">Наименование платежа</th>
+                        <th v-for="day in dateArray"
+                            class="text-center">
+                            {{day | formatDate}}
+                        </th>
+                        <th class="sticky-right-col">Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(value ,key) in expensesByStation">
+                        <td class="zui-sticky-col pl-3">{{key}}</td>
+                        <td v-for="day in dateArray" class="text-right text-nowrap">
+                            {{getDataFromList(value,day) | formatPayment}}
+                        </td>
+                        <td class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <script>
-    import { mapGetters,mapState,mapActions } from 'vuex'
+    import { mapGetters, mapState ,mapActions, mapMutations } from 'vuex'
     import numeral from 'numeral'
 
     export default {
@@ -123,6 +148,9 @@
             detailsList(){
                 return this.dailyStatistic.details
             },
+            expensesByStation(){
+                return this.dailyStatistic.expensesByStation;
+            },
 
             dateArray(){
                 return this.dailyStatistic.dates;
@@ -132,12 +160,13 @@
 
         methods:{
             ...mapActions(['getDailyStatisticAction']),
+            ...mapMutations(['setDailyStatisticPeriod']),
             submitForm(){
                 const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                 };
-                this.$store.commit('setDailyStatisticPeriod',params);
+                this.$store.commit('setDailyStatisticPeriod',params)
                 this.getDailyStatisticAction(params)
             },
 
@@ -158,6 +187,10 @@
                     }
                 }
                 return ''
+            },
+            getSummaryFromList(list){
+                let values = Object.values(list);
+                return values.reduce((a, b) => a + b, 0)
             },
 
             getPropertyByDate(day,prop){
@@ -285,7 +318,10 @@
     }
     .sticky-right-col{
         position: sticky;
-        right: 1px;
+        right: 0px;
+        background-color: aliceblue;
+        border-left: solid 2px #DDEFEF;
+        /*border-right: solid 2px #DDEFEF;*/
 
     }
 

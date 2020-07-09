@@ -40,16 +40,24 @@ public class StatisticServiceImpl implements StatisticService {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
         List<PaymentList> payments = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
         List<DateStringLongDto> details = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
+        List<DateStringLongDto> expByStations = statisticRepo.getDailyStatisticGroupByStation(dateFrom,dateUntil);
 
         Map<String, Map<Date,Long>> detailsMap = details
                 .stream()
                 .collect(Collectors.groupingBy(DateStringLongDto::getType,
                         Collectors.toMap(DateStringLongDto::getDate,DateStringLongDto::getValue)));
 
+        Map<String, Map<Date,Long>> stationsMap = expByStations
+                .stream()
+                .filter(dto -> dto.getType() != null)
+                .collect(Collectors.groupingBy(DateStringLongDto::getType,
+                        TreeMap::new,
+                        Collectors.toMap(DateStringLongDto::getDate,DateStringLongDto::getValue)));
+
         TreeMap<String, Map<Date,Long>> sortedDetails = new TreeMap<>(paymentTypeComparator);
         sortedDetails.putAll(detailsMap);
 
-        return new DailyStatisticDto(dates,payments,sortedDetails);
+        return new DailyStatisticDto(dates,payments,sortedDetails,stationsMap);
 
     }
 

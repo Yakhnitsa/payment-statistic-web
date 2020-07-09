@@ -1,6 +1,8 @@
 package com.yurets_y.payment_statistic_web.repo;
 
 
+import com.yurets_y.payment_statistic_web.dto.DateStringLongDto;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,34 @@ public class StatisticRepoTest {
         result.size();
 
     }
+    @Test
+    public void getDailyStatisticByStationTest() throws ParseException{
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-02");
+        List<DateStringLongDto> dataList = repo.getDailyStatisticGroupByStation(dateFrom,dateUntil);
+        String mykolaiv = "415207 МИКОЛАїВ-ВАНТАЖНИЙ";
+        Long summary = dataList
+                .stream()
+                .filter(dto -> dto.getType().equals(mykolaiv))
+                .mapToLong(dto -> dto.getValue()).sum();
+        Assert.assertEquals(summary.longValue(),41894928L);
+
+        String viry = "444905 ВИРИ";
+        summary = dataList
+                .stream()
+                .filter(dto -> dto.getType().equals(viry))
+                .mapToLong(dto -> dto.getValue()).sum();
+        Assert.assertEquals(summary.longValue(),18930708L);
+
+        String poltava = "448501 ПОЛТАВА-КИїВСЬКА";
+        summary = dataList
+                .stream()
+                .filter(dto -> dto.getType().equals(poltava))
+                .mapToLong(dto -> dto.getValue()).sum();
+        Assert.assertEquals(summary.longValue(),64348932L);
+
+        dataList.size();
+    }
 
     @Test
     public void getYearStatisticTest() throws ParseException {
@@ -85,4 +115,6 @@ public class StatisticRepoTest {
         List result = repo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
         result.size();
     }
+
+
 }

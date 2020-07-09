@@ -14,6 +14,7 @@ export default new Vuex.Store({
             dates:[],
             details:[],
             payments: [],
+            expensesByStation:[],
             dateFrom:'',
             dateUntil:''
         },
@@ -88,6 +89,7 @@ export default new Vuex.Store({
             state.dailyStatistic.dates = data.dates
             state.dailyStatistic.details = data.details;
             state.dailyStatistic.payments = data.payments;
+            state.dailyStatistic.expensesByStation = data.expensesByStation;
 
         },
 

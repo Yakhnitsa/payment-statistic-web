@@ -1,21 +1,31 @@
 package com.yurets_y.payment_statistic_web.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.yurets_y.payment_statistic_web.entity.Views;
+
 import java.util.List;
 
 public class ChartDto {
 
+    @JsonView(Views.ShortView.class)
     private List<String> labels;
 
+    @JsonView(Views.ShortView.class)
     private List<Long> paymentStatistic;
 
+    @JsonView(Views.ShortView.class)
     private List<Long> expensesStatistic;
 
+    @JsonView(Views.ShortView.class)
     private List<Long> averageStatistic;
 
+    @JsonView(Views.ShortView.class)
     private List<StringLongEntry> typeChartData;
 
+    @JsonView(Views.ShortView.class)
     private List<StringLongEntry> stationChartData;
 
+    @JsonView(Views.ShortView.class)
     private int averageIndex;
 
 
