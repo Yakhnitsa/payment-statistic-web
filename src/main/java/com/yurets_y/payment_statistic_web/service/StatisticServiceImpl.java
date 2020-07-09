@@ -4,6 +4,7 @@ import com.yurets_y.payment_statistic_web.dto.*;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import com.yurets_y.payment_statistic_web.repo.StatisticRepo;
+import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class StatisticServiceImpl implements StatisticService {
 
     private final String PAYMENT_TYPE =  "Платіжні доручення";
 
+    private MessageProvider messageProvider;
+
     @Autowired
     public StatisticServiceImpl(PaymentListRepo paymentListRepo,
                                 Comparator<String> paymentTypeComparator,
@@ -39,6 +42,9 @@ public class StatisticServiceImpl implements StatisticService {
     public DailyStatisticDto getDailyStatistic(Date dateFrom, Date dateUntil) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
         List<PaymentList> payments = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
+
+        Map<String, Map<Date,Long>> paymentsMap = getMapFromPaymentList(payments);
+
         List<DateStringLongDto> details = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
         List<DateStringLongDto> expByStations = statisticRepo.getDailyStatisticGroupByStation(dateFrom,dateUntil);
 
@@ -59,6 +65,33 @@ public class StatisticServiceImpl implements StatisticService {
 
         return new DailyStatisticDto(dates,payments,sortedDetails,stationsMap);
 
+    }
+
+    private Map<String,Map<Date,Long>> getMapFromPaymentList(List<PaymentList> payments) {
+        Map<String,Map<Date,Long>> result = new HashMap<>();
+
+        Map<Date,Long> openingBalance = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getOpeningBalance
+                ));
+
+        Map<Date,Long> closingBalance = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getClosingBalance
+                ));
+        Map<Date,Long> expenses = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getPaymentVsTaxes
+                ));
+        String openingBalanceTitle = messageProvider.get("application.service.statistic-service.opening-balance");
+        String closingBalanceTitle = messageProvider.get("application.service.statistic-service.closing-balance");
+        String expensesTitle = messageProvider.get("application.service.statistic-service.expenses");
+
+        result.put(openingBalanceTitle, openingBalance);
+        result.put(closingBalanceTitle, closingBalance);
+        result.put(expensesTitle,expenses);
+
+        return result;
     }
 
     @Override
