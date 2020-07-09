@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface PaymentListRepo extends JpaRepository<PaymentList,PaymentListId> {
 
+//    TODO Проверить и протестит, нихрена не работает!!!
     @Override
     @EntityGraph(attributePaths = {"paymentDetailsList"})
     PaymentList getOne(PaymentListId paymentListId);

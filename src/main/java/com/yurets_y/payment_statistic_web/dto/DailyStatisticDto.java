@@ -14,7 +14,7 @@ public class DailyStatisticDto {
     private List<Date> dates;
 
     @JsonView(Views.ShortView.class)
-    private List<PaymentList> payments;
+    private Map<String, Map<Date, Long>> payments;
 
     @JsonView(Views.ShortView.class)
     private Map<String, Map<Date, Long>> details;
@@ -22,7 +22,7 @@ public class DailyStatisticDto {
     @JsonView(Views.ShortView.class)
     private Map<String, Map<Date, Long>> expensesByStation;
 
-    public DailyStatisticDto(List<Date> dates, List<PaymentList> payments, Map<String,
+    public DailyStatisticDto(List<Date> dates, Map<String, Map<Date, Long>> payments, Map<String,
             Map<Date, Long>> details, Map<String, Map<Date, Long>> expensesByStation) {
         this.dates = dates;
         this.payments = payments;
@@ -34,7 +34,7 @@ public class DailyStatisticDto {
         return dates;
     }
 
-    public List<PaymentList> getPayments() {
+    public Map<String, Map<Date, Long>> getPayments() {
         return payments;
     }
 

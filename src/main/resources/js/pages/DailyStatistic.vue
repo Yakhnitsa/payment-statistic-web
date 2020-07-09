@@ -20,63 +20,70 @@
                 </div>
             </div>
         </form>
-        <h3>Статистика по перечням</h3>
-        <div class="zui-wrapper">
-            <div class="zui-scroller">
-                <table class="zui-table">
-                    <thead>
-                        <tr>
-                            <th class="zui-sticky-col">Наименование платежа</th>
-                            <th v-for="day in dateArray"
-                                class="text-center">
-                                {{day | formatDate}}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="zui-sticky-col">Сальдо на початок розрахункової доби</td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
-                            {{getPropertyByDate(day,'openingBalance')  | formatPayment}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="zui-sticky-col">Сальдо на кінець розрахункової доби</td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
-                            {{getPropertyByDate(day,'closingBalance')  | formatPayment}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="zui-sticky-col" @click="details = !details">Всього проведено платежів
-                            <!--<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>-->
-                        </td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
-                            {{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}
-                        </td>
-                    </tr>
-                    <!--<tr v-show="details" v-for="(value ,key) in this.detailsList">-->
-                        <!--<td class="zui-sticky-col pl-3">{{key}}</td>-->
+        <!--<h3>Статистика по перечням</h3>-->
+        <!--<div class="zui-wrapper">-->
+            <!--<div class="zui-scroller">-->
+                <!--<table class="zui-table">-->
+                    <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th class="zui-sticky-col">Наименование платежа</th>-->
+                            <!--<th v-for="day in dateArray"-->
+                                <!--class="text-center">-->
+                                <!--{{day | formatDate}}-->
+                            <!--</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td class="zui-sticky-col">Сальдо на початок розрахункової доби</td>-->
                         <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getDataFromList(value,day) | formatPayment}}-->
+                            <!--{{getPropertyByDate(day,'openingBalance')  | formatPayment}}-->
                         <!--</td>-->
                     <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="zui-sticky-col">Сальдо на кінець розрахункової доби</td>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getPropertyByDate(day,'closingBalance')  | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td class="zui-sticky-col" @click="details = !details">Всього проведено платежів-->
+                            <!--&lt;!&ndash;<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>&ndash;&gt;-->
+                        <!--</td>-->
+                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
+                            <!--{{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--&lt;!&ndash;<tr v-show="details" v-for="(value ,key) in this.detailsList">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td class="zui-sticky-col pl-3">{{key}}</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td v-for="day in dateArray" class="text-right text-nowrap">&ndash;&gt;-->
+                            <!--&lt;!&ndash;{{getDataFromList(value,day) | formatPayment}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+        <daily-statistic-table
+                tableHeader="Статистика по перечням"
+                :dateArray="dateArray"
+                :dataList="paymentList">
+        </daily-statistic-table>
 
         <daily-statistic-table
                 tableHeader="Детализация по видам платежей"
                 :dateArray="dateArray"
-                :dataList="detailsList">
+                :dataList="detailsList"
+                showSummary="true">
         </daily-statistic-table>
 
         <daily-statistic-table
                 tableHeader="Затраты по станциям"
                 :dateArray="dateArray"
                 :dataList="expensesByStation"
-        ></daily-statistic-table>
+                showSummary="true">
+        </daily-statistic-table>
 
     </div>
 </template>

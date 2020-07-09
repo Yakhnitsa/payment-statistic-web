@@ -67,8 +67,6 @@ public class StatisticController {
     }
 
     @GetMapping("/daily-statistic")
-    @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.ShortView.class)
     public ResponseEntity<?> getDailyStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil

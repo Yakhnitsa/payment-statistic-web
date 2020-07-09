@@ -11,16 +11,18 @@
                             class="text-center">
                             {{day | formatDate}}
                         </th>
-                        <th class="sticky-right-col">Сумма</th>
+                        <th  v-show="showSummary" class="sticky-right-col text-center">Сумма</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(value ,key) in dataList">
                         <td class="zui-sticky-col pl-3">{{key}}</td>
-                        <td v-for="day in dateArray" class="text-right text-nowrap">
+                        <td v-for="day in dateArray"
+                            :class="{ 'font-weight-lighter' : getDataFromList(value,day) === '' }"
+                            class="text-right text-nowrap">
                             {{getDataFromList(value,day) | formatPayment}}
                         </td>
-                        <td class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
+                        <td v-show="showSummary" class="sticky-right-col right">{{getSummaryFromList(value) | formatPayment}}</td>
                     </tr>
 
                     </tbody>
@@ -34,7 +36,7 @@
 <script>
     export default {
         name: "DailyStatisticTable",
-        props: ['tableHeader','dateArray','dataList'],
+        props: ['tableHeader','dateArray','dataList','showSummary'],
         methods:{
             getDataFromList(dailyStatistic,lookupDay){
                 for (let day in dailyStatistic) {
@@ -81,6 +83,9 @@
     .left {
         text-align: left;
         margin-left: 1em;
+    }
+    .text-center {
+        text-align: center;
     }
     .zui-table {
         /*border: none;*/
@@ -132,6 +137,9 @@
         border-left: solid 2px #DDEFEF;
         /*border-right: solid 2px #DDEFEF;*/
 
+    }
+    .font-weight-lighter{
+        color: lightgrey!important;
     }
 
 </style>

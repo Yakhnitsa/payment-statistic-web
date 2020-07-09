@@ -63,36 +63,11 @@ public class StatisticServiceImpl implements StatisticService {
         TreeMap<String, Map<Date,Long>> sortedDetails = new TreeMap<>(paymentTypeComparator);
         sortedDetails.putAll(detailsMap);
 
-        return new DailyStatisticDto(dates,payments,sortedDetails,stationsMap);
+        return new DailyStatisticDto(dates,paymentsMap,sortedDetails,stationsMap);
 
     }
 
-    private Map<String,Map<Date,Long>> getMapFromPaymentList(List<PaymentList> payments) {
-        Map<String,Map<Date,Long>> result = new HashMap<>();
 
-        Map<Date,Long> openingBalance = payments.stream()
-                .collect(Collectors.toMap(
-                        PaymentList::getDate,PaymentList::getOpeningBalance
-                ));
-
-        Map<Date,Long> closingBalance = payments.stream()
-                .collect(Collectors.toMap(
-                        PaymentList::getDate,PaymentList::getClosingBalance
-                ));
-        Map<Date,Long> expenses = payments.stream()
-                .collect(Collectors.toMap(
-                        PaymentList::getDate,PaymentList::getPaymentVsTaxes
-                ));
-        String openingBalanceTitle = messageProvider.get("application.service.statistic-service.opening-balance");
-        String closingBalanceTitle = messageProvider.get("application.service.statistic-service.closing-balance");
-        String expensesTitle = messageProvider.get("application.service.statistic-service.expenses");
-
-        result.put(openingBalanceTitle, openingBalance);
-        result.put(closingBalanceTitle, closingBalance);
-        result.put(expensesTitle,expenses);
-
-        return result;
-    }
 
     @Override
     public ChartDto getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer averageIndex) {
@@ -167,7 +142,10 @@ public class StatisticServiceImpl implements StatisticService {
         return dtoEntryList;
     }
 
-
+    @Autowired
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
 
     private List<Long> getAverageStatistic(List<Long> list, Integer averageIndex) {
         List<Long> averageList = new ArrayList<>();
@@ -241,5 +219,32 @@ public class StatisticServiceImpl implements StatisticService {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
                 ).getTime();
+    }
+
+    private Map<String,Map<Date,Long>> getMapFromPaymentList(List<PaymentList> payments) {
+        Map<String,Map<Date,Long>> result = new LinkedHashMap<>();
+
+        Map<Date,Long> openingBalance = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getOpeningBalance
+                ));
+
+        Map<Date,Long> closingBalance = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getClosingBalance
+                ));
+        Map<Date,Long> expenses = payments.stream()
+                .collect(Collectors.toMap(
+                        PaymentList::getDate,PaymentList::getPaymentVsTaxes
+                ));
+        String openingBalanceTitle = messageProvider.get("application.service.statistic-service.opening-balance");
+        String closingBalanceTitle = messageProvider.get("application.service.statistic-service.closing-balance");
+        String expensesTitle = messageProvider.get("application.service.statistic-service.expenses");
+
+        result.put(openingBalanceTitle, openingBalance);
+        result.put(closingBalanceTitle, closingBalance);
+        result.put(expensesTitle,expenses);
+
+        return result;
     }
 }
