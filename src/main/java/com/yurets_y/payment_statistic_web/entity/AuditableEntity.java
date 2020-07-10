@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -18,21 +19,25 @@ public abstract class AuditableEntity implements Serializable {
 	@CreatedDate
 	@Column(name = "CREATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView(Views.ExtraView.class)
 	protected Date createdDate;
 
 	@CreatedBy
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
+	@JsonView(Views.ExtraView.class)
 	protected User createdBy;
 
 	@LastModifiedBy
 	@ManyToOne
 	@JoinColumn(name = "LAST_MODIFIED_BY")
+	@JsonView(Views.ExtraView.class)
 	protected User lastModifiedBy;
 
 	@LastModifiedDate
 	@Column(name = "LAST_MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView(Views.ExtraView.class)
 	protected Date lastModifiedDate;
 
 	public Optional<User> getCreatedBy() {

@@ -12,5 +12,9 @@ public class Views {
     public interface FullView extends NormalView {
 
     }
+//    Предназначен для дебага приложения админом, только сервисные поля
+    public interface ExtraView extends FullView {
+
+    }
 
 }

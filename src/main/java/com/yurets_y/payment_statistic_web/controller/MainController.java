@@ -1,6 +1,7 @@
 package com.yurets_y.payment_statistic_web.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,7 @@ public class MainController {
     private PaymentListService paymentListService;
 
     private MessageProvider messageProvider;
+    
     @GetMapping
     public String paymentStatistic() {
         return "index";
@@ -43,24 +46,17 @@ public class MainController {
 
     @GetMapping("/api/payments")
     @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.NormalView.class)
+    @JsonView(Views.NormalView.class)
     public PaymentListDto getPayments(
             @PageableDefault(size=RECORDS_PER_PAGE,
                     sort={"date"},
                     direction = Sort.Direction.DESC
             ) Pageable pageable,
-            @RequestParam(value = "dateFrom") String from,
-            @RequestParam(value = "page") Integer pageNumb,
-            @RequestParam(value = "dateUntil") String until
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam(value = "page") Integer pageNumb
 
     ) throws ParseException {
-        Date dateFrom = null;
-        Date dateUntil = null;
-
-        if ((!"".equals(from)) && (!"".equals(until))) {
-            dateFrom = DATE_FORMAT.parse(from);
-            dateUntil = DATE_FORMAT.parse(until);
-        }
         Page<PaymentList> page = null;
         if(dateFrom == null || dateUntil == null){
             page = paymentListService.getAll(pageable);
@@ -73,10 +69,10 @@ public class MainController {
 
     @GetMapping("/api/single-payment")
     @ResponseBody
-    @com.fasterxml.jackson.annotation.JsonView(Views.FullView.class)
+    @JsonView(Views.FullView.class)
     public PaymentList getPayment(
-            @RequestParam(value = "payerCode", required = false) Integer payerCode,
-            @RequestParam(value = "listNumber", required = false) Integer listNumber
+            @RequestParam(value = "payerCode") Integer payerCode,
+            @RequestParam(value = "listNumber") Integer listNumber
     ) {
         PaymentListId id = new PaymentListId(payerCode, listNumber);
         PaymentList paymentList = paymentListService.getById(id);
