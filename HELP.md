@@ -201,4 +201,12 @@ The following guides illustrate how to use some features concretely:
    //templates/users/login
    И настраиваем WebMvcConfig для работы с данными страницами:
    
-     
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry){
+            registry.addViewController("/login").setViewName("users/login");
+        }
+   
+   Добавляем нового пользователя прямиком в БД:
+   Ставим active-true
+   Пароль: шифруем через [шифровщик](https://bcrypt-generator.com/)  
+   Все, теперь эта хрень должна работать.
