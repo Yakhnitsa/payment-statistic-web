@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Entity
 @IdClass(PaymentListId.class)
 @Table(name = "PAYMENT_LIST")
-public class PaymentList {
+public class PaymentList extends AuditableEntity{
     @Id
     @Column(updatable = false)
     @JsonView(Views.ShortView.class)

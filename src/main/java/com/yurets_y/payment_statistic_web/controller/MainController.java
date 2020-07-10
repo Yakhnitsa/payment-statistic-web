@@ -35,12 +35,7 @@ public class MainController {
 
     private PaymentListService paymentListService;
 
-
-    @Autowired
     private MessageProvider messageProvider;
-
-
-
     @GetMapping
     public String paymentStatistic() {
         return "index";
@@ -103,7 +98,12 @@ public class MainController {
         this.paymentListService = paymentListService;
     }
 
-//    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
+    @Autowired
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
+
+    //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
 //
 //        ObjectMapper mapper = new ObjectMapper();
 //        SimpleModule module = new SimpleModule();

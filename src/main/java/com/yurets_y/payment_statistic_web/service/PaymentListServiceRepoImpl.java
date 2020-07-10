@@ -83,7 +83,8 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Override
     public Page<PaymentList> getAll(Pageable pageable) {
-        return paymentListRepo.findAll(pageable);
+        Page<PaymentList> page = paymentListRepo.findAll(pageable);
+        return page;
     }
 
     @Override
