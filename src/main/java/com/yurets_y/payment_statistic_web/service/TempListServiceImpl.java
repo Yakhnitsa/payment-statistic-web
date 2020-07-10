@@ -2,7 +2,7 @@ package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
-import org.springframework.beans.factory.DisposableBean;
+import com.yurets_y.payment_statistic_web.service.parser_services.DocParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

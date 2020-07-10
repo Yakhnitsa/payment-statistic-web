@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<body>
+
+    <div class="container ml-2">
+        <h4>Вход в приложение</h4>
+        <form th:action="@{/login}" method="post">
+            <!--CSRF protection-->
+            <input
+                    type="hidden"
+                    th:username="${_csrf?.parameterName}"
+                    th:value="${_csrf?.token}"/>
+
+
+            <div class="row my-1">
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" th:classappend="${param.error}? 'is-invalid'" name="username" placeholder="Имя пользователя">
+
+                </div>
+                <div class="col-sm-2">
+                    <input type="password" th:classappend="${param.error}? 'is-invalid'" class="form-control" name="password" placeholder="пароль">
+                </div>
+                <div class="col-sm-1 ">
+                    <input type="submit" class="btn btn-primary"  value="Вход">
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col col-sm-5">
+                    <div class="alert alert-secondary" role="alert" th:if="${param.error}">
+                        Invalid username and password.
+                    </div>
+                    <div class="alert alert-success" role="alert" th:if="${param.logout}">
+                        You have been logged out.
+                    </div>
+                </div>
+
+            </div>
+            <div class="row my-1">
+                <div class="col col-sm-5">
+                    <a href="/users/registration">Регистрация нового пользователя</a>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

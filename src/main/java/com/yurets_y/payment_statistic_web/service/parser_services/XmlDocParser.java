@@ -1,7 +1,7 @@
-package com.yurets_y.payment_statistic_web.service;
-
+package com.yurets_y.payment_statistic_web.service.parser_services;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
+import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
@@ -10,35 +10,44 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Service("html-doc-parser")
-public class HtmlDocParser extends AbstractDocParser{
+@Service("xml-doc-parser")
+public class XmlDocParser extends AbstractDocParser{
 
-    @Override
-    String fileFormat() {
-        return ".html";
-    }
 
-    @Override
-    String rowSeparator() {
-        return "tr";
-    }
 
     @Override
     protected List<String> parseChartRow(Element tableString) {
 
         List<String> cellList = new ArrayList<String>();
-        Iterator<Element> cellIterator = tableString.select("th").iterator();
-        while (cellIterator.hasNext()) {
-            cellList.add(cellIterator.next().text());
-        }
-
-        cellIterator = tableString.select("tcol").iterator();
+        Iterator<Element> cellIterator = tableString.select("Data").iterator();
         while (cellIterator.hasNext()) {
             cellList.add(cellIterator.next().text());
         }
         return cellList;
     }
 
+    @Override
+    String fileFormat() {
+        return ".xml";
+    }
+
+    @Override
+    String rowSeparator() {
+        return "Row";
+    }
+
+    @Override
+    protected void parseOpeningAndClosingBalance(PaymentList paymentList, List<String> cellList) {
+        String openBalancePattern = "Сальдо на початок.+:.+?(-?\\d+[,.]\\d+)";
+        if (cellList.get(0).matches(openBalancePattern)) {
+            paymentList.setOpeningBalance(-getLongFromPattern(cellList.get(0), openBalancePattern));
+        }
+
+        String closingBalancePattern = "Сальдо на кінець.+";
+        if (cellList.size() >= 4 && cellList.get(2).matches(closingBalancePattern)) {
+            paymentList.setClosingBalance(-getLongFromPattern(cellList.get(3), NUMBER_PATTERN));
+        }
+    }
 
     @Override
     List<PaymentDetails> getTransportPayments(String type, Iterator<Element> iterator) {
@@ -51,7 +60,7 @@ public class HtmlDocParser extends AbstractDocParser{
                     row = parseChartRow(iterator.next());
                     continue;
                 }
-                if (row.get(4).equals("Всього")) return paymentDetailsList;
+                if (row.get(0).equals("Всього")) return paymentDetailsList;
                 PaymentDetails pd = new PaymentDetails();
                 pd.setType(type);
                 pd.setDate(DATE_FORMAT.parse(row.get(0)));
@@ -85,7 +94,7 @@ public class HtmlDocParser extends AbstractDocParser{
                     row = parseChartRow(iterator.next());
                     continue;
                 }
-                if (row.get(3).equals("Всього")) return paymentDetailsList;
+                if (row.get(0).equals("Всього")) return paymentDetailsList;
                 PaymentDetails pd = new PaymentDetails();
                 pd.setType(type);
                 pd.setDate(DATE_FORMAT.parse(row.get(0)));
@@ -120,7 +129,7 @@ public class HtmlDocParser extends AbstractDocParser{
                     row = parseChartRow(iterator.next());
                     continue;
                 }
-                if (row.get(2).equals("Всього")) return paymentDetailsList;
+                if (row.get(0).equals("Всього")) return paymentDetailsList;
                 PaymentDetails pd = new PaymentDetails();
                 pd.setType(type);
                 pd.setDate(DATE_FORMAT.parse(row.get(0)));
@@ -128,7 +137,6 @@ public class HtmlDocParser extends AbstractDocParser{
                 pd.setPaymentCode(row.get(2));
                 pd.setTotalPayment(getLongFromPattern(row.get(3), NUMBER_PATTERN));
                 pd.setIncomeType(PaymentDetails.IncomeType.INCOME);
-
                 paymentDetailsList.add(pd);
                 row = parseChartRow(iterator.next());
 
@@ -140,5 +148,3 @@ public class HtmlDocParser extends AbstractDocParser{
     }
 
 }
-
-

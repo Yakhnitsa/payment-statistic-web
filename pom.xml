@@ -94,6 +94,20 @@
             <version>${spring.boot.starter.data.jpa.version}</version>
         </dependency>
 
+        <!--security configuration-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--thymeleaf dependencies for Spring security-->
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

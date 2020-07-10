@@ -165,4 +165,40 @@ The following guides illustrate how to use some features concretely:
     `import numeral from 'numeral'`
     Форматируем где это нужно:
     var string = numeral(1000).format('0,0');
+    
+    
+## Настраиваем spring security
+   Добавляем зависимости:
+           
+    <!--security configuration-->
+   
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+   Настраиваем пользователя User implements UserDetails и Role implements GrantedAuthority
+   
+   Настраиваем EncriptionConfig, создаем конфигурацию с одним бином:
+       
+       @Bean
+       public PasswordEncoder getPasswordEncoder(){
+           return new BCryptPasswordEncoder(8);
+       } 
+   Настраиваем конфигурацию SpringSecurity WebSecurityConfig
+    ....
+   Настраиваем хранилище сущностей и кодировку паролей
+    
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                    .userDetailsService(userService)
+                    .passwordEncoder(passwordEncoder);
+        } 
+        
+   Требуется UserService, и UserReop добавляем
+   
+   Добавляем страницу логирования:
+   //templates/users/login
+   И настраиваем WebMvcConfig для работы с данными страницами:
+   
      

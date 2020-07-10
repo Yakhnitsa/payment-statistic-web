@@ -4,10 +4,9 @@ package com.yurets_y.payment_statistic_web.parser;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.resources.TestFilesConfig;
-import com.yurets_y.payment_statistic_web.service.DocParser;
+import com.yurets_y.payment_statistic_web.service.parser_services.DocParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
