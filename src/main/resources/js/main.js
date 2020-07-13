@@ -5,6 +5,8 @@ import router from 'router/router'
 import store from 'store/store'
 import 'util/filters'
 
+import 'babel-polyfill'
+
 Vue.use(VueResouce)
 
 new Vue({

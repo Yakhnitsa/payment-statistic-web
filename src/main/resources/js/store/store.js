@@ -198,52 +198,32 @@ export default new Vuex.Store({
             }).catch((error) => console.log(error));
         },
 
-        uploadListsOnServerAction({commit,state}) {
-            const formData = new FormData();
+        async uploadListsOnServerAction({commit,state}) {
+            const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
+            const data = await response.data;
+            commit('addChosenFilesMutation',[])
+            commit('setTepListsMutation',data)
+        },
 
-            for(var index = 0; index < state.uploadedData.files.length; index++) {
-                formData.append("files", state.uploadedData.files[index]);
+        async saveSelectedListsAction({commit,state},lists){
+            const response = await uploadApi.saveSelected(lists)
+            if(response.status === 200){
+                const data = await response.data
+                commit('setTepListsMutation',data)
+            }else{
+                console.log("ERROR IN SAVE SELECTED LIST ACTION!!!")
             }
 
-            const csrfToken = $("meta[name='_csrf']").attr("content");
-            formData.append("_csrf",csrfToken);
-
-            uploadApi.uploadListsOnServer(state.uploadedData.files).then(response =>{
-                if(response.status == 200){
-                    commit('addChosenFilesMutation',[])
-                    commit('setTepListsMutation',response.data)
-
-                }
-                else if(response.status == 204){
-                    console.log("no content!");
-                }
-            }).catch((error) => console.log(error));
         },
 
-        saveSelectedListsAction({commit,state},lists){
-            const csrfToken = $("meta[name='_csrf']").attr("content");
-            axios({
-                method:'post',
-                url: '/api/save-temp-selected',
-                data: lists,
-                headers:{
-                    'X-CSRF-Token': csrfToken
-                }
-            }).then(response =>{
-                if(response.status == 200){
-                    commit('setTepListsMutation',response.data)
-                }
-            }).catch((error) => console.log(error));
-
-        },
-
-        deleteSelectedListsAction({commit,state},lists){
-            axios.post('/api/delete-temp-selected',lists)
-                .then(response =>{
-                    if(response.status ==200){
-                        commit('setTepListsMutation',response.data)
-                    }
-            }).catch(error => console.log(error))
+        async deleteSelectedListsAction({commit,state},lists){
+            const response = await uploadApi.deleteSelected(lists)
+            if(response.status === 200){
+                const data = await response.data
+                commit('setTepListsMutation',data)
+            }else{
+                console.log("ERROR IN DELETE SELECTED ACTION")
+            }
         },
 
         // Методы обработки статистических данных

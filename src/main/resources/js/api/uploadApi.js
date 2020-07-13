@@ -3,22 +3,44 @@ const CSRF_TOKEN = $("meta[name='_csrf']").attr("content")
 
 export default{
 
-    uploadListsOnServer: files => {
+    async uploadListsOnServer(files){
         const formData = new FormData();
 
         for(var index = 0; index < files.length; index++) {
             formData.append("files", files[index]);
         }
 
-        formData.append("_csrf", CSRF_TOKEN);
-        axios.post('/api/upload-multiple',
+        // formData.append("_csrf", CSRF_TOKEN);
+        return await axios.post('/api/upload-multiple',
             formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'X-CSRF-Token': CSRF_TOKEN
                 }
 
-            }
-        )
+            })
     },
+
+    async saveSelected(lists) {
+        return await axios({
+            method:'post',
+            url: '/api/save-temp-selected',
+            data: lists,
+            headers:{
+                'X-CSRF-Token': CSRF_TOKEN
+            }
+        })
+    },
+
+    async deleteSelected(lists){
+        return await axios({
+            method:'post',
+            url: '/api/delete-temp-selected',
+            data: lists,
+            headers:{
+                'X-CSRF-Token': CSRF_TOKEN
+            }
+        })
+    }
 
 }
