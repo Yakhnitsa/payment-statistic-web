@@ -32,13 +32,12 @@ import java.util.*;
 @Controller
 public class MainController {
 
-    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final int RECORDS_PER_PAGE = 30;
 
     private PaymentListService paymentListService;
 
     private MessageProvider messageProvider;
-    
+
     @GetMapping
     public String paymentStatistic() {
         return "index";

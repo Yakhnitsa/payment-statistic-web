@@ -2,9 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-import axios from 'axios'
+import axios from '../axios/axios'
 
 import statisticApi from '../api/statisticApi'
+import uploadApi from '../api/uploadApi'
 
 // Централизованное хранилище Vuex для данных приложения
 export default new Vuex.Store({
@@ -198,20 +199,16 @@ export default new Vuex.Store({
         },
 
         uploadListsOnServerAction({commit,state}) {
-            var formData = new FormData();
+            const formData = new FormData();
 
             for(var index = 0; index < state.uploadedData.files.length; index++) {
                 formData.append("files", state.uploadedData.files[index]);
             }
 
-            axios.post('/api/upload-multiple',
-                formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+            const csrfToken = $("meta[name='_csrf']").attr("content");
+            formData.append("_csrf",csrfToken);
 
-                }
-            ).then(response =>{
+            uploadApi.uploadListsOnServer(state.uploadedData.files).then(response =>{
                 if(response.status == 200){
                     commit('addChosenFilesMutation',[])
                     commit('setTepListsMutation',response.data)
@@ -224,10 +221,15 @@ export default new Vuex.Store({
         },
 
         saveSelectedListsAction({commit,state},lists){
-            axios.post('/api/save-temp-selected',
-                lists, {
+            const csrfToken = $("meta[name='_csrf']").attr("content");
+            axios({
+                method:'post',
+                url: '/api/save-temp-selected',
+                data: lists,
+                headers:{
+                    'X-CSRF-Token': csrfToken
                 }
-            ).then(response =>{
+            }).then(response =>{
                 if(response.status == 200){
                     commit('setTepListsMutation',response.data)
                 }

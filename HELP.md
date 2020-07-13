@@ -210,3 +210,31 @@ The following guides illustrate how to use some features concretely:
    Ставим active-true
    Пароль: шифруем через [шифровщик](https://bcrypt-generator.com/)  
    Все, теперь эта хрень должна работать.
+   
+## Включаем csrf protection в post запросах:
+   В шаблоне thymeleaf включаем csrf token
+   
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>  
+   Получаем данные на стороне клиента
+     `const CSRF_TOKEN = $("meta[name='_csrf']").attr("content")`
+   Прикладываем данные к форме 
+    
+    formData.append("_csrf", CSRF_TOKEN);
+           axios.post('/api/upload-multiple',
+               formData, {
+                   headers: {
+                       'Content-Type': 'multipart/form-data'
+                   }
+   
+               }
+           )
+   Либо вкладываем в заголовок:
+        
+        axios({
+            method:.....
+            url: ....
+            data: .....
+            headers:{
+                'X-CSRF-Token': csrfToken
+            }       

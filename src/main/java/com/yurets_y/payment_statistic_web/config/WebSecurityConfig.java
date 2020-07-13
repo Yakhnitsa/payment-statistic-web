@@ -32,8 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        "/station-payment",
                         "/users/registration", "/login", "/test", "/static/**").permitAll()
                     .anyRequest().authenticated()
-//                .and()
-//                    .csrf().disable().authorizeRequests().anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
@@ -43,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .permitAll();
 
-        http.csrf().disable();
+//        http.csrf().disable();
 
     }
 
