@@ -49,17 +49,17 @@ public class ControllerTestConfig {
             }
 
             @Override
-            public Page<PaymentList> getAll(Pageable pageable) {
+            public Page<PaymentList> getAll(Pageable pageable, Integer payerCode) {
                 return null;
             }
 
             @Override
-            public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
+            public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until, Integer paymentCode) {
                 return null;
             }
 
             @Override
-            public List<PaymentList> getByPeriod(Date from, Date until) {
+            public List<PaymentList> getByPeriod(Date from, Date until, Integer payerCode) {
                 return null;
             }
 
@@ -74,7 +74,7 @@ public class ControllerTestConfig {
             }
 
             @Override
-            public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
+            public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil, Integer payerCode) {
                 return null;
             }
         };

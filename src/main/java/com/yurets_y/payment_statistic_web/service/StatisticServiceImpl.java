@@ -39,14 +39,14 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public DailyStatisticDto getDailyStatistic(Date dateFrom, Date dateUntil) {
+    public DailyStatisticDto getDailyStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
-        List<PaymentList> payments = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
+        List<PaymentList> payments = paymentListRepo.findAllByDateBetweenAndPayerCode(dateFrom,dateUntil,payerCode);
 
         Map<String, Map<Date,Long>> paymentsMap = getMapFromPaymentList(payments);
 
-        List<DateStringLongDto> details = statisticRepo.getDailyStatisticByType(dateFrom,dateUntil);
-        List<DateStringLongDto> expByStations = statisticRepo.getDailyStatisticGroupByStation(dateFrom,dateUntil);
+        List<DateStringLongDto> details = statisticRepo.getDailyStatisticByPaymentCodeGroupByType(dateFrom,dateUntil,payerCode);
+        List<DateStringLongDto> expByStations = statisticRepo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
 
         Map<String, Map<Date,Long>> detailsMap = details
                 .stream()
@@ -70,7 +70,7 @@ public class StatisticServiceImpl implements StatisticService {
 
 
     @Override
-    public ChartDto getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer averageIndex) {
+    public ChartDto getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer averageIndex, Integer payerCode) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
 
         List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatistic(dateFrom,dateUntil);
@@ -108,7 +108,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public List<YearStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil) {
+    public List<YearStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
         List<YearStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
 
         List<DateStringLongDto> paymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);

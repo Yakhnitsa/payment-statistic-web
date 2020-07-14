@@ -42,17 +42,21 @@ public interface StatisticRepo extends org.springframework.data.repository.Repos
 
     @Query("select new com.yurets_y.payment_statistic_web.dto.DateStringLongDto(pd.date, pd.type, sum(pd.totalPayment)) " +
             "from PaymentDetails pd " +
-            "where pd.date between :date_from and :date_until " +
+            "where pd.paymentList.payerCode = :payer_code and pd.date between :date_from and :date_until " +
             "group by pd.date, pd.type")
-    List<DateStringLongDto> getDailyStatisticByType(@Param("date_from") Date dateFrom,
-                                                    @Param("date_until") Date dateUntil);
+    List<DateStringLongDto> getDailyStatisticByPaymentCodeGroupByType(@Param("date_from") Date dateFrom,
+                                                                      @Param("date_until") Date dateUntil,
+                                                                      @Param("payer_code") Integer payerCode
+                                                                      );
 
     @Query("select new com.yurets_y.payment_statistic_web.dto.DateStringLongDto(pd.date, CONCAT(pd.stationCode,' ',pd.stationName), sum(pd.totalPayment)) " +
             "from PaymentDetails pd " +
-            "where pd.date between :date_from and :date_until " +
+            "where pd.paymentList.payerCode = :payer_code and pd.date between :date_from and :date_until " +
             "group by pd.date, pd.stationName")
-    List<DateStringLongDto> getDailyStatisticGroupByStation(@Param("date_from") Date dateFrom,
-                                                    @Param("date_until") Date dateUntil);
+    List<DateStringLongDto> getDailyStatisticByPaymentCodeGroupByStation(@Param("date_from") Date dateFrom,
+                                                                         @Param("date_until") Date dateUntil,
+                                                                         @Param("payer_code") Integer payerCode
+    );
 
 
     @Query("select new com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry( " +

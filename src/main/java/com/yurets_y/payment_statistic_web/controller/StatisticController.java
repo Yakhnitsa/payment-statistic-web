@@ -54,6 +54,7 @@ public class StatisticController {
     public ResponseEntity<?> dailyChartStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode,
             @RequestParam(defaultValue = "3") Integer averageIndex
     ){
         if (dateFrom == null || dateUntil == null) {
@@ -61,7 +62,7 @@ public class StatisticController {
         }
         //        TODO - сделать проверку периода
 
-        ChartDto dto = statisticService.getDailyChartStatistic(dateFrom,dateUntil,averageIndex);
+        ChartDto dto = statisticService.getDailyChartStatistic(dateFrom,dateUntil,averageIndex,payerCode);
         return new ResponseEntity<ChartDto>(dto,HttpStatus.OK);
 
     }
@@ -69,26 +70,28 @@ public class StatisticController {
     @GetMapping("/daily-statistic")
     public ResponseEntity<?> getDailyStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode
     ) throws ParseException {
         if (dateFrom == null || dateUntil == null) {
             return new ResponseEntity<String>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
         }
 //        TODO - сделать проверку периода
-        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
+        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil,payerCode);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("year-chart")
     public ResponseEntity<?> getYearStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode
     ){
         if (dateFrom == null || dateUntil == null) {
             return new ResponseEntity<>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
         }
 
-        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil);
+        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
 
         return new ResponseEntity<>(dto,HttpStatus.OK);
 

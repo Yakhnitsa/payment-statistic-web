@@ -171,6 +171,7 @@ public abstract class AbstractDocParser implements DocParser{
 
 
     protected long getLongFromPattern(String matchedString, String stringPattern) {
+        if(matchedString.equals("")) return 0L;
         Pattern pattern = Pattern.compile(stringPattern);
         Matcher matcher = pattern.matcher(matchedString);
         if (matcher.matches()) {
@@ -182,7 +183,7 @@ public abstract class AbstractDocParser implements DocParser{
             return Long.parseLong(numbString.replaceAll("[,.]",""));
         }
 
-        return -1L;
+        return 0L;
     }
 
     void checkSumTest(PaymentList paymentList) {

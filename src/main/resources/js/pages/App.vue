@@ -8,7 +8,7 @@
         -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
-            <select class="selectpicker btn btn-light show-tick" v-model="paymentCode">
+            <select class="selectpicker btn btn-light show-tick" v-model="payerCode">
                 <option v-for="code in paymentCodes">{{code}}</option>
             </select>
 
@@ -52,11 +52,12 @@
             }
         },
         computed:{
-            paymentCode:{
+            payerCode:{
                 get() {
-                    return this.$store.state.paymentCode;
+                    return this.$store.state.payerCode;
                 },
                 set(code){
+
                     this.$store.commit('setPayerCodeMutation',code)
                 }
             }
@@ -70,7 +71,7 @@
                 console.log(event)
             },
             setDefaultCode(){
-                let code = this.$store.state.paymentCode;
+                let code = this.$store.state.payerCode;
                 if(code === '' && paymentCodes.length > 0){
                     this.$store.commit('setPayerCodeMutation',paymentCodes[0])
                 }

@@ -62,13 +62,14 @@ public class DownloadFilesController {
     public ResponseEntity<?> serveArchive(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode,
             HttpServletRequest request
     ) throws ParseException, IOException {
         if (dateFrom == null || dateUntil == null) {
             String message = messageProvider.get("application.controller.void-request-param");
             return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
         }
-        Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil);
+        Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil,payerCode);
 
         String contentType = "application/zip";
         try {

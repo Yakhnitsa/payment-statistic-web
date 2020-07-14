@@ -118,6 +118,9 @@
 
             dateArray(){
                 return this.dailyStatistic.dates;
+            },
+            payerCode(){
+                return this.$store.state.payerCode;
             }
 
         },
@@ -129,6 +132,7 @@
                 const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
+                    payerCode: this.payerCode
                 };
                 this.$store.commit('setDailyStatisticPeriod',params)
                 this.getDailyStatisticAction(params)
@@ -197,9 +201,9 @@
             //         )
             // },
 
-            formatDate(date){
-                return new Date(date).toLocaleDateString()
-            }
+            // formatDate(date){
+            //     return new Date(date).toLocaleDateString()
+            // }
         },
         created(){
 

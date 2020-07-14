@@ -19,5 +19,9 @@ export default{
         method: 'GET',
         params,
         responseType: 'blob',
-    })
+    }),
+    downloadTempList: () => axios.get('/api/download-temp'),
+
+    getSinglePayment: params => axios.get('/api/single-payment',{ params})
+
 }

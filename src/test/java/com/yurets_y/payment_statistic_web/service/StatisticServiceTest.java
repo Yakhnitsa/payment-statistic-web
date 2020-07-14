@@ -52,8 +52,9 @@ public class StatisticServiceTest {
     public void paymentStatisticDtoTest() throws ParseException {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
+        int payerCode = 8210260;
 
-        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil);
+        DailyStatisticDto dto = statisticService.getDailyStatistic(dateFrom,dateUntil,payerCode);
         assertThat(dto.getPayments().size()).isEqualTo(20);
 
     }
@@ -61,15 +62,17 @@ public class StatisticServiceTest {
     public void chartDtoTest() throws ParseException {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
+        int payerCode = 8210260;
 
-        statisticService.getDailyChartStatistic(dateFrom,dateUntil,3);
+        statisticService.getDailyChartStatistic(dateFrom,dateUntil,3, payerCode);
     }
     @Test
     public void yearChartDtoTest() throws ParseException {
         Date dateFrom = format.parse("2020-04-01");
         Date dateUntil = format.parse("2020-04-30");
+        int payerCode = 8210260;
 
-        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil);
+        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
         dto.size();
     }
 

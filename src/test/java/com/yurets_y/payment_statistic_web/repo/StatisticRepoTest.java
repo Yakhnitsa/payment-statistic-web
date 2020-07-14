@@ -43,6 +43,7 @@ public class StatisticRepoTest {
     public void simpleQueryTest() throws ParseException {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
+        Integer payerCode = 8210260;
 
         List result = repo.getChartExpensesStatistic(dateFrom,dateUntil);
         result.size();
@@ -55,6 +56,7 @@ public class StatisticRepoTest {
     public void getStatisticByTypeTest() throws ParseException {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
+        Integer payerCode = 8210260;
 
         List result = repo.getChartStatisticGroupByType(dateFrom,dateUntil);
         result.size();
@@ -65,6 +67,7 @@ public class StatisticRepoTest {
     public void getStatisticByStationTest() throws ParseException {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-20");
+        Integer payerCode = 8210260;
 
         List result = repo.getChartStatisticGroupByStation(dateFrom,dateUntil);
         result.size();
@@ -74,7 +77,9 @@ public class StatisticRepoTest {
     public void getDailyStatisticByStationTest() throws ParseException{
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-02");
-        List<DateStringLongDto> dataList = repo.getDailyStatisticGroupByStation(dateFrom,dateUntil);
+        Integer payerCode = 8210260;
+
+        List<DateStringLongDto> dataList = repo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
         String mykolaiv = "415207 МИКОЛАїВ-ВАНТАЖНИЙ";
         Long summary = dataList
                 .stream()
@@ -103,6 +108,7 @@ public class StatisticRepoTest {
     public void getYearStatisticTest() throws ParseException {
         Date dateFrom = format.parse("2020-02-01");
         Date dateUntil = format.parse("2020-06-30");
+        Integer payerCode = 8210260;
 
         List result = repo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
         result.size();
@@ -111,6 +117,7 @@ public class StatisticRepoTest {
     public void getYearStatisticByTypesTest() throws ParseException {
         Date dateFrom = format.parse("2020-02-01");
         Date dateUntil = format.parse("2020-06-30");
+        Integer payerCode = 8210260;
 
         List result = repo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
         result.size();

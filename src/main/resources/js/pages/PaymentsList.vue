@@ -88,6 +88,7 @@
     import axios from 'axios'
     import {mapActions,mapState} from 'vuex'
     import LoadingWindow from "../components/LoadingWindow.vue";
+    import paymentListApi from "../api/paymentListApi"
     export default {
         name: "PaymentsTable",
         components: {LoadingWindow},
@@ -136,8 +137,17 @@
             },
             totalPages(){
                 return this.$store.state.paymentListPage.totalPages
+            },
+            payerCode(){
+                return this.$store.state.payerCode
             }
 
+        },
+        watch:{
+            payerCode(newVal){
+                alert("Код плательщика изменен на: " + newVal)
+                this.loadPage(this.currentPage);
+            }
         },
 
         created: function(){
@@ -155,6 +165,7 @@
                     page,
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
+                    payerCode: this.payerCode
                 }
                 this.$store.commit('setPaymentListPeriod',params)
                 this.getPaymentListsAction(params)
@@ -166,7 +177,7 @@
                     payerCode: payment.payerCode,
                 };
 
-                axios.get('/api/single-payment',{ params})
+                paymentListApi.getSinglePayment(params)
                     .then(function (response) {
                     //    TODO Реализовать отображение перечня в окне
                     console.log(response)
@@ -185,19 +196,22 @@
                 // this.$store.commit('deletePaymentListMutation',paymentList)
             },
             downloadArchive(){
-
-                const period = {
+                const params = {
                     dateFrom: this.dateFrom,
-                    dateUntil: this.dateUntil
+                    dateUntil: this.dateUntil,
+                    payerCode: this.payerCode
+
                 }
-                const length = this.periodLength(period)
+                console.log(params);
+
+                const length = this.periodLength(params)
                 if(Number.isNaN(length) || length > 60 || length < 1){
                     let message = 'Неверно выбранный период, период архива должен быль больше 0 и меньше 60 дней. ' +
                         'Запрашиваемый период: ' + length + ' дней.'
                     this.showWarningMessage(message)
                     return
                 }
-                this.$store.dispatch('downloadPaymentListsArchiveAction', period)
+                this.$store.dispatch('downloadPaymentListsArchiveAction', params)
             },
             //Проверка размера периода, не больше 60 дней в архиве
             periodLength(period){
@@ -206,7 +220,7 @@
                 return (until -  from)/(60 * 60 * 24 * 1000)
             },
             showWarningMessage(message){
-                console.log(message)
+                alert(message)
             //    TODO Реализовать всплывающее окно о неправильном периоде
             }
 

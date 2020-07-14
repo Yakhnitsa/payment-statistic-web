@@ -10,16 +10,13 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -87,40 +84,26 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public Page<PaymentList> getAll(Pageable pageable) {
-        Page<PaymentList> page = paymentListRepo.findAll(pageable);
+    public Page<PaymentList> getAll(Pageable pageable, Integer paymentCode) {
+        Page<PaymentList> page = paymentListRepo.findAllByPayerCode(pageable,paymentCode);
         return page;
     }
 
     @Override
-    public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
-        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable, from, until);
-//        paymentList.forEach(this::loadBackupFile);
-        PaymentListDto dto = new PaymentListDto(
-                page.getContent(),
-                page.getNumber(),
-                page.getTotalPages());
+    public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until, Integer paymentCode) {
+        Page<PaymentList> page = paymentListRepo.findAllByDateBetweenAndPayerCode(pageable, from, until,paymentCode);
         return page;
     }
 
     @Override
-    public List<PaymentList> getByPeriod(Date from, Date until) {
-        return paymentListRepo.findAllByDateBetween(from, until);
+    public List<PaymentList> getByPeriod(Date from, Date until, Integer paymentCode) {
+        return paymentListRepo.findAllByDateBetweenAndPayerCode(from, until,paymentCode);
     }
 
     @Override
     public boolean contains(PaymentList paymentList) {
         return paymentListRepo.existsById(paymentList.getId());
     }
-
-    private void testBeforeSave(@NotNull PaymentList paymentList) {
-        if (paymentList.getBackupFilePath() == null) {
-            throw new NullPointerException("Ошибка backup файла для перечня " + paymentList);
-        }
-    }
-
-
-
 
     @Override
     public Resource getFileAsResource(String filename) throws FileNotFoundException {
@@ -140,14 +123,12 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
-    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
-        List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetween(dateFrom, dateUntil);
+    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil, Integer paymentCode) {
+        List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetweenAndPayerCode(dateFrom, dateUntil,paymentCode);
         List<String> fileNames = paymentLists
                 .stream()
                 .map(PaymentList::getBackupFilePath)
                 .collect(Collectors.toList());
-
-
         try {
             Path file = getFilesArchive(fileNames);
             Resource resource = new UrlResource(file.toUri());
@@ -227,6 +208,11 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         }
         paymentList.setBackupFilePath(fileName);
 
+    }
+    private void testBeforeSave(@NotNull PaymentList paymentList) {
+        if (paymentList.getBackupFilePath() == null) {
+            throw new NullPointerException("Ошибка backup файла для перечня " + paymentList);
+        }
     }
 }
 

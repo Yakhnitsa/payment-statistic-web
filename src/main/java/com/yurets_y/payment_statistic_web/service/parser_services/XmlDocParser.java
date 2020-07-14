@@ -47,6 +47,9 @@ public class XmlDocParser extends AbstractDocParser{
         if (cellList.size() >= 4 && cellList.get(2).matches(closingBalancePattern)) {
             paymentList.setClosingBalance(-getLongFromPattern(cellList.get(3), NUMBER_PATTERN));
         }
+        if (cellList.size() >= 3 && cellList.get(1).matches(closingBalancePattern)) {
+            paymentList.setClosingBalance(-getLongFromPattern(cellList.get(2), NUMBER_PATTERN));
+        }
     }
 
     @Override

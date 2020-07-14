@@ -56,14 +56,15 @@ public class MainController {
             ) Pageable pageable,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode,
             @RequestParam(value = "page") Integer pageNumb
 
     ) throws ParseException {
         Page<PaymentList> page = null;
         if(dateFrom == null || dateUntil == null){
-            page = paymentListService.getAll(pageable);
+            page = paymentListService.getAll(pageable,payerCode);
         }else{
-            page = paymentListService.getPageByPeriod(pageable,dateFrom,dateUntil);
+            page = paymentListService.getPageByPeriod(pageable,dateFrom,dateUntil,payerCode);
         }
 
         return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());

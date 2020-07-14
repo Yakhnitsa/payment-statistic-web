@@ -12,7 +12,7 @@ import paymentListApi from "../api/paymentListApi";
 export default new Vuex.Store({
     // Состояние объекта, массивы и прочее
     state: {
-        paymentCode:'',
+        payerCode:'',
         dailyStatistic: {
             dates:[],
             details:[],
@@ -61,7 +61,7 @@ export default new Vuex.Store({
     mutations: {
 
         setPayerCodeMutation(state,code){
-          state.paymentCode = code
+          state.payerCode = code
         },
 
         addPaymentListsMutation(state,data){
@@ -77,7 +77,7 @@ export default new Vuex.Store({
 
         deletePaymentListMutation(state,list){
             const index = state.paymentListPage.paymentLists.findIndex(element =>
-                (element.number === list.number) && (element.payerCode == list.payerCode)
+                (element.number === list.number) && (element.payerCode === list.payerCode)
             )
             if(index >-1){
                 state.paymentListPage.paymentLists.splice(index, 1);
@@ -187,9 +187,9 @@ export default new Vuex.Store({
 
         /*Методы для загрузки перечней на сервер*/
         loadTempListsFromServerAction({commit}){
-            axios.get('/api/download-temp')
+            paymentListApi.downloadTempList()
                 .then(response =>{
-                if(response.status == 200){
+                if(response.status === 200){
                     commit('setTepListsMutation',response.data)
                 }
 
