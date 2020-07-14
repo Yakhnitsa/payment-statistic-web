@@ -6,6 +6,7 @@ import axios from '../axios/axios'
 
 import statisticApi from '../api/statisticApi'
 import uploadApi from '../api/uploadApi'
+import paymentListApi from "../api/paymentListApi";
 
 // Централизованное хранилище Vuex для данных приложения
 export default new Vuex.Store({
@@ -130,19 +131,14 @@ export default new Vuex.Store({
         }
 
     },
-    // Асинхронные запросы на изменение данных хранилища
-    actions:{
-        /**/
 
+    actions:{
 
         getPaymentListsAction({commit,state},params){
-
-            axios.get('/api/payments',{params})
+            paymentListApi.getPaymentLists(params)
                 .then(response => {
                         commit('addPaymentListsMutation',response.data)
-
                     }
-
                 )
         },
 
@@ -151,8 +147,8 @@ export default new Vuex.Store({
             console.log(data);
         },
 
-        deletePaymentListAction({commit,state},data){
-            axios.delete('/api/remove-payment', { data: data})
+        deletePaymentListAction({commit,state},list){
+            paymentListApi.deletePaymentList(list)
                 .then(function (response) {
                     commit('deletePaymentListMutation',response.data)
             })
@@ -160,12 +156,7 @@ export default new Vuex.Store({
         },
 
         downloadPaymentListAction({commit,state},file){
-            axios({
-                url: '/api/download/file/' + file,
-                method: 'GET',
-                params:{file: file},
-                responseType: 'blob',
-            }).then((response) => {
+            paymentListApi.downloadPaymentList(file).then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
@@ -176,15 +167,17 @@ export default new Vuex.Store({
         },
 
         downloadPaymentListsArchiveAction({},params){
-            axios({
-                url: '/api/download/archive',
-                method: 'GET',
-                params,
-                responseType: 'blob',
-            }).then((response) => {
+            paymentListApi.downloadArchive(params).then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
-                const achName = 'archive.zip';
+                let achName = 'archive.zip'
+                const disposition = response.headers['content-disposition']
+                if (disposition && disposition.indexOf('attachment') !== -1) {
+                    const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                    let matches = filenameRegex.exec(disposition);
+                    if (matches != null && matches[1]) achName = matches[1].replace(/['"]/g, '');
+                }
+
                 link.href = url;
                 link.setAttribute('download', achName);
                 document.body.appendChild(link);
@@ -256,3 +249,4 @@ export default new Vuex.Store({
     }
 
 })
+

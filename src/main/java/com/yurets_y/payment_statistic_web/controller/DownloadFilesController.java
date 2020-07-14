@@ -2,9 +2,12 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +22,12 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api/download")
 public class DownloadFilesController {
-    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+    private final String WRONG_PARAMETERS_MESSAGE = "application.controller.void-request-param";
 
     private PaymentListService paymentListService;
+
+    private MessageProvider messageProvider;
 
     @Autowired
     public DownloadFilesController(PaymentListService paymentListService) {
@@ -53,17 +59,14 @@ public class DownloadFilesController {
 
     @GetMapping("/archive")
     @ResponseBody
-    public ResponseEntity<Resource> serveArchive(
-            @RequestParam(value = "dateFrom") String from,
-            @RequestParam(value = "dateUntil") String until,
+    public ResponseEntity<?> serveArchive(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             HttpServletRequest request
     ) throws ParseException, IOException {
-        Date dateFrom = null;
-        Date dateUntil = null;
-
-        if ((!"".equals(from)) && (!"".equals(until))) {
-            dateFrom = DATE_FORMAT.parse(from);
-            dateUntil = DATE_FORMAT.parse(until);
+        if (dateFrom == null || dateUntil == null) {
+            String message = messageProvider.get("application.controller.void-request-param");
+            return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
         }
         Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil);
 
@@ -74,11 +77,18 @@ public class DownloadFilesController {
             System.out.println("Could not determine file type.");
         }
 
+        String arcName = String.format("archive_%1$tY_%1$tm_%1$td__%2$tY_%2$tm_%2$td.zip", dateFrom,dateUntil);
+
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .contentLength(resource.contentLength())
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + arcName + "\"")
                 .body(resource);
     }
+
+    @Autowired
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
+
 }

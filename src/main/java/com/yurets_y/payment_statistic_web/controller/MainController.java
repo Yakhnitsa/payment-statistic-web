@@ -83,6 +83,7 @@ public class MainController {
 
     @DeleteMapping("/api/remove-payment")
     @ResponseBody
+    @JsonView(Views.NormalView.class)
     public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id) {
         if (paymentListService.remove(id)) {
             return new ResponseEntity<>(id, HttpStatus.OK);
