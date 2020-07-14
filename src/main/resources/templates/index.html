@@ -20,8 +20,11 @@
 
 <!--</head>-->
 <head th:replace="site-head :: site-head">
+
 </head>
 <body>
+    <div th:include="site-head :: csrf-token"></div>
+    <script th:include="site-head :: payment-codes"></script>
 
     <div id="app">
 

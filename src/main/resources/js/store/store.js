@@ -11,6 +11,7 @@ import uploadApi from '../api/uploadApi'
 export default new Vuex.Store({
     // Состояние объекта, массивы и прочее
     state: {
+        paymentCode:'',
         dailyStatistic: {
             dates:[],
             details:[],
@@ -57,6 +58,10 @@ export default new Vuex.Store({
     },
     // Методы для изменения объектов приолжения
     mutations: {
+
+        setPayerCodeMutation(state,code){
+          state.paymentCode = code
+        },
 
         addPaymentListsMutation(state,data){
             state.paymentListPage.paymentLists = [...data.list];

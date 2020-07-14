@@ -19,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +40,9 @@ public class MainController {
     private MessageProvider messageProvider;
 
     @GetMapping
-    public String paymentStatistic() {
+    public String paymentStatistic(Model model) {
+        List<String> codes = paymentListService.getPaymentCodes();
+        model.addAttribute("paymentCodes",codes);
         return "index";
     }
 

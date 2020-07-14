@@ -24,6 +24,11 @@ public class ControllerTestConfig {
     public PaymentListService testPaymentListService(){
         return new PaymentListService() {
             @Override
+            public List<String> getPaymentCodes() {
+                return null;
+            }
+
+            @Override
             public void add(PaymentList paymentList) {
 
             }

@@ -61,6 +61,11 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     }
 
     @Override
+    public List<String> getPaymentCodes() {
+        return paymentListRepo.findAllPaymentCodes();
+    }
+
+    @Override
     public boolean remove(PaymentList paymentList) {
 
         boolean exists = paymentListRepo.existsById(paymentList.getId());
@@ -89,7 +94,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Override
     public Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until) {
-        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable,from,until);
+        Page<PaymentList> page = paymentListRepo.findAllByDateBetween(pageable, from, until);
 //        paymentList.forEach(this::loadBackupFile);
         PaymentListDto dto = new PaymentListDto(
                 page.getContent(),
@@ -100,7 +105,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
     @Override
     public List<PaymentList> getByPeriod(Date from, Date until) {
-        return paymentListRepo.findAllByDateBetween(from,until);
+        return paymentListRepo.findAllByDateBetween(from, until);
     }
 
     @Override
@@ -112,6 +117,91 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         if (paymentList.getBackupFilePath() == null) {
             throw new NullPointerException("Ошибка backup файла для перечня " + paymentList);
         }
+    }
+
+
+
+
+    @Override
+    public Resource getFileAsResource(String filename) throws FileNotFoundException {
+        try {
+            Path file = Paths.get(backupDir, filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new FileNotFoundException(
+                        "Could not read file: " + filename);
+
+            }
+        } catch (MalformedURLException e) {
+            throw new FileNotFoundException("Could not read file: " + filename);
+        }
+    }
+
+    @Override
+    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil) {
+        List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetween(dateFrom, dateUntil);
+        List<String> fileNames = paymentLists
+                .stream()
+                .map(PaymentList::getBackupFilePath)
+                .collect(Collectors.toList());
+
+
+        try {
+            Path file = getFilesArchive(fileNames);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Path getFilesArchive(List<String> files) throws IOException {
+        Path zipFilePath = Files.createTempFile("zip_archive", ".zip");
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFilePath))) {
+            files.forEach(filename -> {
+                ZipEntry zipEntry = new ZipEntry(filename);
+                try {
+                    zipOutputStream.putNextEntry(zipEntry);
+                    Path path = Paths.get(backupDir, filename);
+                    zipOutputStream.write(Files.readAllBytes(path));
+                    zipOutputStream.closeEntry();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            });
+
+            return zipFilePath;
+        }
+    }
+
+    private void loadBackupFile(@NotNull PaymentList paymentList) {
+        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
+        if (!file.exists()) {
+
+            throw new RuntimeException("Ошибка загрузки файла для перечня " + paymentList.toString());
+        }
+        paymentList.setBackupFile(file);
+    }
+
+    private void deleteBackupFile(@NotNull PaymentList list) {
+        File file = new File(backupDir + File.separator + list.getBackupFilePath());
+        if (file.exists()) {
+            try {
+                Files.deleteIfExists(file.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка удаления файла перечня " + file);
+            }
+        }
+        if (file.exists()) {
+            throw new RuntimeException("Файл какого-то хера не удалился " + file);
+        }
+
     }
 
     private void saveBackupFile(@NotNull PaymentList paymentList) {
@@ -138,88 +228,5 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         paymentList.setBackupFilePath(fileName);
 
     }
-
-    private void deleteBackupFile(@NotNull PaymentList list) {
-        File file = new File(backupDir + File.separator + list.getBackupFilePath());
-        if (file.exists()) {
-            try {
-                Files.deleteIfExists(file.toPath());
-            } catch (IOException e) {
-                throw new RuntimeException("Ошибка удаления файла перечня " + file);
-            }
-        }
-        if (file.exists()) {
-            throw new RuntimeException("Файл какого-то хера не удалился " + file);
-        }
-
-    }
-
-    private void loadBackupFile(@NotNull PaymentList paymentList) {
-        File file = new File(backupDir + File.separator + paymentList.getBackupFilePath());
-        if (!file.exists()) {
-
-            throw new RuntimeException("Ошибка загрузки файла для перечня " + paymentList.toString());
-        }
-        paymentList.setBackupFile(file);
-    }
-
-    @Override
-    public Resource getFileAsResource(String filename) throws FileNotFoundException  {
-        try {
-            Path file = Paths.get(backupDir,filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            }
-            else {
-                throw new FileNotFoundException(
-                        "Could not read file: " + filename);
-
-            }
-        }
-        catch (MalformedURLException e) {
-            throw new FileNotFoundException("Could not read file: " + filename);
-        }
-    }
-
-    @Override
-    public Resource getFilesArchiveAsResource(Date dateFrom, Date dateUntil){
-        List<PaymentList> paymentLists = paymentListRepo.findAllByDateBetween(dateFrom,dateUntil);
-        List<String> fileNames = paymentLists
-                .stream()
-                .map(PaymentList::getBackupFilePath)
-                .collect(Collectors.toList());
-
-
-        try {
-            Path file = getFilesArchive(fileNames);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Path getFilesArchive(List<String> files) throws IOException {
-        Path zipFilePath = Files.createTempFile("zip_archive",".zip");
-
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFilePath))) {
-            files.forEach( filename ->{
-                ZipEntry zipEntry = new ZipEntry(filename);
-                try {
-                    zipOutputStream.putNextEntry(zipEntry);
-                    Path path = Paths.get(backupDir,filename);
-                    zipOutputStream.write(Files.readAllBytes(path));
-                    zipOutputStream.closeEntry();
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
-            });
-
-            return zipFilePath;
-        }
-    }
 }
+

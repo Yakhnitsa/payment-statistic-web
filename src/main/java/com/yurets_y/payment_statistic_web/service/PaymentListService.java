@@ -22,6 +22,8 @@ public interface PaymentListService {
 
     Page<PaymentList> getAll(Pageable pageable);
 
+    List<String> getPaymentCodes();
+
     Page<PaymentList> getPageByPeriod(Pageable pageable, Date from, Date until);
 
     List<PaymentList> getByPeriod(Date from, Date until);

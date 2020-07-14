@@ -7,7 +7,11 @@
             - Прочья хрень
         -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand" href="#">ЖД статистика</a>
+
+            <select class="selectpicker btn btn-light show-tick" v-model="paymentCode">
+                <option v-for="code in paymentCodes">{{code}}</option>
+            </select>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,6 +37,7 @@
     import PaymentList from './PaymentsList.vue'
     import LoadingWindow from '../components/LoadingWindow.vue'
 
+
     export default{
         components:{
             DailyStatistic,
@@ -41,17 +46,35 @@
         },
         data: function() {
             return{
+                paymentCodes:[],
                 payments:[],
                 loadedPayments:[],
             }
         },
+        computed:{
+            paymentCode:{
+                get() {
+                    return this.$store.state.paymentCode;
+                },
+                set(code){
+                    this.$store.commit('setPayerCodeMutation',code)
+                }
+            }
+        },
         created: function(){
-
+            this.paymentCodes = paymentCodes;
+            this.setDefaultCode()
         },
         methods:{
             test(event){
                 console.log(event)
             },
+            setDefaultCode(){
+                let code = this.$store.state.paymentCode;
+                if(code === '' && paymentCodes.length > 0){
+                    this.$store.commit('setPayerCodeMutation',paymentCodes[0])
+                }
+            }
         }
     }
 

@@ -13,12 +13,25 @@
 
     <!--fav icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <!--csrf tokens-->
-    <meta th:name="_csrf" th:content="${_csrf.token}"/>
-    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-
+    <!--&lt;!&ndash;TODO Вытянуть в отдельный элемент и не показывать в шаблоне логирования&ndash;&gt;-->
+    <!--&lt;!&ndash;csrf tokens&ndash;&gt;-->
+    <!--<meta th:name="_csrf" th:content="${_csrf.token}"/>-->
+    <!--<meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+    <!--<script th:inline="javascript">-->
+        <!--const paymentCodes = [[${paymentCodes}]];-->
+    <!--</script>-->
 
 </head>
+
+<div th:fragment="csrf-token">
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+</div>
+
+<script th:fragment="payment-codes" th:inline="javascript">
+    const paymentCodes = [[${paymentCodes}]];
+</script>
+
 <body>
 
 </body>

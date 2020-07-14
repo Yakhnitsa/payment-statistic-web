@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -25,4 +26,6 @@ public interface PaymentListRepo extends JpaRepository<PaymentList,PaymentListId
 
     List<PaymentList> findAllByDateBetween(Date from, Date until);
 
+    @Query("select distinct pl.payerCode from PaymentList pl")
+    List<String> findAllPaymentCodes();
 }
