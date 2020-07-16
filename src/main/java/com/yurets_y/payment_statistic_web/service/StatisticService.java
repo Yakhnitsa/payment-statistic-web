@@ -15,5 +15,6 @@ public interface StatisticService {
 
     List<ChartStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode);
 
-    List<ChartStatisticDtoEntry> getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode);
+    List<ChartStatisticDtoEntry> getDailyChartStatisticNew(
+            Date dateFrom, Date dateUntil, Integer payerCode, Integer averageIndex);
 }

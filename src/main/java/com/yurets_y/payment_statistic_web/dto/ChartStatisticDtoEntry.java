@@ -10,9 +10,9 @@ public class ChartStatisticDtoEntry {
 
     private Long payments;
 
-    private List<DateStringLongEntry> expensesByType = new ArrayList<>();
+    private List<StringLongEntry> expensesByType = new ArrayList<>();
 
-    private List<DateStringLongEntry> expensesByStation = new ArrayList<>();
+    private List<StringLongEntry> expensesByStation = new ArrayList<>();
 
     public ChartStatisticDtoEntry() {
     }
@@ -41,12 +41,12 @@ public class ChartStatisticDtoEntry {
         return payments;
     }
 
-    public List<DateStringLongEntry> getExpensesByType() {
+    public List<StringLongEntry> getExpensesByType() {
         return expensesByType;
     }
 
 
-    public void setExpensesByType(List<DateStringLongEntry> expensesByType) {
+    public void setExpensesByType(List<StringLongEntry> expensesByType) {
         this.expensesByType = expensesByType;
     }
 
@@ -54,11 +54,11 @@ public class ChartStatisticDtoEntry {
         this.payments = payments;
     }
 
-    public List<DateStringLongEntry> getExpensesByStation() {
+    public List<StringLongEntry> getExpensesByStation() {
         return expensesByStation;
     }
 
-    public void setExpensesByStation(List<DateStringLongEntry> expensesByStation) {
+    public void setExpensesByStation(List<StringLongEntry> expensesByStation) {
         this.expensesByStation = expensesByStation;
     }
 
