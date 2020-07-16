@@ -1,7 +1,7 @@
 package com.yurets_y.payment_statistic_web.repo;
 
 
-import com.yurets_y.payment_statistic_web.dto.DateStringLongDto;
+import com.yurets_y.payment_statistic_web.dto.DateStringLongEntry;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,7 +79,7 @@ public class StatisticRepoTest {
         Date dateUntil = format.parse("2020-05-02");
         Integer payerCode = 8210260;
 
-        List<DateStringLongDto> dataList = repo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
+        List<DateStringLongEntry> dataList = repo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
         String mykolaiv = "415207 МИКОЛАїВ-ВАНТАЖНИЙ";
         Long summary = dataList
                 .stream()
@@ -120,6 +120,14 @@ public class StatisticRepoTest {
         Integer payerCode = 8210260;
 
         List result = repo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
+        result.size();
+    }
+    @Test
+    public void getChartStatisticByPayerCodeGroupByPaymentType() throws ParseException {
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-01");
+        Integer payerCode = 8210260;
+        List result = repo.getChartStatisticByPayerCodeGroupByPaymentType(dateFrom,dateUntil,payerCode);
         result.size();
     }
 

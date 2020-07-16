@@ -45,20 +45,20 @@ public class StatisticServiceImpl implements StatisticService {
 
         Map<String, Map<Date,Long>> paymentsMap = getMapFromPaymentList(payments);
 
-        List<DateStringLongDto> details = statisticRepo.getDailyStatisticByPaymentCodeGroupByType(dateFrom,dateUntil,payerCode);
-        List<DateStringLongDto> expByStations = statisticRepo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
+        List<DateStringLongEntry> details = statisticRepo.getDailyStatisticByPaymentCodeGroupByType(dateFrom,dateUntil,payerCode);
+        List<DateStringLongEntry> expByStations = statisticRepo.getDailyStatisticByPaymentCodeGroupByStation(dateFrom,dateUntil,payerCode);
 
         Map<String, Map<Date,Long>> detailsMap = details
                 .stream()
-                .collect(Collectors.groupingBy(DateStringLongDto::getType,
-                        Collectors.toMap(DateStringLongDto::getDate,DateStringLongDto::getValue)));
+                .collect(Collectors.groupingBy(DateStringLongEntry::getType,
+                        Collectors.toMap(DateStringLongEntry::getDate,DateStringLongEntry::getValue)));
 
         Map<String, Map<Date,Long>> stationsMap = expByStations
                 .stream()
                 .filter(dto -> dto.getType() != null)
-                .collect(Collectors.groupingBy(DateStringLongDto::getType,
+                .collect(Collectors.groupingBy(DateStringLongEntry::getType,
                         TreeMap::new,
-                        Collectors.toMap(DateStringLongDto::getDate,DateStringLongDto::getValue)));
+                        Collectors.toMap(DateStringLongEntry::getDate,DateStringLongEntry::getValue)));
 
         TreeMap<String, Map<Date,Long>> sortedDetails = new TreeMap<>(paymentTypeComparator);
         sortedDetails.putAll(detailsMap);
@@ -73,9 +73,14 @@ public class StatisticServiceImpl implements StatisticService {
     public ChartDto getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer averageIndex, Integer payerCode) {
         List<Date> dates = getDatesArray(dateFrom, dateUntil);
 
-        List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatistic(dateFrom,dateUntil);
+        List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatisticByPayerCode(dateFrom, dateUntil, payerCode);
 
-        List<DateLongEntry> payments = statisticRepo.getChartStatisticByPaymentType(dateFrom,dateUntil,PAYMENT_TYPE);
+        List<DateStringLongEntry> payments = statisticRepo.getChartStatisticByPayerCodeGroupByPaymentType(dateFrom,dateUntil,payerCode);
+
+        List<DateLongEntry> incomePayments = payments.stream()
+                .filter(entity -> entity.getType().equals(PAYMENT_TYPE))
+                .map(entity -> new DateLongEntry(entity.getDate(),entity.getValue()))
+                .collect(Collectors.toList());
 
         List<StringLongEntry> typeChartData = statisticRepo.getChartStatisticGroupByType(dateFrom,dateUntil)
                 .stream()
@@ -88,7 +93,7 @@ public class StatisticServiceImpl implements StatisticService {
                 .collect(Collectors.toList());
 
         List<Long> expensesList = fillBlankDatesAndGetList(dates,expenses);
-        List<Long> paymentsList = fillBlankDatesAndGetList(dates,payments);
+        List<Long> paymentsList = fillBlankDatesAndGetList(dates,incomePayments);
         List<Long> averageStatistic = getAverageStatistic(expensesList,averageIndex);
 
         List<String> datesList = dates
@@ -108,13 +113,13 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public List<YearStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
-        List<YearStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
+    public List<ChartStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
+        List<ChartStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
 
-        List<DateStringLongDto> paymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
+        List<DateStringLongEntry> paymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
 
         dtoEntryList.forEach(dtoEntry ->{
-            List<DateStringLongDto> dailyPayments = paymentsByType
+            List<DateStringLongEntry> dailyPayments = paymentsByType
                     .stream()
                     .filter(dateEntry -> dateEntry.getDate().equals(dtoEntry.getDate()))
                     .collect(Collectors.toList());
@@ -122,11 +127,11 @@ public class StatisticServiceImpl implements StatisticService {
             Long payment = dailyPayments
                     .stream()
                     .filter(typeEntry -> typeEntry.getType().equals(PAYMENT_TYPE))
-                    .mapToLong(DateStringLongDto::getValue).sum();
+                    .mapToLong(DateStringLongEntry::getValue).sum();
 
             dtoEntry.setPayments(payment);
 
-            List<DateStringLongDto> expensesList = dailyPayments
+            List<DateStringLongEntry> expensesList = dailyPayments
                     .stream()
                     .filter(typeEntry -> !typeEntry.getType().equals(PAYMENT_TYPE))
                     .collect(Collectors.toList());
@@ -138,6 +143,39 @@ public class StatisticServiceImpl implements StatisticService {
         );
 
 
+
+        return dtoEntryList;
+    }
+
+
+    @Override
+    public List<ChartStatisticDtoEntry> getDailyChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
+        List<Date> dates = getDatesArray(dateFrom,dateUntil);
+        List<DateStringLongEntry> allPayments = statisticRepo.getChartStatisticByPayerCodeGroupByPaymentType(
+                dateFrom,dateUntil,payerCode);
+        List<DateLongEntry> expenses = statisticRepo.getChartExpensesStatisticByPayerCode(dateFrom,dateUntil,payerCode);
+
+        Map<Date,Long> expMap = expenses.stream()
+                .collect(Collectors.toMap(DateLongEntry::getDate,DateLongEntry::getValue));
+
+        List<DateStringLongEntry> paymentsList = allPayments.stream()
+                .filter(entity -> entity.getType().equals(PAYMENT_TYPE))
+                .collect(Collectors.toList());
+
+        Map<Date,Long> paymentsMap = allPayments.stream()
+                .filter(entity -> entity.getType().equals(PAYMENT_TYPE))
+                .collect(Collectors.toMap(DateStringLongEntry::getDate,DateStringLongEntry::getValue));
+
+        List<ChartStatisticDtoEntry> dtoEntryList = new ArrayList<>();
+        dates.forEach(date -> {
+            ChartStatisticDtoEntry entry = new ChartStatisticDtoEntry();
+            entry.setDate(date);
+            entry.setExpenses(expMap.get(date));
+            entry.setPayments(paymentsMap.get(date));
+
+//           //TODO Добавить затраты по станциям и затраты по типам списаний.
+            dtoEntryList.add(entry);
+        });
 
         return dtoEntryList;
     }

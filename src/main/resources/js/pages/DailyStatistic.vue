@@ -190,6 +190,13 @@
                 }
             }
         },
+
+        watch:{
+            payerCode(newVal){
+                alert("Код плательщика изменен на: " + newVal)
+                this.submitForm()
+            }
+        },
         filters:{
             // formatPayment(num) {
             //     num = num/100;

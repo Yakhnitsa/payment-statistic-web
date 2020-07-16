@@ -2,7 +2,7 @@ package com.yurets_y.payment_statistic_web.service;
 
 
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
-import com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry;
+import com.yurets_y.payment_statistic_web.dto.ChartStatisticDtoEntry;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import com.yurets_y.payment_statistic_web.repo.RepositoryConfig;
@@ -72,7 +72,16 @@ public class StatisticServiceTest {
         Date dateUntil = format.parse("2020-04-30");
         int payerCode = 8210260;
 
-        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
+        List<ChartStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
+        dto.size();
+    }
+
+    @Test
+    public void dailyChartStatisticTest() throws ParseException{
+        Date dateFrom = format.parse("2020-05-01");
+        Date dateUntil = format.parse("2020-05-03");
+        int payerCode = 8210260;
+        List<ChartStatisticDtoEntry> dto = statisticService.getDailyChartStatistic(dateFrom,dateUntil,payerCode);
         dto.size();
     }
 

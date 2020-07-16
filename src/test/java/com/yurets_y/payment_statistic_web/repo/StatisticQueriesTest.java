@@ -44,7 +44,7 @@ public class StatisticQueriesTest {
     @Test
     public void simpleQueryTest() throws ParseException {
         SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
-        String stringQuery = "SELECT new com.yurets_y.payment_statistic_web.dto.DateStringLongDto(pd.date, pd.type, SUM(pd.totalPayment)) " +
+        String stringQuery = "SELECT new com.yurets_y.payment_statistic_web.dto.DateStringLongEntry(pd.date, pd.type, SUM(pd.totalPayment)) " +
                 "from PaymentDetails pd " +
                 "WHERE pd.date BETWEEN :date_from AND :date_until " +
                 "GROUP BY pd.date, pd.type";

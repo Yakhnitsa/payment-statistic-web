@@ -2,8 +2,7 @@ package com.yurets_y.payment_statistic_web.controller;
 
 import com.yurets_y.payment_statistic_web.dto.ChartDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
-import com.yurets_y.payment_statistic_web.dto.YearStatisticDtoEntry;
-import com.yurets_y.payment_statistic_web.entity.Views;
+import com.yurets_y.payment_statistic_web.dto.ChartStatisticDtoEntry;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +90,7 @@ public class StatisticController {
             return new ResponseEntity<>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);
         }
 
-        List<YearStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
+        List<ChartStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
 
         return new ResponseEntity<>(dto,HttpStatus.OK);
 

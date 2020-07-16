@@ -6,7 +6,7 @@ import com.yurets_y.payment_statistic_web.entity.Views;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DateStringLongDto {
+public class DateStringLongEntry {
 
     @JsonView(Views.ShortView.class)
     private Date date;
@@ -17,13 +17,13 @@ public class DateStringLongDto {
     @JsonView(Views.ShortView.class)
     private Long value;
 
-    public DateStringLongDto(Date date, String type, Long value) {
+    public DateStringLongEntry(Date date, String type, Long value) {
         this.date = date;
         this.type = type;
         this.value = value;
     }
 
-    public DateStringLongDto(int year, int month, int day, String type, Long value) {
+    public DateStringLongEntry(int year, int month, int day, String type, Long value) {
         this.date  = new GregorianCalendar(year,month-1,day).getTime();
         this.type = type;
         this.value = value;
