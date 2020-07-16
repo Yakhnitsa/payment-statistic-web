@@ -22,14 +22,9 @@ export default new Vuex.Store({
             dateUntil:''
         },
         dailyChart:{
+            chartData:[],
             dateFrom:'',
             dateUntil:'',
-            labels:[],
-            paymentStatistic:[],
-            expensesStatistic:[],
-            averageStatistic:[],
-            typeChartData:[],
-            stationChartData:[]
         },
         yearChart:{
             dateFrom:'',
@@ -105,15 +100,8 @@ export default new Vuex.Store({
             state.dailyStatistic.dateUntil = period.dateUntil
         },
 
-
-
         addDailyChartMutation(state, data){
-            state.dailyChart.labels = data.labels;
-            state.dailyChart.paymentStatistic = data.paymentStatistic;
-            state.dailyChart.expensesStatistic = data.expensesStatistic;
-            state.dailyChart.averageStatistic = data.averageStatistic;
-            state.dailyChart.typeChartData= data.typeChartData;
-            state.dailyChart.stationChartData = data.stationChartData
+            state.dailyChart.chartData = data
         },
 
         addDailyChartPeriodMutation(state,data){

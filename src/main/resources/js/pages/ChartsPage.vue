@@ -10,7 +10,6 @@
     import DailyCharts from '../components/DailyCharts.vue'
     import YearCharts from '../components/YearCharts.vue'
 
-
     export default {
         name: 'ChartPage',
         components: {

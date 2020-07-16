@@ -102,13 +102,30 @@
         },
         computed:{
             ...mapState({
-                dailyChart: state => state.dailyChart,
-                labels: state => state.dailyChart.labels,// ...
-                expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
-                payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
-                average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
+                dailyChartData: state => state.dailyChart.chartData,
+                // labels: state => state.dailyChart.labels,// ...
+                // expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
+                // payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
+                // average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
 
             }),
+            labels(){
+                this.dailyChartData.map(e => e.day);
+            },
+            expenses(){
+                this.dailyChartData.map(e => e.expenses / 100);
+            },
+            payments(){
+                this.dailyChartData.map(e => e.expenses/ 100);
+            },
+            average(){
+                //TODO make average calculation in frontend
+                this.dailyChartData.map(e => e.expenses / 100);
+            },
+
+            payerCode(){
+              return this.$store.state.payerCode;
+            },
 
             linearChartData(){
                 return{
@@ -278,7 +295,8 @@
                 var params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
-                    averageIndex: 3
+                    averageIndex: 3,
+                    payerCode: this.payerCode
                 }
                 this.$store.dispatch('getDailyChartAction', params)
             },

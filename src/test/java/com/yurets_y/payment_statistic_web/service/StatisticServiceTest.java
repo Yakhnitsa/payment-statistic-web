@@ -2,7 +2,7 @@ package com.yurets_y.payment_statistic_web.service;
 
 
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
-import com.yurets_y.payment_statistic_web.dto.ChartStatisticDtoEntry;
+import com.yurets_y.payment_statistic_web.dto.ChartStatisticDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
 import com.yurets_y.payment_statistic_web.repo.RepositoryConfig;
@@ -72,7 +72,7 @@ public class StatisticServiceTest {
         Date dateUntil = format.parse("2020-04-30");
         int payerCode = 8210260;
 
-        List<ChartStatisticDtoEntry> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
+        List<ChartStatisticDto> dto = statisticService.getYearChartStatistic(dateFrom,dateUntil,payerCode);
         dto.size();
     }
 
@@ -81,7 +81,7 @@ public class StatisticServiceTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-03");
         int payerCode = 8210260;
-        List<ChartStatisticDtoEntry> dto = statisticService.getDailyChartStatisticNew(dateFrom,dateUntil,payerCode,3);
+        List<ChartStatisticDto> dto = statisticService.getDailyChartStatisticNew(dateFrom,dateUntil,payerCode,3);
         dto.size();
     }
 

@@ -111,8 +111,8 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public List<ChartStatisticDtoEntry> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
-        List<ChartStatisticDtoEntry> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
+    public List<ChartStatisticDto> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
+        List<ChartStatisticDto> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
 
         List<DateStringLongEntry> allPaymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
         Map<Date, List<DateStringLongEntry>> paymentsByTypeMap = allPaymentsByType.stream()
@@ -141,8 +141,8 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
 
-    public List<ChartStatisticDtoEntry> getDailyChartStatisticNew(
-            Date dateFrom, Date dateUntil, Integer payerCode, Integer averageIndex) {
+    public List<ChartStatisticDto> getDailyChartStatisticNew(
+            Date dateFrom, Date dateUntil, Integer payerCode) {
 
         /*
         * Получение данных из репозитория
@@ -168,17 +168,20 @@ public class StatisticServiceImpl implements StatisticService {
         /*
         * Заполнение DTO данными
         */
-        List<ChartStatisticDtoEntry> dtoEntryList = new ArrayList<>();
+        List<ChartStatisticDto> dtoEntryList = new ArrayList<>();
         List<Date> dates = getDatesArray(dateFrom,dateUntil);
         dates.forEach(date -> {
-            ChartStatisticDtoEntry entry = new ChartStatisticDtoEntry();
+            ChartStatisticDto entry = new ChartStatisticDto();
             entry.setDate(date);
-            Long payments = paymentsByTypeMap.get(date)
-                    .stream()
-                    .filter(element -> element.getType().equals(PAYMENT_TYPE))
-                    .mapToLong(StringLongEntry::getValue).sum();
+            List<StringLongEntry> paymentsList = paymentsByTypeMap.get(date);
 
-            entry.setPayments(payments);
+            if(paymentsList != null){
+                Long payments = paymentsList.stream()
+                        .filter(element -> element.getType().equals(PAYMENT_TYPE))
+                        .mapToLong(StringLongEntry::getValue).sum();
+                entry.setPayments(payments);
+            }
+
             entry.setExpenses(expMap.get(date));
 
             entry.setExpensesByType(paymentsByTypeMap.get(date));

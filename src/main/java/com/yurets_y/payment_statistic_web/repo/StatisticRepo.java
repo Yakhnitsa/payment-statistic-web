@@ -3,7 +3,7 @@ package com.yurets_y.payment_statistic_web.repo;
 import com.yurets_y.payment_statistic_web.dto.DateLongEntry;
 import com.yurets_y.payment_statistic_web.dto.DateStringLongEntry;
 import com.yurets_y.payment_statistic_web.dto.StringLongEntry;
-import com.yurets_y.payment_statistic_web.dto.ChartStatisticDtoEntry;
+import com.yurets_y.payment_statistic_web.dto.ChartStatisticDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -92,13 +92,13 @@ public interface StatisticRepo extends org.springframework.data.repository.Repos
 
 
 
-    @Query("select new com.yurets_y.payment_statistic_web.dto.ChartStatisticDtoEntry( " +
+    @Query("select new com.yurets_y.payment_statistic_web.dto.ChartStatisticDto( " +
                 "function('YEAR',pl.date), function('MONTH',pl.date),1, sum(pl.paymentVsTaxes)" +
             ") from PaymentList pl " +
             "where pl.date between :date_from and :date_until " +
             "group by function('YEAR',pl.date), function('MONTH',pl.date)")
-    List<ChartStatisticDtoEntry> getYearExpensesStatisticGroupByMonth(@Param("date_from") Date dateFrom,
-                                                                      @Param("date_until") Date dateUntil);
+    List<ChartStatisticDto> getYearExpensesStatisticGroupByMonth(@Param("date_from") Date dateFrom,
+                                                                 @Param("date_until") Date dateUntil);
 
 
     @Query("select new com.yurets_y.payment_statistic_web.dto.DateStringLongEntry(" +
