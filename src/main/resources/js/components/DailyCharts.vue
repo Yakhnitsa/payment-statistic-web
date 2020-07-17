@@ -94,7 +94,8 @@
                     '#759725',
                     '#13ffe2',
                     '#15dd5a'
-                ]
+                ],
+                averageIndex: 3,
 
             }
         },
@@ -117,8 +118,20 @@
                 return this.dailyChartData.map(e => e.payments/ 100);
             },
             average(){
-                //TODO make average calculation in frontend
-                this.dailyChartData.map(e => e.expenses / 100);
+                const averageArray = []
+                for(let i = 0; i < this.expenses.length; i++ ){
+                    let startIndex = i - Math.trunc(this.averageIndex/2);
+                    let endIndex = startIndex + this.averageIndex;
+                    startIndex = startIndex < 0 ? 0 : startIndex;
+
+
+                    // endIndex = endIndex > this.expenses.length ? this.expenses.length : endIndex
+
+                    let micArray = this.expenses.slice(startIndex,endIndex)
+                    let average = micArray.reduce((a, b) => a + b, 0)/ micArray.length
+                    averageArray.push(average)
+                }
+                return averageArray;
             },
 
             payerCode(){
