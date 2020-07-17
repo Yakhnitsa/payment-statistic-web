@@ -139,6 +139,7 @@
                     ]
                 }
             },
+
             stationsChartOptions(){
                 return{
                     responsive: true,

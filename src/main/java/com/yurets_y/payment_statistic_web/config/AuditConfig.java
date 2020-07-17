@@ -15,7 +15,6 @@ import java.util.Optional;
 @EnableJpaAuditing(auditorAwareRef = "auditorAwareBean")
 public class AuditConfig {
 
-
     @Bean
     public AuditorAware<User> auditorAwareBean(){
         return new AuditorAware<User>() {
