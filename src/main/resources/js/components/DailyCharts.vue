@@ -23,6 +23,11 @@
 
 
         </div>
+        <collective-pie-chart
+                :dates="dates"
+                :expensesByType="expensesByType"
+                :expensesByStation="expensesByStation">
+        </collective-pie-chart>
         <!--<div class="row">-->
             <!--<pie-chart :height="300"-->
                        <!--:chart-data="typesChartData"-->
@@ -46,6 +51,7 @@
 <script>
     import LinearChart from '../components/charts/LinearChart.vue'
     import PieChart from '../components/charts/PieChart'
+    import CollectivePieChart from '../components/charts/CollectivePieChart.vue'
 
     import { mapState } from 'vuex';
 
@@ -55,7 +61,9 @@
         name: 'DailyChart',
         components: {
             LinearChart,
-            PieChart
+            PieChart,
+            CollectivePieChart
+
         },
         data(){
             return{
@@ -108,6 +116,11 @@
                 // average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
 
             }),
+
+
+            dates(){
+                return this.dailyChartData.map(e => e.date);
+            },
             labels(){
                 return this.dailyChartData.map(e => e.date);
             },
@@ -117,16 +130,18 @@
             payments(){
                 return this.dailyChartData.map(e => e.payments/ 100);
             },
+            expensesByType(){
+                return this.dailyChartData.map(e => e.expensesByType);
+            },
+            expensesByStation(){
+                return this.dailyChartData.map(e => e.expensesByStation);
+            },
             average(){
                 const averageArray = []
                 for(let i = 0; i < this.expenses.length; i++ ){
                     let startIndex = i - Math.trunc(this.averageIndex/2);
                     let endIndex = startIndex + this.averageIndex;
                     startIndex = startIndex < 0 ? 0 : startIndex;
-
-
-                    // endIndex = endIndex > this.expenses.length ? this.expenses.length : endIndex
-
                     let micArray = this.expenses.slice(startIndex,endIndex)
                     let average = micArray.reduce((a, b) => a + b, 0)/ micArray.length
                     averageArray.push(average)
@@ -202,102 +217,102 @@
                 }
             },
 
-            typesChartData(){
-                return{
-                    // dataentry: null,
-                    // datalabel: null,
-                    labels: this.dailyChart.typeChartData.map(element => element.type),
-                    datasets: [
-                        {
-                            backgroundColor: this.colours,
-                            data: this.dailyChart.typeChartData
-                                .map(element => element.value / 100)
-                        }
-                    ]
-                }
-            },
 
-            typesChartOptions(){
-                return{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    pieceLabel: {
-                        mode: 'percentage',
-                        precision: 1
-                    },
-                    title: {
-                        display: true,
-                        fontsize: 14,
-                        text: 'По виду списаний'
-                    },
-                    legend: {
-                        display: false,
-                        position: 'bottom',
 
-                    },
-                    tooltips:{
-                        callbacks: {
-                            label: function(tooltipItem, data) {
-                                let label = data.labels[tooltipItem.index] || ''
-                                let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('0,0')
-                                return label + ': ' + value
-                            }
-                        }
-
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    },
-                }
-            },
-
-            stationsChartData(){
-                return{
-                    dataentry: null,
-                    datalabel: null,
-                    labels: this.dailyChart.stationChartData.map(element => element.type),
-                    datasets: [
-                        {
-                            backgroundColor: this.colours,
-                            data: this.dailyChart.stationChartData.map(element => element.value / 100),
-                        }
-                    ]
-                }
-            },
-
-            stationsChartOptions(){
-                return{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    pieceLabel: {
-                        mode: 'percentage',
-                        precision: 1
-                    },
-                    title: {
-                        display: true,
-                        fontsize: 12,
-                        text: 'По станциям'
-                    },
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-
-                    },
-                    tooltips:{
-                        callbacks: {
-                            label: function(tooltipItem, data) {
-                                let label = data.labels[tooltipItem.index] || ''
-                                let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('₴0,0').replace(',','`')
-                                return label + ': ' + value
-                            }
-                        }
-
-                    },
-                }
-            },
+            // typesChartData(){
+            //     return{
+            //         labels: this.dailyChart.typeChartData.map(element => element.type),
+            //         datasets: [
+            //             {
+            //                 backgroundColor: this.colours,
+            //                 data: this.dailyChart.typeChartData
+            //                     .map(element => element.value / 100)
+            //             }
+            //         ]
+            //     }
+            // },
+            //
+            // typesChartOptions(){
+            //     return{
+            //         responsive: true,
+            //         maintainAspectRatio: false,
+            //         pieceLabel: {
+            //             mode: 'percentage',
+            //             precision: 1
+            //         },
+            //         title: {
+            //             display: true,
+            //             fontsize: 14,
+            //             text: 'По виду списаний'
+            //         },
+            //         legend: {
+            //             display: false,
+            //             position: 'bottom',
+            //
+            //         },
+            //         tooltips:{
+            //             callbacks: {
+            //                 label: function(tooltipItem, data) {
+            //                     let label = data.labels[tooltipItem.index] || ''
+            //                     let value = data.datasets[0].data[tooltipItem.index]
+            //                     value = numeral(value).format('0,0')
+            //                     return label + ': ' + value
+            //                 }
+            //             }
+            //
+            //         },
+            //         animation: {
+            //             animateScale: true,
+            //             animateRotate: true
+            //         },
+            //     }
+            // },
+            //
+            // stationsChartData(){
+            //     return{
+            //         dataentry: null,
+            //         datalabel: null,
+            //         labels: this.dailyChart.stationChartData.map(element => element.type),
+            //         datasets: [
+            //             {
+            //                 backgroundColor: this.colours,
+            //                 data: this.dailyChart.stationChartData.map(element => element.value / 100),
+            //             }
+            //         ]
+            //     }
+            // },
+            //
+            // stationsChartOptions(){
+            //     return{
+            //         responsive: true,
+            //         maintainAspectRatio: false,
+            //         pieceLabel: {
+            //             mode: 'percentage',
+            //             precision: 1
+            //         },
+            //         title: {
+            //             display: true,
+            //             fontsize: 12,
+            //             text: 'По станциям'
+            //         },
+            //         legend: {
+            //             display: false,
+            //             position: 'bottom',
+            //
+            //         },
+            //         tooltips:{
+            //             callbacks: {
+            //                 label: function(tooltipItem, data) {
+            //                     let label = data.labels[tooltipItem.index] || ''
+            //                     let value = data.datasets[0].data[tooltipItem.index]
+            //                     value = numeral(value).format('₴0,0').replace(',','`')
+            //                     return label + ': ' + value
+            //                 }
+            //             }
+            //
+            //         },
+            //     }
+            // },
 
         },
 
