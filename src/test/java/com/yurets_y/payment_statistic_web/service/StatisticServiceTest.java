@@ -81,7 +81,7 @@ public class StatisticServiceTest {
         Date dateFrom = format.parse("2020-05-01");
         Date dateUntil = format.parse("2020-05-03");
         int payerCode = 8210260;
-        List<ChartStatisticDto> dto = statisticService.getDailyChartStatisticNew(dateFrom,dateUntil,payerCode,3);
+        List<ChartStatisticDto> dto = statisticService.getDailyChartStatisticNew(dateFrom,dateUntil,payerCode);
         dto.size();
     }
 

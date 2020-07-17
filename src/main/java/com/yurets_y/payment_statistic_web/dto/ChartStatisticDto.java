@@ -6,9 +6,9 @@ public class ChartStatisticDto {
 
     private Date date;
 
-    private Long expenses;
+    private long expenses;
 
-    private Long payments;
+    private long payments;
 
     private List<StringLongEntry> expensesByType = new ArrayList<>();
 
@@ -47,11 +47,11 @@ public class ChartStatisticDto {
 
 
     public void setExpensesByType(List<StringLongEntry> expensesByType) {
-        this.expensesByType = expensesByType;
+        if(expensesByType != null) this.expensesByType = expensesByType;
     }
 
     public void setPayments(Long payments) {
-        this.payments = payments;
+        this.payments = payments != null? payments : 0L;
     }
 
     public List<StringLongEntry> getExpensesByStation() {
@@ -59,7 +59,7 @@ public class ChartStatisticDto {
     }
 
     public void setExpensesByStation(List<StringLongEntry> expensesByStation) {
-        this.expensesByStation = expensesByStation;
+        if(expensesByStation != null) this.expensesByStation = expensesByStation;
     }
 
     public void setDate(Date date) {
@@ -67,6 +67,6 @@ public class ChartStatisticDto {
     }
 
     public void setExpenses(Long expenses) {
-        this.expenses = expenses;
+        this.expenses = expenses != null ? expenses : 0L;
     }
 }

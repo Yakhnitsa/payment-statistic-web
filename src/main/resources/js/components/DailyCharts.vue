@@ -23,24 +23,22 @@
 
 
         </div>
-        <div class="row">
-            <pie-chart :height="300"
-                       :chart-data="typesChartData"
-                       :options="typesChartOptions"
-                       class="col my-1"
+        <!--<div class="row">-->
+            <!--<pie-chart :height="300"-->
+                       <!--:chart-data="typesChartData"-->
+                       <!--:options="typesChartOptions"-->
+                       <!--class="col my-1"-->
 
-            ></pie-chart>
-            <pie-chart :height="300"
-                       :chart-data="stationsChartData"
-                       :options="stationsChartOptions"
-                       class="col my-1"
+            <!--&gt;</pie-chart>-->
+            <!--<pie-chart :height="300"-->
+                       <!--:chart-data="stationsChartData"-->
+                       <!--:options="stationsChartOptions"-->
+                       <!--class="col my-1"-->
 
-            ></pie-chart>
-        </div>
+            <!--&gt;</pie-chart>-->
+        <!--</div>-->
 
-        <!--<linear-chart :height="300" :width="600"-->
-                      <!--:chart-data="linearChartData"-->
-                      <!--:options="linearChartOptions"></linear-chart>-->
+
     </div>
     
 </template>
@@ -110,13 +108,13 @@
 
             }),
             labels(){
-                this.dailyChartData.map(e => e.day);
+                return this.dailyChartData.map(e => e.date);
             },
             expenses(){
-                this.dailyChartData.map(e => e.expenses / 100);
+                return this.dailyChartData.map(e => e.expenses / 100);
             },
             payments(){
-                this.dailyChartData.map(e => e.expenses/ 100);
+                return this.dailyChartData.map(e => e.payments/ 100);
             },
             average(){
                 //TODO make average calculation in frontend
