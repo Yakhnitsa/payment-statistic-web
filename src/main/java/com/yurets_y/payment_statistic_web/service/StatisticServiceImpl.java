@@ -183,8 +183,9 @@ public class StatisticServiceImpl implements StatisticService {
             }
 
             entry.setExpenses(expMap.get(date));
-
-            entry.setExpensesByType(paymentsByTypeMap.get(date));
+            //
+            List<StringLongEntry> expensesList = getExpensesFromList(paymentsByTypeMap.get(date));
+            entry.setExpensesByType(expensesList);
             entry.setExpensesByStation(paymentsByStationMap.get(date));
 
 
@@ -192,6 +193,16 @@ public class StatisticServiceImpl implements StatisticService {
         });
 
         return dtoEntryList;
+    }
+
+    private List<StringLongEntry> getExpensesFromList(List<StringLongEntry> allPayments) {
+        if(allPayments != null){
+            allPayments = allPayments.stream().
+                    filter(element -> !element.getType().equals(PAYMENT_TYPE))
+                    .collect(Collectors.toList());
+            return allPayments;
+        }
+        return new ArrayList<>();
     }
 
     @Autowired

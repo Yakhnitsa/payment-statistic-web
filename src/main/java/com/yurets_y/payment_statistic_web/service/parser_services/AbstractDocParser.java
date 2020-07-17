@@ -169,7 +169,6 @@ public abstract class AbstractDocParser implements DocParser{
     }
 
     protected long getLongFromPattern(String matchedString, String stringPattern) {
-        if(matchedString.equals("")) return 0L;
         Pattern pattern = Pattern.compile(stringPattern);
         Matcher matcher = pattern.matcher(matchedString);
         if (matcher.matches()) {
