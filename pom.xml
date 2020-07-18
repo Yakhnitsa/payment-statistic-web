@@ -22,6 +22,7 @@
         <hibernate.version>5.4.0.Final</hibernate.version>
         <spring.boot.starter.data.jpa.version>2.2.1.RELEASE</spring.boot.starter.data.jpa.version>
         <spring.boot.starter.test.version>2.1.6.RELEASE</spring.boot.starter.test.version>
+        <spring.boot.starter.security.version>2.3.1.RELEASE</spring.boot.starter.security.version>
     </properties>
 
     <dependencies>
@@ -96,10 +97,13 @@
 
         <!--security configuration-->
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring.boot.starter.security.version}</version>
         </dependency>
+
 
         <!--thymeleaf dependencies for Spring security-->
 
@@ -107,6 +111,8 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
         </dependency>
+
+
 
     </dependencies>
 

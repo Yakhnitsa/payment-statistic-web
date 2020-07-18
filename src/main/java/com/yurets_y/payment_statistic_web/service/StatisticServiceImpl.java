@@ -112,27 +112,28 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public List<ChartStatisticDto> getYearChartStatistic(Date dateFrom, Date dateUntil, Integer payerCode) {
-        List<ChartStatisticDto> dtoEntryList = statisticRepo.getYearExpensesStatisticGroupByMonth(dateFrom,dateUntil);
+        List<ChartStatisticDto> dtoEntryList = statisticRepo.getYearExpensesStatisticByPayerCodeGroupByMonth(dateFrom,dateUntil,payerCode);
 
-        List<DateStringLongEntry> allPaymentsByType = statisticRepo.getYearStatisticGroupByMonthAndType(dateFrom,dateUntil);
-        Map<Date, List<DateStringLongEntry>> paymentsByTypeMap = allPaymentsByType.stream()
-                .collect(Collectors.groupingBy(DateStringLongEntry::getDate));
+        List<DateStringLongEntry> allPaymentsByType = statisticRepo
+                .getYearStatisticByPayerCodeGroupByMonthAndType(dateFrom,dateUntil,payerCode);
+
+        List<DateStringLongEntry> allPaymentsByStation = statisticRepo
+                .getYearStatisticByPayerCodeGroupByMonthAndStation(dateFrom,dateUntil,payerCode);
+        /*
+         * Конвертация данных в удобный формат
+         * */
+        Map<Date,List<StringLongEntry>> paymentsByStationMap = getMapForChartStatistic(allPaymentsByStation);
+        Map<Date,List<StringLongEntry>> paymentsByTypeMap = getMapForChartStatistic(allPaymentsByType);
+
 
         dtoEntryList.forEach(dtoEntry ->{
-            // Заполнение графы доходово по каждому периоду
-            Long payment = paymentsByTypeMap.get(dtoEntry.getDate())
-                    .stream()
-                    .filter(typeEntry -> typeEntry.getType().equals(PAYMENT_TYPE))
-                    .mapToLong(DateStringLongEntry::getValue).sum();
-            //Заполнение расходов по типам по каждому периоду
-            dtoEntry.setPayments(payment);
-                List<StringLongEntry> expensesByType = paymentsByTypeMap.get(dtoEntry.getDate())
-                        .stream()
-                        .filter(entry -> !entry.getType().equals(PAYMENT_TYPE))
-                        .map(entry -> new StringLongEntry(entry.getType(),entry.getValue()))
-                        .collect(Collectors.toList());
+            Date date = dtoEntry.getDate();
 
-                dtoEntry.setExpensesByType(expensesByType);
+            List<StringLongEntry> expensesList = getExpensesFromList(paymentsByTypeMap.get(date));
+            Long payments = getSumOfPaymentsFromList(paymentsByStationMap.get(date));
+            dtoEntry.setPayments(payments);
+            dtoEntry.setExpensesByType(expensesList);
+            dtoEntry.setExpensesByStation(paymentsByStationMap.get(date));
         });
 
 
@@ -174,20 +175,13 @@ public class StatisticServiceImpl implements StatisticService {
             ChartStatisticDto entry = new ChartStatisticDto();
             entry.setDate(date);
             List<StringLongEntry> paymentsList = paymentsByTypeMap.get(date);
-
-            if(paymentsList != null){
-                Long payments = paymentsList.stream()
-                        .filter(element -> element.getType().equals(PAYMENT_TYPE))
-                        .mapToLong(StringLongEntry::getValue).sum();
-                entry.setPayments(payments);
-            }
-
+            Long payments = getSumOfPaymentsFromList(paymentsByTypeMap.get(date));
+            entry.setPayments(payments);
             entry.setExpenses(expMap.get(date));
-            //
+
             List<StringLongEntry> expensesList = getExpensesFromList(paymentsByTypeMap.get(date));
             entry.setExpensesByType(expensesList);
             entry.setExpensesByStation(paymentsByStationMap.get(date));
-
 
             dtoEntryList.add(entry);
         });
@@ -203,6 +197,15 @@ public class StatisticServiceImpl implements StatisticService {
             return allPayments;
         }
         return new ArrayList<>();
+    }
+
+    private Long getSumOfPaymentsFromList(List<StringLongEntry> allPayments) {
+        if(allPayments != null){
+            return allPayments.stream().
+                    filter(element -> element.getType().equals(PAYMENT_TYPE))
+                    .mapToLong(StringLongEntry::getValue).sum();
+        }
+        return 0L;
     }
 
     @Autowired
