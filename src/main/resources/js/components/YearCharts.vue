@@ -169,7 +169,6 @@
                 var params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
-                    averageIndex: 3,
                     payerCode: this.payerCode
                 }
                 this.$store.dispatch('getYearChartAction', params)

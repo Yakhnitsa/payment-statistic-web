@@ -130,7 +130,8 @@ public class StatisticServiceImpl implements StatisticService {
             Date date = dtoEntry.getDate();
 
             List<StringLongEntry> expensesList = getExpensesFromList(paymentsByTypeMap.get(date));
-            Long payments = getSumOfPaymentsFromList(paymentsByStationMap.get(date));
+            Long payments = getSumOfPaymentsFromList(paymentsByTypeMap.get(date));
+
             dtoEntry.setPayments(payments);
             dtoEntry.setExpensesByType(expensesList);
             dtoEntry.setExpensesByStation(paymentsByStationMap.get(date));
