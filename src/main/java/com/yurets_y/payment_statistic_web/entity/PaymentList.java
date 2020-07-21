@@ -25,7 +25,6 @@ public class PaymentList extends AuditableEntity{
 
     @Temporal(TemporalType.DATE)
     @JsonView(Views.ShortView.class)
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     private int taxCode;
@@ -56,6 +55,9 @@ public class PaymentList extends AuditableEntity{
 
     @JsonView(Views.ShortView.class)
     private String backupFilePath;
+
+    @JsonView(Views.ShortView.class)
+    private boolean testPassed;
 
     public PaymentList() {
     }
@@ -208,5 +210,13 @@ public class PaymentList extends AuditableEntity{
         int result = number;
         result = 31 * result + payerCode;
         return result;
+    }
+
+    public boolean isTestPassed() {
+        return testPassed;
+    }
+
+    public void setTestPassed(boolean testPassed) {
+        this.testPassed = testPassed;
     }
 }

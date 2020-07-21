@@ -204,7 +204,10 @@ public abstract class AbstractDocParser implements DocParser{
         boolean closingBalanceTest = closingBalance == checkSum;
 
         if(!totalPaymentsTest || !closingBalanceTest){
+            paymentList.setTestPassed(false);
             throw new RuntimeException("Ошибка контрольной суммы для перечня " + paymentList);
+        }else{
+            paymentList.setTestPassed(true);
         }
     }
 

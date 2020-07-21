@@ -14,15 +14,33 @@
                 </div>
             </div>
         </form>
-        <div class="row">
-            <linear-chart :height="300" :width="600"
-                          :chart-data="linearChartData"
-                          :options="linearChartOptions"
-                          class="col my-1"
-            ></linear-chart>
+        <div class="container my-1">
+            <div class="row">
+                <linear-chart :height="300" :width="600"
+                              :chart-data="linearChartData"
+                              :options="linearChartOptions"
+                              class="col"
+                ></linear-chart>
+            </div>
+            <div class="row mx-5">
+                <div class="form-check-inline">
+                    <input class="form-check-input" v-model.number="averageIndex" type="radio" id="threeDaysAverageRadio" value="3" checked>
+                    <label class="form-check-label" for="threeDaysAverageRadio">
+                        Среднее за 3 дня
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <input class="form-check-input" v-model.number="averageIndex" type="radio" id="sevenDaysAverageRadio" value="7">
+                    <label class="form-check-label" for="sevenDaysAverageRadio">
+                        Среднее за 7 дней
+                    </label>
+                </div>
+            </div>
+
 
 
         </div>
+
         <collective-pie-chart
                 :dates="dates"
                 :expensesByType="expensesByType"

@@ -238,3 +238,6 @@ The following guides illustrate how to use some features concretely:
             headers:{
                 'X-CSRF-Token': csrfToken
             }       
+            
+            
+## Переход на https [habr](https://java-master.com/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-https-%D0%B2-spring-boot/)            

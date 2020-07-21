@@ -1,7 +1,7 @@
 <template>
     <div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
-            Загрузить перечни
+            Загрузить перечни <span v-show="countOfTempLists > 0" class="badge badge-light">{{countOfTempLists}}</span>
         </button>
         <!-- Modal -->
         <div class="modal fade" id="loadingPage" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
@@ -16,8 +16,7 @@
                     <div class="modal-body">
                         <!--Таблица загруженных перечней во временную ДБ-->
                         <uploaded-list-table :payments="loadedPayments"
-                            v-on:change-selected="changeSelected($event)"
-                        ></uploaded-list-table>
+                            v-on:change-selected="changeSelected($event)"></uploaded-list-table>
                         <ul>
                             <li v-for="file in files">{{file.name}}</li>
                         </ul>
@@ -63,7 +62,10 @@
             ...mapGetters({
                 files: 'chosenFiles',
                 loadedPayments: 'tempUploadedLists',
-            })
+            }),
+            countOfTempLists(){
+                return this.loadedPayments.length;
+            }
         },
         data: function(){
             return{
