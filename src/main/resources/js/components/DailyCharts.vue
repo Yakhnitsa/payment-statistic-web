@@ -37,8 +37,6 @@
                 </div>
             </div>
 
-
-
         </div>
 
         <collective-pie-chart
@@ -46,21 +44,6 @@
                 :expensesByType="expensesByType"
                 :expensesByStation="expensesByStation">
         </collective-pie-chart>
-        <!--<div class="row">-->
-            <!--<pie-chart :height="300"-->
-                       <!--:chart-data="typesChartData"-->
-                       <!--:options="typesChartOptions"-->
-                       <!--class="col my-1"-->
-
-            <!--&gt;</pie-chart>-->
-            <!--<pie-chart :height="300"-->
-                       <!--:chart-data="stationsChartData"-->
-                       <!--:options="stationsChartOptions"-->
-                       <!--class="col my-1"-->
-
-            <!--&gt;</pie-chart>-->
-        <!--</div>-->
-
 
     </div>
     

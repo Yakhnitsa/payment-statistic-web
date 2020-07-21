@@ -1,18 +1,36 @@
 <template>
     <div class="container">
-        <ul class="pagination">
-            <li class="page-item"
-                :class="{disabled: this.index < 1}">
-                <a class="page-link" @click="decrementIndex()"><i class="fas fa-caret-left"></i></a>
-            </li>
-            <li class="page-item h5">{{currentPeriod}}</li>
-            <!--<li class="page-item"><a class="page-link">2</a></li>-->
-            <!--<li class="page-item"><a class="page-link">3</a></li>-->
-            <li class="page-item"
-                :class="{disabled: index >= dates.length - 1}">
-                <a class="page-link" @click="incrementIndex()"><i class="fas fa-caret-right"></i></a>
-            </li>
-        </ul>
+        <div>
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-secondary"
+                            @click="decrementIndex()"
+                            :class="{disabled: this.index < 1}"><i class="fas fa-caret-left"></i>
+                    </button>
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span v-if="groupedCharts">Общая</span>
+                        <span v-else>{{currentPeriod}}</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" @click="groupedCharts = false">По дням</a>
+                        <a class="dropdown-item" @click="groupedCharts = true">Общая</a>
+                    </div>
+                </div>
+
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-secondary"
+                            @click="incrementIndex()"
+                            :class="{disabled: index >= dates.length - 1}"><i class="fas fa-caret-right"></i>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+
         <div class="row">
             <pie-chart :height="300"
                        :chart-data="typesChartData"
@@ -41,6 +59,7 @@
         data(){
             return{
                 index:0,
+                groupedCharts: '',
                 colours:[
                     '#E47514',
                     '#ac4fe4',
@@ -173,6 +192,10 @@
 
         },
         methods:{
+            setGroupedChart(value){
+                this.groupedCharts = value;
+                alert(value);
+            },
             incrementIndex(){
                 if(this.index < this.dates.length) this.index++;
             },
@@ -187,6 +210,9 @@
                 if(dataArray.length === 0) return [0]
                 return dataArray.map(element => element.value / 100)
             }
+        },
+        watch:{
+
         },
         mounted(){
 
