@@ -40,6 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
+        /*
+        * Enable https
+        */
+        http
+                .requiresChannel()
+                .anyRequest()
+                .requiresSecure();
 
 //        http.csrf().disable();
 

@@ -240,4 +240,22 @@ The following guides illustrate how to use some features concretely:
             }       
             
             
-## Переход на https [habr](https://java-master.com/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-https-%D0%B2-spring-boot/)            
+## Переход на https [habr](https://java-master.com/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-https-%D0%B2-spring-boot/)   
+Более детальная(инструкция)[https://www.thomasvitale.com/https-spring-boot-ssl-certificate/]         
+- Создаем сертификат:
+    `keytool -genkeypair -alias payment-statistic -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore D:\payment-statistic-keystore.p12 -validity 3650 -storepass password`
+- Проверка сертификата:
+    `keytool -list -v -storetype pkcs12 -keystore D:\payment-statistic-keystore.p12`
+- Добавляем настройки 
+
+ 
+        #https properties
+        server.ssl.key-store=classpath:payment-statistic-keystore.p12
+        server.ssl.key-store-password=password
+        server.ssl.key-store-type=pkcs12
+        server.ssl.key-alias=payment-statistic
+        server.ssl.key-password=password
+    
+    
+        
+    

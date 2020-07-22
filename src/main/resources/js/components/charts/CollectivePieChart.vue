@@ -5,7 +5,7 @@
                 <div class="input-group-prepend">
                     <button type="button" class="btn btn-secondary"
                             @click="decrementIndex()"
-                            :class="{disabled: this.index < 1}"><i class="fas fa-caret-left"></i>
+                            :class="{disabled: this.index < 1  || groupedCharts}"><i class="fas fa-caret-left"></i>
                     </button>
                 </div>
 
@@ -23,11 +23,10 @@
                 <div class="input-group-append">
                     <button type="button" class="btn btn-secondary"
                             @click="incrementIndex()"
-                            :class="{disabled: index >= dates.length - 1}"><i class="fas fa-caret-right"></i>
+                            :class="{disabled: index >= dates.length - 1 || groupedCharts}"
+                    ><i class="fas fa-caret-right"></i>
                     </button>
                 </div>
-
-
             </div>
         </div>
 
