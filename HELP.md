@@ -240,8 +240,7 @@ The following guides illustrate how to use some features concretely:
             }       
             
             
-## Переход на https [habr](https://java-master.com/%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C-https-%D0%B2-spring-boot/)   
-Более детальная(инструкция)[https://www.thomasvitale.com/https-spring-boot-ssl-certificate/]         
+## Переход на https [инструкция](https://www.thomasvitale.com/https-spring-boot-ssl-certificate/)     
 - Создаем сертификат:
     `keytool -genkeypair -alias payment-statistic -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore D:\payment-statistic-keystore.p12 -validity 3650 -storepass password`
 - Проверка сертификата:
@@ -256,6 +255,56 @@ The following guides illustrate how to use some features concretely:
         server.ssl.key-alias=payment-statistic
         server.ssl.key-password=password
     
+- Настраиваем WebSecurityConfig на https:
+
+    
+        @Override
+            protected void configure(HttpSecurity http){
+            ...    
+        
+            /*
+            * Enable https
+            */
+            http
+                    .requiresChannel()
+                    .anyRequest()
+                    .requiresSecure();
+- Настраиваем перенаправление на https:
     
         
-    
+        @Configuration
+        public class HttpsRedirectConfig {
+        
+            @Value("${server.port}")
+            private Integer applicationPort;
+        
+            @Bean
+            public ServletWebServerFactory servletContainer() {
+                TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
+                    @Override
+                    protected void postProcessContext(Context context) {
+                        SecurityConstraint securityConstraint = new SecurityConstraint();
+                        securityConstraint.setUserConstraint("CONFIDENTIAL");
+                        SecurityCollection collection = new SecurityCollection();
+                        collection.addPattern("/*");
+                        securityConstraint.addCollection(collection);
+                        context.addConstraint(securityConstraint);
+                    }
+                };
+                tomcat.addAdditionalTomcatConnectors(getHttpConnector());
+                return tomcat;
+            }
+        
+            private Connector getHttpConnector() {
+                Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+                connector.setScheme("http");
+                connector.setPort(8080);
+                connector.setSecure(false);
+                connector.setRedirectPort(applicationPort);
+                return connector;
+            }
+        }  
+        
+        
+- Создаем сертификат пользователя:
+    `keytool -export -keystore D:\payment-statistic-keystore.p12 -alias payment-statistic -file D:\myCertificate.crt`                          

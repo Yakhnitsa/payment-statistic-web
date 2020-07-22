@@ -1,21 +1,22 @@
 <template>
-    <div>
+    <div  class="scrolling-y">
         <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>
-                    <label class="form-checkbox">
-                        <input type="checkbox" v-model="selectAll" @click="select">
-                        <i class="form-icon"></i>
-                    </label>
-                </th>
-                <th>payer code</th>
-                <th>payer numb</th>
-                <th>date</th>
-                <th>open balance</th>
-                <th>close balance</th>
-            </tr>
+            <thead class="sticky-header">
+                <tr>
+                    <th>
+                        <label class="form-checkbox">
+                            <input type="checkbox" v-model="selectAll" @click="select">
+                            <i class="form-icon"></i>
+                        </label>
+                    </th>
+                    <th>payer code</th>
+                    <th>payer numb</th>
+                    <th>date</th>
+                    <th>open balance</th>
+                    <th>close balance</th>
+                </tr>
             </thead>
+
             <tbody>
             <tr v-for="payment in payments">
                 <td>
@@ -25,10 +26,12 @@
                     </label>
                 </td>
                 <td>{{payment.payerCode}}</td>
-                <td>{{payment.number}}</td>
+                <td>
+                    <i v-show="!payment.testPassed" class="fa fa-exclamation-circle" style="color:red" aria-hidden="true"></i>
+                    {{payment.number}}</td>
                 <td>{{payment.date | formatDate}}</td>
-                <td>{{payment.openingBalance | formatPayment}}</td>
-                <td>{{payment.closingBalance | formatPayment}}</td>
+                <td class="text-right">{{payment.openingBalance | formatPayment}}</td>
+                <td class="text-right">{{payment.closingBalance | formatPayment}}</td>
             </tr>
             </tbody>
         </table>
@@ -90,5 +93,29 @@
 </script>
 
 <style scoped>
+
+
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .scrolling-y {
+        max-height:400px;
+        overflow-y: scroll;
+    }
+    .text-right {
+        text-align: right;
+        padding-right: 2em;
+    }
+
+    .text-left {
+        text-align: left;
+        margin-left: 1em;
+    }
+    .text-center {
+        text-align: center;
+    }
+
 
 </style>

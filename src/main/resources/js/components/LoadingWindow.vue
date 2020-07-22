@@ -15,11 +15,17 @@
                     </div>
                     <div class="modal-body">
                         <!--Таблица загруженных перечней во временную ДБ-->
-                        <uploaded-list-table :payments="loadedPayments"
-                            v-on:change-selected="changeSelected($event)"></uploaded-list-table>
-                        <ul>
-                            <li v-for="file in files">{{file.name}}</li>
-                        </ul>
+                        <div>
+                            <uploaded-list-table :payments="loadedPayments"
+                                                 v-on:change-selected="changeSelected($event)"></uploaded-list-table>
+                        </div>
+                        <div>
+                            <ul >
+                                <li v-for="file in files">{{file.name}}</li>
+                            </ul>
+                        </div>
+
+
 
                     </div>
                     <div class="modal-footer">

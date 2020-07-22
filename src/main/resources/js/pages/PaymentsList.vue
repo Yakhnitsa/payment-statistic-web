@@ -23,7 +23,7 @@
 
         <div class="container">
 
-            <table id="payments-table" class="table table-fixed able-sm table-striped">
+            <table id="payments-table" class="table table-fixed table-sm table-striped">
                 <thead class="thead-light">
                     <tr class="text-center">
                         <th scope="col" class="col-2">№ перечня</th>
