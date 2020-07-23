@@ -27,7 +27,7 @@
                 </td>
                 <td>{{payment.payerCode}}</td>
                 <td>
-                    <i v-show="!payment.testPassed" class="fa fa-exclamation-circle" style="color:red" aria-hidden="true"></i>
+                    <i v-show="!payment.testPassed" class="fa fa-exclamation-ci rcle text-danger" aria-hidden="true"></i>
                     {{payment.number}}</td>
                 <td>{{payment.date | formatDate}}</td>
                 <td class="text-right">{{payment.openingBalance | formatPayment}}</td>
@@ -93,6 +93,14 @@
 </script>
 
 <style scoped>
+
+    th {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: rgba(220, 220, 220, 0.9);
+    }
 
 
     .sticky-header {

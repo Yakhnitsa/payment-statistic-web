@@ -307,4 +307,23 @@ The following guides illustrate how to use some features concretely:
         
         
 - Создаем сертификат пользователя:
-    `keytool -export -keystore D:\payment-statistic-keystore.p12 -alias payment-statistic -file D:\myCertificate.crt`                          
+    `keytool -export -keystore D:\payment-statistic-keystore.p12 -alias payment-statistic -file D:\myCertificate.crt`      
+    
+    
+    
+## Загрузка перечней из почты в Temp DB
+
+Подключаем зависимости:
+
+
+            <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.7</version>
+            </dependency>    
+            
+Создаем сервис:      
+    MailService и его имплементацию
+    MailServiceImpl 
+                              

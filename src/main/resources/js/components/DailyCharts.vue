@@ -194,7 +194,8 @@
                                 // Include a dollar sign in the ticks
                                 callback: function(value, index, values) {
                                     return numeral(value).format('0a')
-                                }
+                                },
+                                beginAtZero: true
                             }
                         }],
                         xAxes: [{
@@ -217,104 +218,6 @@
                     }
                 }
             },
-
-
-
-            // typesChartData(){
-            //     return{
-            //         labels: this.dailyChart.typeChartData.map(element => element.type),
-            //         datasets: [
-            //             {
-            //                 backgroundColor: this.colours,
-            //                 data: this.dailyChart.typeChartData
-            //                     .map(element => element.value / 100)
-            //             }
-            //         ]
-            //     }
-            // },
-            //
-            // typesChartOptions(){
-            //     return{
-            //         responsive: true,
-            //         maintainAspectRatio: false,
-            //         pieceLabel: {
-            //             mode: 'percentage',
-            //             precision: 1
-            //         },
-            //         title: {
-            //             display: true,
-            //             fontsize: 14,
-            //             text: 'По виду списаний'
-            //         },
-            //         legend: {
-            //             display: false,
-            //             position: 'bottom',
-            //
-            //         },
-            //         tooltips:{
-            //             callbacks: {
-            //                 label: function(tooltipItem, data) {
-            //                     let label = data.labels[tooltipItem.index] || ''
-            //                     let value = data.datasets[0].data[tooltipItem.index]
-            //                     value = numeral(value).format('0,0')
-            //                     return label + ': ' + value
-            //                 }
-            //             }
-            //
-            //         },
-            //         animation: {
-            //             animateScale: true,
-            //             animateRotate: true
-            //         },
-            //     }
-            // },
-            //
-            // stationsChartData(){
-            //     return{
-            //         dataentry: null,
-            //         datalabel: null,
-            //         labels: this.dailyChart.stationChartData.map(element => element.type),
-            //         datasets: [
-            //             {
-            //                 backgroundColor: this.colours,
-            //                 data: this.dailyChart.stationChartData.map(element => element.value / 100),
-            //             }
-            //         ]
-            //     }
-            // },
-            //
-            // stationsChartOptions(){
-            //     return{
-            //         responsive: true,
-            //         maintainAspectRatio: false,
-            //         pieceLabel: {
-            //             mode: 'percentage',
-            //             precision: 1
-            //         },
-            //         title: {
-            //             display: true,
-            //             fontsize: 12,
-            //             text: 'По станциям'
-            //         },
-            //         legend: {
-            //             display: false,
-            //             position: 'bottom',
-            //
-            //         },
-            //         tooltips:{
-            //             callbacks: {
-            //                 label: function(tooltipItem, data) {
-            //                     let label = data.labels[tooltipItem.index] || ''
-            //                     let value = data.datasets[0].data[tooltipItem.index]
-            //                     value = numeral(value).format('₴0,0').replace(',','`')
-            //                     return label + ': ' + value
-            //                 }
-            //             }
-            //
-            //         },
-            //     }
-            // },
-
         },
 
         methods:{
@@ -322,7 +225,6 @@
                 var params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
-                    averageIndex: 3,
                     payerCode: this.payerCode
                 }
                 this.$store.dispatch('getDailyChartAction', params)
