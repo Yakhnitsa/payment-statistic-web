@@ -47,12 +47,15 @@ public class TempListServiceImpl implements TempListService {
             multipartFile.transferTo(file);
 
             PaymentList list = parseFromFile(file);
+            if(list.getNumber() > 0){
+                tempDBMap.put(list.getId(), list);
+            }
 
-            tempDBMap.put(list.getId(), list);
+
 
             return list;
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка при сохранении во временную ДБ перечней" + filePath);
+            throw new RuntimeException("Ошибка при сохранении во временную ДБ файла перечня: " + filePath);
         }
     }
 

@@ -326,4 +326,6 @@ The following guides illustrate how to use some features concretely:
 Создаем сервис:      
     MailService и его имплементацию
     MailServiceImpl 
-                              
+                           
+                           
+!! Конвертация InputStream в MultipartFile

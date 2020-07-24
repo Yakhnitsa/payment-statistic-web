@@ -27,8 +27,22 @@ public class PatternsTest {
             System.out.println(matcher.group(1));
             System.out.println("parsed: "+ numb.longValue());
 
-//            System.out.println(matcher.group(2));
-//            System.out.println(matcher.group(2).replaceAll("[,.]",""));
+        }
+
+    }
+
+    @Test
+    public void filenameFromMailMatcherTest(){
+
+        String testString = "application/octet-stream; \n" +
+                "\tname=doc_23_07_2020_100005_8210260.xml";
+        String stringPattern = ".+name=(.+)";
+        Pattern pattern = Pattern.compile(stringPattern,Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(testString);
+        if(matcher.matches()){
+            System.out.println(matcher.group(0));
+            System.out.println(matcher.group(1));
+
         }
 
     }
