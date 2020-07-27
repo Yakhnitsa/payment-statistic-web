@@ -1,9 +1,9 @@
 package com.yurets_y.payment_statistic_web.service.mail_service;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
+import java.util.Date;
 
 public interface MailService {
-    List<MultipartFile> readFromMail();
+
+
+    void readFromMail(Date lastUpdate);
 }

@@ -13,7 +13,6 @@ import javax.mail.internet.InternetAddress;
 import java.io.*;
 import java.security.NoSuchProviderException;
 import java.util.Date;
-import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,13 +39,6 @@ public class MailServiceImpl implements MailService {
     private Date lastUpdate;
 
 
-    @Override
-    public List<MultipartFile> readFromMail() {
-        downloadEmails();
-//        TODO Изменить сигнатуру метода, сохранять все в TempListService
-        return null;
-    }
-
     private Properties getServerProperties() {
         Properties properties = new Properties();
 
@@ -68,7 +60,9 @@ public class MailServiceImpl implements MailService {
         return properties;
     }
 
-    public void downloadEmails() {
+    //  TODO изменить поведение метода, разорвать связь MailService и TempListService
+    @Override
+    public void readFromMail(Date lastUpdate) {
         Properties properties = getServerProperties();
         Session session = Session.getDefaultInstance(properties);
 
@@ -110,7 +104,7 @@ public class MailServiceImpl implements MailService {
         }
     }
 
-    public void writePart(Part p) throws Exception {
+    private void writePart(Part p) throws Exception {
         if (p.isMimeType("multipart/*")) {
             Multipart mp = (Multipart) p.getContent();
             int count = mp.getCount();

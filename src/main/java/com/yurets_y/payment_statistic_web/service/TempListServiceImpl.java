@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-@Service
+@Service("temp-list-service-inmemory-map")
 public class TempListServiceImpl implements TempListService {
 
     private Path tempDir;

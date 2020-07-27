@@ -6,7 +6,9 @@ import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.TempListService;
+import com.yurets_y.payment_statistic_web.service.mail_service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class UploadController {
     private PaymentListService paymentListService;
 
     private TempListService tempListService;
+
+    private MailService mailService;
 
     @Autowired
     public UploadController(PaymentListService paymentListService, TempListService tempListService) {
@@ -91,6 +95,16 @@ public class UploadController {
             tempListService.deleteFromTempDB(list);
         }
         return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
+    }
+
+    @PostMapping("/api/scan-from-mail")
+    @JsonView(Views.ShortView.class)
+    public ResponseEntity<?> scanListsFromMail(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date lastUpdate
+    ){
+//        TODO - Реализовать скан перечней из почты
+
+        return new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
 
