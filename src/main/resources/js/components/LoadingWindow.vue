@@ -29,20 +29,40 @@
 
                     </div>
                     <div class="modal-footer">
-                        <div class="form-row">
+                        <div class="row">
                             <div class="col">
-                                <input type="file" ref="file" id="customFile"
-                                       v-on:change="addFile($event)"
-                                       multiple
-                                       class="custom-file-input"
-                                       enctype="multipart/form-data">
-                                <label class="custom-file-label" for="customFile">{{chosenFile}}</label>
+                                <div class="input-group">
+                                    <input class="form-control" type="date" v-model="lastUpdate">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" @click="scanFromMail">Сканировать почту</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" ref="file" id="customFile"
+                                               v-on:change="addFile($event)"
+                                               multiple
+                                               class="custom-file-input"
+                                               enctype="multipart/form-data">
+                                        <label class="custom-file-label" for="customFile">{{chosenFile}}</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary"
+                                                @click="submitFileUpload()" type="button">Загрузить</button>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-secondary" @click="submitFileUpload()">Отправить на сервер</button>
-                        <button type="button" class="btn btn-primary" @click="saveSelected()">Сохранить перечни в БД</button>
-                        <button type="button" class="btn btn-primary" @click="deleteSelected()">Удалить выбранные</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary" @click="saveSelected()">Сохранить перечни в БД</button>
+                            <button type="button" class="btn btn-primary" @click="deleteSelected()">Удалить выбранные</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -76,7 +96,8 @@
         data: function(){
             return{
                 selectedPayments:[],
-                chosenFile:'no file'
+                chosenFile:'no file',
+                lastUpdate:''
             }
         },
         methods:{
@@ -85,7 +106,8 @@
                 'deleteSelectedListsAction',
                 'saveSelectedListsAction',
                 'loadTempListsFromServerAction',
-                'getPaymentListsAction'
+                'getPaymentListsAction',
+                'scanFromMailAction'
             ]),
             addFile(event){
                 var selectedFiles = event.target.files;
@@ -104,6 +126,13 @@
             },
             changeSelected(selected){
                 this.selectedPayments = selected;
+            },
+            scanFromMail(){
+                // const params = {
+                //     lastUpdate: this.lastUpdate,
+                //
+                // };
+                this.scanFromMailAction(this.lastUpdate);
             }
         },
         created: function(){

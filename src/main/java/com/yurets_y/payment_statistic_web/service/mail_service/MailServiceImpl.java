@@ -2,12 +2,15 @@ package com.yurets_y.payment_statistic_web.service.mail_service;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import com.yurets_y.payment_statistic_web.service.TempListService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import java.io.*;
@@ -19,9 +22,6 @@ import java.util.regex.Pattern;
 
 @Service
 public class MailServiceImpl implements MailService {
-
-    private TempListService tempListService;
-
 
     @Value("${service.mail.protocol}")
     private String protocol;
@@ -36,11 +36,14 @@ public class MailServiceImpl implements MailService {
     @Value("${service.mail.sourceEmail}")
     private String sourceEmail;
 
-    private Date lastUpdate;
+    private Properties properties;
+    private TempListService tempListService;
 
+    private static Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
 
-    private Properties getServerProperties() {
-        Properties properties = new Properties();
+    @PostConstruct
+    private void init() {
+        properties = new Properties();
 
         // server setting
         properties.put(String.format("mail.%s.host", protocol), host);
@@ -57,13 +60,10 @@ public class MailServiceImpl implements MailService {
                 String.format("mail.%s.socketFactory.port", protocol),
                 String.valueOf(port));
 
-        return properties;
     }
 
-    //  TODO изменить поведение метода, разорвать связь MailService и TempListService
     @Override
-    public void readFromMail(Date lastUpdate) {
-        Properties properties = getServerProperties();
+    public void scanFromMailToTempDb(Date lastUpdate) {
         Session session = Session.getDefaultInstance(properties);
 
         try {
@@ -80,8 +80,11 @@ public class MailServiceImpl implements MailService {
 
             for (int i = messages.length - 1; i >= 0; i--) {
                 Message msg = messages[i];
-//                TODO Выход из цикла при достижении даты последнего обновления
-
+                Date messageDate = msg.getSentDate();
+                if(messageDate.before(lastUpdate)) {
+                    logger.info("Сканирование почты завершено...");
+                    break;
+                }
                 InternetAddress[] fromAddress = (InternetAddress[]) msg.getFrom();
                 String from = fromAddress[0].getAddress();
                 if (from.equals(sourceEmail)) {
@@ -94,10 +97,10 @@ public class MailServiceImpl implements MailService {
             folderInbox.close(false);
             store.close();
         } catch (NoSuchProviderException ex) {
-            System.out.println("No provider for protocol: " + protocol);
+            logger.error("No provider for protocol: " + protocol, ex);
             ex.printStackTrace();
         } catch (MessagingException ex) {
-            System.out.println("Could not connect to the message store");
+            logger.error("Could not connect to the message store", ex);
             ex.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,16 +122,12 @@ public class MailServiceImpl implements MailService {
             if(testFileName(fileName) && o instanceof InputStream){
                 InputStream is = (InputStream) o;
                 MultipartFile multipartFile = getMultipartFileFromInputStream(is,fileName);
+
+
                 tempListService.putToTempDB(multipartFile);
-
-                int c;
-                while ((c = is.read()) != -1)
-                    System.out.write(c);
+                logger.info("New paymentList found: " + fileName);
             }
-
-
         }
-
     }
 
     private boolean testFileName(String fileName) {

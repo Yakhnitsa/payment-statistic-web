@@ -5,5 +5,5 @@ import java.util.Date;
 public interface MailService {
 
 
-    void readFromMail(Date lastUpdate);
+    void scanFromMailToTempDb(Date lastUpdate);
 }

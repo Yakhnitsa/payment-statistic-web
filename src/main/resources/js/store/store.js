@@ -42,7 +42,8 @@ export default new Vuex.Store({
         uploadedData:{
             files:[],
             selectedLists:[],
-            tempLists:[]
+            tempLists:[],
+            lastUpdate:''
         }
     },
     // Изменяемые свойства объекта, computed properties, ets...
@@ -188,6 +189,12 @@ export default new Vuex.Store({
             const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
             const data = await response.data;
             commit('addChosenFilesMutation',[])
+            commit('setTepListsMutation',data)
+        },
+
+        async scanFromMailAction({commit,state},params) {
+            const response = await uploadApi.scanFromMailToTempDB(params);
+            const data = await response.data;
             commit('setTepListsMutation',data)
         },
 

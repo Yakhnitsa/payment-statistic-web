@@ -3,6 +3,8 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.service.parser_services.DocParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 
 @Service("temp-list-service-inmemory-map")
 public class TempListServiceImpl implements TempListService {
+
+    private static Logger logger = LoggerFactory.getLogger(TempListServiceImpl.class);
 
     private Path tempDir;
 
@@ -26,12 +28,13 @@ public class TempListServiceImpl implements TempListService {
 
     private DocParser xmlDocParser;
 
-    private Map<PaymentListId, PaymentList> tempDBMap = new LinkedHashMap<>();
+    private Map<PaymentListId, PaymentList> tempDBMap;
 
 
     @Autowired
     public TempListServiceImpl(@Qualifier("html-doc-parser") DocParser htmlDocParser,
                                @Qualifier("xml-doc-parser") DocParser xmlDocParser) {
+        tempDBMap = new LinkedHashMap<>();
         this.htmlDocParser = htmlDocParser;
         this.xmlDocParser = xmlDocParser;
     }
@@ -89,18 +92,28 @@ public class TempListServiceImpl implements TempListService {
         } catch (IOException e) {
             throw new RuntimeException("Ошибка создания временного хранилища");
         }
-        System.out.println("Временное храниличе успешно создано:");
-        System.out.println(tempDir.toAbsolutePath());
+        logger.info("Временное храниличе успешно создано:" + tempDir.toAbsolutePath());
+
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("Удаление временного хранилища файлов");
-        System.out.println(tempDir.toAbsolutePath());
+        logger.info("Удаление временного хранилища файлов: " + tempDir.toAbsolutePath());
         try {
-            Files.deleteIfExists(tempDir);
+            deleteDirectoryRecursion(tempDir);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void deleteDirectoryRecursion(Path path) throws IOException {
+        if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
+            try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
+                for (Path entry : entries) {
+                    deleteDirectoryRecursion(entry);
+                }
+            }
+        }
+        Files.delete(path);
     }
 }

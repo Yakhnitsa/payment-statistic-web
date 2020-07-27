@@ -26,9 +26,13 @@ public class UploadController {
     private MailService mailService;
 
     @Autowired
-    public UploadController(PaymentListService paymentListService, TempListService tempListService) {
+    public UploadController(
+            PaymentListService paymentListService,
+            TempListService tempListService,
+            MailService mailService) {
         this.paymentListService = paymentListService;
         this.tempListService = tempListService;
+        this.mailService = mailService;
     }
 
     @PostMapping("/api/upload-single")
@@ -102,8 +106,8 @@ public class UploadController {
     public ResponseEntity<?> scanListsFromMail(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date lastUpdate
     ){
-//        TODO - Реализовать скан перечней из почты
 
+        mailService.scanFromMailToTempDb(lastUpdate);
         return new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
