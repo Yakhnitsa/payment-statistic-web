@@ -43,7 +43,8 @@ export default new Vuex.Store({
             files:[],
             selectedLists:[],
             tempLists:[],
-            lastUpdate:''
+            lastUpdate:'',
+            mailUpdateAwait: false
         }
     },
     // Изменяемые свойства объекта, computed properties, ets...
@@ -51,7 +52,8 @@ export default new Vuex.Store({
         paymentLists: state => state.paymentListPage.paymentLists,
         chosenFiles: state => state.uploadedData.files,
         tempUploadedLists: state => state.uploadedData.tempLists,
-        selectedUploadedLists: state => state.uploadedData.selectedLists
+        selectedUploadedLists: state => state.uploadedData.selectedLists,
+        mailUpdateAwait: state => state.uploadedData.mailUpdateAwait
     },
     // Методы для изменения объектов приолжения
     mutations: {
@@ -82,6 +84,10 @@ export default new Vuex.Store({
 
         addChosenFilesMutation(state,data){
             state.uploadedData.files = [...data]
+        },
+
+        setMailUpdateAwaitMutation(state,waiting){
+            state.uploadedData.mailUpdateAwait = waiting
         },
 
         setTepListsMutation(state,data){
@@ -193,8 +199,10 @@ export default new Vuex.Store({
         },
 
         async scanFromMailAction({commit,state},params) {
+            commit('setMailUpdateAwaitMutation',true);
             const response = await uploadApi.scanFromMailToTempDB(params);
             const data = await response.data;
+            commit('setMailUpdateAwaitMutation',false);
             commit('setTepListsMutation',data)
         },
 

@@ -34,7 +34,15 @@
                                 <div class="input-group">
                                     <input class="form-control" type="date" v-model="lastUpdate">
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button" @click="scanFromMail">Сканировать почту</button>
+                                        <button class="btn btn-secondary"
+                                                :disabled="lastUpdate === ''|| mailUpdateAwait"
+                                                type="button" @click="scanFromMail">
+                                            <span v-show="mailUpdateAwait"
+                                                  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            {{mailUpdateAwait ? 'Сканирование...' : 'Сканировать почту'}}
+<!--                                            <span v-if="mailUpdateAwait" class="sr-only">Загрузка...</span>
+                                            <span v-else class="sr-only">Сканировать почту</span>-->
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -49,17 +57,19 @@
                                         <label class="custom-file-label" for="customFile">{{chosenFile}}</label>
                                     </div>
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary"
-                                                @click="submitFileUpload()" type="button">Загрузить</button>
+                                        <button class="btn btn-outline-secondary" :disabled="files < 1"
+                                                @click="submitFileUpload()" type="button">Загрузить
+                                            <span v-show="files.length > 0" class="badge badge-light">{{files.length}}</span>
+                                        </button>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-primary" @click="saveSelected()">Сохранить перечни в БД</button>
-                            <button type="button" class="btn btn-primary" @click="deleteSelected()">Удалить выбранные</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Сохранить перечни в БД</button>
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">Удалить выбранные</button>
+                            <button type="button" class="btn btn-secondary mx-1" data-dismiss="modal">Закрыть</button>
                         </div>
 
 
@@ -88,6 +98,7 @@
             ...mapGetters({
                 files: 'chosenFiles',
                 loadedPayments: 'tempUploadedLists',
+                mailUpdateAwait: 'mailUpdateAwait'
             }),
             countOfTempLists(){
                 return this.loadedPayments.length;
@@ -128,10 +139,6 @@
                 this.selectedPayments = selected;
             },
             scanFromMail(){
-                // const params = {
-                //     lastUpdate: this.lastUpdate,
-                //
-                // };
                 this.scanFromMailAction(this.lastUpdate);
             }
         },

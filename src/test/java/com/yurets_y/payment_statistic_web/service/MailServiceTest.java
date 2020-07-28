@@ -32,7 +32,7 @@ public class MailServiceTest {
 
     @Test
     public void readFromMailTest() throws ParseException {
-        Date dateFrom = format.parse("2020-07-23");
+        Date dateFrom = format.parse("2020-07-26");
         mailService.scanFromMailToTempDb(dateFrom);
     }
 

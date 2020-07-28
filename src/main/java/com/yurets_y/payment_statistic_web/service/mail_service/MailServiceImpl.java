@@ -15,7 +15,9 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import java.io.*;
 import java.security.NoSuchProviderException;
+import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +37,9 @@ public class MailServiceImpl implements MailService {
     private String password;
     @Value("${service.mail.sourceEmail}")
     private String sourceEmail;
+
+    @Value("#{'${service.mail.sourceEmails}'.split(',')}")
+    private List<String> sourceEmails;
 
     private Properties properties;
     private TempListService tempListService;
@@ -87,9 +92,13 @@ public class MailServiceImpl implements MailService {
                 }
                 InternetAddress[] fromAddress = (InternetAddress[]) msg.getFrom();
                 String from = fromAddress[0].getAddress();
-                if (from.equals(sourceEmail)) {
+//                TODO реализовать загрузку перечней из группы доверенных адресов
+                if(sourceEmails.contains(from)){
                     writePart(msg);
                 }
+//                if (from.equals(sourceEmail)) {
+//
+//                }
 
             }
 
@@ -127,7 +136,40 @@ public class MailServiceImpl implements MailService {
                 tempListService.putToTempDB(multipartFile);
                 logger.info("New paymentList found: " + fileName);
             }
+//            else if(o instanceof  InputStream){
+//                InputStream is = (InputStream) o;
+//                int c;
+//                while ((c = is.read()) != -1)
+//                    System.out.write(c);
+//            }
         }
+////        Разбор вложенных сообщений
+//        else if(p.isMimeType("application/ms-tnef")){
+//
+//            Object o = p.getContent();
+//            if(o instanceof  Multipart){
+//                Multipart mp = (Multipart) o;
+//                int count = mp.getCount();
+//                for (int i = 0; i < count; i++)
+//                    writePart(mp.getBodyPart(i));
+//            }
+//            Class[] classes = o.getClass().getDeclaredClasses();
+//            if (o instanceof InputStream) {
+//                InputStream is = (InputStream) o;
+//                int c;
+//                while ((c = is.read()) != -1)
+//                    System.out.write(c);
+//            }
+//        }
+//        else{
+//            Object o = p.getContent();
+//            if (o instanceof InputStream) {
+//                InputStream is = (InputStream) o;
+//                int c;
+//                while ((c = is.read()) != -1)
+//                    System.out.write(c);
+//            }
+//        }
     }
 
     private boolean testFileName(String fileName) {
@@ -145,11 +187,15 @@ public class MailServiceImpl implements MailService {
     private static String getFileNameFromContentType(String contentType) {
         Pattern pattern = Pattern.compile(".+name=(.+)", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(contentType);
+        String result = "unknown_file";
         if (matcher.matches()) {
-            return matcher.group(1);
-
+            result = matcher.group(1);
         }
-        return "unknown_file";
+        String[] parts = contentType.split("\\?");
+        if(parts.length > 4){
+            result = new String(Base64.getDecoder().decode(parts[3]));
+        }
+        return result;
     }
 
     @Autowired
