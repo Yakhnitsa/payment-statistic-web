@@ -1,73 +1,76 @@
 <template>
-    <div class="zui-wrapper ml-3">
-        <div class="zui-scroller">
-            <table class="zui-table">
-                <thead>
-                <tr>
-                    <th class="zui-sticky-col">Name</th>
-                    <th>Number</th>
-                    <th>Position</th>
-                    <th>Height</th>
-                    <th>Born</th>
-                    <th>Salary</th>
-                    <th>Prior to NBA/Country</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="zui-sticky-col">DeMarcus Cousins</td>
-                    <td>15</td>
-                    <td>C</td>
-                    <td>6'11"</td>
-                    <td>08-13-1990</td>
-                    <td>$4,917,000</td>
-                    <td>Kentucky/USA</td>
-                </tr>
-                <tr>
-                    <td class="zui-sticky-col">Isaiah Thomas</td>
-                    <td>22</td>
-                    <td>PG</td>
-                    <td>5'9"</td>
-                    <td>02-07-1989</td>
-                    <td>$473,604</td>
-                    <td>Washington/USA</td>
-                </tr>
-                <tr>
-                    <td class="zui-sticky-col">Ben McLemore</td>
-                    <td>16</td>
-                    <td>SG</td>
-                    <td>6'5"</td>
-                    <td>02-11-1993</td>
-                    <td>$2,895,960</td>
-                    <td>Kansas/USA</td>
-                </tr>
-                <tr>
-                    <td class="zui-sticky-col">Marcus Thornton</td>
-                    <td>23</td>
-                    <td>SG</td>
-                    <td>6'4"</td>
-                    <td>05-05-1987</td>
-                    <td>$7,000,000</td>
-                    <td>Louisiana State/USA</td>
-                </tr>
-                <tr>
-                    <td class="zui-sticky-col">Jason Thompson</td>
-                    <td>34</td>
-                    <td>PF</td>
-                    <td>6'11"</td>
-                    <td>06-21-1986</td>
-                    <td>$3,001,000</td>
-                    <td>Rider/USA</td>
-                    <td class="zui-last-col">Rider/USA</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <payment-details-table></payment-details-table>
+    <!--<div class="zui-wrapper ml-3">-->
+        <!--<div class="zui-scroller">-->
+            <!--<table class="zui-table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="zui-sticky-col">Name</th>-->
+                    <!--<th>Number</th>-->
+                    <!--<th>Position</th>-->
+                    <!--<th>Height</th>-->
+                    <!--<th>Born</th>-->
+                    <!--<th>Salary</th>-->
+                    <!--<th>Prior to NBA/Country</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td class="zui-sticky-col">DeMarcus Cousins</td>-->
+                    <!--<td>15</td>-->
+                    <!--<td>C</td>-->
+                    <!--<td>6'11"</td>-->
+                    <!--<td>08-13-1990</td>-->
+                    <!--<td>$4,917,000</td>-->
+                    <!--<td>Kentucky/USA</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="zui-sticky-col">Isaiah Thomas</td>-->
+                    <!--<td>22</td>-->
+                    <!--<td>PG</td>-->
+                    <!--<td>5'9"</td>-->
+                    <!--<td>02-07-1989</td>-->
+                    <!--<td>$473,604</td>-->
+                    <!--<td>Washington/USA</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="zui-sticky-col">Ben McLemore</td>-->
+                    <!--<td>16</td>-->
+                    <!--<td>SG</td>-->
+                    <!--<td>6'5"</td>-->
+                    <!--<td>02-11-1993</td>-->
+                    <!--<td>$2,895,960</td>-->
+                    <!--<td>Kansas/USA</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="zui-sticky-col">Marcus Thornton</td>-->
+                    <!--<td>23</td>-->
+                    <!--<td>SG</td>-->
+                    <!--<td>6'4"</td>-->
+                    <!--<td>05-05-1987</td>-->
+                    <!--<td>$7,000,000</td>-->
+                    <!--<td>Louisiana State/USA</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="zui-sticky-col">Jason Thompson</td>-->
+                    <!--<td>34</td>-->
+                    <!--<td>PF</td>-->
+                    <!--<td>6'11"</td>-->
+                    <!--<td>06-21-1986</td>-->
+                    <!--<td>$3,001,000</td>-->
+                    <!--<td>Rider/USA</td>-->
+                    <!--<td class="zui-last-col">Rider/USA</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
 </template>
 
 <script>
+    import PaymentDetailsTable from "../components/PaymentDetailsTable.vue";
     export default {
+        components: {PaymentDetailsTable},
         data() {
             return {
                 stickyHeader: true,

@@ -38,7 +38,18 @@ export default new Vuex.Store({
             dateFrom:'',
             dateUntil:''
         },
-        paymentLists: [],
+        paymentDetailsPage:{
+            paymentDetails:[],
+            paymentTypes:[],
+            currentPage:0,
+            totalPages:0,
+            dateFrom:'',
+            dateUntil:'',
+            stationCode:'',
+            docNumber:'',
+            paymentType:'',
+            paymentSum:''
+        },
         uploadedData:{
             files:[],
             selectedLists:[],

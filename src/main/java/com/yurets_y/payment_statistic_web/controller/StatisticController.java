@@ -53,8 +53,7 @@ public class StatisticController {
     public ResponseEntity<?> dailyChartStatistic(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
-            @RequestParam Integer payerCode,
-            @RequestParam(defaultValue = "3") Integer averageIndex
+            @RequestParam Integer payerCode
     ){
         if (dateFrom == null || dateUntil == null) {
             return new ResponseEntity<String>(messageProvider.get(WRONG_PARAMETERS_MESSAGE),HttpStatus.BAD_REQUEST);

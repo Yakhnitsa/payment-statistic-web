@@ -40,8 +40,6 @@
                                             <span v-show="mailUpdateAwait"
                                                   class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             {{mailUpdateAwait ? 'Сканирование...' : 'Сканировать почту'}}
-<!--                                            <span v-if="mailUpdateAwait" class="sr-only">Загрузка...</span>
-                                            <span v-else class="sr-only">Сканировать почту</span>-->
                                         </button>
                                     </div>
                                 </div>

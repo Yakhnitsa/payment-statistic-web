@@ -21,6 +21,10 @@ export default new VueRouter({
         {
             path: '/payments',
             component: Payments
+        },
+        {
+            path: '/test',
+            component: Test
         }
     ]
 

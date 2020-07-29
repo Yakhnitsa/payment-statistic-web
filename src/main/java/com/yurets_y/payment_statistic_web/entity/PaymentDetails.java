@@ -21,7 +21,6 @@ public class PaymentDetails {
 
     private String type;
 
-
     private IncomeType incomeType;
 
     @Temporal(TemporalType.DATE)

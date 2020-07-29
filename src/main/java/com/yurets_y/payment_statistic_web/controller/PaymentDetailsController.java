@@ -1,0 +1,75 @@
+package com.yurets_y.payment_statistic_web.controller;
+
+import com.yurets_y.payment_statistic_web.dto.ChartStatisticDto;
+import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
+import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
+import com.yurets_y.payment_statistic_web.service.StatisticService;
+import com.yurets_y.payment_statistic_web.util.MessageProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+@RestController
+@RequestMapping("api/payment-details")
+public class PaymentDetailsController {
+
+
+    private final String WRONG_PARAMETERS_MESSAGE = "application.controller.void-request-param";
+
+
+    private MessageProvider messageProvider;
+
+    private PaymentDetailsService paymentDetailsService;
+
+    @Autowired
+    public PaymentDetailsController(MessageProvider messageProvider, PaymentDetailsService paymentDetailsService) {
+        this.messageProvider = messageProvider;
+        this.paymentDetailsService = paymentDetailsService;
+    }
+
+    @GetMapping("/payment-types")
+    public ResponseEntity<?> dailyChartStatistic(){
+        List<String> paymentTypes = paymentDetailsService.getAllPaymentTypes();
+        return new ResponseEntity<>(paymentTypes,HttpStatus.OK);
+
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> getPaymentDetails(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam Integer payerCode,
+            @RequestParam(required = false) String paymentType,
+            @RequestParam(required = false, defaultValue = "0") Integer pageNumber
+            ){
+//        TODO выбрать сортировку в окне и записать в параметры
+        Sort dateSort = Sort.by("date").descending();
+        Pageable page = PageRequest.of(pageNumber,getItemsInPage(),dateSort);
+
+        Page<PaymentDetails> paymentDetailsPage = paymentDetailsService.getAllWithParameters(
+                payerCode, paymentType, dateFrom,dateUntil, page);
+        return new ResponseEntity<>(paymentDetailsPage,HttpStatus.OK);
+
+    }
+
+    private int getItemsInPage(){
+        return 30;
+    }
+
+}
