@@ -1,4 +1,5 @@
 <template>
+
     <div class="container-fluid">
         <table id="payments-table" class="table table-fixed table-sm table-striped">
             <thead class="thead-light">
@@ -29,9 +30,12 @@
 </template>
 
 <script>
+    import PaymentDetailsRequestForm from "./PaymentDetailsRequestForm.vue";
     export default {
-        name: "PaymentDetailsTable"
-    //    TODO запрос перечней из store и отображение в таблице
+        name: "PaymentDetailsTable",
+        components: {PaymentDetailsRequestForm}
+
+        //    TODO запрос перечней из store и отображение в таблице
     }
 </script>
 

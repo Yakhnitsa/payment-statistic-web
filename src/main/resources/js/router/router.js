@@ -4,6 +4,7 @@ Vue.use(VueRouter)
 
 import DailyStatistic from '../pages/DailyStatistic.vue'
 import Payments from '../pages/PaymentsList.vue'
+import PaymentDetailsPage from '../pages/PaymentDetailsPage.vue'
 import Test from '../pages/Test.vue'
 import ChartsPage from '../pages/ChartsPage.vue'
 
@@ -23,9 +24,12 @@ export default new VueRouter({
             component: Payments
         },
         {
+            path: '/payment-details',
+            component: PaymentDetailsPage
+        },
+        {
             path: '/test',
             component: Test
         }
     ]
-
 })
