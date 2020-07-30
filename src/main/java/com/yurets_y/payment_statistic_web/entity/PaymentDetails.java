@@ -1,40 +1,65 @@
 package com.yurets_y.payment_statistic_web.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="PAYMENT_DETAILS")
+@Table(name = "PAYMENT_DETAILS")
 public class PaymentDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumns( {
-            @JoinColumn(name="number", referencedColumnName="number"),
-            @JoinColumn(name="payerCode", referencedColumnName="payerCode")
+    @JoinColumns({
+            @JoinColumn(name = "number", referencedColumnName = "number"),
+            @JoinColumn(name = "payerCode", referencedColumnName = "payerCode")
     })
+//    @JsonView(Views.ShortView.class)
     private PaymentList paymentList;
 
+    @JsonView(Views.ShortView.class)
     private String type;
 
     private IncomeType incomeType;
 
     @Temporal(TemporalType.DATE)
+    @JsonView(Views.ShortView.class)
     private Date date;
+
+    @JsonView(Views.ShortView.class)
     private int stationCode;
+
+    @JsonView(Views.ShortView.class)
     private String stationName;
+
+    @JsonView(Views.ShortView.class)
     private String documentNumber;
     private String paymentCode;
     private String paymentDescription;
 
+    @JsonView(Views.ShortView.class)
     private long payment;
+    @JsonView(Views.ShortView.class)
     private long additionalPayment;
+    @JsonView(Views.ShortView.class)
     private long taxPayment;
+    @JsonView(Views.ShortView.class)
     private long totalPayment;
+
+    @JsonView(Views.ShortView.class)
+    public Integer getPaymentListNumber(){
+        return paymentList.getNumber();
+    }
+
+    @JsonView(Views.ShortView.class)
+    public Integer getPayerCode(){
+        return paymentList.getPayerCode();
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -151,7 +176,9 @@ public class PaymentDetails {
         return id;
     }
 
-    public static enum IncomeType{
+
+
+    public static enum IncomeType {
         INCOME,
         OUTCOME
     }

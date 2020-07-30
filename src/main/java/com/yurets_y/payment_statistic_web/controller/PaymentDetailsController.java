@@ -1,8 +1,11 @@
 package com.yurets_y.payment_statistic_web.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.dto.ChartStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
+import com.yurets_y.payment_statistic_web.dto.JsonPage;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
+import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
@@ -51,6 +54,7 @@ public class PaymentDetailsController {
     }
 
     @GetMapping()
+    @JsonView(Views.ShortView.class)
     public ResponseEntity<?> getPaymentDetails(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
@@ -58,13 +62,16 @@ public class PaymentDetailsController {
             @RequestParam(required = false) String paymentType,
             @RequestParam(required = false, defaultValue = "0") Integer pageNumber
             ){
-//        TODO выбрать сортировку в окне и записать в параметры
+//        TODO выбрать сортировку в front-end и записать в параметры
         Sort dateSort = Sort.by("date").descending();
-        Pageable page = PageRequest.of(pageNumber,getItemsInPage(),dateSort);
+        Pageable pageRequest = PageRequest.of(pageNumber,getItemsInPage(),dateSort);
 
         Page<PaymentDetails> paymentDetailsPage = paymentDetailsService.getAllWithParameters(
-                payerCode, paymentType, dateFrom,dateUntil, page);
-        return new ResponseEntity<>(paymentDetailsPage,HttpStatus.OK);
+                payerCode, paymentType, dateFrom,dateUntil, pageRequest);
+
+        JsonPage<PaymentDetails> jsonPage = new JsonPage<>(paymentDetailsPage,pageRequest);
+
+        return new ResponseEntity<>(jsonPage,HttpStatus.OK);
 
     }
 

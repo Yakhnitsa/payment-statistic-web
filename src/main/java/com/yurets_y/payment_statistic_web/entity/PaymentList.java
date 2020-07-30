@@ -168,6 +168,7 @@ public class PaymentList extends AuditableEntity{
         return paymentDetailsList.remove(o);
     }
 
+    @JsonView(Views.ShortView.class)
     public PaymentListId getId(){
         return new PaymentListId(this.payerCode,this.number);
     }
