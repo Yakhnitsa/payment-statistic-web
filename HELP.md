@@ -329,3 +329,10 @@ The following guides illustrate how to use some features concretely:
                            
                            
 !! Конвертация InputStream в MultipartFile
+
+## Настраиваем security для методов
+Меняем WebSecurityConfig:
+	`@EnableGlobalMethodSecurity(
+        prePostEnabled = true, 
+        securedEnabled = true, 
+        jsr250Enabled = true)`

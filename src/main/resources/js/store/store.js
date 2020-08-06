@@ -7,6 +7,7 @@ import axios from '../axios/axios'
 import statisticApi from '../api/statisticApi'
 import uploadApi from '../api/uploadApi'
 import paymentListApi from "../api/paymentListApi";
+import paymentDetailsApi from "../api/paymentDetailsApi";
 
 // Централизованное хранилище Vuex для данных приложения
 export default new Vuex.Store({
@@ -43,6 +44,8 @@ export default new Vuex.Store({
             paymentTypes:[],
             currentPage:0,
             totalPages:0,
+            totalElements: 0,
+            //Параметры запроса
             dateFrom:'',
             dateUntil:'',
             stationCode:'',
@@ -134,6 +137,16 @@ export default new Vuex.Store({
         addYearChartPeriodMutation(state,data){
             state.yearChart.dateFrom = data.dateFrom
             state.yearChart.dateUntil = data.dateUntil
+        },
+
+        setPaymentTypesMutation(state,data){
+            state.paymentDetailsPage.paymentTypes = data;
+        },
+
+        addPaymentDetailsMutation(state,data){
+            state.paymentDetailsPage.paymentDetails = data.content;
+            state.paymentDetailsPage.totalPages = data.totalPages;
+            state.paymentDetailsPage.totalElements = data.totalElements;
         }
 
     },
@@ -242,8 +255,7 @@ export default new Vuex.Store({
         getDailyStatisticAction({commit,state},params){
             statisticApi.getDailyStatistic(params).then(response => {
                 commit('addDailyStatisticMutation',response.data)
-            })
-                .catch((error) => console.log(error))
+            }).catch((error) => console.log(error))
         },
 
         getDailyChartAction({commit,state},params) {
@@ -257,6 +269,21 @@ export default new Vuex.Store({
             statisticApi.getYearChart(params).then(response =>{
                 commit('addYearChartMutation',response.data)
                 commit('addYearChartPeriodMutation',params)
+            }).catch((error) => console.log(error));
+        },
+
+        //Payment details actions
+
+        getPaymentDetailsAction({commit,state},params){
+            paymentDetailsApi.getPayments(params)
+                .then(response => {
+                    commit('addPaymentDetailsMutation',response.data);
+                })
+        },
+
+        getPaymentTypesAction({commit,state},params){
+            paymentDetailsApi.getPaymentTypes().then(response =>{
+                commit('setPaymentTypesMutation',response.data);
             }).catch((error) => console.log(error));
         }
 

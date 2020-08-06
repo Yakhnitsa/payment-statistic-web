@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -71,13 +72,19 @@ public class PaymentDetailsRepoTest {
 
         Integer payerCode = 8210260;
         String paymentType = "Відправлення";
+        Integer stationCode = null;
+        String docNumber = "";
+        Integer paymentSum = null;
 
         Page<PaymentDetails> paymentDetailsList = paymentDetailsRepo.findAllByQuery(
                 payerCode,
                 paymentType,
                 dateFrom,
                 dateUntil,
-                pageRequest
+                pageRequest,
+                stationCode,
+                docNumber,
+                paymentSum
 
         );
         List<PaymentDetails> list = paymentDetailsList.getContent();

@@ -18,6 +18,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +45,12 @@ public class MainController {
     private MessageProvider messageProvider;
 
     @GetMapping
-    public String paymentStatistic(Model model) {
+    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
+    public String paymentStatistic(
+            @AuthenticationPrincipal UserDetails user,
+            Model model) {
         List<String> codes = paymentListService.getPaymentCodes();
+        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
         model.addAttribute("paymentCodes",codes);
         return "index";
     }
@@ -50,6 +59,7 @@ public class MainController {
     @ResponseBody
     @JsonView(Views.NormalView.class)
     public PaymentListDto getPayments(
+            @AuthenticationPrincipal User user,
             @PageableDefault(size=RECORDS_PER_PAGE,
                     sort={"date"},
                     direction = Sort.Direction.DESC
@@ -59,7 +69,7 @@ public class MainController {
             @RequestParam Integer payerCode,
             @RequestParam(value = "page") Integer pageNumb
 
-    ) throws ParseException {
+    ) {
         Page<PaymentList> page = null;
         if(dateFrom == null || dateUntil == null){
             page = paymentListService.getAll(pageable,payerCode);
@@ -83,6 +93,7 @@ public class MainController {
     }
 
     @DeleteMapping("/api/remove-payment")
+    @Secured({"ADMIN", "EDITOR"})
     @ResponseBody
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id) {

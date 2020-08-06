@@ -31,17 +31,22 @@ public interface PaymentDetailsRepo extends JpaRepository<PaymentDetails,Long> {
 
     @Query("select pd from PaymentDetails pd where " +
             "pd.paymentList.payerCode = :payer_code and " +
-            "(:payment_type is null or pd.type = :payment_type) and " +
-            "pd.date between :date_from and :date_until")
+            "(:payment_type = '' or pd.type = :payment_type) and " +
+            "pd.date between :date_from and :date_until and " +
+            "(:station_code is null or pd.stationCode = :station_code) and " +
+            "(:document_number = '' or pd.documentNumber = :document_number) and " +
+            "(:payment_sum is null or pd.totalPayment = :payment_sum)"
+
+    )
     Page<PaymentDetails> findAllByQuery(
             @Param("payer_code") Integer payerCode,
             @Param("payment_type") String paymentType,
             @Param("date_from") Date dateFrom,
             @Param("date_until") Date dateUntil,
-            Pageable pageable
-//            @Param("station_code") Integer stationCode,
-//            @Param("document_number") String docNumber,
-//            @Param("payment_sum") Integer paymentSum
+            Pageable pageable,
+            @Param("station_code") Integer stationCode,
+            @Param("document_number") String docNumber,
+            @Param("payment_sum") Integer paymentSum
     );
 
     @Query("select distinct pd.type from PaymentDetails pd")

@@ -28,7 +28,12 @@ public class PaymentDetailsService {
         return paymentDetailsRepo.findAllPaymentTypes();
     }
 
-    public Page<PaymentDetails> getAllWithParameters(Integer payerCode, String paymentType, Date dateFrom, Date dateUntil, Pageable page) {
-        return paymentDetailsRepo.findAllByQuery(payerCode,paymentType,dateFrom,dateUntil,page);
+    public Page<PaymentDetails> getAllWithParameters(Integer payerCode, String paymentType, Date dateFrom, Date dateUntil,
+                                                     Pageable page,Integer stationCode,String docNumber, Float paymentSum) {
+        Integer paymentSumInt = null;
+        if(paymentSum != null){
+            paymentSumInt = (int)(paymentSum * 100);
+        }
+        return paymentDetailsRepo.findAllByQuery(payerCode,paymentType,dateFrom,dateUntil,page,stationCode,docNumber,paymentSumInt);
     }
 }

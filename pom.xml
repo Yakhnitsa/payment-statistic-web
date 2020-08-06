@@ -23,6 +23,7 @@
         <spring.boot.starter.data.jpa.version>2.2.1.RELEASE</spring.boot.starter.data.jpa.version>
         <spring.boot.starter.test.version>2.1.6.RELEASE</spring.boot.starter.test.version>
         <spring.boot.starter.security.version>2.3.1.RELEASE</spring.boot.starter.security.version>
+        <thymeleaf.extras.springsecurity4.version>3.0.4.RELEASE</thymeleaf.extras.springsecurity4.version>
     </properties>
 
     <dependencies>
@@ -105,12 +106,13 @@
         </dependency>
 
 
-        <!--thymeleaf dependencies for Spring security-->
-
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>${thymeleaf.extras.springsecurity4.version}</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
         <dependency>

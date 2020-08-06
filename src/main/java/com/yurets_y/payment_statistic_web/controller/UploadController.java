@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
+import com.yurets_y.payment_statistic_web.entity.User;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.TempListService;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +40,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/upload-single")
+    @Secured({"ADMIN", "EDITOR"})
     public ResponseEntity<?> uploadSingleList(
             @RequestParam("file") MultipartFile file
     ){
@@ -48,6 +53,7 @@ public class UploadController {
 
 
     @PostMapping("/api/upload-multiple")
+    @Secured({"ADMIN", "EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> uploadMultiple(
             @RequestParam("files") MultipartFile[] files
@@ -73,6 +79,7 @@ public class UploadController {
 
     @PostMapping("/api/save-temp-selected")
     @JsonView(Views.ShortView.class)
+    @Secured({"ADMIN", "EDITOR"})
     public ResponseEntity<?> saveSelectedToMainDB(
             @RequestBody PaymentList[] paymentLists
     ){
@@ -101,9 +108,11 @@ public class UploadController {
         return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
+
     @PostMapping("/api/scan-from-mail")
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> scanListsFromMail(
+            @AuthenticationPrincipal User user,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date lastUpdate
     ){
 

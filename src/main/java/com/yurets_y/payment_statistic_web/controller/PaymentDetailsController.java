@@ -60,14 +60,18 @@ public class PaymentDetailsController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             @RequestParam Integer payerCode,
             @RequestParam(required = false) String paymentType,
-            @RequestParam(required = false, defaultValue = "0") Integer pageNumber
+            @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+            @RequestParam(required = false) Integer stationCode,
+            @RequestParam(required = false) String docNumber,
+            @RequestParam(required = false) Float paymentSum
+
             ){
 //        TODO выбрать сортировку в front-end и записать в параметры
         Sort dateSort = Sort.by("date").descending();
         Pageable pageRequest = PageRequest.of(pageNumber,getItemsInPage(),dateSort);
 
         Page<PaymentDetails> paymentDetailsPage = paymentDetailsService.getAllWithParameters(
-                payerCode, paymentType, dateFrom,dateUntil, pageRequest);
+                payerCode, paymentType, dateFrom,dateUntil, pageRequest,stationCode,docNumber,paymentSum);
 
         JsonPage<PaymentDetails> jsonPage = new JsonPage<>(paymentDetailsPage,pageRequest);
 

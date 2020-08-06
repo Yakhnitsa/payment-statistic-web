@@ -1,8 +1,8 @@
 <template>
     <div class="container my-2">
         <div class="my-2">
-            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#requestForm" aria-expanded="false"
-                    aria-controls="requestForm">
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#requestForm"
+                    aria-expanded="true" aria-controls="requestForm">
                 Отобразить форму
             </button>
 
@@ -30,7 +30,7 @@
         <div>
             <form>
 
-                <div class="collapse my-2" id="requestForm">
+                <div class="collapse show my-2" id="requestForm">
                     <div class="form-row">
                         <div class="form-group col-lg-2">
                             <label for="inputPayerCode">Код плательщика</label>
@@ -40,7 +40,13 @@
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="inputPaymentType">Название платежа</label>
-                            <input type="text" v-model="paymentType" class="form-control" id="inputPaymentType" placeholder="Отправка, ведомости, прочее...">
+                            <input type="text" v-model="paymentType"
+                                   class="form-control" id="inputPaymentType"
+                                   list="paymentTypes"
+                                   placeholder="Отправка, ведомости, прочее...">
+                            <datalist id="paymentTypes">
+                                <option v-for="type in paymentTypes" :value="type"></option>
+                            </datalist>
                         </div>
                         <div class="form-group col-lg-2">
                             <label for="inputDateFrom">Начало периода</label>
@@ -55,15 +61,18 @@
 
                         <div class="form-group col-md-3">
                             <label for="inputStation">Станция</label>
-                            <input type="text" v-model="station" class="form-control" id="inputStation" placeholder="(код) Станция">
+                            <input type="text" v-model="stationCode" class="form-control" id="inputStation"
+                                   placeholder="(код) Станция">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputDocNumber">Документ</label>
-                            <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber" placeholder="№ документа">
+                            <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber"
+                                   placeholder="№ документа">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPaymentSum">Сумма платежа</label>
-                            <input type="number" v-model="paymentSum" class="form-control" id="inputPaymentSum" placeholder="Сумма">
+                            <input type="number" v-model="paymentSum" class="form-control" id="inputPaymentSum"
+                                   placeholder="Сумма">
                         </div>
                     </div>
                 </div>
@@ -76,34 +85,55 @@
 </template>
 
 <script>
+    import paymentDetailsApi from "../api/paymentDetailsApi";
+
     export default {
         name: "PaymentDetailsRequestForm",
 
-    //    TODO форма запроса списка перечней
-        data(){
-            return{
-                payerCode:'',
-                paymentType:'',
-                dateFrom:'',
-                dateUntil:'',
-                currentPage:'',
-                station:'',
-                docNumber:'',
-                paymentSum:''
+        //    TODO форма запроса списка перечней
+        data() {
+            return {
+                payerCode: '',
+                paymentType: '',
+                dateFrom: '',
+                dateUntil: '',
+                currentPage: '',
+                stationCode: '',
+                docNumber: '',
+                paymentSum: '',
+                paymentTypes: []
             }
         },
-        computed:{
-            paymentCodes(){
+        computed: {
+            paymentCodes() {
                 return paymentCodes;
             },
-            pages(){
+            pages() {
                 return this.$store.state.paymentDetailsPage.totalPages
+            },
+        },
+        methods: {
+            submitForm() {
+                var params = {
+                    payerCode: this.payerCode,
+                    paymentType: this.paymentType,
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                    currentPage: this.currentPage,
+                    stationCode: this.stationCode, //TODO сделать поиск по станциям и передавать в запрос код станции
+                    docNumber: this.docNumber,
+                    paymentSum: this.paymentSum,
+                }
+                this.$store.dispatch('getPaymentDetailsAction',params);
             }
         },
-        methods:{
-            submitForm(){
-
-            }
+        mounted() {
+            paymentDetailsApi.getPaymentTypes().then(response => {
+                response.data.forEach(type => {
+                        this.paymentTypes.push(type)
+                    }
+                )
+            })
         }
     }
 </script>
