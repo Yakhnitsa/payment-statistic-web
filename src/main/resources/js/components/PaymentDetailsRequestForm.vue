@@ -89,8 +89,7 @@
 
     export default {
         name: "PaymentDetailsRequestForm",
-
-        //    TODO форма запроса списка перечней
+        props:['has-request-params','request-params'],
         data() {
             return {
                 payerCode: '',
@@ -114,7 +113,7 @@
         },
         methods: {
             submitForm() {
-                var params = {
+                const params = {
                     payerCode: this.payerCode,
                     paymentType: this.paymentType,
                     dateFrom: this.dateFrom,
@@ -123,11 +122,24 @@
                     stationCode: this.stationCode, //TODO сделать поиск по станциям и передавать в запрос код станции
                     docNumber: this.docNumber,
                     paymentSum: this.paymentSum,
-                }
-                this.$store.dispatch('getPaymentDetailsAction',params);
-            }
+                };
+                // this.$store.dispatch('getPaymentDetailsAction',params);
+                this.$emit('submit-form', params);
+            },
+
         },
         mounted() {
+            if(this.hasRequestParams){
+                console.log(this.requestParams);
+                this.payerCode = this.requestParams.payerCode;
+                this.paymentType = this.requestParams.paymentType;
+                this.dateFrom = this.requestParams.dateFrom;
+                this.dateUntil = this.requestParams.dateUntil;
+                this.currentPage = this.requestParams.currentPage;
+                this.stationCode = this.requestParams.stationCode;
+                this.docNumber = this.requestParams.docNumber;
+                this.paymentSum = this.requestParams.paymentSum;
+            }
             paymentDetailsApi.getPaymentTypes().then(response => {
                 response.data.forEach(type => {
                         this.paymentTypes.push(type)

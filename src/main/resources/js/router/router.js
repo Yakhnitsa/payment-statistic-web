@@ -25,11 +25,15 @@ export default new VueRouter({
         },
         {
             path: '/payment-details',
-            component: PaymentDetailsPage
+            component: PaymentDetailsPage,
+            name: 'payment-details',
+            props: true
         },
         {
             path: '/test',
-            component: Test
+            component: Test,
+            name:'test',
+            props: true
         }
     ]
 })

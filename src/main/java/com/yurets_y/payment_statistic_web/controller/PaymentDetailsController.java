@@ -59,10 +59,10 @@ public class PaymentDetailsController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             @RequestParam Integer payerCode,
-            @RequestParam(required = false) String paymentType,
+            @RequestParam(required = false, defaultValue = "") String paymentType,
             @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
             @RequestParam(required = false) Integer stationCode,
-            @RequestParam(required = false) String docNumber,
+            @RequestParam(required = false, defaultValue = "") String docNumber,
             @RequestParam(required = false) Float paymentSum
 
             ){

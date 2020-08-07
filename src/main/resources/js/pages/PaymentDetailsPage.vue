@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <payment-details-request-form></payment-details-request-form>
+        <payment-details-request-form
+                :has-request-params="hasRequestParams"
+                :request-params="requestParams"
+                @submit-form="updateData"></payment-details-request-form>
         <payment-details-table></payment-details-table>
     </div>
 
@@ -12,7 +15,44 @@
     import PaymentDetailsTable from "../components/PaymentDetailsTable.vue";
     export default {
         name: "PaymentDetailsPage",
-        components: {PaymentDetailsTable, PaymentDetailsRequestForm}
+        props:['hasRequestParams','payerCode', 'paymentType', 'dateFrom',
+            'dateUntil', 'currentPage' , 'stationCode', 'docNumber', 'paymentSum'],
+        components: {PaymentDetailsTable, PaymentDetailsRequestForm},
+        computed:{
+            requestParams(){
+                return {
+                    payerCode: this.payerCode,
+                    paymentType: this.paymentType,
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                    currentPage: this.currentPage,
+                    stationCode: this.stationCode,
+                    docNumber: this.docNumber,
+                    paymentSum: this.paymentSum,
+                };
+            }
+        },
+        methods:{
+            updateData(params){
+                console.log(params)
+                this.$store.dispatch('getPaymentDetailsAction',params);
+            }
+        },
+        mounted(){
+            if(this.hasRequestParams){
+                // const params = {
+                //     payerCode: this.payerCode,
+                //     paymentType: this.paymentType,
+                //     dateFrom: this.dateFrom,
+                //     dateUntil: this.dateUntil,
+                //     currentPage: this.currentPage,
+                //     stationCode: this.stationCode,
+                //     docNumber: this.docNumber,
+                //     paymentSum: this.paymentSum,
+                // };
+                this.updateData(this.requestParams);
+            }
+        }
     }
 </script>
 

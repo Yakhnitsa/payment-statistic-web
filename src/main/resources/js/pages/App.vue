@@ -21,7 +21,9 @@
                     <router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>
                     <router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>
                     <router-link to="/payment-details" class="nav-item nav-link">Детали платежей</router-link>
-                    <router-link to="/test" class="nav-item nav-link">Test</router-link>
+                    <router-link
+                            :to="{name: 'test', params: {dateFrom: '2020-07-20', dateUntil: '2020-08-03'}}"
+                            class="nav-item nav-link">Test</router-link>
                     <!--<a class="nav-item nav-link" href="#">Pricing</a>-->
                     <!--<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
                 </div>
