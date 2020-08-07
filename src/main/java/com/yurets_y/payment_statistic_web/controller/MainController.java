@@ -45,7 +45,8 @@ public class MainController {
     private MessageProvider messageProvider;
 
     @GetMapping
-    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
+//    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String paymentStatistic(
             @AuthenticationPrincipal UserDetails user,
             Model model) {
