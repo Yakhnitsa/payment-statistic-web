@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <payment-details-request-form
+        <payment-details-request-form :inputData.sync="someData"
                 :has-request-params="hasRequestParams"
                 :request-params="requestParams"
                 @submit-form="updateData"></payment-details-request-form>
@@ -18,6 +18,11 @@
         props:['hasRequestParams','payerCode', 'paymentType', 'dateFrom',
             'dateUntil', 'currentPage' , 'stationCode', 'docNumber', 'paymentSum'],
         components: {PaymentDetailsTable, PaymentDetailsRequestForm},
+        data(){
+            return{
+                someData:''
+            }
+        },
         computed:{
             requestParams(){
                 return {
