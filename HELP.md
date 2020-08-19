@@ -336,3 +336,7 @@ The following guides illustrate how to use some features concretely:
         prePostEnabled = true, 
         securedEnabled = true, 
         jsr250Enabled = true)`
+        
+        
+## Деплой на сервер (readme)[/help/SERVER_DEPLOY_HELP.md]
+               

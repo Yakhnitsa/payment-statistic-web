@@ -67,6 +67,12 @@
             <!--<scope>test</scope>-->
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!--JSon dependencies to ignore some properties-->
         <!-- https://mvnrepository.com/artifact/com.monitorjbl/json-view -->
         <dependency>
