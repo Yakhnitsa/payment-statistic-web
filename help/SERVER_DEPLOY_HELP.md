@@ -60,7 +60,10 @@
     `printenv`
 6.2. Запись настроек, требуемых в приложении:
 
-spring.datasource.password=${MYSQL_PASS} - 
-service.mail.password=${MAIL_PASSWORD} -     
+spring.datasource.password=${MYSQL_PASS} - `export MYSQL_PASS={MySQL pass}`
+service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`    
 
 7. Пишем скрипт деплоя    
+
+8*. Запуск приложения с изменением пропертей:
+`java -jar myproject.jar --spring.config.name=myproject`

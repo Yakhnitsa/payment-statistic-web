@@ -13,7 +13,6 @@ import java.util.Locale;
 @Component
 public class MessageProvider {
 
-    @Autowired
     private MessageSource messageSource;
 
     private MessageSourceAccessor accessor;
@@ -21,7 +20,6 @@ public class MessageProvider {
     @PostConstruct
     private void init() {
         Locale locale = LocaleContextHolder.getLocale();
-        System.out.println(locale);
         accessor = new MessageSourceAccessor(messageSource, locale);
     }
 
@@ -33,4 +31,8 @@ public class MessageProvider {
         return messageSource.getMessage(code,params,locale);
     }
 
+    @Autowired
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 }
