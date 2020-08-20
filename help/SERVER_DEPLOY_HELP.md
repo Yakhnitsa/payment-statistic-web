@@ -49,7 +49,7 @@
     #database dependencies
     
     spring.jpa.hibernate.ddl-auto=update
-    spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_utl_web_app
+    spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_utl_web_app?serverTimezone=UTC&useUnicode=true
     spring.datasource.username=developer
     spring.datasource.password=${MYSQL_PASS}
     
@@ -66,6 +66,10 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
 7. Пишем скрипт деплоя    
     Запись bash скриптов [инструкция](https://habr.com/ru/company/ruvds/blog/325522/)
     Убиение процесса [инструкция](https://pingvinus.ru/note/ps-kill-killall)
+    Создаем файл скрипта `deploy/utl2_site_deploy.sh`
+    
+    Запуск скрипта:
+    `./deploy/utl2_site_deploy.sh 'some value'`
 
 8*. Запуск приложения с изменением пропертей:
 `java -jar myproject.jar --spring.config.name=myproject`
