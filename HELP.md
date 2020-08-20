@@ -336,3 +336,47 @@ The following guides illustrate how to use some features concretely:
         prePostEnabled = true, 
         securedEnabled = true, 
         jsr250Enabled = true)`
+        
+        
+## Деплой на сервер [инструкция](/help/SERVER_DEPLOY_HELP.md)
+
+## Настройка миграции БД
+- Именение настроек application-dev.properties
+
+
+    spring.jpa.show-sql=true
+    spring.jpa.generate-ddl=true
+    spring.jpa.hibernate.ddl-auto=create   
+- Меняем базу данных, чтобы старая сохранилась
+    `spring.datasource.url=jdbc:h2:file:./src/main/resources/database/test_db`    
+- Запускаем приложение с девелоперскими пропертями.
+ - VM arguments:
+    `-Dspring.profiles.active=dev`    
+ - Либо прописываем режим в конфигурации запуска intellij -> active profiles
+ 
+ - Выделяем запросы Hibernate по созданию базы данных:
+ 
+ 
+     Hibernate: create sequence hibernate_sequence start with 1 increment by 1
+     Hibernate: create table app_user (id bigint not null, active boolean not null, email varchar(255), password varchar(255), username varchar(255), primary key (id))
+     Hibernate: create table payment_details (id bigint not null, additional_payment bigint not null, date date, document_number varchar(255), income_type integer, payment bigint not null, payment_code varchar(255), payment_description varchar(255), station_code integer not null, station_name varchar(255), tax_payment bigint not null, total_payment bigint not null, type varchar(255), number integer, payer_code integer, primary key (id))
+     Hibernate: create table payment_list (number integer not null, payer_code integer not null, created_date timestamp, last_modified_date timestamp, backup_file_path varchar(255), closing_balance bigint not null, contract_number varchar(255), date date, opening_balance bigint not null, payer_name varchar(255), payment_taxes bigint not null, payment_vs_taxes bigint not null, payments bigint not null, tax_code integer not null, test_passed boolean not null, user_id bigint, last_modified_by bigint, primary key (number, payer_code))
+     Hibernate: create table user_role (user_id bigint not null, roles varchar(255))
+     Hibernate: alter table payment_details add constraint FKrunu207hvbresx9w7aso0etn foreign key (number, payer_code) references payment_list
+     Hibernate: alter table payment_list add constraint FKgjxh7pxd1uek9utf16i68s7la foreign key (user_id) references app_user
+     Hibernate: alter table payment_list add constraint FK8jly0hr6c1eqbx6mbqjyjtee4 foreign key (last_modified_by) references app_user
+     Hibernate: alter table user_role add constraint FKg7fr1r7o0fkk41nfhnjdyqn7b foreign key (user_id) references app_user   
+
+- Подключаем flyway к pom-нику [ссылочка](https://flywaydb.org/documentation/maven/):
+        
+    
+    <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+    <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>6.5.5</version>
+    </dependency>
+- Настраиваем миграции:
+    - Создаем директорию миграции `resouces/db.migration` 
+    - Создаем файлы миграции: `V{numb_version}__{explanation}` 
+        - пример `V1__init_db.sql`             
