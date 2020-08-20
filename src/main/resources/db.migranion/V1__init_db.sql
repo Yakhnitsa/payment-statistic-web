@@ -50,7 +50,8 @@ create table payment_list (
 
 create table user_role (
   user_id bigint not null,
-  roles varchar(255));
+  roles varchar(255)
+);
 
 alter table payment_details add constraint FK_paymDetail_paymList foreign key (number, payer_code) references payment_list;
 

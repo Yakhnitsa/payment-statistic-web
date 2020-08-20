@@ -64,6 +64,8 @@ spring.datasource.password=${MYSQL_PASS} - `export MYSQL_PASS={MySQL pass}`
 service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`    
 
 7. Пишем скрипт деплоя    
+    Запись bash скриптов [инструкция](https://habr.com/ru/company/ruvds/blog/325522/)
+    Убиение процесса [инструкция](https://pingvinus.ru/note/ps-kill-killall)
 
 8*. Запуск приложения с изменением пропертей:
 `java -jar myproject.jar --spring.config.name=myproject`
