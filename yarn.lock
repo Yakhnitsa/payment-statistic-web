@@ -27,7 +27,7 @@
     "@babel/generator" "^7.8.7"
     "@babel/helpers" "^7.8.4"
     "@babel/parser" "^7.8.7"
-    "@babel/db.migranion" "^7.8.6"
+    "@babel/db.db.migration" "^7.8.6"
     "@babel/traverse" "^7.8.6"
     "@babel/types" "^7.8.7"
     convert-source-map "^1.7.0"
@@ -135,7 +135,7 @@
   integrity sha512-BCxgX1BC2hD/oBlIFUgOCQDOPV8nSINxCwM3o93xP4P9Fq6aV5sgv2cOOITDMtCfQ+3PvHp3l689XZvAM9QyOA==
   dependencies:
     "@babel/helper-get-function-arity" "^7.8.3"
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/types" "^7.8.3"
 
 "@babel/helper-get-function-arity@^7.8.3":
@@ -174,7 +174,7 @@
     "@babel/helper-module-imports" "^7.8.3"
     "@babel/helper-simple-access" "^7.8.3"
     "@babel/helper-split-export-declaration" "^7.8.3"
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/types" "^7.8.3"
     lodash "^4.17.13"
 
@@ -204,7 +204,7 @@
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.8.3"
     "@babel/helper-wrap-function" "^7.8.3"
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/traverse" "^7.8.3"
     "@babel/types" "^7.8.3"
 
@@ -233,7 +233,7 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.8.3.tgz#7f8109928b4dab4654076986af575231deb639ae"
   integrity sha512-VNGUDjx5cCWg4vvCTR8qQ7YJYZ+HBjxOgXEl7ounz+4Sn7+LMD3CFrCTEU6/qXKbA2nKg21CwhhBzO0RpRbdCw==
   dependencies:
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/types" "^7.8.3"
 
 "@babel/helper-split-export-declaration@^7.8.3":
@@ -249,7 +249,7 @@
   integrity sha512-LACJrbUET9cQDzb6kG7EeD7+7doC3JNvUgTEQOx2qaO1fKlzE/Bf05qs9w1oXQMmXlPO65lC3Tq9S6gZpTErEQ==
   dependencies:
     "@babel/helper-function-name" "^7.8.3"
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/traverse" "^7.8.3"
     "@babel/types" "^7.8.3"
 
@@ -258,7 +258,7 @@
   resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.8.4.tgz#754eb3ee727c165e0a240d6c207de7c455f36f73"
   integrity sha512-VPbe7wcQ4chu4TDQjimHv/5tj73qz88o12EPkO2ValS2QiQS/1F2SsjyIGNnAD0vF/nZS6Cf9i+vW6HIlnaR8w==
   dependencies:
-    "@babel/db.migranion" "^7.8.3"
+    "@babel/db.db.migration" "^7.8.3"
     "@babel/traverse" "^7.8.4"
     "@babel/types" "^7.8.3"
 
@@ -631,7 +631,7 @@
 
 "@babel/plugin-transform-template-literals@^7.8.3":
   version "7.8.3"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-db.migranion-literals/-/plugin-transform-db.migranion-literals-7.8.3.tgz#7bfa4732b455ea6a43130adc0ba767ec0e402a80"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-db.db.migration-literals/-/plugin-transform-db.db.migration-literals-7.8.3.tgz#7bfa4732b455ea6a43130adc0ba767ec0e402a80"
   integrity sha512-820QBtykIQOLFT8NZOcTRJ1UNuztIELe4p9DCgvj4NK+PwluSJ49we7s9FB1HIGNIYT7wFUJ0ar2QpCDj0escQ==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.8.3"
@@ -705,7 +705,7 @@
     "@babel/plugin-transform-shorthand-properties" "^7.8.3"
     "@babel/plugin-transform-spread" "^7.8.3"
     "@babel/plugin-transform-sticky-regex" "^7.8.3"
-    "@babel/plugin-transform-db.migranion-literals" "^7.8.3"
+    "@babel/plugin-transform-db.db.migration-literals" "^7.8.3"
     "@babel/plugin-transform-typeof-symbol" "^7.8.4"
     "@babel/plugin-transform-unicode-regex" "^7.8.3"
     "@babel/types" "^7.8.7"
@@ -724,7 +724,7 @@
 
 "@babel/template@^7.8.3":
   version "7.8.3"
-  resolved "https://registry.yarnpkg.com/@babel/db.migranion/-/db.migranion-7.8.3.tgz#e02ad04fe262a657809327f578056ca15fd4d1b8"
+  resolved "https://registry.yarnpkg.com/@babel/db.db.migration/-/db.db.migration-7.8.3.tgz#e02ad04fe262a657809327f578056ca15fd4d1b8"
   integrity sha512-04m87AcQgAFdvuoyiQ2kgELr2tV8B4fP/xJAVUL3Yb3bkNdMedD3d0rlSQr3PegP0cms3eHjl1F7PWlvWbU8FQ==
   dependencies:
     "@babel/code-frame" "^7.8.3"
@@ -733,7 +733,7 @@
 
 "@babel/template@^7.8.6":
   version "7.8.6"
-  resolved "https://registry.yarnpkg.com/@babel/db.migranion/-/db.migranion-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
+  resolved "https://registry.yarnpkg.com/@babel/db.db.migration/-/db.db.migration-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
   integrity sha512-zbMsPMy/v0PWFZEhQJ66bqjhH+z0JgMoBWuikXybgG3Gkd/3t5oQ1Rw2WQhnSrsOmsKXnZOx15tkC4qON/+JPg==
   dependencies:
     "@babel/code-frame" "^7.8.3"
@@ -882,7 +882,7 @@
     postcss-selector-parser "^6.0.2"
     prettier "^1.18.2"
     source-map "~0.6.1"
-    vue-db.migranion-es2015-compiler "^1.9.0"
+    vue-db.db.migration-es2015-compiler "^1.9.0"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
@@ -5225,7 +5225,7 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
 
 vue-template-compiler@^2.6.11:
   version "2.6.11"
-  resolved "https://registry.yarnpkg.com/vue-db.migranion-compiler/-/vue-db.migranion-compiler-2.6.11.tgz#c04704ef8f498b153130018993e56309d4698080"
+  resolved "https://registry.yarnpkg.com/vue-db.db.migration-compiler/-/vue-db.db.migration-compiler-2.6.11.tgz#c04704ef8f498b153130018993e56309d4698080"
   integrity sha512-KIq15bvQDrcCjpGjrAhx4mUlyyHfdmTaoNfeoATHLAiWB+MU3cx4lOzMwrnUh9cCxy0Lt1T11hAFY6TQgroUAA==
   dependencies:
     de-indent "^1.0.2"
@@ -5233,7 +5233,7 @@ vue-template-compiler@^2.6.11:
 
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
-  resolved "https://registry.yarnpkg.com/vue-db.migranion-es2015-compiler/-/vue-db.migranion-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
+  resolved "https://registry.yarnpkg.com/vue-db.db.migration-es2015-compiler/-/vue-db.db.migration-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
 vue@^2.6.11:

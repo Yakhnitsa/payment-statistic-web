@@ -39,7 +39,7 @@
     `MariaDB [(none)]>CREATE USER 'developer'@'localhost' IDENTIFIED BY '{password};'`
     Создание и настройка новой базы данных
     `MariaDB [(none)]> CREATE DATABASE db_utl_web_app;`
-    `MariaDB [(none)]> GRANT ALL PRIVILEGES db_utl_web_app.* TO 'developer'@'localhost' WITH GRANT OPTION;`
+    `MariaDB [(none)]> GRANT ALL PRIVILEGES ON db_utl_web_app.* TO 'developer'@'localhost' WITH GRANT OPTION;`
 4. Копирование файлов
     Проверяем копирование файлов:
     `scp target/test.txt -P822 yri@myapp.ukrtranslogistic.com.ua:~/test` - Копирование получилось )))
