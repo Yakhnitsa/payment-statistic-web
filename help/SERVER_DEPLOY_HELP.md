@@ -67,9 +67,16 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
     Запись bash скриптов [инструкция](https://habr.com/ru/company/ruvds/blog/325522/)
     Убиение процесса [инструкция](https://pingvinus.ru/note/ps-kill-killall)
     Создаем файл скрипта `deploy/utl2_site_deploy.sh`
+    Подробнее о происходящем:
+    
+    
+    
+    - Запуск jar файла:
+     java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev --mail_password={pass} --MYSQL_PASSWORD={pass}
+    
     
     Запуск скрипта:
-    `./deploy/utl2_site_deploy.sh 'some value'`
+    `./deploy/utl2_site_deploy.sh`
 
 8*. Запуск приложения с изменением пропертей:
 `java -jar myproject.jar --spring.config.name=myproject`
