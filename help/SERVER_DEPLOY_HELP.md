@@ -69,6 +69,7 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
     Создаем файл скрипта `deploy/utl2_site_deploy.sh`
     Подробнее о происходящем:
     
+    - Ликвидация старого процесса java:
     
     
     - Запуск jar файла:
