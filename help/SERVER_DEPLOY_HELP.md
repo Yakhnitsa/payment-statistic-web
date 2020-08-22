@@ -70,14 +70,18 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
     Подробнее о происходящем:
     
     - Ликвидация старого процесса java:
-    
-    
-    - Запуск jar файла:
-     java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev --mail_password={pass} --MYSQL_PASSWORD={pass}
-    
+        
+    - Запуск jar файла на сервере
+     `java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar --mail_password={pass} --MYSQL_PASSWORD={pass}`
+    - Запуск с логированием в файл 
+      `java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar > logfile.txt --mail_password={pass} --MYSQL_PASSWORD={pass} &`   
     
     Запуск скрипта:
     `./deploy/utl2_site_deploy.sh`
+!!! Первые проблемы на сервере, flyway не работает с maria_db v 10.1, нужна версия 10.2
+[Инструкция по обновлению](https://mariadb.com/kb/en/upgrading-from-mariadb-101-to-mariadb-102/)  
+[решение](https://downloads.mariadb.org/mariadb/repositories/#distro=Ubuntu&distro_release=bionic--ubuntu_bionic&mirror=host-europe&version=10.4)  
+Обновление легко происходит простой установкой поверх старой версии
 
 8*. Запуск приложения с изменением пропертей:
 `java -jar myproject.jar --spring.config.name=myproject`

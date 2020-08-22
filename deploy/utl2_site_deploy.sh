@@ -9,7 +9,7 @@ echo -e $delimiter\\n\\t'webpack build main.js'
 
 echo -e $delimiter\\n\\t'maven build project'
 
-#    mvn install -DskipTests
+    mvn install -DskipTests
 
 echo -e $delimiter\\n\\t'Copy files to server...'
 

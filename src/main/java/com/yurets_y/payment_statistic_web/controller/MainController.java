@@ -10,7 +10,10 @@ import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -38,70 +41,25 @@ import java.util.*;
 @Controller
 public class MainController {
 
-    private final int RECORDS_PER_PAGE = 30;
+    @Value("${spring.profiles.active}")
+    private String profile;
 
     private PaymentListService paymentListService;
+
+    private Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private MessageProvider messageProvider;
 
     @GetMapping
 //    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String paymentStatistic(
             @AuthenticationPrincipal UserDetails user,
             Model model) {
         List<String> codes = paymentListService.getPaymentCodes();
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
         model.addAttribute("paymentCodes",codes);
+        model.addAttribute("isDevMode", "dev".equals(profile));
         return "index";
-    }
-
-    @GetMapping("/api/payments")
-    @ResponseBody
-    @JsonView(Views.NormalView.class)
-    public PaymentListDto getPayments(
-            @AuthenticationPrincipal User user,
-            @PageableDefault(size=RECORDS_PER_PAGE,
-                    sort={"date"},
-                    direction = Sort.Direction.DESC
-            ) Pageable pageable,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
-            @RequestParam Integer payerCode,
-            @RequestParam(value = "page") Integer pageNumb
-
-    ) {
-        Page<PaymentList> page = null;
-        if(dateFrom == null || dateUntil == null){
-            page = paymentListService.getAll(pageable,payerCode);
-        }else{
-            page = paymentListService.getPageByPeriod(pageable,dateFrom,dateUntil,payerCode);
-        }
-
-        return new PaymentListDto(page.getContent(),page.getNumber(),page.getTotalPages());
-    }
-
-    @GetMapping("/api/single-payment")
-    @ResponseBody
-    @JsonView(Views.FullView.class)
-    public PaymentList getPayment(
-            @RequestParam(value = "payerCode") Integer payerCode,
-            @RequestParam(value = "listNumber") Integer listNumber
-    ) {
-        PaymentListId id = new PaymentListId(payerCode, listNumber);
-        PaymentList paymentList = paymentListService.getById(id);
-        return paymentList;
-    }
-
-    @DeleteMapping("/api/remove-payment")
-    @Secured({"ADMIN", "EDITOR"})
-    @ResponseBody
-    @JsonView(Views.NormalView.class)
-    public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id) {
-        if (paymentListService.remove(id)) {
-            return new ResponseEntity<>(id, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
     }
 
 
