@@ -40,7 +40,7 @@ public class HttpsRedirectConfig {
     private Connector getHttpConnector() {
         Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
         connector.setScheme("http");
-        connector.setPort(8000);
+        connector.setPort(8080);
         connector.setSecure(false);
         connector.setRedirectPort(applicationPort);
         return connector;

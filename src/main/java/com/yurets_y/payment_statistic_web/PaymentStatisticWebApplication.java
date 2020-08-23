@@ -6,19 +6,33 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.annotation.PostConstruct;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class PaymentStatisticWebApplication {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(PaymentStatisticWebApplication.class);
+    private final Logger logger = LoggerFactory.getLogger(PaymentStatisticWebApplication.class);
 
     @Value("${spring.profiles.active}")
-    private static String profile;
+    private String profile;
+
+    @Value("${application.timezone:'UTC'}")
+    private String timezone;
 
     public static void main(String[] args) {
-        LOGGER.info("Application started with '{}' active profile at time {}", profile,  Calendar.getInstance().getTime());
+
         SpringApplication.run(PaymentStatisticWebApplication.class, args);
     }
+
+    @PostConstruct
+    public void init(){
+        TimeZone.setDefault(TimeZone.getTimeZone(timezone));
+        logger.info("Application started with '{}' active profile at time {}", profile,  Calendar.getInstance().getTime());
+        logger.info("Timezone is set to '{}'", timezone);
+
+    }
+
 
 }
