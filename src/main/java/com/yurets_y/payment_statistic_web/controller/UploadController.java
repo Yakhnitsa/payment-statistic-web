@@ -40,7 +40,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/upload-single")
-    @Secured({"ADMIN", "EDITOR"})
+    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
     public ResponseEntity<?> uploadSingleList(
             @RequestParam("file") MultipartFile file
     ){
@@ -53,7 +53,7 @@ public class UploadController {
 
 
     @PostMapping("/api/upload-multiple")
-    @Secured({"ADMIN", "EDITOR"})
+    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> uploadMultiple(
             @RequestParam("files") MultipartFile[] files
@@ -79,7 +79,7 @@ public class UploadController {
 
     @PostMapping("/api/save-temp-selected")
     @JsonView(Views.ShortView.class)
-    @Secured({"ADMIN", "EDITOR"})
+    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
     public ResponseEntity<?> saveSelectedToMainDB(
             @RequestBody PaymentList[] paymentLists
     ){
@@ -110,6 +110,7 @@ public class UploadController {
 
 
     @PostMapping("/api/scan-from-mail")
+    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> scanListsFromMail(
             @AuthenticationPrincipal User user,

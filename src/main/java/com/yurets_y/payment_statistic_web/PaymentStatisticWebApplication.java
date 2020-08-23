@@ -15,7 +15,7 @@ public class PaymentStatisticWebApplication {
 
     private final Logger logger = LoggerFactory.getLogger(PaymentStatisticWebApplication.class);
 
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:'production'}")
     private String profile;
 
     @Value("${application.timezone:'UTC'}")

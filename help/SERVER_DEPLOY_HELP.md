@@ -68,6 +68,7 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
     Убиение процесса [инструкция](https://pingvinus.ru/note/ps-kill-killall)
     Создаем файл скрипта `deploy/utl2_site_deploy.sh`
     Подробнее о происходящем:
+    - Поиск приложения, которое использует порт
     
     - Ликвидация старого процесса java:
         
