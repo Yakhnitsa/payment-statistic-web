@@ -18,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.*;
 
 @RestController
@@ -40,7 +41,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/upload-single")
-    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
+    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
     public ResponseEntity<?> uploadSingleList(
             @RequestParam("file") MultipartFile file
     ){
@@ -53,7 +54,7 @@ public class UploadController {
 
 
     @PostMapping("/api/upload-multiple")
-    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
+    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> uploadMultiple(
             @RequestParam("files") MultipartFile[] files
@@ -78,8 +79,8 @@ public class UploadController {
     }
 
     @PostMapping("/api/save-temp-selected")
+    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
     @JsonView(Views.ShortView.class)
-    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
     public ResponseEntity<?> saveSelectedToMainDB(
             @RequestBody PaymentList[] paymentLists
     ){
@@ -98,6 +99,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/delete-temp-selected")
+    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> deleteSelectedFromTemp(
             @RequestBody PaymentList[] paymentLists
@@ -110,7 +112,7 @@ public class UploadController {
 
 
     @PostMapping("/api/scan-from-mail")
-    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
+    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> scanListsFromMail(
             @AuthenticationPrincipal User user,

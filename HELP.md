@@ -330,12 +330,18 @@ The following guides illustrate how to use some features concretely:
                            
 !! Конвертация InputStream в MultipartFile
 
-## Настраиваем security для методов
+## Настраиваем security для методов - [литтл мануал ](https://www.baeldung.com/spring-security-method-security)
 Меняем WebSecurityConfig:
 	`@EnableGlobalMethodSecurity(
-        prePostEnabled = true, 
-        securedEnabled = true, 
-        jsr250Enabled = true)`
+        prePostEnabled = true, - для аннотаций pre/post annotations
+        securedEnabled = true, - для аннотаций @Secured
+        jsr250Enabled = true)` - для аннотаций @RoleAllowed
+    Теперь вешаем анноатции на методы:
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Secured({ "ROLE_VIEWER", "ROLE_EDITOR" })
+    @RolesAllowed({ "ROLE_VIEWER", "ROLE_EDITOR" })    
+    
+   !!! ВАЖНО - именование ролей начинается с ROLE_* иначе не будет работать
         
         
 ## Деплой на сервер [инструкция](/help/SERVER_DEPLOY_HELP.md)

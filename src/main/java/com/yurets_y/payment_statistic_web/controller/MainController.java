@@ -52,14 +52,21 @@ public class MainController {
 
     @GetMapping
 //    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     public String paymentStatistic(
-            @AuthenticationPrincipal UserDetails user,
-            Model model) {
+            Model model,
+            @AuthenticationPrincipal User user
+    ) {
         List<String> codes = paymentListService.getPaymentCodes();
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
+        model.addAttribute("userRoles", user.getAuthorities());
         return "index";
+    }
+
+    @GetMapping("test")
+    public String getTestPage() {
+        return "test";
     }
 
 
