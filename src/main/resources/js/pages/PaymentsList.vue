@@ -52,7 +52,11 @@
                             <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button type="button" class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
+                            <button type="button"
+                                    :disabled="!hasEditorPermission"
+                                    data-toggle="tooltip" data-placement="bottom"
+                                    :title="hasEditorPermission ? 'Удалить запись' : 'Недостаточно прав для совершения действия'"
+                                    class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             <button type="button" class="btn btn-secondary btn-sm" @click="downloadPayment(payment)">
@@ -140,7 +144,8 @@
             },
             payerCode(){
                 return this.$store.state.payerCode
-            }
+            },
+
 
         },
         watch:{
@@ -241,14 +246,6 @@
         },
     }
 </script>
-.btn {
-    background-color: DodgerBlue;
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-}
 
 <style scoped>
     .sticky-top {

@@ -1,8 +1,16 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
-            Загрузить перечни <span v-show="countOfTempLists > 0" class="badge badge-light">{{countOfTempLists}}</span>
-        </button>
+        <div  data-toggle="tooltip"
+              data-placement="bottom"
+              :title="hasEditorPermission ? 'Загрузка с почты или файла' : 'Недостаточно прав для совершения действия'">
+            <button type="button"
+                    :disabled="!hasEditorPermission"
+                    class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
+                Загрузить перечни <span v-show="countOfTempLists > 0" class="badge badge-light">{{countOfTempLists}}</span>
+            </button>
+
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="loadingPage" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
             <div class="modal-dialog modal-lg" role="dialog">
@@ -100,6 +108,9 @@
             }),
             countOfTempLists(){
                 return this.loadedPayments.length;
+            },
+            hasEditorPermission(){
+                return this.$store.getters.userRoles.includes('ROLE_EDITOR');
             }
         },
         data: function(){

@@ -63,12 +63,15 @@
                 set(code){
                     this.$store.commit('setPayerCodeMutation',code)
                 }
+            },
+            userRoles(){
+                return  this.$store.getters.userRoles;
             }
         },
         created: function(){
             this.paymentCodes = paymentCodes;
             this.setDefaultCode()
-            
+
         },
         methods:{
             test(event){

@@ -70,7 +70,7 @@ public class PaymentListController {
     }
 
     @DeleteMapping("/api/remove-payment")
-    @Secured({"ROLE_ADMIN", "ROLE_EDITOR"})
+    @Secured({"ROLE_EDITOR"})
     @ResponseBody
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> deletePayment(@RequestBody(required = false) PaymentList id) {

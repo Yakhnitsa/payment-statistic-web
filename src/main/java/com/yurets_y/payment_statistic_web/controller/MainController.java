@@ -62,13 +62,6 @@ public class MainController {
         List<String> codes = paymentListService.getPaymentCodes();
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
-//
-//        String userRoles = null;
-//        try {
-//            userRoles = new ObjectMapper().writeValueAsString(user.getAuthorities());
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
         model.addAttribute("userRoles", user.getAuthorities());
         return "index";
     }

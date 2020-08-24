@@ -23,7 +23,7 @@
                 <div class="input-group-append">
                     <button type="button" class="btn btn-secondary"
                             @click="incrementIndex()"
-                            :class="{disabled: index >= dates?.length - 1 || groupedCharts}"
+                            :class="{disabled: !dates || (index >= dates.length - 1 || groupedCharts)}"
                     ><i class="fas fa-caret-right"></i>
                     </button>
                 </div>
@@ -188,6 +188,8 @@
                     },
                 }
             },
+
+
 
         },
         methods:{

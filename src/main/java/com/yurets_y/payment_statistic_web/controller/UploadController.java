@@ -41,7 +41,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/upload-single")
-    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
+    @Secured({"ROLE_EDITOR"})
     public ResponseEntity<?> uploadSingleList(
             @RequestParam("file") MultipartFile file
     ){
@@ -54,7 +54,7 @@ public class UploadController {
 
 
     @PostMapping("/api/upload-multiple")
-    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
+    @Secured({"ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> uploadMultiple(
             @RequestParam("files") MultipartFile[] files
@@ -79,7 +79,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/save-temp-selected")
-    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
+    @Secured({"ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> saveSelectedToMainDB(
             @RequestBody PaymentList[] paymentLists
@@ -99,7 +99,7 @@ public class UploadController {
     }
 
     @PostMapping("/api/delete-temp-selected")
-    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
+    @Secured({"ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> deleteSelectedFromTemp(
             @RequestBody PaymentList[] paymentLists
@@ -112,7 +112,7 @@ public class UploadController {
 
 
     @PostMapping("/api/scan-from-mail")
-    @RolesAllowed({ "ROLE_ADMIN", "ROLE_EDITOR" })
+    @Secured({"ROLE_EDITOR"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> scanListsFromMail(
             @AuthenticationPrincipal User user,

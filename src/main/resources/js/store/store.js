@@ -68,7 +68,8 @@ export default new Vuex.Store({
         chosenFiles: state => state.uploadedData.files,
         tempUploadedLists: state => state.uploadedData.tempLists,
         selectedUploadedLists: state => state.uploadedData.selectedLists,
-        mailUpdateAwait: state => state.uploadedData.mailUpdateAwait
+        mailUpdateAwait: state => state.uploadedData.mailUpdateAwait,
+        userRoles: () => userRoles
     },
     // Методы для изменения объектов приолжения
     mutations: {
