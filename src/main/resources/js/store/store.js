@@ -8,6 +8,7 @@ import statisticApi from '../api/statisticApi'
 import uploadApi from '../api/uploadApi'
 import paymentListApi from "../api/paymentListApi";
 import paymentDetailsApi from "../api/paymentDetailsApi";
+import messageManager from '../util/messageManager';
 
 // Централизованное хранилище Vuex для данных приложения
 export default new Vuex.Store({
@@ -216,38 +217,65 @@ export default new Vuex.Store({
         },
 
         async uploadListsOnServerAction({commit,state}) {
-            const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
-            const data = await response.data;
-            commit('addChosenFilesMutation',[])
-            commit('setTepListsMutation',data)
-        },
-
-        async scanFromMailAction({commit,state},params) {
-            commit('setMailUpdateAwaitMutation',true);
-            const response = await uploadApi.scanFromMailToTempDB(params);
-            const data = await response.data;
-            commit('setMailUpdateAwaitMutation',false);
-            commit('setTepListsMutation',data)
-        },
-
-        async saveSelectedListsAction({commit,state},lists){
-            const response = await uploadApi.saveSelected(lists)
-            if(response.status === 200){
-                const data = await response.data
+            try{
+                const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
+                const data = await response.data;
+                commit('addChosenFilesMutation',[])
                 commit('setTepListsMutation',data)
-            }else{
-                console.log("ERROR IN SAVE SELECTED LIST ACTION!!!")
+            }catch(error){
+                if(error.response && error.response.status == 403){
+                    messageManager.showSecurityException403()
+                }
             }
 
         },
 
+        async scanFromMailAction({commit,state},params) {
+            commit('setMailUpdateAwaitMutation',true);
+            try{
+                const response = await uploadApi.scanFromMailToTempDB(params);
+                if(response.status === 200){
+                    const data = await response.data;
+                    commit('setTepListsMutation',data)
+                }
+            }catch(error){
+                if(error.response && error.response.status == 403){
+                    messageManager.showSecurityException403()
+                }
+            }finally {
+                commit('setMailUpdateAwaitMutation',false)
+            }
+
+
+        },
+
+        async saveSelectedListsAction({commit,state},lists){
+            try{
+                const response = await uploadApi.saveSelected(lists)
+                if(response.status === 200){
+                    const data = await response.data
+                    commit('setTepListsMutation',data)
+                }
+            }catch(error){
+                if(error.response && error.response.status == 403) {
+                    messageManager.showSecurityException403()
+                }
+            }
+
+
+        },
+
         async deleteSelectedListsAction({commit,state},lists){
-            const response = await uploadApi.deleteSelected(lists)
-            if(response.status === 200){
-                const data = await response.data
-                commit('setTepListsMutation',data)
-            }else{
-                console.log("ERROR IN DELETE SELECTED ACTION")
+            try{
+                const response = await uploadApi.deleteSelected(lists)
+                if(response.status === 200){
+                    const data = await response.data
+                    commit('setTepListsMutation',data)
+                }
+            }catch(error){
+                if(error.response && error.response.status == 403) {
+                    messageManager.showSecurityException403()
+                }
             }
         },
 

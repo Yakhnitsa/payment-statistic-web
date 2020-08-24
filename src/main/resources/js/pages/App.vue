@@ -61,7 +61,6 @@
                     return this.$store.state.payerCode;
                 },
                 set(code){
-
                     this.$store.commit('setPayerCodeMutation',code)
                 }
             }
@@ -69,6 +68,7 @@
         created: function(){
             this.paymentCodes = paymentCodes;
             this.setDefaultCode()
+            
         },
         methods:{
             test(event){

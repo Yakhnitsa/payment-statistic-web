@@ -24,14 +24,12 @@ export default{
     async scanFromMailToTempDB(lastUpdate){
         const formData = new FormData();
         formData.append('lastUpdate',lastUpdate);
-
         return await axios.post('/api/scan-from-mail',
             formData, {
                 headers: {
                     'X-CSRF-Token': CSRF_TOKEN
                 }
-
-            })
+            });
     },
 
     async saveSelected(lists) {

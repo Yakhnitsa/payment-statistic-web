@@ -2,6 +2,8 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
@@ -60,6 +62,13 @@ public class MainController {
         List<String> codes = paymentListService.getPaymentCodes();
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
+//
+//        String userRoles = null;
+//        try {
+//            userRoles = new ObjectMapper().writeValueAsString(user.getAuthorities());
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
         model.addAttribute("userRoles", user.getAuthorities());
         return "index";
     }

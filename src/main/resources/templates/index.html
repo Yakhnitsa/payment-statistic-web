@@ -27,6 +27,12 @@
     <script th:include="site-head :: payment-codes"></script>
     <script th:include="site-head :: user-roles"></script>
 
+    <script th:inline="javascript">
+
+        const userRoles = /*[[${userRoles}]]*/ null;
+
+    </script>
+
     <div id="app">
 
     </div>
