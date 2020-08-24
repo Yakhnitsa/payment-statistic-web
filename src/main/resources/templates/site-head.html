@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="site-head">
 
     <title>Payment statistic</title>
@@ -28,15 +28,17 @@
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
 </div>
 
-<script th:fragment="payment-codes" th:inline="javascript">
-    const paymentCodes = [[${paymentCodes}]];
-</script>
 
-<script th:fragment="user-roles" th:inline="javascript">
 
-</script>
 
 <body>
+    <script th:fragment="payment-codes" th:inline="javascript">
+        const paymentCodes = [[${paymentCodes}]];
+    </script>
+
+    <srcipt th:fragment="user-roles" th:inline="javascript">
+        const userRoles = [[${userRoles}]];
+    </srcipt>
 
 </body>
 </html>

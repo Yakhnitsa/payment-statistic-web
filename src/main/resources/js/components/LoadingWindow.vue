@@ -1,18 +1,22 @@
 <template>
     <div>
-        <div  data-toggle="tooltip"
-              data-placement="bottom"
-              :title="hasEditorPermission ? 'Загрузка с почты или файла' : 'Недостаточно прав для совершения действия'">
-            <button type="button"
-                    :disabled="!hasEditorPermission"
-                    class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
-                Загрузить перечни <span v-show="countOfTempLists > 0" class="badge badge-light">{{countOfTempLists}}</span>
-            </button>
 
-        </div>
+        <button type="button"
+                :disabled="!hasEditorPermission"
+                class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
+            <span data-toggle="tooltip"
+                 data-placement="bottom"
+                 :title="hasEditorPermission ? 'Загрузка с почты или файла' : 'Недостаточно прав для совершения действия'">
+                Загрузить перечни <span v-show="countOfTempLists > 0"
+                                        class="badge badge-light">{{countOfTempLists}}</span>
+            </span>
+
+        </button>
+
 
         <!-- Modal -->
-        <div class="modal fade" id="loadingPage" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="false">
+        <div class="modal fade" id="loadingPage" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+             aria-hidden="false">
             <div class="modal-dialog modal-lg" role="dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -28,11 +32,10 @@
                                                  v-on:change-selected="changeSelected($event)"></uploaded-list-table>
                         </div>
                         <div>
-                            <ul >
+                            <ul>
                                 <li v-for="file in files">{{file.name}}</li>
                             </ul>
                         </div>
-
 
 
                     </div>
@@ -46,7 +49,8 @@
                                                 :disabled="lastUpdate === ''|| mailUpdateAwait"
                                                 type="button" @click="scanFromMail">
                                             <span v-show="mailUpdateAwait"
-                                                  class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                  class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
                                             {{mailUpdateAwait ? 'Сканирование...' : 'Сканировать почту'}}
                                         </button>
                                     </div>
@@ -65,7 +69,8 @@
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" :disabled="files < 1"
                                                 @click="submitFileUpload()" type="button">Загрузить
-                                            <span v-show="files.length > 0" class="badge badge-light">{{files.length}}</span>
+                                            <span v-show="files.length > 0"
+                                                  class="badge badge-light">{{files.length}}</span>
                                         </button>
 
                                     </div>
@@ -73,8 +78,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Сохранить перечни в БД</button>
-                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">Удалить выбранные</button>
+                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Сохранить перечни
+                                в БД
+                            </button>
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">Удалить
+                                выбранные
+                            </button>
                             <button type="button" class="btn btn-secondary mx-1" data-dismiss="modal">Закрыть</button>
                         </div>
 
@@ -91,36 +100,36 @@
 <script>
     import axios from 'axios'
     import UploadedListTable from './UploadedListTable.vue'
-    import { mapGetters } from 'vuex';
-    import { mapMutations } from 'vuex';
-    import { mapActions } from 'vuex';
+    import {mapGetters} from 'vuex';
+    import {mapMutations} from 'vuex';
+    import {mapActions} from 'vuex';
 
     export default {
         name: "LoadingWindow",
-        components:{
+        components: {
             UploadedListTable
         },
-        computed:{
+        computed: {
             ...mapGetters({
                 files: 'chosenFiles',
                 loadedPayments: 'tempUploadedLists',
                 mailUpdateAwait: 'mailUpdateAwait'
             }),
-            countOfTempLists(){
+            countOfTempLists() {
                 return this.loadedPayments.length;
             },
-            hasEditorPermission(){
+            hasEditorPermission() {
                 return this.$store.getters.userRoles.includes('ROLE_EDITOR');
             }
         },
-        data: function(){
-            return{
-                selectedPayments:[],
-                chosenFile:'no file',
-                lastUpdate:''
+        data: function () {
+            return {
+                selectedPayments: [],
+                chosenFile: 'no file',
+                lastUpdate: ''
             }
         },
-        methods:{
+        methods: {
             ...mapMutations(['addChosenFilesMutation']),
             ...mapActions(['uploadListsOnServerAction',
                 'deleteSelectedListsAction',
@@ -129,31 +138,31 @@
                 'getPaymentListsAction',
                 'scanFromMailAction'
             ]),
-            addFile(event){
+            addFile(event) {
                 var selectedFiles = event.target.files;
                 this.addChosenFilesMutation(Array.from(selectedFiles))
             },
-            submitFileUpload(){
+            submitFileUpload() {
                 this.uploadListsOnServerAction();
 
             },
-            saveSelected(){
+            saveSelected() {
                 this.saveSelectedListsAction(this.selectedPayments)
                 this.getPaymentListsAction()
             },
-            deleteSelected(){
+            deleteSelected() {
                 this.deleteSelectedListsAction(this.selectedPayments)
             },
-            changeSelected(selected){
+            changeSelected(selected) {
                 this.selectedPayments = selected;
             },
-            scanFromMail(){
+            scanFromMail() {
                 this.scanFromMailAction(this.lastUpdate);
             }
         },
-        created: function(){
+        created: function () {
         },
-        mounted: function(){
+        mounted: function () {
             this.loadTempListsFromServerAction()
         }
 
