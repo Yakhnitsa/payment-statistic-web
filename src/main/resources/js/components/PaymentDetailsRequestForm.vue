@@ -130,14 +130,12 @@
                     docNumber: this.docNumber,
                     paymentSum: this.paymentSum,
                 };
-                // this.$store.dispatch('getPaymentDetailsAction',params);
                 this.$emit('submit-form', params);
             },
 
         },
         mounted() {
             if(this.hasRequestParams){
-                console.log(this.requestParams);
                 this.payerCode = this.requestParams.payerCode;
                 this.paymentType = this.requestParams.paymentType;
                 this.dateFrom = this.requestParams.dateFrom;

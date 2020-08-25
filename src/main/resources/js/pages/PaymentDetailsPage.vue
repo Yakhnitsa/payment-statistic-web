@@ -45,16 +45,6 @@
         },
         mounted(){
             if(this.hasRequestParams){
-                // const params = {
-                //     payerCode: this.payerCode,
-                //     paymentType: this.paymentType,
-                //     dateFrom: this.dateFrom,
-                //     dateUntil: this.dateUntil,
-                //     currentPage: this.currentPage,
-                //     stationCode: this.stationCode,
-                //     docNumber: this.docNumber,
-                //     paymentSum: this.paymentSum,
-                // };
                 this.updateData(this.requestParams);
             }
         }
