@@ -1,6 +1,9 @@
 <template>
     <div>
         <div>Test component</div>
+        <station-input :station.sync="station" :stations="stations"></station-input>
+        <span>Station found:</span>
+        <span>{{station}}</span>
         <div>{{dateFrom}}</div>
         <div>{{dateUntil}}</div>
         <div>{{paymentType}}</div>
@@ -8,10 +11,12 @@
         <router-link
                 :to="{name: 'payment-details',
                     params: {
-                        hasRequestParams: true,
-                        payerCode: '8210260',
-                        dateFrom: '2020-07-20',
-                        dateUntil: '2020-08-03'
+                        hasRedirectParams: true,
+                        redirectParams:{
+                            payerCode: '8210260',
+                            dateFrom: '2020-07-20',
+                            dateUntil: '2020-08-03'
+                        }
                     }
                 }"
                 class="nav-item nav-link">With name test</router-link>
@@ -19,10 +24,12 @@
         <router-link
                 :to="{path: 'payment-details',
                     params: {
-                        hasRequestParams: true,
-                        payerCode: '8210260',
-                        dateFrom: '2020-07-20',
-                        dateUntil: '2020-08-03'
+                        hasRedirectParams: true,
+                        redirectParams:{
+                            payerCode: '8210260',
+                            dateFrom: '2020-07-20',
+                            dateUntil: '2020-08-03'
+                        }
                     }
                 }"
                 class="nav-item nav-link">With path test</router-link>
@@ -33,17 +40,80 @@
 </template>
 
 <script>
+    import StationInput from "../components/StationInput.vue";
     export default {
+        components: {StationInput},
         props:['dateFrom','dateUntil','paymentType'],
+        data(){
+            return{
+                station:'',
+                stations:[
+                    {
+                        code: 403002,
+                        rusName:'ДАРНИЦА',
+                        ukrName:'ДАРНИЦЯ'
+
+                    },
+                    {
+                        code: 320401 ,
+                        rusName:'ГРУШКИ',
+                        ukrName:'ГРУШКИ'
+
+                    },                    {
+                        code: 323804,
+                        rusName:'НОСОВКА',
+                        ukrName:'НОСІВКА'
+
+                    },                    {
+                        code: 323700,
+                        rusName:'КОБЫЖЧИ',
+                        ukrName:'КОБИЖЧА'
+
+                    },                    {
+                        code: 323607,
+                        rusName:'БОБРОВИЦЫ',
+                        ukrName:'БОБРОВИЦЯ'
+
+                    },                    {
+                        code: 322206,
+                        rusName:'ИРПЕНЬ',
+                        ukrName:'ІРПІНЬ'
+
+                    },                    {
+                        code: 327504,
+                        rusName:'ВИРЕВКА',
+                        ukrName:'ВИРІВКА'
+
+                    },                    {
+                        code: 326304,
+                        rusName:'ДОЧЬ',
+                        ukrName:'ДОЧ'
+
+                    },                    {
+                        code: 321705,
+                        rusName:'БУЯН',
+                        ukrName:'БУЯН'
+
+                    },                    {
+                        code: 324008,
+                        rusName:'НЕЖИН',
+                        ukrName:'НІЖИН'
+
+                    },
+                ]
+            }
+        },
         methods:{
             routeTo(){
                 const route = {
                     name: 'payment-details',
                     params: {
-                        hasRequestParams: true,
-                        payerCode: '5635841',
-                        dateFrom: '2020-07-20',
-                        dateUntil: '2020-08-03'
+                        hasRedirectParams: true,
+                        redirectParams:{
+                            payerCode: '8210260',
+                            dateFrom: '2020-07-20',
+                            dateUntil: '2020-08-03'
+                        }
                     }
                 }
                 this.$router.push(route);
