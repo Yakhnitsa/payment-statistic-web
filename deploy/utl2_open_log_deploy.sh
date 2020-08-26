@@ -19,9 +19,9 @@ echo -e $delimiter\\n\\t'Copy files to server...'
 echo -e $delimiter\\n\\t'Restart server'
 ssh -p 822 yri@myapp.ukrtranslogistic.com.ua << EOF
     lsof -t -i:8443 | xargs kill -9
-    nohup java -Dfile.encoding=UTF8 -jar utl-web-app/payment-statistic-web-0.0.1-SNAPSHOT.jar > logfile.txt \
+    java -Dfile.encoding=UTF8 -jar utl-web-app/payment-statistic-web-0.0.1-SNAPSHOT.jar \
     --MAIL_PASSWORD=$1 \
-    --MYSQL_PASSWORD=$2 &
+    --MYSQL_PASSWORD=$2 
 EOF
 
 echo -e $delimiter\\n\\t'Done'
