@@ -71,11 +71,14 @@ service.mail.password=${MAIL_PASSWORD} - `export MAIL_PASSWORD={mail_pass}`
     - Поиск приложения, которое использует порт
     
     - Ликвидация старого процесса java:
+    `netstat -tulpn | grep ':8443'`  - поиск приложения, которое использует порт
+    `sudo lsof -t -i:8443` - PID приложения, которое использует порт.
+    `kill -9 `lsof -t -i:8443`` - ликвидация процесса, который использует порт
         
     - Запуск jar файла на сервере
      `java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar --mail_password={pass} --MYSQL_PASSWORD={pass}`
     - Запуск с логированием в файл 
-      `java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar > logfile.txt --mail_password={pass} --MYSQL_PASSWORD={pass} &`   
+      `nohup java -Dfile.encoding=UTF8 -jar payment-statistic-web-0.0.1-SNAPSHOT.jar > logfile.txt --mail_password={pass} --MYSQL_PASSWORD={pass} &`   
     
     Запуск скрипта:
     `./deploy/utl2_site_deploy.sh`

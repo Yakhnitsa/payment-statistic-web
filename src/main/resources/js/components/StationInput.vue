@@ -2,7 +2,6 @@
     <div>
         <label>Поиск станции</label>
         <input v-model=stationSearch type="text"/>
-        <span>{{station}}</span>
     </div>
 
     

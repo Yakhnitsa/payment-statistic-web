@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.*;
+import com.yurets_y.payment_statistic_web.repo.StationsRepo;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
@@ -52,9 +53,8 @@ public class MainController {
 
     private MessageProvider messageProvider;
 
-    @GetMapping
-//    @PreAuthorize("hasRole(T(com.yurets_y.payment_statistic_web.entity.Role).ROLE_ADMIN)")
 
+    @GetMapping
     public String paymentStatistic(
             Model model,
             @AuthenticationPrincipal User user
@@ -62,7 +62,11 @@ public class MainController {
         List<String> codes = paymentListService.getPaymentCodes();
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
-        model.addAttribute("userRoles", user.getAuthorities());
+        if(user != null){
+            model.addAttribute("userRoles", user.getAuthorities());
+        }
+
+
         return "index";
     }
 
