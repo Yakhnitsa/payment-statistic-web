@@ -90,7 +90,7 @@
 
 <script>
     import axios from 'axios'
-    import {mapActions,mapState} from 'vuex'
+    import {mapActions,mapState,mapGetters} from 'vuex'
     import LoadingWindow from "../components/LoadingWindow.vue";
     import paymentListApi from "../api/paymentListApi"
     export default {
@@ -103,6 +103,7 @@
             }
         },
         computed: {
+            ...mapGetters(['hasEditorPermission']),
             payments: function(){
                 return this.$store.getters.paymentLists
             },

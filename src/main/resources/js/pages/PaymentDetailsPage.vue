@@ -94,7 +94,7 @@
     import PaymentDetailsTable from "../components/PaymentDetailsTable.vue";
     export default {
         name: "PaymentDetailsPage",
-        props:['hasRedirectParams','redirectParams'],
+        props:['redirectParams'],
         components: {PaymentDetailsTable, PaymentDetailsRequestForm},
         data() {
             return {
@@ -118,14 +118,26 @@
             }
         },
         methods:{
-            updateData(params){
+            submitForm() {
+                const params = {
+                    payerCode: this.payerCode,
+                    paymentType: this.paymentType,
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                    currentPage: this.currentPage,
+                    stationCode: this.stationCode, //TODO сделать поиск по станциям и передавать в запрос код станции
+                    docNumber: this.docNumber,
+                    paymentSum: this.paymentSum,
+                };
                 this.$store.dispatch('getPaymentDetailsAction',params);
-            }
+            },
         },
         mounted(){
-
-            if(this.hasRedirectParams){
-                console.log(this.redirectParams)
+            if(this.redirectParams){
+                for (const [key, value] of Object.entries(this.redirectParams)) {
+                    this[key] = value;
+                }
+                this.submitForm();
             }
         }
     }

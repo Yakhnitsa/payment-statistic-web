@@ -1,5 +1,7 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,6 +37,7 @@ public class Station extends AuditableEntity{
         this.node = node;
     }
 
+    @JsonView(Views.ShortView.class)
     public Integer getCode() {
         return code;
     }
@@ -43,6 +46,7 @@ public class Station extends AuditableEntity{
         this.code = code;
     }
 
+    @JsonView(Views.ShortView.class)
     public String getRusName() {
         return rusName;
     }
@@ -51,6 +55,7 @@ public class Station extends AuditableEntity{
         this.rusName = rusName;
     }
 
+    @JsonView(Views.ShortView.class)
     public String getUkrName() {
         return ukrName;
     }

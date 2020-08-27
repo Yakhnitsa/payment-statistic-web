@@ -18,6 +18,7 @@
                     <tr v-for="(value ,key) in dataList">
                         <td class="zui-sticky-col pl-3">{{key}}</td>
                         <td v-for="day in dateArray"
+                            @dblclick="handleClickOnCell($event,{key,day})"
                             :class="{ 'font-weight-lighter' : getDataFromList(value,day) === '' }"
                             class="text-right text-nowrap">
                             {{getDataFromList(value,day) | formatPayment}}
@@ -61,6 +62,9 @@
 
                 return 0;
             },
+            handleClickOnCell(event, data){
+                this.$emit('get-cell-data',data)
+            }
         }
     }
 

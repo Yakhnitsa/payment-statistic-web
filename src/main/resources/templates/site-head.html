@@ -40,5 +40,13 @@
         const userRoles = [[${userRoles}]];
     </srcipt>
 
+    <srcipt th:fragment="developer-mode" th:inline="javascript">
+        const isDevMode = [[${isDevMode}]];
+    </srcipt>
+
+    <srcipt th:fragment="stations" th:inline="javascript">
+        const stations = JSON.parse([[${stations}]]);
+    </srcipt>
+
 </body>
 </html>

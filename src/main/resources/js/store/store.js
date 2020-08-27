@@ -69,7 +69,10 @@ export default new Vuex.Store({
         tempUploadedLists: state => state.uploadedData.tempLists,
         selectedUploadedLists: state => state.uploadedData.selectedLists,
         mailUpdateAwait: state => state.uploadedData.mailUpdateAwait,
-        userRoles: () => userRoles
+        userRoles: () => userRoles,
+        hasEditorPermission: () => userRoles.includes('ROLE_EDITOR'),
+        inDeveloperMode:() => isDevMode,
+        stations:() => stations,
     },
     // Методы для изменения объектов приолжения
     mutations: {
@@ -306,7 +309,10 @@ export default new Vuex.Store({
         getPaymentDetailsAction({commit,state},params){
             paymentDetailsApi.getPayments(params)
                 .then(response => {
-                    commit('addPaymentDetailsMutation',response.data);
+                    if(response.status === 200){
+                        commit('addPaymentDetailsMutation',response.data);
+                    }
+
                 })
         },
 

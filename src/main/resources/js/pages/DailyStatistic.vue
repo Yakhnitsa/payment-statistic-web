@@ -72,6 +72,7 @@
         </daily-statistic-table>
 
         <daily-statistic-table
+                @get-cell-data="showDescriptionByType"
                 tableHeader="Детализация по видам платежей"
                 :dateArray="dateArray"
                 :dataList="detailsList"
@@ -79,6 +80,7 @@
         </daily-statistic-table>
 
         <daily-statistic-table
+                @get-cell-data="showDescriptionByStation"
                 tableHeader="Затраты по станциям"
                 :dateArray="dateArray"
                 :dataList="expensesByStation"
@@ -137,6 +139,36 @@
                 this.$store.commit('setDailyStatisticPeriod',params)
                 this.getDailyStatisticAction(params)
             },
+            showDescriptionByType(data){
+                const route = {
+                    name: 'payment-details',
+                    params: {
+                        redirectParams:{
+                            payerCode: this.payerCode,
+                            dateFrom: data.day,
+                            dateUntil: data.day,
+                            paymentType: data.key
+                        }
+                    }
+                }
+                this.$router.push(route);
+            },
+            showDescriptionByStation(data){
+                const stCode = data.key.match(/\d{6}/i)[0]
+                const route = {
+                    name: 'payment-details',
+                    params: {
+                        redirectParams:{
+                            payerCode: this.payerCode,
+                            dateFrom: data.day,
+                            dateUntil: data.day,
+                            stationCode: stCode
+                        }
+                    }
+                }
+                this.$router.push(route);
+
+            },
 
             test(){
                 // console.log("test begin");
@@ -156,6 +188,7 @@
                 }
                 return ''
             },
+
             getSummaryFromList(list){
                 let values = Object.values(list);
                 return values.reduce((a, b) => a + b, 0)
@@ -198,19 +231,7 @@
             }
         },
         filters:{
-            // formatPayment(num) {
-            //     num = num/100;
-            //     return (
-            //         num
-            //             .toFixed(2) // always two decimal digits
-            //             .replace('.', ',') // replace decimal point character with ,
-            //             .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
-            //         )
-            // },
 
-            // formatDate(date){
-            //     return new Date(date).toLocaleDateString()
-            // }
         },
         created(){
 

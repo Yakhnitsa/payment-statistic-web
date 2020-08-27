@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
@@ -10,6 +11,7 @@ import com.yurets_y.payment_statistic_web.entity.*;
 import com.yurets_y.payment_statistic_web.repo.StationsRepo;
 import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import com.yurets_y.payment_statistic_web.service.StationService;
 import com.yurets_y.payment_statistic_web.service.StatisticService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -53,6 +55,8 @@ public class MainController {
 
     private MessageProvider messageProvider;
 
+    private StationService stationService;
+
 
     @GetMapping
     public String paymentStatistic(
@@ -62,6 +66,14 @@ public class MainController {
         List<String> codes = paymentListService.getPaymentCodes();
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
+
+
+        try {
+            model.addAttribute("stations",marshallJSON(stationService.getAllStations()));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         if(user != null){
             model.addAttribute("userRoles", user.getAuthorities());
         }
@@ -86,18 +98,19 @@ public class MainController {
         this.messageProvider = messageProvider;
     }
 
-    //    private String marshallJSON(List<PaymentList> paymentLists) throws JsonProcessingException {
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        SimpleModule module = new SimpleModule();
-//        module.addSerializer(JsonView.class, new JsonViewSerializer());
-//        mapper.registerModule(module);
-//
-//        String result = mapper.writeValueAsString(JsonView.with(paymentLists)
-//                .onClass(PaymentList.class, match()
-//                        .exclude("paymentDetailsList")));
-//
-//        return result;
-//    }
+    @Autowired
+    public void setStationService(StationService stationService) {
+        this.stationService = stationService;
+    }
+
+    private String marshallJSON(List<Station> stations) throws JsonProcessingException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+        mapper.setConfig(mapper.getSerializationConfig()
+                .withView(Views.ShortView.class));
+
+        return mapper.writeValueAsString(stations);
+    }
 
 }

@@ -22,6 +22,7 @@
                     <router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>
                     <router-link to="/payment-details" class="nav-item nav-link">Детали платежей</router-link>
                     <router-link
+                            v-if="inDeveloperMode"
                             :to="{name: 'test', params: {dateFrom: '2020-07-20', dateUntil: '2020-08-03'}}"
                             class="nav-item nav-link">Test</router-link>
                     <!--<a class="nav-item nav-link" href="#">Pricing</a>-->
@@ -40,7 +41,7 @@
     import DailyStatistic from './DailyStatistic.vue'
     import PaymentList from './PaymentsList.vue'
     import LoadingWindow from '../components/LoadingWindow.vue'
-
+    import {mapGetters} from 'vuex'
 
     export default{
         components:{
@@ -56,6 +57,7 @@
             }
         },
         computed:{
+            ...mapGetters(['inDeveloperMode']),
             payerCode:{
                 get() {
                     return this.$store.state.payerCode;
