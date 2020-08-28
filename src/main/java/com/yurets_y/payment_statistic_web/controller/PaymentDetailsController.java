@@ -56,8 +56,8 @@ public class PaymentDetailsController {
     @GetMapping()
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> getPaymentDetails(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             @RequestParam Integer payerCode,
             @RequestParam(required = false, defaultValue = "") String paymentType,
             @RequestParam(required = false, defaultValue = "0") Integer pageNumber,

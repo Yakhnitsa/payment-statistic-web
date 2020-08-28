@@ -1,7 +1,10 @@
 <template>
     <div>
         <!--<label>({{station.code}})</label>-->
-        <input v-model=stationSearch type="text" list="stations"/>
+        <input v-model=stationSearch type="search"
+               list="stations"
+               :class="[{ 'is-valid' : station }, inputClass]"
+        />
         <datalist id="stations">
             <option v-for="station in filteredStations" v-bind:value="station.code">
                 ({{station.code}}) {{station.rusName}}
@@ -15,7 +18,7 @@
 <script>
     export default {
         name: "StationInput",
-        props:['station','stations'],
+        props:['station','stations','input-class'],
         data(){
             return{
                 stationSearch:'',
@@ -44,17 +47,11 @@
             }
         },
         watch:{
-            // stationSearch(value){
-            //     if(value.length < 3 ) return [];
-            //
-            //     const filteredArray = this.stations.filter(station => this.checkStation(this.stationSearch,station));
-            //     if(filteredArray.length === 1){
-            //         this.stationSearch = filteredArray[0].code;
-            //         this.$emit('update:station', filteredArray[0]);
-            //         this.filteredStations = []
-            //     }
-            //     this.filteredStations = filteredArray;
-            // }
+            stationSearch(value){
+                if(value=== ''){
+                    this.$emit('update:station', null);
+                }
+            }
         }
 
     }

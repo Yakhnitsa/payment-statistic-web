@@ -74,7 +74,7 @@ public class PaymentDetailsRepoTest {
         String paymentType = "Відправлення";
         Integer stationCode = null;
         String docNumber = "";
-        Integer paymentSum = null;
+        Long paymentSum = null;
 
         Page<PaymentDetails> paymentDetailsList = paymentDetailsRepo.findAllByQuery(
                 payerCode,

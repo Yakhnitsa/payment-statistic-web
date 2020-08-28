@@ -32,7 +32,8 @@ public interface PaymentDetailsRepo extends JpaRepository<PaymentDetails,Long> {
     @Query("select pd from PaymentDetails pd where " +
             "pd.paymentList.payerCode = :payer_code and " +
             "(:payment_type = '' or pd.type = :payment_type) and " +
-            "pd.date between :date_from and :date_until and " +
+            "pd.date BETWEEN COALESCE(:date_from, pd.date) AND COALESCE(:date_until, pd.date) and " +
+//            "pd.date between :date_from and :date_until and " +
             "(:station_code is null or pd.stationCode = :station_code) and " +
             "(:document_number = '' or pd.documentNumber = :document_number) and " +
             "(:payment_sum is null or pd.totalPayment = :payment_sum)"

@@ -46,7 +46,7 @@
                                        list="paymentTypes"
                                        placeholder="Отправка, ведомости, прочее...">
                                 <datalist id="paymentTypes">
-                                    <option v-for="type in paymentTypes" :value="type"></option>
+                                    <option v-for="type in foundTypes" :value="type"></option>
                                 </datalist>
                             </div>
                             <div class="form-group col-lg-2">
@@ -62,8 +62,13 @@
 
                             <div class="form-group col-md-3">
                                 <label for="inputStation">Станция</label>
-                                <input type="text" v-model="stationCode" class="form-control" id="inputStation"
-                                       placeholder="(код) Станция">
+                                <station-input :input-class="'form-control'"
+                                        :station.sync="station"
+                                    :stations="stations"
+                                ></station-input>
+
+                                <!--<input type="text" v-model="stationCode" class="form-control" id="inputStation"-->
+                                       <!--placeholder="(код) Станция">-->
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputDocNumber">Документ</label>
@@ -93,13 +98,15 @@
     import PaymentDetailsRequestForm from "../components/PaymentDetailsRequestForm.vue";
     import PaymentDetailsTable from "../components/PaymentDetailsTable.vue";
     import paymentDetailsApi from "../api/paymentDetailsApi"
+    import StationInput from "../components/StationInput.vue";
 
     export default {
         name: "PaymentDetailsPage",
         props:['redirectParams'],
-        components: {PaymentDetailsTable, PaymentDetailsRequestForm},
+        components: {StationInput, PaymentDetailsTable, PaymentDetailsRequestForm},
         data() {
             return {
+                station:'',
                 payerCode: '',
                 paymentType: '',
                 dateFrom: '',
@@ -117,6 +124,20 @@
             },
             pages(){
                 return this.$store.state.paymentDetailsPage.totalPages;
+            },
+            stations(){
+                return this.$store.getters.stations
+            },
+            foundTypes(){
+                const regexp = RegExp(this.paymentType, "i");
+                const filteredArray = this.paymentTypes.filter(type => regexp.test(type));
+                if(filteredArray.length > 6) return []
+                else if(filteredArray.length === 1){
+                    this.paymentType = filteredArray[0]
+                    return []
+                }
+                return filteredArray
+
             }
         },
         methods:{
