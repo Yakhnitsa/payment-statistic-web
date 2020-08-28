@@ -61,12 +61,11 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-3">
-                                <label for="inputStation">Станция</label>
+                                <label for="inputStation">Станция ({{stationCode}})</label>
                                 <station-input :input-class="'form-control'"
-                                        :station.sync="station"
-                                    :stations="stations"
+                                               :station.sync="station"
+                                               :stations="stations"
                                 ></station-input>
-
                                 <!--<input type="text" v-model="stationCode" class="form-control" id="inputStation"-->
                                        <!--placeholder="(код) Станция">-->
                             </div>
@@ -112,7 +111,6 @@
                 dateFrom: '',
                 dateUntil: '',
                 currentPage: '',
-                stationCode: '',
                 docNumber: '',
                 paymentSum: '',
                 paymentTypes: []
@@ -124,6 +122,9 @@
             },
             pages(){
                 return this.$store.state.paymentDetailsPage.totalPages;
+            },
+            stationCode(){
+                return this.station ? this.station.code : undefined;
             },
             stations(){
                 return this.$store.getters.stations
@@ -148,7 +149,7 @@
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                     currentPage: this.currentPage,
-                    stationCode: this.stationCode, //TODO сделать поиск по станциям и передавать в запрос код станции
+                    stationCode: this.stationCode,
                     docNumber: this.docNumber,
                     paymentSum: this.paymentSum,
                 };

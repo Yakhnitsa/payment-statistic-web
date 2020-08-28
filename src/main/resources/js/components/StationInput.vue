@@ -22,7 +22,6 @@
         data(){
             return{
                 stationSearch:'',
-                // filteredStations:[]
             }
         },
         computed:{
@@ -31,7 +30,6 @@
 
                 const filterArray = this.stations.filter(station => this.checkStation(this.stationSearch,station));
                 if(filterArray.length === 1){
-                    console.log(filterArray)
                     this.stationSearch = filterArray[0].rusName;
                     this.$emit('update:station', filterArray[0]);
                     return [];
@@ -49,7 +47,7 @@
         watch:{
             stationSearch(value){
                 if(value=== ''){
-                    this.$emit('update:station', null);
+                    this.$emit('update:station', undefined);
                 }
             }
         }
