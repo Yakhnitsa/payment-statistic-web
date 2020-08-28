@@ -5,7 +5,7 @@ echo -e $delimiter\\n\\t'Starting script:'$0
 
 echo -e $delimiter\\n\\t'webpack build main.js'
 
-#    npm run build
+    npm run build
 
 echo -e $delimiter\\n\\t'maven build project'
 

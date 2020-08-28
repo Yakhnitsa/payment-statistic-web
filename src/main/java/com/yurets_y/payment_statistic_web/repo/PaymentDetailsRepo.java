@@ -46,7 +46,7 @@ public interface PaymentDetailsRepo extends JpaRepository<PaymentDetails,Long> {
             Pageable pageable,
             @Param("station_code") Integer stationCode,
             @Param("document_number") String docNumber,
-            @Param("payment_sum") Integer paymentSum
+            @Param("payment_sum") Long paymentSum
     );
 
     @Query("select distinct pd.type from PaymentDetails pd")

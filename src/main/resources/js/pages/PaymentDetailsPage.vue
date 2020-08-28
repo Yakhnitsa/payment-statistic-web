@@ -92,6 +92,8 @@
 <script>
     import PaymentDetailsRequestForm from "../components/PaymentDetailsRequestForm.vue";
     import PaymentDetailsTable from "../components/PaymentDetailsTable.vue";
+    import paymentDetailsApi from "../api/paymentDetailsApi"
+
     export default {
         name: "PaymentDetailsPage",
         props:['redirectParams'],
@@ -139,6 +141,12 @@
                 }
                 this.submitForm();
             }
+            paymentDetailsApi.getPaymentTypes().then(response =>{
+                if(response.status === 200){
+                    this.paymentTypes = response.data
+                }
+            })
+
         }
     }
 </script>

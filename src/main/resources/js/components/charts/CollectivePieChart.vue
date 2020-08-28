@@ -141,7 +141,7 @@
                     },
                     animation: {
                         animateScale: true,
-                        animateRotate: true
+                        // animateRotate: true
                     },
                 }
             },

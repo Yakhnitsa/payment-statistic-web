@@ -30,9 +30,9 @@ public class PaymentDetailsService {
 
     public Page<PaymentDetails> getAllWithParameters(Integer payerCode, String paymentType, Date dateFrom, Date dateUntil,
                                                      Pageable page,Integer stationCode,String docNumber, Float paymentSum) {
-        Integer paymentSumInt = null;
+        Long paymentSumInt = null;
         if(paymentSum != null){
-            paymentSumInt = (int)(paymentSum * 100);
+            paymentSumInt = (long)(paymentSum * 100);
         }
         return paymentDetailsRepo.findAllByQuery(payerCode,paymentType,dateFrom,dateUntil,page,stationCode,docNumber,paymentSumInt);
     }
