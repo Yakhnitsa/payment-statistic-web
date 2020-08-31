@@ -3,7 +3,7 @@
         <!--<label>({{station.code}})</label>-->
         <input v-model=stationSearch type="search"
                list="stations"
-               :class="[{ 'is-valid' : station }, inputClass]"
+               :class="[{ 'is-valid' : station.code }, inputClass]"
         />
         <datalist id="stations">
             <option v-for="station in filteredStations" v-bind:value="station.code">
@@ -18,12 +18,13 @@
 <script>
     export default {
         name: "StationInput",
-        props:['station','stations','input-class'],
+        props:['station','stations','input-class','stationCode'],
         data(){
             return{
                 stationSearch:'',
             }
         },
+
         computed:{
             filteredStations(){
                 if(this.stationSearch.length < 3 ) return [];
@@ -35,7 +36,6 @@
                     return [];
                 }
                 return filterArray;
-
             }
         },
         methods:{
@@ -47,10 +47,16 @@
         watch:{
             stationSearch(value){
                 if(value=== ''){
-                    this.$emit('update:station', undefined);
+                    this.$emit('update:station', {code:'',rusName:'',ukrName:''});
                 }
+            },
+            stationCode(value){
+                this.stationSearch = value;
             }
-        }
+
+        },
+
+
 
     }
 </script>

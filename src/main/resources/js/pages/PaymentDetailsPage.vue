@@ -9,23 +9,7 @@
 
                 <button class="btn btn-outline-secondary" @click="submitForm()">Обновить данные</button>
 
-                <div class="float-right mr-4">
-                    <nav aria-label="Page nav ">
-                        <ul class="pagination pagination-sm">
-                            <li class="page-item">
-                                <a class="page-link"><i class="fas fa-caret-left"></i></a>
-                            </li>
-                            <li>
-                                <select v-model="currentPage" class="form-control form-control-sm" id="inputPageSelect">
-                                    <option v-for="page in pages">{{page}}</option>
-                                </select>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link"><i class="fas fa-caret-right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+
             </div>
 
             <div>
@@ -63,6 +47,7 @@
                             <div class="form-group col-md-3">
                                 <label for="inputStation">Станция ({{stationCode}})</label>
                                 <station-input :input-class="'form-control'"
+                                               :stationCode="stationCode"
                                                :station.sync="station"
                                                :stations="stations"
                                 ></station-input>
@@ -87,6 +72,37 @@
 
         </div>
 
+        <div class="float-right mr-4">
+            <div class="row">
+                <!--<span>Страница</span>-->
+                <nav aria-label="Page nav ">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item"
+                            :class="{disabled: currentPage <= 1}">
+                            <a @click="currentPage--" class="page-link"><i class="fas fa-caret-left"></i></a>
+                        </li>
+                        <li>
+                            <select
+                                    v-model="currentPage"
+                                    class="form-control form-control-sm" id="inputPageSelect">
+                                <option
+                                        :value="page"
+                                        v-for="page in pages">{{page}}</option>
+                            </select>
+                        </li>
+                        <li class="page-item"
+                            :class="{disabled: currentPage >= pages}"
+                        >
+                            <a @click="currentPage++"class="page-link"><i class="fas fa-caret-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+
+        </div>
+
         <payment-details-table></payment-details-table>
     </div>
 
@@ -105,12 +121,12 @@
         components: {StationInput, PaymentDetailsTable, PaymentDetailsRequestForm},
         data() {
             return {
-                station:'',
+                station:{code:'',rusName:'',ukrName:''},
                 payerCode: '',
                 paymentType: '',
                 dateFrom: '',
                 dateUntil: '',
-                currentPage: '',
+                currentPage: 1,
                 docNumber: '',
                 paymentSum: '',
                 paymentTypes: []
@@ -123,8 +139,14 @@
             pages(){
                 return this.$store.state.paymentDetailsPage.totalPages;
             },
-            stationCode(){
-                return this.station ? this.station.code : undefined;
+            stationCode:{
+                get(){
+                    return this.station ? this.station.code : undefined;
+                },
+                set(value){
+                    this.station.code = value;
+                }
+
             },
             stations(){
                 return this.$store.getters.stations
@@ -148,13 +170,18 @@
                     paymentType: this.paymentType,
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
-                    currentPage: this.currentPage,
+                    pageNumber: this.currentPage -1,
                     stationCode: this.stationCode,
                     docNumber: this.docNumber,
                     paymentSum: this.paymentSum,
                 };
                 this.$store.dispatch('getPaymentDetailsAction',params);
             },
+        },
+        watch:{
+            currentPage(){
+                this.submitForm()
+            }
         },
         mounted(){
             if(this.redirectParams){
@@ -170,6 +197,7 @@
             })
 
         }
+
     }
 </script>
 

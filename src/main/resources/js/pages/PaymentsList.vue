@@ -94,12 +94,12 @@
     import LoadingWindow from "../components/LoadingWindow.vue";
     import paymentListApi from "../api/paymentListApi"
     export default {
-        name: "PaymentsTable",
+        name: "PaymentListPage",
         components: {LoadingWindow},
         data: function(){
             return{
-                dateFrom:'2020-05-01',
-                dateUntil:'2020-05-10'
+                dateFrom:'',
+                dateUntil:''
             }
         },
         computed: {
