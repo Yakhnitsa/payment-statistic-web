@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+
+#headerMain {
+    width:100%;
+    height: 100px;
+    margin:0px auto;
+    padding-bottom: 40px;
+    z-index:0;
+}
+
+#header {
+    width:100%;
+    height: 100px;
+    position: fixed;
+    z-index: 1;
+    /*border-bottom-color: #292929;*/
+
+}
+
+.menu-main {
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    margin: 0px 0 0px;
+    padding: 20px 0 10px;
+    text-align: center;
+    background: #006633;
+}
+.menu-main li {display: inline-block;}
+.menu-main li:after {
+    content: "|";
+    color: goldenrod;
+    display: inline-block;
+    vertical-align:center;
+}
+.menu-main li:last-child:after {content: none;}
+.menu-main a {
+    text-decoration: none;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 10px;
+    margin: 0 10px 0 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: color .2s;
+}
+.menu-main a, .menu-main a:visited {color: goldenrod;}
+.menu-main a.current, .menu-main a:hover{
+    color: forestgreen;}
+
+.menu-main a:before,
+.menu-main a:after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    top: auto;
+    right: 50%;
+    bottom: -5px;
+    left: 50%;
+    background: goldenrod;
+    transition: .8s;
+}
+.menu-main a:hover:before, .menu-main .current:before {left: 0;}
+.menu-main a:hover:after, .menu-main .current:after {right: 0;}
+@media (max-width: 550px) {
+    .menu-main {padding-top: 0;}
+    .menu-main li {display: block;}
+    .menu-main li:after {content: none;}
+    .menu-main a {
+        padding: 25px 0 20px;
+        margin: 0 30px;
+    }
+}
+
+.home-logo{
+    height: 75px;
+    width: 189px;
+}
+
+/*Bootstrap styles*/
+
+.navbar {
+    background-color: #006633;
+    text-align: center;
+    display: block;
+}
+.navbar .nav-item {
+    text-transform: uppercase;
+}
+.navbar .navbar-brand {
+    color: #daa520;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #fafafa;
+}
+.navbar .navbar-text {
+    display: block;
+    color: #daa520;
+
+}
+.navbar .navbar-text a {
+    display: block;
+    color: #fafafa;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+    color: #fafafa;
+}
+.navbar .navbar-nav .nav-link {
+    color: #daa520;
+    border-radius: .25rem;
+    margin: 0 0.25em;
+}
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+    color: #fafafa;
+}
+.navbar .navbar-nav .dropdown-menu {
+    background-color: #006633;
+    border-color: #0f7b45;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-item {
+    color: #daa520;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar .navbar-nav .dropdown-menu .dropdown-item:focus,
+.navbar .navbar-nav .dropdown-menu .dropdown-item.active {
+    color: #fafafa;
+    background-color: #0f7b45;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-divider {
+    border-top-color: #0f7b45;
+}
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+    color: #fafafa;
+    background-color: #0f7b45;
+}
+.navbar .navbar-toggle {
+    border-color: #0f7b45;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+    background-color: #0f7b45;
+}
+.navbar .navbar-toggle .navbar-toggler-icon {
+    color: #daa520;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+    border-color: #daa520;
+}
+.navbar .navbar-link {
+    color: #daa520;
+}
+.navbar .navbar-link:hover {
+    color: #fafafa;
+}
+
+@media (max-width: 575px) {
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #daa520;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #fafafa;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #fafafa;
+        background-color: #0f7b45;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #daa520;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #fafafa;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #fafafa;
+        background-color: #0f7b45;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #daa520;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #fafafa;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #fafafa;
+        background-color: #0f7b45;
+    }
+}
+
+@media (max-width: 1199px) {
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #daa520;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #fafafa;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #fafafa;
+        background-color: #0f7b45;
+    }
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #daa520;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #fafafa;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #fafafa;
+    background-color: #0f7b45;
+}
+.navbar .btn {
+    color: #daa520;
+    border: 2px solid #da8556;
+    border-radius: 4px;
+}
+
+.col .alert {
+    position: relative;
+    padding: .20rem 1.5rem;
+    margin-bottom: .50rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+

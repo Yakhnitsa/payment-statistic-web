@@ -78,7 +78,8 @@ public class DownloadFilesController {
             System.out.println("Could not determine file type.");
         }
 
-        String arcName = String.format("archive_%1$tY_%1$tm_%1$td__%2$tY_%2$tm_%2$td.zip", dateFrom,dateUntil);
+        String arcName = String
+                .format("archive_%1s_%2$tY_%2$tm_%2$td__%3$tY_%3$tm_%3$td.zip",payerCode, dateFrom, dateUntil);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))

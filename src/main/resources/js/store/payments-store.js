@@ -2,15 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-import axios from '../axios/axios'
-
 import statisticApi from '../api/statisticApi'
 import uploadApi from '../api/uploadApi'
 import paymentListApi from "../api/paymentListApi";
 import paymentDetailsApi from "../api/paymentDetailsApi";
 import messageManager from '../util/messageManager';
 
-// Централизованное хранилище Vuex для данных приложения
+
 export default new Vuex.Store({
     // Состояние объекта, массивы и прочее
     state: {
@@ -73,6 +71,7 @@ export default new Vuex.Store({
         hasEditorPermission: () => userRoles.includes('ROLE_EDITOR'),
         inDeveloperMode:() => isDevMode,
         stations:() => stations,
+        paymentCodes:() => paymentCodes,
     },
     // Методы для изменения объектов приолжения
     mutations: {
@@ -265,8 +264,6 @@ export default new Vuex.Store({
                     messageManager.showSecurityException403()
                 }
             }
-
-
         },
 
         async deleteSelectedListsAction({commit,state},lists){
