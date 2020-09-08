@@ -9,16 +9,18 @@
     <div th:include="layouts/header :: header"></div>
 
     <div th:include="site-head :: csrf-token"></div>
-    <script th:include="site-head :: payment-codes"></script>
-    <script th:include="site-head :: user-roles" th:inline="javascript"></script>
-    <script th:include="site-head :: developer-mode" th:inline="javascript"></script>
-    <script th:include="site-head :: stations" th:inline="javascript"></script>
 
-    <div id="app">
+    <script th:include="site-head :: developer-mode" th:inline="javascript"></script>
+
+
+
+
+
+    <div id="documents-page">
+
     </div>
 
-    <script th:src="${isDevMode ? 'http://localhost:8000/payments.js' : '/js/payments.bungle.js'}"></script>
+    <script th:src="${isDevMode ? 'http://localhost:8000/documents.js' : '/js/payments.documents.js'}"></script>
 
 </body>
-
 </html>

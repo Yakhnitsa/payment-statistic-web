@@ -9,7 +9,7 @@ module.exports = merge(common, {
         new CleanWebpackPlugin()
     ],
     output: {
-        filename: 'main.js',
+        filename: '[name].bungle.js',
         path: path.resolve(__dirname, 'src', 'main', 'resources', 'static', 'js'),
     },
 });

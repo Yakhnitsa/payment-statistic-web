@@ -39,8 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(
-//                        "/**", //TODO Удалить после тестирования
-//                        "/",
+
 //                        "/station-payment",
                         "/users/registration", "/login", "/test", "/static/**").permitAll()
                     .anyRequest().authenticated()

@@ -220,7 +220,7 @@
     }
 }
 
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+.navbar .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
     color: #daa520;
 }
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
@@ -232,7 +232,6 @@
     background-color: #0f7b45;
 }
 .navbar .btn {
-    color: #daa520;
     border: 2px solid #da8556;
     border-radius: 4px;
 }
@@ -244,4 +243,5 @@
     border: 1px solid transparent;
     border-radius: .25rem;
 }
+
 

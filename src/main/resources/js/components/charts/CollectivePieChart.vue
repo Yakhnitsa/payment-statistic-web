@@ -204,11 +204,11 @@
                 if(this.index > 0) this.index--;
             },
             getLabels(dataArray){
-                if(dataArray.length === 0) return ['no data']
+                if(dataArray === undefined) return ['no data']
                 return dataArray.map(element => element.type)
             },
             getValues(dataArray){
-                if(dataArray.length === 0) return [0]
+                if(dataArray === undefined) return [0]
                 return dataArray.map(element => element.value / 100)
             }
         },

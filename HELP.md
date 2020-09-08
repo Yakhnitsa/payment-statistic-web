@@ -37,7 +37,7 @@ The following guides illustrate how to use some features concretely:
             ]
         },
 - Редактируем файл index.html для приема javascript из сервера:
-    <script src="http://localhost:8000/main.js"></script>
+    <script src="http://localhost:8000/payments.js"></script>
 - Стартуем девелоперский сервер
     npm start    
     
@@ -92,7 +92,7 @@ The following guides illustrate how to use some features concretely:
         
 ## Подготовка приложения к деплою
    
-   - Вытягиваем файлы из static в корень приложения (в папке static будет только собранный main.js)
+   - Вытягиваем файлы из static в корень приложения (в папке static будет только собранный payments.js)
    
    - Устанавливаем приложение для зборки
     

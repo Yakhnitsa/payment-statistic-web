@@ -24,10 +24,10 @@
                 <!--</div>-->
             <!--</div>-->
         <!--</nav>-->
-        <div class="position-fixed">
+        <div class="position-fixed" :style="sidebarStyle" id="side-bar">
             <sidebar></sidebar>
         </div>
-        <div class="app-content">
+        <div class="app-content" :style="mainBarStyle">
             <router-view></router-view>
         </div>
 
@@ -53,6 +53,7 @@
                 paymentCodes:[],
                 payments:[],
                 loadedPayments:[],
+
             }
         },
         computed:{
@@ -67,12 +68,25 @@
             },
             userRoles(){
                 return  this.$store.getters.userRoles;
-            }
-        },
-        created: function(){
-            this.paymentCodes = paymentCodes;
-            this.setDefaultCode()
+            },
+            sidebarStyle(){
+                const headerSize = document.querySelector('#site-header').scrollHeight;
+                const marginTop = headerSize + 10 + 'px'
+                return{
+                    position: 'fixed',
+                    top: marginTop,
+                    'z-index': 1
+                }
+            },
+            mainBarStyle(){
+                const headerSize = document.querySelector('#site-header').scrollHeight;
+                const marginTop = headerSize + 10 + 'px';
 
+                return {
+                    'margin-top' : marginTop,
+                    'margin-left' : '60px'
+                }
+            }
         },
         methods:{
             test(event){
@@ -84,23 +98,28 @@
                     this.$store.commit('setPayerCodeMutation',paymentCodes[0])
                 }
             }
+        },
+
+        created: function(){
+            this.paymentCodes = paymentCodes;
+            this.setDefaultCode()
+
+        },
+        mounted(){
+            const header = document.querySelector('#side-bar');
+            console.log(header.clientWidth);
+
         }
+
     }
 
 </script >
 
 <style scoped>
-    .position-fixed{
-        position:fixed;
-        top: 60px;
-        z-index:1;
-    }
+
     .app-content {
-        margin-top: 60px;
-        margin-left: 60px;
+        /*margin-top: 60px;*/
+        /*margin-left: 60px;*/
     }
-
-
-
 
 </style>

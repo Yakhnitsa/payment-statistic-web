@@ -1,50 +1,60 @@
-<div  th:fragment="header">
-    <nav class="navbar fixed-top navbar-light bg-light">
-        <a class="navbar-brand" href="#">Fixed top</a>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-ligth bg-fadded" id="site-header" ref="site-header" >
+        <!--<a class="navbar-brand" th:href="@{/}">-->
+        <!--<img class="home-logo" alt="UTL-2" th:src="@{/img/site-logo.png}" height="60"/>-->
+        <!--</a>-->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="fa fa-bars navbar-nav"></span>
+        </button>
+
+        <!--Collapced part of navbar-->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" th:href="@{/}">Списания</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" th:href="@{/railroad-documents}">ЖД накладные</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light disable" th:href="@{/map}">Карта</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link waves-effect waves-light" th:href="@{/admin}">Панель админа</a>
+                </li>
+            </ul>
+
+            <div id="logged-in-info" class="mr-2">
+                <div class="row">
+                    <span class="navbar-text mx-1" sec:authorize="isAuthenticated()">Hello,
+                        <b sec:authentication="name">(Anonimous)</b>
+                    </span>
+
+                    <form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
+                        <input type="submit" class="btn navbar-text" value="Logout"/>
+                    </form>
+
+                    <form sec:authorize="isAnonymous()" method="get" th:action="@{/login}">
+                        <input type="submit" class="btn navbar-text" value="Login"/>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
     </nav>
-    <!--<nav class="navbar navbar-expand-md sticky-top navbar-ligth bg-fadded">-->
-        <!--<a class="nav-link waves-effect waves-light" th:href="@{/}">-->
-            <!--<img class="home-logo" alt="UTL-2" th:src="@{/static/img/site-logo.png}"/></a>-->
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
-                <!--aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-            <!--<span class="navbar-toggler-icon"></span>-->
-        <!--</button>-->
-        <!--<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">-->
-            <!--<ul id="myDIV" class="navbar-nav mr-auto">-->
 
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link waves-effect waves-light" th:href="@{/documents-list}">Реестр <br/>накладных</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link waves-effect waves-light" th:href="@{/expences-list}">Реестр <br/>списаний</a>-->
-                <!--</li>-->
-
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link waves-effect waves-light" th:href="@{/map}">Карта</a>-->
-                <!--</li>-->
-
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link waves-effect waves-light" th:href="@{/info}">Информация</a>-->
-                <!--</li>-->
-
-                <!--<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">-->
-                    <!--<a class="nav-link waves-effect waves-light" th:href="@{/admin}">Панель <br/>администратора</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-
-            <!--<div id="logged-in-info">-->
-                <!--<span sec:authorize="isAuthenticated()">Hello, <b sec:authentication="name">(Anonimous)</b></span>-->
-
-                <!--<form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">-->
-                    <!--<input type="submit" class="btn" value="Logout"/>-->
-                <!--</form>-->
-
-                <!--<form sec:authorize="isAnonymous()" method="get" th:action="@{/login}">-->
-                    <!--<input type="submit" class="btn" value="Login"/>-->
-                <!--</form>-->
-            <!--</div>-->
-
-        <!--</div>-->
-
-    <!--</nav>-->
 </div>
+</html>
+

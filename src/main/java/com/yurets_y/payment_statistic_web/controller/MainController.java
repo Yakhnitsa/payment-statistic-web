@@ -87,6 +87,20 @@ public class MainController {
         return "test";
     }
 
+    @GetMapping("railroad-documents")
+    public String railroadDocuments(
+            Model model,
+            @AuthenticationPrincipal User user
+    ) {
+        model.addAttribute("isDevMode", "dev".equals(profile));
+
+        if(user != null){
+            model.addAttribute("userRoles", user.getAuthorities());
+        }
+
+        return "rail-doc-page";
+    }
+
 
     @Autowired
     public void setPaymentListService(PaymentListService paymentListService) {

@@ -4,7 +4,7 @@ delimiter='-------------------------------------------------------------'
 
 echo -e $delimiter\\n\\t'Starting script:'$0
 
-echo -e $delimiter\\n\\t'webpack build main.js'
+echo -e $delimiter\\n\\t'webpack build payments.js'
 
     npm run build
 
