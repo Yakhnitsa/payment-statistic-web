@@ -1,6 +1,7 @@
 <template>
     <div id="sidebar-container"
          :class="collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'"
+         :style="{width: sidebarWidth}"
          class="d-none d-md-block">
 
         <ul class="list-group ">
@@ -47,7 +48,7 @@
 
             <li class="logo-separator"></li>
 
-            <a @click="collapsed = !collapsed" class="list-group-item list-group-item-action d-flex align-items-center">
+            <a @click="toggleSidebar" class="list-group-item list-group-item-action d-flex align-items-center">
                 <div >
                     <span
                             :class="collapsed ? 'fa-angle-double-right': 'fa-angle-double-left'"
@@ -65,15 +66,18 @@
 
     export default {
         name: "Sidebar",
+        props:['sidebarSize'],
         data(){
             return{
                 collapsed: true,
             }
         },
 
-        methods:{
-            changeCode(){
 
+        methods:{
+            toggleSidebar(){
+                this.collapsed = !this.collapsed;
+                this.$emit('update:sidebarSize', this.sidebarWidth);
             }
 
         },
@@ -87,6 +91,9 @@
                     this.$store.commit('setPayerCodeMutation',code)
                 }
             },
+            sidebarWidth(){
+                return this.collapsed ? '60px' : '230px'
+            }
 
         }
 

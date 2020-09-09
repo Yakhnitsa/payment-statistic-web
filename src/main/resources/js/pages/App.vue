@@ -24,8 +24,8 @@
                 <!--</div>-->
             <!--</div>-->
         <!--</nav>-->
-        <div class="position-fixed" :style="sidebarStyle" id="side-bar">
-            <sidebar></sidebar>
+        <div class="position-fixed" :style="sidebarStyle">
+            <sidebar :sidebarSize.sync="sidebarSize"></sidebar>
         </div>
         <div class="app-content" :style="mainBarStyle">
             <router-view></router-view>
@@ -53,7 +53,7 @@
                 paymentCodes:[],
                 payments:[],
                 loadedPayments:[],
-
+                sidebarSize: "60px"
             }
         },
         computed:{
@@ -69,9 +69,10 @@
             userRoles(){
                 return  this.$store.getters.userRoles;
             },
+
             sidebarStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
-                const marginTop = headerSize + 10 + 'px'
+                const marginTop = headerSize + 10 + 'px';
                 return{
                     position: 'fixed',
                     top: marginTop,
@@ -84,7 +85,7 @@
 
                 return {
                     'margin-top' : marginTop,
-                    'margin-left' : '60px'
+                    'margin-left' : this.sidebarSize
                 }
             }
         },
@@ -106,8 +107,6 @@
 
         },
         mounted(){
-            const header = document.querySelector('#side-bar');
-            console.log(header.clientWidth);
 
         }
 

@@ -1,13 +1,6 @@
 <template>
-    <div class="container-fluid mx-5">
-        <!--TODO Вытянуть отдельно статистику по платежам
-         - Изменить способ переполнения данных для названий перечней
-         - Выделить другим стилем детали перечней
-        -->
-
-        <!--<h3> Daily statistic component</h3>-->
-        <!--<button type="button" class="btn btn-primary" v-on:click="test">test</button>-->
-        <form>
+    <div class="container-fluid mx-1">
+        <form class="mx-3">
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <input type="date" v-model="dateFrom" class="form-control"/>
@@ -20,51 +13,7 @@
                 </div>
             </div>
         </form>
-        <!--<h3>Статистика по перечням</h3>-->
-        <!--<div class="zui-wrapper">-->
-            <!--<div class="zui-scroller">-->
-                <!--<table class="zui-table">-->
-                    <!--<thead>-->
-                        <!--<tr>-->
-                            <!--<th class="zui-sticky-col">Наименование платежа</th>-->
-                            <!--<th v-for="day in dateArray"-->
-                                <!--class="text-center">-->
-                                <!--{{day | formatDate}}-->
-                            <!--</th>-->
-                        <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td class="zui-sticky-col">Сальдо на початок розрахункової доби</td>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'openingBalance')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="zui-sticky-col">Сальдо на кінець розрахункової доби</td>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'closingBalance')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                        <!--<td class="zui-sticky-col" @click="details = !details">Всього проведено платежів-->
-                            <!--&lt;!&ndash;<span v-bind:class="details ? 'fas fa-minus-square' : 'fas fa-caret-square-down'"></span>&ndash;&gt;-->
-                        <!--</td>-->
-                        <!--<td v-for="day in dateArray" class="text-right text-nowrap">-->
-                            <!--{{getPropertyByDate(day,'paymentVsTaxes')  | formatPayment}}-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--&lt;!&ndash;<tr v-show="details" v-for="(value ,key) in this.detailsList">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td class="zui-sticky-col pl-3">{{key}}</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td v-for="day in dateArray" class="text-right text-nowrap">&ndash;&gt;-->
-                            <!--&lt;!&ndash;{{getDataFromList(value,day) | formatPayment}}&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
 
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
         <daily-statistic-table
                 tableHeader="Статистика по перечням"
                 :dateArray="dateArray"

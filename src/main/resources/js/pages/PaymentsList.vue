@@ -1,7 +1,10 @@
 <template>
-    <div class="container">
-        <loading-window></loading-window>
-        <div class="sticky-top my-2">
+    <div class="container mx-1">
+        <div class="ml-3">
+            <loading-window></loading-window>
+        </div>
+
+        <div class="ml-3 my-2">
             <div class="form-row ">
                 <div class="form-group col-md-2">
                     <input type="date" v-model="dateFrom" class="form-control"/>

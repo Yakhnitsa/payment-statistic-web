@@ -26,7 +26,6 @@
                 </nav>
             </div>
         </div>
-        <!--TODO Сделать двунаправленную привязку для всех элементов формы!!!-->
 
         <input type="text" v-model="inputData"
                @keyup="$emit('update:inputData', inputData);"

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mx-1">
         <div class="container my-2">
             <div class="my-2">
                 <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#requestForm"
