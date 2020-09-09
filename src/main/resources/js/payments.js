@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from './pages/App.vue'
+import App from './pages/PaymentsRootPage.vue'
 import VueResouce from 'vue-resource'
-import router from 'router/router'
+import router from 'router/payments-router'
 import store from 'store/payments-store'
 import 'util/filters'
 

@@ -2,6 +2,11 @@
     <div>
         <div class="app-content" :style="mainBarStyle">
             <h1>Railroad documents page</h1>
+            <div>
+                <router-link to="/">main page</router-link>
+                <router-link to="/certificates">main page</router-link>
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
