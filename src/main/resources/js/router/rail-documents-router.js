@@ -2,8 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-import RootPage from '../pages/rail-docs-pages/RailDocumensList.vue'
-import Certificates from '../pages/rail-docs-pages/QualityCertsList.vue'
+import RootPage from '../pages/rail-docs-pages/RailDocumensPage.vue'
+import Certificates from '../pages/rail-docs-pages/QualityCertsPage.vue'
+import LoadingPage from '../pages/rail-docs-pages/LoadingPage.vue'
 
 const rootPath = '';
 
@@ -18,6 +19,10 @@ export default new VueRouter({
         {
             path: '/certificates',
             component: Certificates
+        },
+        {
+            path: '/upload',
+            component: LoadingPage
         }
         // {
         //     path: '/daily-statistic',

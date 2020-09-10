@@ -139,7 +139,7 @@
                 'scanFromMailAction'
             ]),
             addFile(event) {
-                var selectedFiles = event.target.files;
+                const selectedFiles = event.target.files;
                 this.addChosenFilesMutation(Array.from(selectedFiles))
             },
             submitFileUpload() {

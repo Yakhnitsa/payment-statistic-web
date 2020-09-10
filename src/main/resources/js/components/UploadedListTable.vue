@@ -1,5 +1,5 @@
 <template>
-    <div  class="scrolling-y">
+    <div class="scrolling-y">
         <table class="table table-striped table-hover">
             <thead class="sticky-header">
                 <tr>

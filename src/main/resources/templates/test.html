@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Welcome to Spring Security Thymeleaf tutorial</title>
+
+<head th:replace="site-head :: site-head">
+
 </head>
+
+
 <body>
-<h2>Welcome</h2>
-<p>Spring Security Thymeleaf tutorial</p>
-<div sec:authorize="hasRole('USER')">Text visible to user.</div>
-<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-<div sec:authorize="isAuthenticated()">
-    Text visible only to authenticated users.
-</div>
-Authenticated username:
-<div sec:authentication="name"></div>
-<div sec:authorize="isAuthenticated()">
-    <div sec:authentication="principal.authorities"></div>
+<div class="container">
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
 </div>
 <!---->
+<!--<h2>Welcome</h2>-->
+<!--<p>Spring Security Thymeleaf tutorial</p>-->
+<!--<div sec:authorize="hasRole('USER')">Text visible to user.</div>-->
+<!--<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>-->
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--Text visible only to authenticated users.-->
+<!--</div>-->
+<!--Authenticated username:-->
+<!--<div sec:authentication="name"></div>-->
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--<div sec:authentication="principal.authorities"></div>-->
+<!--</div>-->
+<!--&lt;!&ndash;&ndash;&gt;-->
 </body>
 </html>

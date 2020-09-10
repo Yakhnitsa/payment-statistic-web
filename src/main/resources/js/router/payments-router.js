@@ -10,6 +10,7 @@ import ChartsPage from '../pages/ChartsPage.vue'
 
 export default new VueRouter({
     mode: 'history',
+    // base: '/payments',
     routes:[
         {
             path: '/',
