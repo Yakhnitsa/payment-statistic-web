@@ -1,3 +1,6 @@
+import uploadApi from "../../api/uploadApi";
+import messageManager from "../../util/messageManager";
+
 export default {
     state: () => ({
         files:[],
@@ -13,6 +16,10 @@ export default {
         mailUpdateAwait: state => state.uploadedData.mailUpdateAwait,
     },
     mutations: {
+        setFilesMutation(state,files){
+            state.files = files;
+        },
+
 
     },
     actions: {

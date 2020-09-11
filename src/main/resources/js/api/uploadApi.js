@@ -6,7 +6,7 @@ export default{
     async uploadListsOnServer(files){
         const formData = new FormData();
 
-        for(var index = 0; index < files.length; index++) {
+        for(let index = 0; index < files.length; index++) {
             formData.append("files", files[index]);
         }
 

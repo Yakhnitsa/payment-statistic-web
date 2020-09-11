@@ -178,9 +178,9 @@
                     tooltips:{
                         callbacks: {
                             label: function(tooltipItem, data) {
-                                let label = data.labels[tooltipItem.index] || ''
-                                let value = data.datasets[0].data[tooltipItem.index]
-                                value = numeral(value).format('₴0,0')
+                                let label = data.labels[tooltipItem.index] || '';
+                                let value = data.datasets[0].data[tooltipItem.index];
+                                value = numeral(value).format('₴0,0');
                                 return label + ': ' + value
                             }
                         }
@@ -204,7 +204,7 @@
                 if(this.index > 0) this.index--;
             },
             getLabels(dataArray){
-                if(dataArray === undefined) return ['no data']
+                if(dataArray === undefined) return ['no data'];
                 return dataArray.map(element => element.type)
             },
             getValues(dataArray){

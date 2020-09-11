@@ -29,7 +29,7 @@
                             </div>
 
 
-                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Загрузить
+                            <button type="button" class="btn btn-primary mx-1" @click="uploadFiles()">Загрузить
                             </button>
                         </div>
                     </div>
@@ -66,85 +66,39 @@
 
         </div>
 
-        <!--<div class="row">-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-md">-->
-                <!--<div class="flex-grow h-75">-->
-                    <!--<files-table :files="files"></files-table>-->
-                <!--</div>-->
-
-
-                <!--<div class="input-group flex-box">-->
-                    <!--<div class="custom-file">-->
-                        <!--<input type="file" id="customFile"-->
-                               <!--v-on:change="addFiles($event)"-->
-                               <!--multiple-->
-                               <!--class="custom-file-input"-->
-                               <!--enctype="multipart/form-data">-->
-                        <!--<label class="custom-file-label" for="customFile">{{files.length}}</label>-->
-                    <!--</div>-->
-
-
-                    <!--<button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Загрузить-->
-                    <!--</button>-->
-                <!--</div>-->
-
-            <!--</div>-->
-
-
-            <!--<div class="col-md">-->
-                <!--<div class="flex-grow h-75">-->
-                    <!--Downloaded data-->
-                <!--</div>-->
-
-                <!--<div class="input-group flex-box ">-->
-                    <!--<button type="button" class="btn btn-primary mx-1" @click="saveSelected()">Сохранить в БД-->
-                    <!--</button>-->
-
-                    <!--<button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">Удалить-->
-                        <!--выбранные-->
-                    <!--</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row">-->
-        <!--</div>-->
-
-        <!--<div>-->
-
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-6">-->
-
-
-            <!--</div>-->
-
-
-        <!--</div>-->
-
     </div>
 
 </template>
 
 <script>
     import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
+    import uploadApi from "../../api/uploadDocumentsApi";
+
+    import {mapGetters} from 'vuex';
+    import {mapMutations} from 'vuex';
+
     export default {
         name: "LoadingPage",
         components: {FilesTable},
         data() {
             return {
                 files: [],
-                uploadedDocs: []
+                uploadedDocs: [],
+                loadingProgress:0,
             }
+        },
+        computed:{
+            ...mapGetters({
+                filesFromStore: 'upload/files',
+            }),
         },
         methods: {
             choseFile() {
 
             },
             uploadFiles() {
-
+                if(this.files.length > 0)
+                uploadApi.uploadMultipleFiles(this.files, this.loadingProgress)
             },
             saveSelected() {
 
@@ -154,8 +108,13 @@
             },
             addFiles(event) {
                 this.files = event.target.files;
-                // this.addChosenFilesMutation(Array.from(selectedFiles))
+                this.$store.commit('upload/setFilesMutation',this.files);
             },
+        },
+        watch:{
+            loadingProgress(value){
+                console.log(value);
+            }
         }
     }
 </script>
