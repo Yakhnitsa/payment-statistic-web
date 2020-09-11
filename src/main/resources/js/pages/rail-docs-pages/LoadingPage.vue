@@ -74,8 +74,7 @@
     import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
     import uploadApi from "../../api/uploadDocumentsApi";
 
-    import {mapGetters} from 'vuex';
-    import {mapMutations} from 'vuex';
+    import {mapMutations,mapActions,mapGetters} from 'vuex';
 
     export default {
         name: "LoadingPage",
@@ -96,12 +95,16 @@
             ...mapMutations({
                 addFilesToStorage: 'uploadStore/setFilesMutation'
             }),
+            ...mapActions({
+                uploadFilesToServer: 'uploadStore/uploadFilesOnServerAction'
+            }),
             choseFile() {
 
             },
             uploadFiles() {
-                if(this.files.length > 0)
-                uploadApi.uploadMultipleFiles(this.files, this.loadingProgress)
+                console.log("file is uploads...");
+                this.$store.dispatch('uploadStore/uploadFilesOnServerAction');
+                this.uploadFilesToServer();
             },
             saveSelected() {
 

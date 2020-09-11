@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class RailDocsUploadController {
 
     @PostMapping("/api/upload-single-raildoc")
     @Secured({"ROLE_EDITOR"})
-    public ResponseEntity<?> uploadSingleList(
+    public Object uploadSingleList(
             @RequestParam("file") MultipartFile file
     ){
         if(file.isEmpty()){
@@ -27,7 +29,8 @@ public class RailDocsUploadController {
         }
         String fileName = file.getOriginalFilename();
         System.out.println(fileName);
-        return null;
+
+        return getMockedFile(fileName);
     }
 
     @PostMapping("/api/upload-multiple-raildocs")
@@ -45,5 +48,11 @@ public class RailDocsUploadController {
             System.out.println(type);
         }
         return null;
+    }
+
+    private Map<String,String> getMockedFile(String fileName){
+        Map<String,String> map = new HashMap<>();
+        map.put("number",fileName);
+        return map;
     }
 }

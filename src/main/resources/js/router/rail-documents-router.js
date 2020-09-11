@@ -14,7 +14,7 @@ export default new VueRouter({
     routes:[
         {
             path: '/',
-            component: RootPage
+            component: LoadingPage
         },
         {
             path: '/certificates',
