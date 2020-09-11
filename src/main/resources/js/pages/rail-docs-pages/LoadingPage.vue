@@ -89,10 +89,13 @@
         },
         computed:{
             ...mapGetters({
-                filesFromStore: 'upload/files',
+                filesFromStore: 'uploadStore/files',
             }),
         },
         methods: {
+            ...mapMutations({
+                addFilesToStorage: 'uploadStore/setFilesMutation'
+            }),
             choseFile() {
 
             },
@@ -108,7 +111,7 @@
             },
             addFiles(event) {
                 this.files = event.target.files;
-                this.$store.commit('upload/setFilesMutation',this.files);
+                this.addFilesToStorage([...event.target.files]);
             },
         },
         watch:{

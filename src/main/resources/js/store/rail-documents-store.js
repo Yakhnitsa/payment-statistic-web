@@ -6,6 +6,6 @@ import UploadModule from './rail-docs-modules/upload-module'
 
 export default new Vuex.Store({
     modules: {
-        upload: UploadModule
+        uploadStore: UploadModule
     }
 })
