@@ -41,8 +41,6 @@
 
 <script>
     import StationInput from "../components/StationInput.vue";
-    import VueSimpleContextMenu from 'vue-simple-context-menu'
-
 
     export default {
         components: {StationInput},

@@ -15,7 +15,8 @@ export default{
                     'X-CSRF-Token': CSRF_TOKEN
                 },
                 onUploadProgress: function(progressEvent){
-                    progress =  Math.round( progressEvent.loaded * 100 / progressEvent.total );
+                    // progress =  Math.round( progressEvent.loaded * 100 / progressEvent.total );
+                    // console.log(progress);
                 }
             })
     },

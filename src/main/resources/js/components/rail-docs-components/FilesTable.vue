@@ -5,6 +5,10 @@
                 v-for="file in files">
                 <span :class="getFileTypeStyle(file)"></span>
                 <span>{{file.name}}</span>
+                <i v-if="file.uploaded"
+                      class="fa fa-check-circle-o"
+
+                ></i>
             </li>
         </ul>
     </div>

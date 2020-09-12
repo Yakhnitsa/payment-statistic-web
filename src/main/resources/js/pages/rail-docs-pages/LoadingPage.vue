@@ -29,7 +29,7 @@
                             </div>
 
 
-                            <button type="button" class="btn btn-primary mx-1" @click="uploadFiles()">Загрузить
+                            <button type="button" class="btn btn-primary mx-1" @click="uploadFilesToServer">Загрузить
                             </button>
                         </div>
                     </div>
@@ -102,8 +102,6 @@
 
             },
             uploadFiles() {
-                console.log("file is uploads...");
-                this.$store.dispatch('uploadStore/uploadFilesOnServerAction');
                 this.uploadFilesToServer();
             },
             saveSelected() {
@@ -113,8 +111,8 @@
 
             },
             addFiles(event) {
-                this.files = event.target.files;
-                this.addFilesToStorage([...event.target.files]);
+                this.files = [...event.target.files];
+                this.addFilesToStorage(this.files);
             },
         },
         watch:{

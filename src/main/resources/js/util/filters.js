@@ -1,6 +1,5 @@
 import Vue from 'vue'
 
-
 Vue.filter('formatPayment', numb => {
     numb = numb/100;
     return (

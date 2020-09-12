@@ -268,9 +268,9 @@ export default new Vuex.Store({
 
         async deleteSelectedListsAction({commit,state},lists){
             try{
-                const response = await uploadApi.deleteSelected(lists)
+                const response = await uploadApi.deleteSelected(lists);
                 if(response.status === 200){
-                    const data = await response.data
+                    const data = await response.data;
                     commit('setTepListsMutation',data)
                 }
             }catch(error){
