@@ -1,5 +1,9 @@
 <template>
     <div class="container-fluid">
+        <button
+                @click="test"
+                class="btn btn-secondary">Test
+        </button>
 
         <div class="row">
             <!--Окно файлов для загрузки файлов-->
@@ -8,7 +12,7 @@
                     <div class="h5">Список файлов</div>
                     <div v-if="files.length > 0" class="flex-element">
 
-                        <files-table  :files="files"></files-table>
+                        <files-table :files="files"></files-table>
 
                     </div>
 
@@ -29,7 +33,9 @@
                             </div>
 
 
-                            <button type="button" class="btn btn-primary mx-1" @click="uploadFilesToServer">Загрузить
+                            <button type="button" class="btn btn-primary mx-1" @click="uploadFilesToServer">
+                                Загрузить
+                                <span v-if="selectedFiles.length > 0" class="badge badge-light">{{selectedFiles.length}}</span>
                             </button>
                         </div>
                     </div>
@@ -74,21 +80,23 @@
     import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
     import uploadApi from "../../api/uploadDocumentsApi";
 
-    import {mapMutations,mapActions,mapGetters} from 'vuex';
+    import {mapMutations, mapActions, mapGetters} from 'vuex';
 
     export default {
         name: "LoadingPage",
         components: {FilesTable},
         data() {
             return {
-                files: [],
-                uploadedDocs: [],
-                loadingProgress:0,
+                files:[],
+                uploadedDocs: []
             }
         },
-        computed:{
+        computed: {
             ...mapGetters({
                 filesFromStore: 'uploadStore/files',
+                uploadedDocuments: 'uploadStore/uploadedDocuments',
+                selectedFiles:'uploadStore/selectedFiles',
+                loadingProgress:'uploadStore/onUploadProgress'
             }),
         },
         methods: {
@@ -112,11 +120,18 @@
             },
             addFiles(event) {
                 this.files = [...event.target.files];
+                this.files.forEach(file => {
+                    this.$set(file, 'selected', false);
+                    this.$set(file, 'uploaded', false);
+                });
                 this.addFilesToStorage(this.files);
             },
+            test() {
+                console.log(this.files);
+            }
         },
-        watch:{
-            loadingProgress(value){
+        watch: {
+            loadingProgress(value) {
                 console.log(value);
             }
         }
@@ -129,12 +144,14 @@
         flex-direction: column;
         height: 75vh;
     }
+
     .flex-element {
         /*background: yellow;*/
         overflow-y: scroll;
         flex-grow: 3
     }
-    .control-panel{
+
+    .control-panel {
 
     }
 

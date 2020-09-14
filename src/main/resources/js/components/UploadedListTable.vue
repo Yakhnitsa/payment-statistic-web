@@ -69,9 +69,9 @@
                     return '';
                 }
                 if (payment > 99999) {
-                    var paymentString = (payment / 100).toFixed(2);
-                    var paymentArray = paymentString.split('').reverse();
-                    var index = 3;
+                    let paymentString = (payment / 100).toFixed(2);
+                    let paymentArray = paymentString.split('').reverse();
+                    let index = 3;
                     while (paymentArray.length > index + 3) {
                         paymentArray.splice(index + 3, 0, ' ');
                         index += 4;
