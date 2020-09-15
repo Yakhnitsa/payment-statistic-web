@@ -1,4 +1,5 @@
 import axios from 'axios'
+axios.defaults.baseURL = '/api/documents/';
 const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 
 export default{
@@ -8,7 +9,7 @@ export default{
 
         formData.append('file',file);
 
-        return await axios.post('/api/upload-single-raildoc',
+        return await axios.post('upload-single-raildoc',
             formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -20,24 +21,29 @@ export default{
                 }
             })
     },
-    async uploadMultipleFiles(files,progress){
-        const formData = new FormData();
 
-        for(let index = 0; index < files.length; index++) {
-            formData.append("files", files[index]);
-        }
-
-        return await axios.post('/api/upload-multiple-raildocs',
-            formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'X-CSRF-Token': CSRF_TOKEN
-                },
-                onUploadProgress: function(progressEvent){
-                    progress = Math.round( progressEvent.loaded * 100 / progressEvent.total );
-                }
-            })
+    async saveDocumentsToMainDb(documents){
+        return await axios({
+            method:'post',
+            url: 'save-docs-to-main-db',
+            data: documents,
+            headers:{
+                'X-CSRF-Token': CSRF_TOKEN
+            }
+        })
     },
+    async deleteDocumentsFromTempDb(documents){
+        return await axios({
+            method:'delete',
+            url: 'delete-docs-from-temp-db',
+            data: documents,
+            headers:{
+                'X-CSRF-Token': CSRF_TOKEN
+            }
+        })
+    }
+
+
 
 
 }

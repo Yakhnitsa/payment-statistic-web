@@ -24,8 +24,6 @@
                 <span :class="getFileTypeStyle(file)"></span>
                 <span v-if="file.uploaded" class="far fa-check-circle text-success"></span>
                 <span :class="fileNameClass(file)">{{file.name}}</span>
-                <!--<span>{{ file.selected }}</span>-->
-                <!--<span>{{ file.uploaded }}</span>-->
             </li>
         </ul>
     </div>

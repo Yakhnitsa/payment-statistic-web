@@ -2,13 +2,12 @@ package com.yurets_y.payment_statistic_web.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
@@ -16,10 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController()
 public class RailDocsUploadController {
 
-    @PostMapping("/api/upload-single-raildoc")
+    @PostMapping("/api/documents/upload-single-raildoc")
     @Secured({"ROLE_EDITOR"})
     public Object uploadSingleList(
             @RequestParam("file") MultipartFile file
@@ -33,20 +32,22 @@ public class RailDocsUploadController {
         return getMockedFile(fileName);
     }
 
-    @PostMapping("/api/upload-multiple-raildocs")
+    @PostMapping("/api/documents/save-docs-to-main-db")
     @Secured({"ROLE_EDITOR"})
-    public ResponseEntity<?> uploadMultiple(
-            @RequestParam("files") MultipartFile[] files
+    public ResponseEntity<?> saveDocumentsToMainDb(
+            @RequestBody Object[] payload
     ){
-        if(files.length == 0){
-            return new ResponseEntity<String>("No file!!!",HttpStatus.NO_CONTENT);
-        }
-        List<String> extensions = Arrays.asList("text/html","text/xml");
+        System.out.println(payload);
+        return null;
+    }
 
-        for(MultipartFile file: files){
-            String type = file.getContentType();
-            System.out.println(type);
-        }
+    @DeleteMapping("/api/documents/delete-docs-from-temp-db")
+    @Secured({"ROLE_EDITOR"})
+    public ResponseEntity<?> deleteDocumentsFromTempDb(
+            @RequestBody Object[] payload
+    )
+    {
+        System.out.println(payload);
         return null;
     }
 

@@ -33,15 +33,7 @@ export default {
             state.files = []
         },
 
-        addUploadedDocumentMutation(state, document){
-            const index = state.uploadedDocuments
-                .findIndex(doc => doc.number === document.number);
-            if(index !== -1){
-                state.uploadedDocuments.splice(index,1,document);
-            }else{
-                state.uploadedDocuments.push(document);
-            }
-        },
+
         setOnUploadProgressMutation(state, progress){
             state.onUploadProgress = progress;
         },
@@ -59,6 +51,16 @@ export default {
                 .findIndex(doc => doc.name === selectedFile.name);
             selectedFile.selected = !selectedFile.selected;
             state.files.splice(index,1,selectedFile);
+        },
+
+        addUploadedDocumentMutation(state, document){
+            const index = state.uploadedDocuments
+                .findIndex(doc => doc.number === document.number);
+            if(index !== -1){
+                state.uploadedDocuments.splice(index,1,document);
+            }else{
+                state.uploadedDocuments.push(document);
+            }
         },
     },
     actions: {
@@ -83,6 +85,12 @@ export default {
             commit('setOnUploadProgressMutation', 100);
 
         },
+        async saveSelectedDocumentsToMainDbAction(){
+
+        },
+        async deleteSelectedDocumentsFromTempDbAction(){
+
+        }
     },
 
 }
