@@ -28,6 +28,11 @@ public class Station extends AuditableEntity{
     public Station() {
     }
 
+    public Station(Integer code, String rusName) {
+        this.code = code;
+        this.rusName = rusName;
+    }
+
     public Station(Integer code, String rusName, String ukrName, String administration, String railDepartment, int node) {
         this.code = code;
         this.rusName = rusName;
