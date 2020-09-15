@@ -1,22 +1,29 @@
 <template>
     <div class="container-fluid">
-        <button
-                @click="test"
-                class="btn btn-secondary">Test
-        </button>
+
+
+        <!--<button-->
+                <!--@click="test"-->
+                <!--class="btn btn-secondary">Test-->
+        <!--</button>-->
 
         <div class="row">
             <!--Окно файлов для загрузки файлов-->
             <div class="col-md-6">
                 <div class="flex-container">
-                    <div class="h5">Список файлов</div>
+                    <div class="h5 text-center">Список файлов</div>
                     <div v-if="files.length > 0" class="flex-element">
                         <files-table></files-table>
+
                     </div>
 
                     <div v-else class="placeholder">
                         <h5 class="card-title">Нет данных для отображения</h5>
                         <p class="card-text">Загрузите ЖД накладные</p>
+                    </div>
+
+                    <div class="progress" v-show="showProgressBar">
+                        <div class="progress-bar" role="progressbar" :style="progressStyle" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
                     <div class="control-panel my-1">
@@ -29,7 +36,12 @@
                                        enctype="multipart/form-data">
                                 <label class="custom-file-label" for="customFile">{{files.length}}</label>
                             </div>
-
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelectedFiles">
+                                Удалить выбранные
+                            </button>
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteAllFiles">
+                                Удалить все
+                            </button>
 
                             <button type="button" class="btn btn-primary mx-1" @click="uploadFilesToServer">
                                 Загрузить
@@ -94,30 +106,36 @@
                 selectedFiles:'uploadStore/selectedFiles',
                 loadingProgress:'uploadStore/onUploadProgress'
             }),
+            progressStyle(){
+                return 'width: '+ this.loadingProgress + '%';
+            },
+            showProgressBar(){
+                return this.loadingProgress > 0 && this.loadingProgress < 100;
+            }
 
         },
         methods: {
             ...mapMutations({
-                addFilesToStorage: 'uploadStore/setFilesMutation'
+                addFilesToStorage: 'uploadStore/addFilesMutation',
+                deleteSelectedFiles: 'uploadStore/deleteSelectedFilesMutation',
+                deleteAllFiles: 'uploadStore/deleteAllFilesMutation'
             }),
             ...mapActions({
                 uploadFilesToServer: 'uploadStore/uploadFilesOnServerAction'
             }),
-            choseFile() {
-
-            },
             addFiles(event) {
                 this.addFilesToStorage([...event.target.files]);
             },
             uploadFiles() {
                 this.uploadFilesToServer();
             },
-            saveSelected() {
-
-            },
-            deleteSelected() {
-
-            },
+            //
+            // deleteSelectedFiles() {
+            //
+            // },
+            // deleteAllFiles() {
+            //
+            // },
 
             test() {
                 console.log(this.files);
@@ -155,6 +173,9 @@
         border: 3px dashed gainsboro;
         border-radius: 5px;
         flex-grow: 3
+    }
+    .progress{
+        height: 8px;
     }
 
 </style>

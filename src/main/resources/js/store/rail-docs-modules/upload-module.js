@@ -18,6 +18,21 @@ export default {
         setFilesMutation(state,files){
             state.files = files;
         },
+        addFilesMutation(state,files){
+            files.forEach(file =>{
+               let index = state.files.findIndex(exFile => exFile.name === file.name);
+               if(index === -1){
+                   state.files.push(file);
+               }
+            });
+        },
+        deleteSelectedFilesMutation(state){
+            state.files = state.files.filter(file => !file.selected);
+        },
+        deleteAllFilesMutation(state){
+            state.files = []
+        },
+
         addUploadedDocumentMutation(state, document){
             const index = state.uploadedDocuments
                 .findIndex(doc => doc.number === document.number);
@@ -30,6 +45,7 @@ export default {
         setOnUploadProgressMutation(state, progress){
             state.onUploadProgress = progress;
         },
+
         setFileUploadedMutation(state,updatedFile){
             const index = state.files
                 .findIndex(doc => doc.name === updatedFile.name);
@@ -37,6 +53,7 @@ export default {
             updatedFile.uploaded = true;
             state.files.splice(index,1,updatedFile);
         },
+
         setFileSelectedMutation(state,selectedFile){
             const index = state.files
                 .findIndex(doc => doc.name === selectedFile.name);
