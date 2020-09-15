@@ -41,7 +41,7 @@
 <script>
     export default {
         name: "UploadedListTable",
-        props:['payments',],
+        props:['payments'],
         data: function(){
             return{
                 selectAll: false,

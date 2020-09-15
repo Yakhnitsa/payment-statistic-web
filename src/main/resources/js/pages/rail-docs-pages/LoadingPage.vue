@@ -11,9 +11,7 @@
                 <div class="flex-container">
                     <div class="h5">Список файлов</div>
                     <div v-if="files.length > 0" class="flex-element">
-
-                        <files-table :files="files"></files-table>
-
+                        <files-table></files-table>
                     </div>
 
                     <div v-else class="placeholder">
@@ -78,7 +76,6 @@
 
 <script>
     import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
-    import uploadApi from "../../api/uploadDocumentsApi";
 
     import {mapMutations, mapActions, mapGetters} from 'vuex';
 
@@ -87,17 +84,17 @@
         components: {FilesTable},
         data() {
             return {
-                files:[],
                 uploadedDocs: []
             }
         },
         computed: {
             ...mapGetters({
-                filesFromStore: 'uploadStore/files',
+                files: 'uploadStore/files',
                 uploadedDocuments: 'uploadStore/uploadedDocuments',
                 selectedFiles:'uploadStore/selectedFiles',
                 loadingProgress:'uploadStore/onUploadProgress'
             }),
+
         },
         methods: {
             ...mapMutations({
@@ -109,6 +106,9 @@
             choseFile() {
 
             },
+            addFiles(event) {
+                this.addFilesToStorage([...event.target.files]);
+            },
             uploadFiles() {
                 this.uploadFilesToServer();
             },
@@ -118,14 +118,7 @@
             deleteSelected() {
 
             },
-            addFiles(event) {
-                this.files = [...event.target.files];
-                this.files.forEach(file => {
-                    this.$set(file, 'selected', false);
-                    this.$set(file, 'uploaded', false);
-                });
-                this.addFilesToStorage(this.files);
-            },
+
             test() {
                 console.log(this.files);
             }

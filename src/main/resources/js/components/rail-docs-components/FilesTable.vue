@@ -1,7 +1,9 @@
 <template>
     <div>
+        <input type="checkbox" v-model="allSelected">
         <ul class="list-group">
             <!--<upload-file-component v-for="file in files" :file="file"></upload-file-component>-->
+
             <li class="list-group-item"
                 v-for="file in files">
                 <input
@@ -25,12 +27,18 @@
 </template>
 
 <script>
-    import UploadFileComponent from "./UploadFileComponent.vue";
+
+    import {mapGetters} from 'vuex';
+
     export default {
         name: "FilesTable",
-        components: {UploadFileComponent},
-        props: ['files'],
+        components: {},
+        // props: ['files'],
         computed: {
+            ...mapGetters({
+                files: 'uploadStore/files',
+                selectedFiles:'uploadStore/selectedFiles',
+            }),
             xmlFiles() {
                 return this.files.filter(file => file.name.toLowerCase().endsWith('.xml'));
             },
@@ -39,6 +47,16 @@
             },
             uploadedFiles(){
                 return this.files.filter(file => file.uploaded);
+            },
+            allSelected:{
+                get(){
+                    return this.files.length === this.selectedFiles.length;
+                },
+                set(newValue){
+                    this.files.forEach(file => {
+                        if (file.selected !== newValue) { this.selectFile(file) }
+                    })
+                }
             }
         },
         methods: {
@@ -57,9 +75,9 @@
                 return  filename.endsWith('.xml') ? true : filename.endsWith('.pdf');
             },
             selectFile(file){
-                console.log(file.selected);
                 this.$store.commit('uploadStore/setFileSelectedMutation',file);
-            }
+            },
+
 
         }
     }

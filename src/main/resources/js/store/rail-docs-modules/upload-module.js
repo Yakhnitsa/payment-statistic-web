@@ -42,7 +42,7 @@ export default {
                 .findIndex(doc => doc.name === selectedFile.name);
             selectedFile.selected = !selectedFile.selected;
             state.files.splice(index,1,selectedFile);
-        }
+        },
     },
     actions: {
         async uploadFilesOnServerAction({commit,state,getters}) {
