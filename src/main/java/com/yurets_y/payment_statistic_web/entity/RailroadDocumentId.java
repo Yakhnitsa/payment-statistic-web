@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class RailroadDocumentId implements Serializable {
-    private int number;
+    private int docNumber;
     private Date dateStamp;
 
-    public int getNumber() {
-        return number;
+    public int getDocNumber() {
+        return docNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setDocNumber(int docNumber) {
+        this.docNumber = docNumber;
     }
 
     public Date getDateStamp() {
@@ -30,13 +30,13 @@ public class RailroadDocumentId implements Serializable {
 
         RailroadDocumentId that = (RailroadDocumentId) o;
 
-        if (number != that.number) return false;
+        if (docNumber != that.docNumber) return false;
         return dateStamp != null ? dateStamp.equals(that.dateStamp) : that.dateStamp == null;
     }
 
     @Override
     public int hashCode() {
-        int result = number;
+        int result = docNumber;
         result = 31 * result + (dateStamp != null ? dateStamp.hashCode() : 0);
         return result;
     }

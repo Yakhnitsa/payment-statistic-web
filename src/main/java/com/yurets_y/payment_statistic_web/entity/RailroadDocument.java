@@ -1,12 +1,16 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
+import java.io.File;
 import java.util.*;
 
 @Entity
 @IdClass(RailroadDocumentId.class)
 @Table(name = "RAILROAD_DOCUMENT")
-public class RailroadDocument {
+public class RailroadDocument extends AuditableEntity {
     @Id
     @Column(updatable = false)
     private Integer docNumber;
@@ -29,19 +33,31 @@ public class RailroadDocument {
     private Date credDate;
 
     @ManyToOne
+    @NotFound(action=NotFoundAction.IGNORE)
     private Station sendStation;
 
     @ManyToOne
+    @NotFound(action=NotFoundAction.IGNORE)
     private Station receiveStation;
 
-    @OneToOne
+    @OneToOne(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true)
     private Client cargoSender;
 
-    @OneToOne
+    @OneToOne(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true)
     private Client cargoReceiver;
 
-    @OneToOne
+    @OneToOne(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true)
     private Client tarifPayer;
+
+    private File xmlBackupFile;
+
+    private File pdfBackupFile;
 
 //    private List<Carrier> carriers = new ArrayList<>();
 
@@ -302,4 +318,19 @@ public class RailroadDocument {
         this.stamps.putAll(stamps);
     }
 
+    public File getXmlBackupFile() {
+        return xmlBackupFile;
+    }
+
+    public void setXmlBackupFile(File xmlBackupFile) {
+        this.xmlBackupFile = xmlBackupFile;
+    }
+
+    public File getPdfBackupFile() {
+        return pdfBackupFile;
+    }
+
+    public void setPdfBackupFile(File pdfBackupFile) {
+        this.pdfBackupFile = pdfBackupFile;
+    }
 }

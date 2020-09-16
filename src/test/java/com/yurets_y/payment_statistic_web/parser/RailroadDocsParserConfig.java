@@ -10,7 +10,7 @@ import java.io.File;
 @TestConfiguration
 @ComponentScan(
         basePackageClasses={RailroadDocumentsParser.class})
-class RailroadDocsParserConfig {
+public class RailroadDocsParserConfig {
 
     @Bean("test-file")
     File testFile(){

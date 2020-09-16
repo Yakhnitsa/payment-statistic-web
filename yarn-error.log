@@ -2284,7 +2284,7 @@ Lockfile:
     integrity sha1-1USBHUKPmOsGpj3EAtJAPDKMOPc=
     dependencies:
       extend-shallow "^2.0.1"
-      is-number "^3.0.0"
+      is-docNumber "^3.0.0"
       repeat-string "^1.6.1"
       to-regex-range "^2.1.0"
   
@@ -2594,7 +2594,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/has-values/-/has-values-1.0.0.tgz#95b0b63fec2146619a6fe57fe75628d5a39efe4f"
     integrity sha1-lbC2P+whRmGab+V/51Yo1aOe/k8=
     dependencies:
-      is-number "^3.0.0"
+      is-docNumber "^3.0.0"
       kind-of "^4.0.0"
   
   has@^1.0.3:
@@ -2953,7 +2953,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz#ef9e31386f031a7f0d643af82fde50c457ef00cb"
     integrity sha1-754xOG8DGn8NZDr4L95QxFfvAMs=
     dependencies:
-      number-is-nan "^1.0.0"
+      docNumber-is-nan "^1.0.0"
   
   is-fullwidth-code-point@^2.0.0:
     version "2.0.0"
@@ -2974,9 +2974,9 @@ Lockfile:
     dependencies:
       is-extglob "^2.1.1"
   
-  is-number@^3.0.0:
+  is-docNumber@^3.0.0:
     version "3.0.0"
-    resolved "https://registry.yarnpkg.com/is-number/-/is-number-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
+    resolved "https://registry.yarnpkg.com/is-docNumber/-/is-docNumber-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
     integrity sha1-JP1iAaR4LPUFYcgQJ2r8fRLXEZU=
     dependencies:
       kind-of "^3.0.2"
@@ -3600,9 +3600,9 @@ Lockfile:
     dependencies:
       path-key "^2.0.0"
   
-  number-is-nan@^1.0.0:
+  docNumber-is-nan@^1.0.0:
     version "1.0.1"
-    resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
+    resolved "https://registry.yarnpkg.com/docNumber-is-nan/-/docNumber-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
     integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
   
   object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
@@ -4801,7 +4801,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-2.1.1.tgz#7c80c17b9dfebe599e27367e0d4dd5590141db38"
     integrity sha1-fIDBe53+vlmeJzZ+DU3VWQFB2zg=
     dependencies:
-      is-number "^3.0.0"
+      is-docNumber "^3.0.0"
       repeat-string "^1.6.1"
   
   to-regex@^3.0.1, to-regex@^3.0.2:

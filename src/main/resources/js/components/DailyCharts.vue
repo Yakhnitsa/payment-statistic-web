@@ -24,13 +24,13 @@
             </div>
             <div class="row mx-5">
                 <div class="form-check-inline">
-                    <input class="form-check-input" v-model.number="averageIndex" type="radio" id="threeDaysAverageRadio" value="3" checked>
+                    <input class="form-check-input" v-model.docNumber="averageIndex" type="radio" id="threeDaysAverageRadio" value="3" checked>
                     <label class="form-check-label" for="threeDaysAverageRadio">
                         Среднее за 3 дня
                     </label>
                 </div>
                 <div class="form-check-inline">
-                    <input class="form-check-input" v-model.number="averageIndex" type="radio" id="sevenDaysAverageRadio" value="7">
+                    <input class="form-check-input" v-model.docNumber="averageIndex" type="radio" id="sevenDaysAverageRadio" value="7">
                     <label class="form-check-label" for="sevenDaysAverageRadio">
                         Среднее за 7 дней
                     </label>

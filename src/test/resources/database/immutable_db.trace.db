@@ -555,7 +555,7 @@ select paymentdet0_.dateStamp as col_0_0_, paymentdet0_.type as col_1_0_, sum(pa
 2020-07-02 11:53:40 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Функция "DATE_FORMAT" не найдена
 Function "DATE_FORMAT" not found; SQL statement:
-select paymentlis0_.dateStamp as col_0_0_, paymentlis0_.payment_vs_taxes as col_1_0_, paymentdet1_.type as col_2_0_, sum(paymentdet1_.total_payment) as col_3_0_ from payment_list paymentlis0_ inner join payment_details paymentdet1_ on paymentlis0_.number=paymentdet1_.number and paymentlis0_.payer_code=paymentdet1_.payer_code where paymentlis0_.dateStamp between ? and ? group by date_format(paymentlis0_.dateStamp, '%Y, %m') , paymentlis0_.payment_vs_taxes , paymentdet1_.type [90022-200]
+select paymentlis0_.dateStamp as col_0_0_, paymentlis0_.payment_vs_taxes as col_1_0_, paymentdet1_.type as col_2_0_, sum(paymentdet1_.total_payment) as col_3_0_ from payment_list paymentlis0_ inner join payment_details paymentdet1_ on paymentlis0_.docNumber=paymentdet1_.docNumber and paymentlis0_.payer_code=paymentdet1_.payer_code where paymentlis0_.dateStamp between ? and ? group by date_format(paymentlis0_.dateStamp, '%Y, %m') , paymentlis0_.payment_vs_taxes , paymentdet1_.type [90022-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	at org.h2.message.DbException.get(DbException.java:205)

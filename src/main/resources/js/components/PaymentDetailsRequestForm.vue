@@ -72,12 +72,12 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputDocNumber">Документ</label>
-                            <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber"
+                            <input type="docNumber" v-model="docNumber" class="form-control" id="inputDocNumber"
                                    placeholder="№ документа">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPaymentSum">Сумма платежа</label>
-                            <input type="number" v-model="paymentSum" class="form-control" id="inputPaymentSum"
+                            <input type="docNumber" v-model="paymentSum" class="form-control" id="inputPaymentSum"
                                    placeholder="Сумма">
                         </div>
                     </div>

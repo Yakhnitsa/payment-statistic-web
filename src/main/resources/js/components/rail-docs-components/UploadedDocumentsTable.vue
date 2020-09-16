@@ -24,7 +24,7 @@
                     <i class="form-icon"></i>
                 </label>
             </td>
-            <td>{{document.number}}</td>
+            <td>{{document.docNumber}}</td>
             <td>{{document.dateStamp | formatDate}}</td>
             <td>{{document.sender}}</td>
             <td class="text-right">{{document.sendStation | formatStation}}</td>

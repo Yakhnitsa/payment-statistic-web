@@ -26,13 +26,13 @@ create table payment_details (
   tax_payment bigint not null,
   total_payment bigint not null,
   type varchar(255),
-  number integer,
+  docNumber integer,
   payer_code integer,
   primary key (id)
 ) engine=InnoDB;
 
 create table payment_list (
-  number integer not null,
+  docNumber integer not null,
   payer_code integer not null,
   created_date datetime(6),
   last_modified_date datetime(6),
@@ -49,7 +49,7 @@ create table payment_list (
   test_passed bit not null,
   user_id bigint,
   last_modified_by bigint,
-  primary key (number, payer_code)
+  primary key (docNumber, payer_code)
 ) engine=InnoDB;
 
 create table user_role (
@@ -59,8 +59,8 @@ create table user_role (
 
 alter table payment_details
   add constraint payment_details__payment_list_fk
-  foreign key (number, payer_code)
-  references payment_list (number, payer_code);
+  foreign key (docNumber, payer_code)
+  references payment_list (docNumber, payer_code);
 
 alter table payment_list
   add constraint payment_list__app_user_creator_fk

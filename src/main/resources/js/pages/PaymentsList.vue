@@ -41,7 +41,7 @@
                 </thead>
                 <tbody>
                     <tr class="text-right text-nowrap" v-for="payment in checkedPayments">
-                        <td scope="col" class="col-2">{{payment.number}}</td>
+                        <td scope="col" class="col-2">{{payment.docNumber}}</td>
                         <td scope="col" class="col-2">{{payment.dateStamp | formatDate}}</td>
                         <td scope="col" class="col-2"
                             :class="{'text-danger': !payment.checkedOpeningBalance}">
@@ -182,7 +182,7 @@
             showPayment(payment){
 
                 const params = {
-                    listNumber: payment.number,
+                    listNumber: payment.docNumber,
                     payerCode: payment.payerCode,
                 };
 

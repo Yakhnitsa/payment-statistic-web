@@ -28,7 +28,7 @@
                 <td>{{payment.payerCode}}</td>
                 <td>
                     <i v-show="!payment.testPassed" class="fa fa-exclamation-ci rcle text-danger" aria-hidden="true"></i>
-                    {{payment.number}}</td>
+                    {{payment.docNumber}}</td>
                 <td>{{payment.dateStamp | formatDate}}</td>
                 <td class="text-right">{{payment.openingBalance | formatPayment}}</td>
                 <td class="text-right">{{payment.closingBalance | formatPayment}}</td>

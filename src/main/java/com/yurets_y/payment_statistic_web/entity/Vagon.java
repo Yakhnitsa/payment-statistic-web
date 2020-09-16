@@ -6,7 +6,7 @@ import java.util.List;
 
 
 @Entity
-public class Vagon {
+public class Vagon  extends AuditableEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
