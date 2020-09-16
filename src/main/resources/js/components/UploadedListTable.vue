@@ -11,7 +11,7 @@
                     </th>
                     <th>payer code</th>
                     <th>payer numb</th>
-                    <th>date</th>
+                    <th>dateStamp</th>
                     <th>open balance</th>
                     <th>close balance</th>
                 </tr>
@@ -29,7 +29,7 @@
                 <td>
                     <i v-show="!payment.testPassed" class="fa fa-exclamation-ci rcle text-danger" aria-hidden="true"></i>
                     {{payment.number}}</td>
-                <td>{{payment.date | formatDate}}</td>
+                <td>{{payment.dateStamp | formatDate}}</td>
                 <td class="text-right">{{payment.openingBalance | formatPayment}}</td>
                 <td class="text-right">{{payment.closingBalance | formatPayment}}</td>
             </tr>

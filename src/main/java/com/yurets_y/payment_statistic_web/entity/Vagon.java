@@ -1,12 +1,22 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Entity
 public class Vagon {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "docNumber", referencedColumnName = "docNumber"),
+            @JoinColumn(name = "dateStamp", referencedColumnName = "dateStamp")
+    })
     private RailroadDocument railroadDocument;
 
     private String number;
@@ -16,6 +26,8 @@ public class Vagon {
     private double carryingCapacity;
     private double payment;
 
+    @ElementCollection
+//            (fetch=FetchType.EAGER)
     private List<String> zpuList;
 
     public Vagon() {

@@ -1,10 +1,32 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String name;
-    private String railroadCode;
-    private String edrpuCode;
+
+    private Integer railroadCode;
+
+    private Integer edrpuCode;
+
     private String address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAddress() {
         return address;
@@ -14,11 +36,11 @@ public class Client {
         this.address = address;
     }
 
-    public String getEdrpuCode() {
+    public Integer getEdrpuCode() {
         return edrpuCode;
     }
 
-    public void setEdrpuCode(String edrpuCode) {
+    public void setEdrpuCode(Integer edrpuCode) {
         this.edrpuCode = edrpuCode;
     }
 
@@ -30,11 +52,11 @@ public class Client {
         this.name = name;
     }
 
-    public String getRailroadCode() {
+    public Integer getRailroadCode() {
         return railroadCode;
     }
 
-    public void setRailroadCode(String railroadCode) {
+    public void setRailroadCode(Integer railroadCode) {
         this.railroadCode = railroadCode;
     }
 

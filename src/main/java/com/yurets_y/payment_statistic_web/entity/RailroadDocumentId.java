@@ -1,10 +1,11 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RailroadDocumentId {
+public class RailroadDocumentId implements Serializable {
     private int number;
-    private Date date;
+    private Date dateStamp;
 
     public int getNumber() {
         return number;
@@ -14,12 +15,12 @@ public class RailroadDocumentId {
         this.number = number;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateStamp() {
+        return dateStamp;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateStamp(Date dateStamp) {
+        this.dateStamp = dateStamp;
     }
 
     @Override
@@ -30,13 +31,13 @@ public class RailroadDocumentId {
         RailroadDocumentId that = (RailroadDocumentId) o;
 
         if (number != that.number) return false;
-        return date != null ? date.equals(that.date) : that.date == null;
+        return dateStamp != null ? dateStamp.equals(that.dateStamp) : that.dateStamp == null;
     }
 
     @Override
     public int hashCode() {
         int result = number;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (dateStamp != null ? dateStamp.hashCode() : 0);
         return result;
     }
 }

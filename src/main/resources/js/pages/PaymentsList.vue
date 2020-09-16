@@ -7,10 +7,10 @@
         <div class="ml-3 my-2">
             <div class="form-row ">
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateFrom" class="form-control"/>
+                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateUntil" class="form-control"/>
+                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button class="btn btn-primary" v-on:click="updateList()">Получить данные</button>
@@ -42,7 +42,7 @@
                 <tbody>
                     <tr class="text-right text-nowrap" v-for="payment in checkedPayments">
                         <td scope="col" class="col-2">{{payment.number}}</td>
-                        <td scope="col" class="col-2">{{payment.date | formatDate}}</td>
+                        <td scope="col" class="col-2">{{payment.dateStamp | formatDate}}</td>
                         <td scope="col" class="col-2"
                             :class="{'text-danger': !payment.checkedOpeningBalance}">
                             {{payment.openingBalance | formatPayment }}
@@ -111,7 +111,7 @@
                 return this.$store.getters.paymentLists
             },
             sortedPayments: function(){
-                return this.payments.sort((a,b)=> a.date - b.date)
+                return this.payments.sort((a,b)=> a.dateStamp - b.dateStamp)
             },
             // проверка перечней по логике конец предыдущего = начало текущего периода
             checkedPayments(){
@@ -244,8 +244,8 @@
                         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
                 )
             },
-            formatDate(date){
-                return new Date(date).toLocaleDateString()
+            formatDate(dateStamp){
+                return new Date(dateStamp).toLocaleDateString()
             }
         },
     }

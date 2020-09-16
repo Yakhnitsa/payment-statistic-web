@@ -55,7 +55,7 @@
             getPropertyByDate(day,prop){
                 for(let i in this.paymentList){
                     let list = this.paymentList[i];
-                    if(list.date === day){
+                    if(list.dateStamp === day){
                         return list[prop];
                     }
                 }

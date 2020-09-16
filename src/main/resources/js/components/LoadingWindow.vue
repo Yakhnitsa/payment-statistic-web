@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="date" v-model="lastUpdate">
+                                    <input class="form-control" type="dateStamp" v-model="lastUpdate">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary"
                                                 :disabled="lastUpdate === ''|| mailUpdateAwait"

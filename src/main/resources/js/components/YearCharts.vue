@@ -4,10 +4,10 @@
         <form>
             <div class="form-row mx-1">
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateFrom" class="form-control"/>
+                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateUntil" class="form-control"/>
+                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-primary" v-on:click="updateChart">Получить данные</button>
@@ -95,7 +95,7 @@
             }),
 
             linearChartLabels(){
-                return this.yearChartData.map(element => element.date);
+                return this.yearChartData.map(element => element.dateStamp);
             },
             linearChartExpenses(){
                 return this.yearChartData.map(element => element.expenses/100);

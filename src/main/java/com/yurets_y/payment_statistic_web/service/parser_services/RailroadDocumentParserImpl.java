@@ -159,8 +159,9 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         Client client = new Client();
         client.setName(element.attr("name"));
         client.setAddress(element.attr("adress"));
-        client.setRailroadCode(element.attr("kod"));
-        client.setEdrpuCode(element.attr("okpo"));
+
+        client.setRailroadCode(Integer.parseInt(element.attr("kod")));
+        client.setEdrpuCode(Integer.parseInt(element.attr("okpo")));
 
         return client;
     }
@@ -171,7 +172,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
     private Client parseTarifPayer(Elements elements) {
         Client tarifPayer = new Client();
         tarifPayer.setName(elements.attr("name_plat"));
-        tarifPayer.setRailroadCode(elements.attr("kod_plat"));
+        tarifPayer.setRailroadCode(Integer.parseInt(elements.attr("kod_plat")));
         return tarifPayer;
     }
 

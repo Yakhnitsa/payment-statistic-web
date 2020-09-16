@@ -15,7 +15,7 @@ insert into hibernate_sequence values ( 1 );
 create table payment_details (
   id bigint not null,
   additional_payment bigint not null,
-  date date,
+  dateStamp dateStamp,
   document_number varchar(255),
   income_type integer,
   payment bigint not null,
@@ -39,7 +39,7 @@ create table payment_list (
   backup_file_path varchar(255),
   closing_balance bigint not null,
   contract_number varchar(255),
-  date date,
+  dateStamp dateStamp,
   opening_balance bigint not null,
   payer_name varchar(255),
   payment_taxes bigint not null,

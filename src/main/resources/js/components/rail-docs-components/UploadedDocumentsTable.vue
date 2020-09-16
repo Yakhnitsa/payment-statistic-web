@@ -25,7 +25,7 @@
                 </label>
             </td>
             <td>{{document.number}}</td>
-            <td>{{document.date | formatDate}}</td>
+            <td>{{document.dateStamp | formatDate}}</td>
             <td>{{document.sender}}</td>
             <td class="text-right">{{document.sendStation | formatStation}}</td>
             <td class="text-right">{{document.receiveStation | formatStation}}</td>

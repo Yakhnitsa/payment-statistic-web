@@ -1852,7 +1852,7 @@ Lockfile:
     integrity sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
     dependencies:
       is-arguments "^1.0.4"
-      is-date-object "^1.0.1"
+      is-dateStamp-object "^1.0.1"
       is-regex "^1.0.4"
       object-is "^1.0.1"
       object-keys "^1.1.1"
@@ -2078,7 +2078,7 @@ Lockfile:
     integrity sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
     dependencies:
       is-callable "^1.1.4"
-      is-date-object "^1.0.1"
+      is-dateStamp-object "^1.0.1"
       is-symbol "^1.0.2"
   
   escape-html@~1.0.3:
@@ -2908,9 +2908,9 @@ Lockfile:
     dependencies:
       kind-of "^6.0.0"
   
-  is-date-object@^1.0.1:
+  is-dateStamp-object@^1.0.1:
     version "1.0.2"
-    resolved "https://registry.yarnpkg.com/is-date-object/-/is-date-object-1.0.2.tgz#bda736f2cd8fd06d32844e7743bfa7494c3bfd7e"
+    resolved "https://registry.yarnpkg.com/is-dateStamp-object/-/is-dateStamp-object-1.0.2.tgz#bda736f2cd8fd06d32844e7743bfa7494c3bfd7e"
     integrity sha512-USlDT524woQ08aoZFzh3/Z6ch9Y/EWXEHQ/AaRN0SkKq4t2Jw2R2339tSXmwuVoY7LLlBCbOIlx2myP/L5zk0g==
   
   is-descriptor@^0.1.0:

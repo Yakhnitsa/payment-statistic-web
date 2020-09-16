@@ -4,10 +4,10 @@
         <form>
             <div class="form-row mx-1">
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateFrom" class="form-control"/>
+                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="date" v-model="dateUntil" class="form-control"/>
+                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-primary" v-on:click="updateChart">Получить данные</button>
@@ -120,10 +120,10 @@
 
 
             dates(){
-                return this.dailyChartData.map(e => e.date);
+                return this.dailyChartData.map(e => e.dateStamp);
             },
             labels(){
-                return this.dailyChartData.map(e => e.date);
+                return this.dailyChartData.map(e => e.dateStamp);
             },
             expenses(){
                 return this.dailyChartData.map(e => e.expenses / 100);

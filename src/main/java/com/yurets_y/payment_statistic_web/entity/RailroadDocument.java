@@ -1,31 +1,49 @@
 package com.yurets_y.payment_statistic_web.entity;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
+import javax.persistence.*;
 import java.util.*;
 
-
+@Entity
+@IdClass(RailroadDocumentId.class)
+@Table(name = "RAILROAD_DOCUMENT")
 public class RailroadDocument {
-// TODO Проверить работоспособность при сохранении entity, проверка на возможность мутации
-    @Immutable
+    @Id
+    @Column(updatable = false)
     private Integer docNumber;
 
-    @Immutable
+    @Id
+    @Column(updatable = false)
+    @Temporal(TemporalType.DATE)
     private Date dateStamp;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date docDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date delDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date notfDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date credDate;
 
+    @ManyToOne
     private Station sendStation;
+
+    @ManyToOne
     private Station receiveStation;
 
+    @OneToOne
     private Client cargoSender;
+
+    @OneToOne
     private Client cargoReceiver;
+
+    @OneToOne
     private Client tarifPayer;
 
-    private List<Carrier> carriers = new ArrayList<>();
+//    private List<Carrier> carriers = new ArrayList<>();
 
     private String cargoName;
     private String cargoCode;
@@ -37,8 +55,11 @@ public class RailroadDocument {
     private String column7info;
     private String column15info;
 
+    @OneToMany(mappedBy="railroadDocument", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Vagon> vagonList = new ArrayList<>();
 
+    @ElementCollection
+//            (fetch=FetchType.EAGER)
     private Map<String, String> stamps = new HashMap<String, String>();
 
     public RailroadDocument() {
@@ -160,7 +181,15 @@ public class RailroadDocument {
         this.sendStation = sendStation;
     }
 
-//    public Station getOutStation() {
+    public Date getDateStamp() {
+        return dateStamp;
+    }
+
+    public void setDateStamp(Date dateStamp) {
+        this.dateStamp = dateStamp;
+    }
+
+    //    public Station getOutStation() {
 //        return carriers.size() > 0 ? carriers.get(0).getTo() : new Station();
 //    }
 //
@@ -215,13 +244,13 @@ public class RailroadDocument {
         this.column15info = column15info;
     }
 
-    public List<Carrier> getCarriers() {
-        return carriers;
-    }
-
-    public void addCarrier(Carrier carrier){
-        carriers.add(carrier);
-    }
+//    public List<Carrier> getCarriers() {
+//        return carriers;
+//    }
+//
+//    public void addCarrier(Carrier carrier){
+//        carriers.add(carrier);
+//    }
 
     @Override
     public String toString() {
