@@ -1,10 +1,17 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.util.*;
 
 
 public class RailroadDocument {
-    private String docNumber;
+// TODO Проверить работоспособность при сохранении entity, проверка на возможность мутации
+    @Immutable
+    private Integer docNumber;
+
+    @Immutable
+    private Date dateStamp;
 
     private Date docDate;
     private Date delDate;
@@ -33,6 +40,15 @@ public class RailroadDocument {
     private List<Vagon> vagonList = new ArrayList<>();
 
     private Map<String, String> stamps = new HashMap<String, String>();
+
+    public RailroadDocument() {
+    }
+
+    public RailroadDocument(Integer docNumber, Date dateStamp) {
+        this.docNumber = docNumber;
+        this.dateStamp = dateStamp;
+        this.docDate = dateStamp;
+    }
 
     /*
      * getters and setters:
@@ -104,11 +120,11 @@ public class RailroadDocument {
         this.credDate = credDate;
     }
 
-    public String getDocNumber() {
+    public Integer getDocNumber() {
         return docNumber;
     }
 
-    public void setDocNumber(String docNumber) {
+    public void setDocNumber(Integer docNumber) {
         this.docNumber = docNumber;
     }
 

@@ -9,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
+
+@Service("doc-parser-service")
 public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 
     /*
@@ -43,12 +46,12 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
      * Парсинг данных по документу из представления xml документа
      */
     private RailroadDocument parseDocument(Document jSoupDocument) throws ParseException {
-        RailroadDocument railDoc = new RailroadDocument();
 
-        railDoc.setDocNumber(getAttributeValue(jSoupDocument,"nom_doc"));
-
+        String docNumb = getAttributeValue(jSoupDocument,"nom_doc");
+        if(!docNumb.matches("\\d{8}"))throw new RuntimeException("Ошибка парсинга номера накладной");
         Date docDate = getDateFromString(getAttributeValue(jSoupDocument,"date_otpr"));
-        railDoc.setDocDate(docDate);
+
+        RailroadDocument railDoc = new RailroadDocument(Integer.parseInt(docNumb),docDate);
 
         Date deliveryDate = getDateFromString(getAttributeValue(jSoupDocument,"date_grpol"));
         railDoc.setDelDate(deliveryDate);
@@ -70,15 +73,15 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         railDoc.setSendStation(getSendStation(jSoupDocument));
         railDoc.setReceiveStation(getReceiveStation(jSoupDocument));
 
-        //добавление информации о перевозчиках TODO Изменить
-        parseAndAddCarriers(jSoupDocument,railDoc);
-
+//        //добавление информации о перевозчиках
+//        parseAndAddCarriers(jSoupDocument,railDoc);
 
         //добавление инфо по вагонам:
         railDoc.addVagons(getVagonsInfo(jSoupDocument));
 
-        //Добавление инфо по грузу: TODO Изменить
-        parseAndAddCarriageInfoToDoc(jSoupDocument, railDoc);
+        //Добавление инфо по грузу:
+        railDoc.setCargoName(getAttributeValue(jSoupDocument,"name_etsng"));
+        railDoc.setCargoCode(getAttributeValue(jSoupDocument,"kod_etsng"));
 
         //Определение платы по документу
         String payment = jSoupDocument.getElementsByAttributeValue("type_pay", "0").attr("osum");
@@ -132,21 +135,21 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 //        );
 //    }
 
-    private void parseAndAddCarriers(Document jSoupDoc, RailroadDocument railDoc){
-
-        Elements carrierElements = jSoupDoc.getElementsByTag("CARRIER");
-        carrierElements.forEach(element ->{
-                    String codeInn = element.attr("esr_in");
-                    String nameInn = element.attr("esr_name_in");
-                    String codeOut = element.attr("esr_out");
-                    String nameOut = element.attr("esr_name_out");
-                    RailroadDocument.Station innStation = new RailroadDocument.Station(nameInn,codeInn);
-                    RailroadDocument.Station outStation = new RailroadDocument.Station(nameOut,codeOut);
-                    RailroadDocument.Carrier carrier =  new RailroadDocument.Carrier(innStation,outStation);
-                    railDoc.addCarrier(carrier);
-                }
-        );
-    }
+//    private void parseAndAddCarriers(Document jSoupDoc, RailroadDocument railDoc){
+//
+//        Elements carrierElements = jSoupDoc.getElementsByTag("CARRIER");
+//        carrierElements.forEach(element ->{
+//                    String codeInn = element.attr("esr_in");
+//                    String nameInn = element.attr("esr_name_in");
+//                    String codeOut = element.attr("esr_out");
+//                    String nameOut = element.attr("esr_name_out");
+//                    RailroadDocument.Station innStation = new RailroadDocument.Station(nameInn,codeInn);
+//                    RailroadDocument.Station outStation = new RailroadDocument.Station(nameOut,codeOut);
+//                    RailroadDocument.Carrier carrier =  new RailroadDocument.Carrier(innStation,outStation);
+//                    railDoc.addCarrier(carrier);
+//                }
+//        );
+//    }
 
     /*
      * Добавление инфо о получателе/отправителе из єлемента документа // Completed
@@ -238,15 +241,6 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
     }
 
     /*
-     * Добавление инфо про груз в документ
-     */
-    private void parseAndAddCarriageInfoToDoc(Document jSoupDoc, RailroadDocument railDoc) {
-        String carriageName = jSoupDoc.getElementsByAttribute("name_etsng").attr("name_etsng").toString();
-        String carriageCode = jSoupDoc.getElementsByAttribute("kod_etsng").attr("kod_etsng").toString();
-        railDoc.setCargoName(carriageName);
-        railDoc.setCargoCode(carriageCode);
-    }
-    /*
      * Проверка документа на предмет изменения веса
      */
     private void updateNetWeight(Document jSoupDoc, RailroadDocument railDoc){
@@ -254,7 +248,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         String atributeKey = "target";
         String valueFormat = "OTPR/VAGON[%1$d]/COLLECT_V[1]";
         for(int i = 0; i < vagonCount;){
-            RailroadDocument.Vagon vagon = railDoc.getVagonList().get(i++);
+            Vagon vagon = railDoc.getVagonList().get(i++);
             String ves = null;
             try {
                 String value = String.format(valueFormat,i);
@@ -262,13 +256,10 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
                 for(Element element: elements){
                     ves = element.getElementsByAttribute("vesg").attr("vesg");
                     if(ves.matches("\\d+")){
-                        vagon.setNetVeight(Integer.parseInt(ves));
+                        vagon.setNetWeight(Integer.parseInt(ves));
                     }
 
                 }
-
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -296,7 +287,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         String attributeKey = "target";
         String valueFormat = "OTPR/VAGON[%1$d]";
         for(int i = vagonCount; i >0 ;i--){
-            RailroadDocument.Vagon vagon = railDoc.getVagonList().get(i-1);
+            Vagon vagon = railDoc.getVagonList().get(i-1);
             String vagNumb = null;
             String UpdateUTara = null;
             String tagname = "";
@@ -325,7 +316,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
             }
             if((UpdateUTara != null)&&(!UpdateUTara.equals(""))){
                 try{
-                    vagon.setTareVeight(Integer.parseInt(UpdateUTara));
+                    vagon.setTareWeight(Integer.parseInt(UpdateUTara));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -342,7 +333,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         String atributeKey = "target";
         String valueFormat = "OTPR/VAGON[%1$d]/PAY_V[1]";
         for(int i = 0; i < vagonCount;){
-            RailroadDocument.Vagon vagon = railDoc.getVagonList().get(i++);
+            Vagon vagon = railDoc.getVagonList().get(i++);
             String paymentStr = null;
             try {
                 String value = String.format(valueFormat,i);
@@ -400,7 +391,5 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
     private String getAttributeValue(Document jSoupDocument, String attribute){
         return jSoupDocument.getElementsByAttribute(attribute).attr(attribute);
     }
-
-
 
 }

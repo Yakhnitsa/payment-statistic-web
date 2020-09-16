@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uz-rwc-doc xmlns="uz:rwc:document:1.11">
+    <document-data>
+        <uz-rwc-doc>
+            <document-data>
+                <OTPR country_nazn="756" country_otpr="804" date_plan="15.09.2020" doc_lang="de" kod_doc="90" loader="2"
+                      metod="58" pr_locom="0" rab_esr="11" speed="2" vid="6" xmlns="uz:rwc:document:project:1.11">
+                    <CLIENT adress="м. Київ вул. Толстого Льва, 63, офіс 202" kod="2481" name="ТОВ &quot;УТЛ-2&quot;"
+                            okpo="43592481" type="1"/>
+                    <CLIENT adress="54052, г. Николаев, ул. Айвазовского, 14" kod="4183" name="ООО «ЕВТ ГРЕЙН»"
+                            okpo="41730338" type="2"/>
+                    <PL kod_plat="8210260" name_plat="ТОВ &quot;УТЛ-2&quot;" type="0"/>
+                    <ROUTE index="0" name_from="Бобровицы" name_to="Жовтневая (эксп.)" rw_from="22" rw_to="22"
+                           stn_from="323607" stn_to="418101" zd_nazn="22" zd_otpr="22"/>
+                    <SHTEMPEL column_num="20" info_sht="Експорт" nom_sht="706"/>
+                    <SHTEMPEL column_num="20"
+                              info_sht="Власний вагон. Власник АО «ПУМБ». Оператор ТОВ &quot;УТЛ-2&quot;"
+                              nom_sht="623"/>
+                    <SHTEMPEL column_num="20" info_sht="Насыпью" nom_sht="705"/>
+                    <SHTEMPEL column_num="19" info_sht="Загальна кількість вагонів -  2. Дивись відомість."
+                              nom_sht="708"/>
+                    <SHTEMPEL column_num="26" info_sht="На вагонных весах (150 т)" nom_sht="718"/>
+                    <SHTEMPEL column_num="7" info_sht="Для вивезення водним транспортом у Швейцария" nom_sht="719"/>
+                    <TEXT branch="на П/К" create_place="Бобровицы" marks="Сертификаты качества отправлены почтой."
+                          name_gr="Ответственный за погрузку менеджер Гайдук А."
+                          zayava="Експедитор в порту ТОВ «ЄВТ Грейн». Експортер: ПП &quot;Агропрогрес&quot; по контракту №P-2714-SGG/1 от 02.09.2020р. з  &quot;Negoce Agricole S.a.r.l&quot; в квоту компанії «SIERENTZ GLOBAL MERCHANTS»"/>
+                    <VAGON gruzp="70.0" kod_adm="22" kol_os="4" name_firm_operator="ТОВ &quot;УТЛ-2&quot;"
+                           name_firm_owner="АО «ПУМБ»" nomer="59501502" pr_sobst="1" rod_vag="95" u_tara="20250" use="0"
+                           ves_tary_arc="23000">
+                        <COLLECT_V kod_etsng="011005" name_etsng="Пшеница" pac="VR" vesg="69500"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758376" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758371" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758378" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758392" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758377" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758391" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758399" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                    </VAGON>
+                    <VAGON gruzp="70.0" kod_adm="22" kol_os="4" name_firm_operator="ТОВ &quot;УТЛ-2&quot;"
+                           name_firm_owner="АО «ПУМБ»" nomer="59501239" pr_sobst="1" rod_vag="95" u_tara="21750" use="0"
+                           ves_tary_arc="23000">
+                        <COLLECT_V kod_etsng="011005" name_etsng="Пшеница" pac="VR" vesg="70000"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758393" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758394" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758395" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758396" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758397" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758398" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                        <ZPU_V esr_zpu="323607" nom_zpu="К758400" sobst_zpu="1" zd_kod="22" zpu="1"/>
+                    </VAGON>
+                </OTPR>
+            </document-data>
+            <signature>
+                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
+            </signature>
+        </uz-rwc-doc>
+        <changes xmlns="uz:rwc:document:accepted:1.11">
+            <delete target="OTPR">
+                <OTPR pr_locom="0"/>
+            </delete>
+            <update target="OTPR">
+                <OTPR date_otpr="15.09.2020 14:45:00" distance_way="700" nom_doc="33230095" nom_plan="903415"
+                      osum="2789200" srok_end="21.09.2020 00:00:00" type_pay="0"/>
+            </update>
+            <update target="OTPR/CLIENT[1]">
+                <CLIENT representative_pib="Ябчанка Андрій Петрович"/>
+            </update>
+            <insert target="OTPR/PL[1]/PAY[1]">
+                <PAY currency="980" kod="001" pr_avt="1" summa="2789200"/>
+            </insert>
+            <delete target="OTPR/ROUTE[1]">
+                <ROUTE zd_nazn="22" zd_otpr="22"/>
+            </delete>
+            <insert target="OTPR/SCHEMA[1]">
+                <SCHEMA carry_sch="2" pr_sch="2"/>
+            </insert>
+            <insert target="OTPR/SENDER_DOC[1]">
+                <SENDER_DOC
+                        description="Декларація про поміщення в режим тимчасового ввезення, № 232816, вiд 04.02.2017"
+                        doc_date="04.02.2017" doc_num="232816" doc_type="610"
+                        doc_type_name="Декларація про поміщення в режим тимчасового ввезення" id="6208592"/>
+            </insert>
+            <insert target="OTPR/TAKS[1]">
+                <TAKS coeff_mode="2" coeff_value="2.4190"/>
+            </insert>
+            <delete target="OTPR/TEXT[1]">
+                <TEXT create_place="Бобровицы"/>
+            </delete>
+            <update target="OTPR/TEXT[1]">
+                <TEXT name_tov="Миць Тетяна Василівна"/>
+            </update>
+            <update target="OTPR/VAGON[1]">
+                <VAGON calc_weight="70000"/>
+            </update>
+            <insert target="OTPR/VAGON[1]/PAY_V[1]">
+                <PAY_V kod="001" summa="1394600"/>
+            </insert>
+            <update target="OTPR/VAGON[2]">
+                <VAGON calc_weight="70000"/>
+            </update>
+            <insert target="OTPR/VAGON[2]/PAY_V[1]">
+                <PAY_V kod="001" summa="1394600"/>
+            </insert>
+        </changes>
+    </document-data>
+    <signature>
+        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
+    </signature>
+</uz-rwc-doc>
