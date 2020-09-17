@@ -1,6 +1,5 @@
 package com.yurets_y.payment_statistic_web.service;
 
-import com.yurets_y.payment_statistic_web.dto.PaymentListDto;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
@@ -36,9 +35,9 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
     private String backupDir;
 
     private PaymentListRepo paymentListRepo;
-
-    public PaymentListServiceRepoImpl() {
-    }
+//
+//    public PaymentListServiceRepoImpl() {
+//    }
 
     @Autowired
     public PaymentListServiceRepoImpl(PaymentListRepo paymentListRepo) {
@@ -193,9 +192,9 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
 
         try {
             File fileFromList = paymentList.getBackupFile();
-            System.out.println("backupdir exists: " + backupFile.getParentFile().exists() + " : " + backupFile.getParentFile().getAbsolutePath());
+//            System.out.println("backupdir exists: " + backupFile.getParentFile().exists() + " : " + backupFile.getParentFile().getAbsolutePath());
             boolean fileCreated = backupFile.createNewFile();
-            System.out.println(fileCreated + ":"+ backupFile.toPath());
+//            System.out.println(fileCreated + ":"+ backupFile.toPath());
 //            if (!fileFromList.exists())
 //                Files.createFile(backupFile.toPath());
 //            System.out.println(backupFile.exists() + ":" + backupFile.toPath());

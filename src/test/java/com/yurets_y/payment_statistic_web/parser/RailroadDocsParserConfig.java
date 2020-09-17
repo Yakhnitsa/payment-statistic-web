@@ -4,12 +4,17 @@ import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocume
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 import java.io.File;
 
 @TestConfiguration
 @ComponentScan(
-        basePackageClasses={RailroadDocumentsParser.class})
+        useDefaultFilters = false,
+        basePackages="com.yurets_y.payment_statistic_web.service.parser_services",
+        includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+            classes = RailroadDocumentsParser.class)
+)
 public class RailroadDocsParserConfig {
 
     @Bean("test-file")

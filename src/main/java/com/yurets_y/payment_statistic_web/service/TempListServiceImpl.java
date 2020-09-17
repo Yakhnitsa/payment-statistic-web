@@ -53,9 +53,6 @@ public class TempListServiceImpl implements TempListService {
             if(list.getNumber() > 0){
                 tempDBMap.put(list.getId(), list);
             }
-
-
-
             return list;
         } catch (IOException e) {
             throw new RuntimeException("Ошибка при сохранении во временную ДБ файла перечня: " + filePath);
@@ -93,7 +90,6 @@ public class TempListServiceImpl implements TempListService {
             throw new RuntimeException("Ошибка создания временного хранилища");
         }
         logger.info("Временное храниличе успешно создано:" + tempDir.toAbsolutePath());
-
     }
 
     @PreDestroy

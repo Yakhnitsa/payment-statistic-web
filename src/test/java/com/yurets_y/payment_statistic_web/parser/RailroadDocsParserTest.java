@@ -73,17 +73,7 @@ public class RailroadDocsParserTest {
         assertTrue(document.getTarifPayer().getRailroadCode() == 8210260);
         assertTrue(document.getTarifDistance() == -1);
         assertTrue(document.getPayment() == -1);
-
-
-
     }
-
-
-
-
-
-
-
 
     @Autowired
     public void setDocumentsParser(RailroadDocumentsParser documentsParser) {

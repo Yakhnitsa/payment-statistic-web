@@ -326,4 +326,22 @@ public class RailroadDocument extends AuditableEntity {
     public void setPdfBackupFile(File pdfBackupFile) {
         this.pdfBackupFile = pdfBackupFile;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RailroadDocument that = (RailroadDocument) o;
+
+        if (!docNumber.equals(that.docNumber)) return false;
+        return dateStamp != null ? dateStamp.equals(that.dateStamp) : that.dateStamp == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = docNumber.hashCode();
+        result = 31 * result + (dateStamp != null ? dateStamp.hashCode() : 0);
+        return result;
+    }
 }

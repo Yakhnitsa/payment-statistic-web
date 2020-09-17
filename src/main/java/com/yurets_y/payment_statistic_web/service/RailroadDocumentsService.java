@@ -13,9 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface RailroadDocumentsService {
-    void add(RailroadDocument paymentList);
 
-    void update(RailroadDocument paymentList);
+    void add(RailroadDocument paymentList);
 
     boolean remove(RailroadDocument paymentList);
 

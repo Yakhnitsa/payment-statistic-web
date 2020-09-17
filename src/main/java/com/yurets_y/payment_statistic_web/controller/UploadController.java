@@ -107,7 +107,7 @@ public class UploadController {
         for(PaymentList list : paymentLists){
             tempListService.deleteFromTempDB(list);
         }
-        return  new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
+        return new ResponseEntity<>(tempListService.getAllFromTempDB(),HttpStatus.OK);
     }
 
 
