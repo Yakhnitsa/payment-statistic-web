@@ -24,7 +24,7 @@ public class Vagon  extends AuditableEntity{
     private int netWeight;
     private int tareWeight;
     private double carryingCapacity;
-    private double payment;
+    private int payment;
 
     @ElementCollection
 //            (fetch=FetchType.EAGER)
@@ -99,11 +99,11 @@ public class Vagon  extends AuditableEntity{
         return String.join(", ",zpuList);
     }
 
-    public double getPayment() {
+    public int getPayment() {
         return payment;
     }
 
-    public void setPayment(double payment) {
+    public void setPayment(int payment) {
         this.payment = payment;
     }
 

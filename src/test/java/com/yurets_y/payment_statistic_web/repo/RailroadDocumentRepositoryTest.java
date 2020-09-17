@@ -2,6 +2,7 @@ package com.yurets_y.payment_statistic_web.repo;
 
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
+import com.yurets_y.payment_statistic_web.entity.Station;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,6 @@ import static org.junit.Assert.assertTrue;
 @DataJpaTest(properties = {
         "spring.flyway.enabled=false"
 })
-//@TestPropertySource(locations="classpath:db_properties/inmemory-db.properties")
 @Import({RailroadRepositoryTestConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
@@ -33,6 +33,9 @@ public class RailroadDocumentRepositoryTest {
 
     @Autowired
     private RailroadDocumentsParser documentParser;
+
+    @Autowired
+    private StationsRepo stationsRepo;
 
     @Resource(name="test-file")
     private File testFile;
@@ -52,14 +55,36 @@ public class RailroadDocumentRepositoryTest {
         RailroadDocument railroadDocument = documentParser.parseFromFile(testFile);
         documentsRepo.save(railroadDocument);
         RailroadDocument document = documentsRepo.findAll().get(0);
-        assertTrue(document.getDocNumber() == 33230095);
-        assertTrue(document.getVagonCount() == 2);
+        assertEquals(33230095, (int) document.getDocNumber());
+        assertEquals(2, document.getVagonCount());
 //        assertTrue(document.getSendStation().getCode() == 323607);
 //        assertTrue(document.getReceiveStation().getCode() == 418101);
-        assertTrue(document.getCargoSender().getEdrpuCode() == 43592481);
-        assertTrue(document.getTarifPayer().getRailroadCode() == 8210260);
-        assertTrue(document.getTarifDistance() == 700);
-        assertTrue(document.getPayment() == 2789200);
+        assertEquals(43592481, (int) document.getCargoSender().getEdrpuCode());
+        assertEquals(8210260, (int) document.getTarifPayer().getRailroadCode());
+        assertEquals(700, document.getTarifDistance());
+        assertEquals(2789200, document.getPayment());
     }
+
+    @Test
+    public void overrideStationWhileSaveTest() throws IOException, ParseException
+    {
+
+        Station station = new Station();
+        station.setCode(418101);
+        station.setRusName("Жовтневая(экспортная)");
+        station.setUkrName("Жовтнева (експортна)");
+
+        stationsRepo.saveAndFlush(station);
+
+        RailroadDocument railroadDocument = documentParser.parseFromFile(testFile);
+        documentsRepo.save(railroadDocument);
+
+        RailroadDocument document = documentsRepo.findAll().get(0);
+        assertEquals("Жовтневая(экспортная)",document.getReceiveStation().getRusName());
+
+
+
+    }
+
 
 }

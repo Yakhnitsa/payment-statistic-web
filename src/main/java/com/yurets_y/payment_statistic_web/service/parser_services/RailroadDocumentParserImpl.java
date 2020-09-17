@@ -94,10 +94,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         railDoc.setColumn15info(column15);
         //Определение тарифного рассотяния
         String tarifDistance = getAttributeValue(jSoupDocument,"distance_way");
-
-        if(tarifDistance.matches("\\d+")){
-            railDoc.setTarifDistance(Integer.parseInt(tarifDistance));
-        }
+        railDoc.setTarifDistance(parseNumber(tarifDistance,"\\d+"));
 
         railDoc.putStamps(getStamps(jSoupDocument));
 
@@ -108,13 +105,13 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
      * Добавление инфы о станциях из документа
      */
     private Station getSendStation(Document jsoupDoc){
-        Integer stationCode = Integer.parseInt(getAttributeValue(jsoupDoc,"stn_from"));
+        Integer stationCode = parseNumber(getAttributeValue(jsoupDoc,"stn_from"),"\\d{4,6}");
         String stationName = getAttributeValue(jsoupDoc,"name_from");
         return new Station(stationCode,stationName);
     }
 
     private Station getReceiveStation(Document jsoupDoc){
-        Integer stationCode = Integer.parseInt(getAttributeValue(jsoupDoc,"stn_to"));
+        Integer stationCode = parseNumber(getAttributeValue(jsoupDoc,"stn_to"),"\\d{4,6}");
         String stationName = getAttributeValue(jsoupDoc,"name_to");
         return new Station(stationCode,stationName);
     }
@@ -160,8 +157,8 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         client.setName(element.attr("name"));
         client.setAddress(element.attr("adress"));
 
-        client.setRailroadCode(Integer.parseInt(element.attr("kod")));
-        client.setEdrpuCode(Integer.parseInt(element.attr("okpo")));
+        client.setRailroadCode(parseNumber(element.attr("kod"),"\\d"));
+        client.setEdrpuCode(parseNumber(element.attr("okpo"),"\\d"));
 
         return client;
     }
@@ -172,7 +169,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
     private Client parseTarifPayer(Elements elements) {
         Client tarifPayer = new Client();
         tarifPayer.setName(elements.attr("name_plat"));
-        tarifPayer.setRailroadCode(Integer.parseInt(elements.attr("kod_plat")));
+        tarifPayer.setRailroadCode(parseNumber(elements.attr("kod_plat"),"\\d"));
         return tarifPayer;
     }
 
@@ -199,18 +196,10 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
             int netWeight = 0;
             int tareWeight = 0;
             try {
-                String string_netWeight = element.getElementsByAttribute("vesg").attr("vesg");
-                if(string_netWeight.matches("\\d+")){
-                    netWeight = Integer.parseInt(string_netWeight);
-                }
-                String tareWeightString = element.getElementsByAttribute("ves_tary_arc").attr("u_tara");
-                if(tareWeightString.matches("\\d+")){
-                    tareWeight = Integer.parseInt(tareWeightString);
-                }else{
-                    String stringTareWeight = element.getElementsByAttribute("ves_tary_arc").attr("ves_tary_arc");
-                    if(stringTareWeight.matches("\\d+")){
-                        tareWeight = Integer.parseInt(stringTareWeight);
-                    }
+                netWeight = parseNumber(element.getElementsByAttribute("vesg").attr("vesg"),"\\d+");
+                tareWeight = parseNumber(element.getElementsByAttribute("ves_tary_arc").attr("u_tara"),"\\d+");
+                if(tareWeight == -1){
+                    tareWeight = parseNumber(element.getElementsByAttribute("ves_tary_arc").attr("ves_tary_arc"),"\\d+");
                 }
 
             } catch (NumberFormatException e) {
@@ -341,20 +330,12 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
                 Elements elements = jSoupDoc.getElementsByAttributeValue(atributeKey,value);
                 if(elements.first() != null){
                     paymentStr = elements.first().getElementsByAttribute("summa").attr("summa");
-
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
             if(paymentStr != null){
-                try{
-                    Double payment = (double)Integer.parseInt(paymentStr)/100;
-                    vagon.setPayment(payment);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
+                vagon.setPayment(parseNumber(paymentStr,"\\d+"));
             }
         }
     }
@@ -391,6 +372,9 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 
     private String getAttributeValue(Document jSoupDocument, String attribute){
         return jSoupDocument.getElementsByAttribute(attribute).attr(attribute);
+    }
+    private int parseNumber(String numbString, String testPattern){
+        return numbString.matches(testPattern) ? Integer.parseInt(numbString) : -1;
     }
 
 }
