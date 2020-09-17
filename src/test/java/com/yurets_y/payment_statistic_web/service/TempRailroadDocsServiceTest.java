@@ -10,9 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -33,7 +38,30 @@ public class TempRailroadDocsServiceTest {
     public void resourceIntegrationTest(){
         assertNotNull(tempDocService);
         assertTrue(testDirectory.exists());
+        assertTrue(testDirectory.isDirectory());
     }
+
+    @Test
+    public void saveToTempDbTest() throws IOException {
+        File[] files = testDirectory.listFiles();
+
+        for(File file: files){
+            
+            if(!file.isFile()) continue;
+            byte[] content = Files.readAllBytes(file.toPath());
+            MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);
+
+            tempDocService.putToTempDB(multipartFile);
+        }
+
+        int count = tempDocService.getAllFromTempDB().size();
+//        TODO выполнить логику проверки файлов
+    }
+
+
+
+
+
 }
 
 

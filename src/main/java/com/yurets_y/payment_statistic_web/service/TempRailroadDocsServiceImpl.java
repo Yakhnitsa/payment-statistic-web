@@ -81,6 +81,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         RailroadDocument document = null;
         try {
             document = documentsParser.parseFromFile(file);
+            document.setXmlBackupFile(file);
         } catch (ParseException | IOException e) {
             e.printStackTrace();
             return null;
@@ -92,12 +93,13 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         while (it.hasNext()) {
             File pdfFile = it.next();
             if(pdfFile.getName().contains(String.valueOf(docNumb)) && docNumb != -1){
-                document.setPdfBackupFile(file);
+                document.setPdfBackupFile(pdfFile);
                 it.remove();
-                return document;
+                break;
             }
 
         }
+        documentMap.put(docNumb,document);
         return document;
     }
 
