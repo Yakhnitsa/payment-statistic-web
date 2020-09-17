@@ -47,11 +47,12 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
      */
     private RailroadDocument parseDocument(Document jSoupDocument) throws ParseException {
 
-        String docNumb = getAttributeValue(jSoupDocument,"nom_doc");
-        if(!docNumb.matches("\\d{8}"))throw new RuntimeException("Ошибка парсинга номера накладной");
+//        String docNumb = getAttributeValue(jSoupDocument,"nom_doc");
+//        if(!docNumb.matches("\\d{8}"))throw new RuntimeException("Ошибка парсинга номера накладной");
         Date docDate = getDateFromString(getAttributeValue(jSoupDocument,"date_otpr"));
+        int docNumb = parseNumber(getAttributeValue(jSoupDocument,"nom_doc"),"\\d{8}");
 
-        RailroadDocument railDoc = new RailroadDocument(Integer.parseInt(docNumb),docDate);
+        RailroadDocument railDoc = new RailroadDocument(docNumb,docDate);
 
         Date deliveryDate = getDateFromString(getAttributeValue(jSoupDocument,"date_grpol"));
         railDoc.setDelDate(deliveryDate);
@@ -85,7 +86,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 
         //Определение платы по документу
         String payment = jSoupDocument.getElementsByAttributeValue("type_pay", "0").attr("osum");
-        railDoc.setPayment(payment);
+        railDoc.setPayment(parseNumber(payment,"\\d+"));
 
         //Определение информации 7 и 15 графы
         String column7 = getAttributeValue(jSoupDocument,"zayava");
@@ -157,8 +158,8 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         client.setName(element.attr("name"));
         client.setAddress(element.attr("adress"));
 
-        client.setRailroadCode(parseNumber(element.attr("kod"),"\\d"));
-        client.setEdrpuCode(parseNumber(element.attr("okpo"),"\\d"));
+        client.setRailroadCode(parseNumber(element.attr("kod"),"\\d+"));
+        client.setEdrpuCode(parseNumber(element.attr("okpo"),"\\d+"));
 
         return client;
     }
@@ -169,7 +170,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
     private Client parseTarifPayer(Elements elements) {
         Client tarifPayer = new Client();
         tarifPayer.setName(elements.attr("name_plat"));
-        tarifPayer.setRailroadCode(parseNumber(elements.attr("kod_plat"),"\\d"));
+        tarifPayer.setRailroadCode(parseNumber(elements.attr("kod_plat"),"\\d+"));
         return tarifPayer;
     }
 

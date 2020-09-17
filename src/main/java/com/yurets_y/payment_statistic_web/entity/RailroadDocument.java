@@ -236,13 +236,6 @@ public class RailroadDocument extends AuditableEntity {
         this.payment = payment;
     }
 
-    public void setPayment(String paymentString) {
-        try {
-            this.payment = Integer.parseInt(paymentString);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-    }
 
     public String getColumn7info() {
         return column7info;

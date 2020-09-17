@@ -16,6 +16,10 @@ public class RailroadDocsParserConfig {
     File testFile(){
         return new File("src/test/resources/test_files/railroad-documents/33230095.xml");
     }
+    @Bean("corrupted-test-file")
+    File corruptedTestFile(){
+        return new File("src/test/resources/test_files/railroad-documents/corrupted/33248824.xml");
+    }
 //
 //    @Bean
 //    RailroadDocumentsParser getDocParser(){

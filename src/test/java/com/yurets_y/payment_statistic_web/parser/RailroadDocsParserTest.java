@@ -32,10 +32,14 @@ public class RailroadDocsParserTest {
     @Resource(name="test-file")
     private File testXmlFile;
 
+    @Resource(name="corrupted-test-file")
+    private File corruptedTestFile;
+
     @Test
     public void resourceIntegrationTest(){
         assertNotNull(documentsParser);
         assertTrue(testXmlFile.exists());
+        assertTrue(corruptedTestFile.exists());
     }
     @Test
     public void parseDocumentTest() throws IOException, ParseException {
@@ -53,6 +57,24 @@ public class RailroadDocsParserTest {
         Date date = dateFormat.parse("15.09.2020 14:45:00");
 
         assertEquals(document.getDateStamp(),date);
+
+    }
+
+    @Test
+    public void parserCorruptedFileTest() throws IOException, ParseException {
+        RailroadDocument document = documentsParser.parseFromFile(corruptedTestFile);
+        assertTrue(document.getDocNumber() == -1);
+        assertTrue(document.getDateStamp()== null);
+        assertTrue(document.getVagonCount() == 15);
+        assertTrue(document.getSendStation().getCode() == 325104);
+        assertTrue(document.getReceiveStation().getCode() == 418101);
+        assertTrue(document.getCargoSender().getEdrpuCode() == 43592481);
+        assertTrue(document.getCargoReceiver().getEdrpuCode() == 41730338);
+        assertTrue(document.getTarifPayer().getRailroadCode() == 8210260);
+        assertTrue(document.getTarifDistance() == -1);
+        assertTrue(document.getPayment() == -1);
+
+
 
     }
 
