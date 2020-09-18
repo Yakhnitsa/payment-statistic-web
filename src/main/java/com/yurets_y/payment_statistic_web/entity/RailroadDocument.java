@@ -55,9 +55,15 @@ public class RailroadDocument extends AuditableEntity {
             orphanRemoval = true)
     private Client tarifPayer;
 
+    @Transient
     private File xmlBackupFile;
 
+    private String xmlBackupFilePath;
+
+    @Transient
     private File pdfBackupFile;
+
+    private String pdfBackupFilePath;
 
 //    private List<Carrier> carriers = new ArrayList<>();
 
@@ -343,5 +349,21 @@ public class RailroadDocument extends AuditableEntity {
         int result = docNumber.hashCode();
         result = 31 * result + (dateStamp != null ? dateStamp.hashCode() : 0);
         return result;
+    }
+
+    public String getXmlBackupFilePath() {
+        return xmlBackupFilePath;
+    }
+
+    public void setXmlBackupFilePath(String xmlBackupFilePath) {
+        this.xmlBackupFilePath = xmlBackupFilePath;
+    }
+
+    public String getPdfBackupFilePath() {
+        return pdfBackupFilePath;
+    }
+
+    public void setPdfBackupFilePath(String pdfBackupFilePath) {
+        this.pdfBackupFilePath = pdfBackupFilePath;
     }
 }

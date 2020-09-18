@@ -22,12 +22,17 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public List<Station> getStationByIdOrCode(String str) {
-        return null;
+        int stationCode = 0;
+        if(str.matches("\\d+")){
+            stationCode = Integer.parseInt(str);
+        }
+        return stationsRepo
+                .findByCodeOrRusNameContainsIgnoreCaseOrUkrNameContainsIgnoreCase(stationCode,str,str);
     }
 
     @Override
     public Station getByStationCode(Integer stationCode) {
-        return stationsRepo.findById(stationCode).orElseThrow(() -> new RuntimeException("Station is not found"));
+        return stationsRepo.findById(stationCode).orElse(null);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Station updateStation(Station station) {
+    public Station addStation(Station station) {
         return stationsRepo.saveAndFlush(station);
     }
 }

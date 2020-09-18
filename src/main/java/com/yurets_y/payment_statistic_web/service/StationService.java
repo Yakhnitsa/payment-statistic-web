@@ -12,6 +12,6 @@ public interface StationService {
 
     List<Station> getAllStations();
 
-    Station updateStation(Station station);
+    Station addStation(Station station);
 
 }

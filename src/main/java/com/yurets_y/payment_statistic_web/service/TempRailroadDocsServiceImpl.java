@@ -21,7 +21,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
 
     private static Logger logger = LoggerFactory.getLogger(TempRailroadDocsServiceImpl.class);
 
-    private Map<Integer,RailroadDocument> documentMap = new HashMap<>();
+    private List<RailroadDocument> documents = new LinkedList<>();
 
     private Set<File> pdfFiles = new HashSet<>();
 
@@ -48,23 +48,59 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
     }
 
     @Override
-    public RailroadDocument deleteFromTempDB(RailroadDocument railroadDocument) {
-        return documentMap.remove(railroadDocument.getDocNumber());
+    public RailroadDocument getFromTempDb(RailroadDocument railroadDocument){
+        if(isDocCorrect(railroadDocument)){
+            return documents.stream()
+                    .filter(doc -> doc.equals(railroadDocument)
+                    ).findFirst().orElse(null);
+        }
+        return null;
     }
+
+    @Override
+    public RailroadDocument deleteFromTempDB(RailroadDocument railroadDocument) {
+        if(isDocCorrect(railroadDocument)){
+            RailroadDocument document = documents.stream()
+                    .filter(doc -> doc.equals(railroadDocument)
+            ).findFirst().orElse(null);
+            if(document != null) documents.remove(document);
+            return document;
+        } else{
+            Iterator<RailroadDocument> docIterator = documents.iterator();
+            while (docIterator.hasNext()){
+                RailroadDocument doc = docIterator.next();
+                if (doc.getXmlBackupFile().getName().equals(railroadDocument.getXmlBackupFile().getName())) {
+                    docIterator.remove();
+                    return doc;
+                }
+            }
+        }
+        return null;
+
+    }
+
+    @Override
     public RailroadDocument fixCorruptedDocumentInTempDb(RailroadDocument railroadDocument){
-        return railroadDocument;
+        RailroadDocument document = deleteFromTempDB(railroadDocument);
+        document.setDocNumber(railroadDocument.getDocNumber());
+        document.setDateStamp(railroadDocument.getDateStamp());
+        document.setPdfBackupFile(findPdfFileForDoc(document));
+
+        documents.add(railroadDocument);
+
+        return document;
     }
 
     @Override
     public Collection<RailroadDocument> getAllFromTempDB() {
-        return documentMap.values();
+        return documents;
     }
 
     private RailroadDocument putPdfToTempDb(File file){
-        for(Map.Entry<Integer,RailroadDocument> docEntity : documentMap.entrySet()){
-            if(file.getName().contains(docEntity.getKey().toString())){
-                docEntity.getValue().setPdfBackupFile(file);
-                return docEntity.getValue();
+        for(RailroadDocument document : documents){
+            if(isDocCorrect(document) && file.getName().contains(document.getDocNumber().toString())){
+                document.setPdfBackupFile(file);
+                return document;
             }
         }
         pdfFiles.add(file);
@@ -72,7 +108,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
     }
 
     private RailroadDocument putXmlToTempDb(File file){
-        RailroadDocument document = null;
+        RailroadDocument document;
         try {
             document = documentsParser.parseFromFile(file);
             document.setXmlBackupFile(file);
@@ -81,20 +117,23 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
             return null;
         }
 
-        int docNumb = document.getDocNumber();
-        Iterator<File> it = pdfFiles.iterator();
+        File pdfFile = findPdfFileForDoc(document);
+        document.setPdfBackupFile(pdfFile);
 
+        documents.add(document);
+        return document;
+    }
+
+    private File findPdfFileForDoc(RailroadDocument document){
+        Iterator<File> it = pdfFiles.iterator();
         while (it.hasNext()) {
             File pdfFile = it.next();
-            if(pdfFile.getName().contains(String.valueOf(docNumb)) && docNumb != -1){
-                document.setPdfBackupFile(pdfFile);
-                it.remove();
-                break;
+            if(isDocCorrect(document) && pdfFile.getName().contains(String.valueOf(document.getDocNumber()))){
+               it.remove();
+               return pdfFile;
             }
-
         }
-        documentMap.put(docNumb,document);
-        return document;
+        return null;
     }
 
     @PostConstruct
@@ -139,6 +178,10 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         } catch (IOException e) {
             throw new RuntimeException("Ошибка при сохранении во временную ДБ файла ЖД накладной " + filePath);
         }
+    }
+
+    private boolean isDocCorrect(RailroadDocument railroadDocument){
+        return (railroadDocument.getDocNumber() != -1) && (railroadDocument.getDateStamp() != null);
     }
 
 }

@@ -193,7 +193,7 @@ public class PaymentListServiceRepoImpl implements PaymentListService {
         try {
             File fileFromList = paymentList.getBackupFile();
 //            System.out.println("backupdir exists: " + backupFile.getParentFile().exists() + " : " + backupFile.getParentFile().getAbsolutePath());
-            boolean fileCreated = backupFile.createNewFile();
+//            boolean fileCreated = backupFile.createNewFile();
 //            System.out.println(fileCreated + ":"+ backupFile.toPath());
 //            if (!fileFromList.exists())
 //                Files.createFile(backupFile.toPath());

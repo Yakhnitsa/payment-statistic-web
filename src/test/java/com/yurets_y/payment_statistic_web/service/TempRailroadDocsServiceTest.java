@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.service;
 
+import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.parser.RailroadDocsParserConfig;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
 import org.junit.Test;
@@ -14,10 +15,14 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -31,8 +36,11 @@ public class TempRailroadDocsServiceTest {
     @Autowired
     private TempRailroadDocsService tempDocService;
 
-    @Autowired
+    @Resource(name="valid-files-directory")
     private File testDirectory;
+
+    @Resource(name="corrupted-files-directory")
+    private File corruptedFilesTestDirectory;
 
     @Test
     public void resourceIntegrationTest(){
@@ -58,10 +66,62 @@ public class TempRailroadDocsServiceTest {
 //        TODO выполнить логику проверки файлов
     }
 
+    @Test
+    public void saveCorruptedFilesToTempDbTest() throws IOException {
+        File[] files = corruptedFilesTestDirectory.listFiles();
 
+        for(File file: files){
 
+            if(!file.isFile()) continue;
+            byte[] content = Files.readAllBytes(file.toPath());
+            MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);
 
+            tempDocService.putToTempDB(multipartFile);
+        }
 
+        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
+        int count = documents.size();
+        int corruptedFilesCount = (int)documents.stream()
+                .filter(doc -> doc.getDocNumber() == -1)
+                .count();
+
+        assertTrue(count==7);
+        assertTrue(corruptedFilesCount==1);
+
+    }
+
+    @Test
+    public void fixCorruptedFileTest() throws IOException {
+        File[] files = corruptedFilesTestDirectory.listFiles();
+
+        for(File file: files){
+
+            if(!file.isFile()) continue;
+            byte[] content = Files.readAllBytes(file.toPath());
+            MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);
+
+            tempDocService.putToTempDB(multipartFile);
+        }
+
+        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
+        RailroadDocument corruptedDoc = documents.stream()
+                .filter(doc -> doc.getDocNumber() == -1)
+                .findFirst().get();
+
+        corruptedDoc.setDocNumber(33248824);
+        corruptedDoc.setDateStamp(new Date());
+
+        tempDocService.fixCorruptedDocumentInTempDb(corruptedDoc);
+
+        int count = documents.size();
+        int corruptedFilesCount = (int)documents.stream()
+                .filter(doc -> doc.getDocNumber() == -1)
+                .count();
+
+        assertTrue(count==7);
+        assertTrue(corruptedFilesCount==0);
+
+    }
 }
 
 
@@ -78,9 +138,14 @@ public class TempRailroadDocsServiceTest {
 )
 class TempRailroadDocsServiceTestConfig{
 
-    @Bean("backup-files-directory")
-    public File backupFileDirectory(){
+    @Bean("valid-files-directory")
+    public File validTestfilesDirectory(){
         return new File("src/test/resources/test_files/railroad-documents/correct");
+    }
+
+    @Bean("corrupted-files-directory")
+    public File corruptedFilesDirectory(){
+        return new File("src/test/resources/test_files/railroad-documents/corrupted");
     }
 }
 

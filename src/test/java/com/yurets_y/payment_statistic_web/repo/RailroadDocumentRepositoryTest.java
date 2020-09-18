@@ -51,8 +51,9 @@ public class RailroadDocumentRepositoryTest {
     }
 
     @Test
-    public void readToDbTest() throws IOException, ParseException {
+    public void writeToDbTest() throws IOException, ParseException {
         RailroadDocument railroadDocument = documentParser.parseFromFile(testFile);
+        railroadDocument.setXmlBackupFile(testFile);
         documentsRepo.save(railroadDocument);
         RailroadDocument document = documentsRepo.findAll().get(0);
         assertEquals(33230095, (int) document.getDocNumber());
