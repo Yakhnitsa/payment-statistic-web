@@ -46,7 +46,7 @@ public class TempRailroadDocsServiceTest {
         File[] files = testDirectory.listFiles();
 
         for(File file: files){
-            
+
             if(!file.isFile()) continue;
             byte[] content = Files.readAllBytes(file.toPath());
             MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);

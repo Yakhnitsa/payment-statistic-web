@@ -37,17 +37,8 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
     @Override
     public RailroadDocument putToTempDB(MultipartFile multipartFile) {
 
-        File file = null;
+        File file = putMultipartToTempDir(multipartFile);
 
-        String filePath = tempDir.toAbsolutePath().toString() + File.separator + multipartFile.getOriginalFilename();
-        try {
-            file = Paths.get(filePath).toFile();
-            Files.deleteIfExists(file.toPath());
-            file = Files.createFile(Paths.get(filePath)).toFile();
-            multipartFile.transferTo(file);
-        } catch (IOException e) {
-            throw new RuntimeException("Ошибка при сохранении во временную ДБ файла ЖД накладной " + filePath);
-        }
         if(file.getName().endsWith(".pdf")){
             return putPdfToTempDb(file);
         } else if(file.getName().endsWith(".xml")){
@@ -59,6 +50,9 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
     @Override
     public RailroadDocument deleteFromTempDB(RailroadDocument railroadDocument) {
         return documentMap.remove(railroadDocument.getDocNumber());
+    }
+    public RailroadDocument fixCorruptedDocumentInTempDb(RailroadDocument railroadDocument){
+        return railroadDocument;
     }
 
     @Override
@@ -132,6 +126,19 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
             }
         }
         Files.delete(path);
+    }
+
+    private File putMultipartToTempDir(MultipartFile multipartFile){
+        String filePath = tempDir.toAbsolutePath().toString() + File.separator + multipartFile.getOriginalFilename();
+        try {
+            File file = Paths.get(filePath).toFile();
+            Files.deleteIfExists(file.toPath());
+            file = Files.createFile(Paths.get(filePath)).toFile();
+            multipartFile.transferTo(file);
+            return file;
+        } catch (IOException e) {
+            throw new RuntimeException("Ошибка при сохранении во временную ДБ файла ЖД накладной " + filePath);
+        }
     }
 
 }
