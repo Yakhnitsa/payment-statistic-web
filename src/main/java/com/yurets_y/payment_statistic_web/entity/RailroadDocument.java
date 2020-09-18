@@ -2,6 +2,7 @@ package com.yurets_y.payment_statistic_web.entity;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.File;
@@ -18,6 +19,7 @@ public class RailroadDocument extends AuditableEntity {
     @Id
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateStamp;
 
     @Temporal(TemporalType.TIMESTAMP)

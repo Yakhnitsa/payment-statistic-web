@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+@Service
 public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
 
     private StationServiceImpl stationService;
@@ -29,7 +31,8 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         this.documentsRepo = documentsRepo;
     }
 
-    @Value("#{${service.backup-path} + systemProperties.line.separator + 'rail_docs'}")
+//    @Value("#{${service.backup-path} + systemProperties.line.separator + 'rail_docs'}")
+    @Value("${service.backup-path}")
     private String backupDir;
 
     @Override
@@ -47,14 +50,14 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         rDoc.setPdfBackupFilePath(pdfBackup);
 
         String xmlBackup = saveBackupFile(rDoc,rDoc.getXmlBackupFile());
-        rDoc.setPdfBackupFilePath(xmlBackup);
+        rDoc.setXmlBackupFilePath(xmlBackup);
 
         documentsRepo.save(rDoc);
     }
 
     @Override
     public void remove(RailroadDocument rDoc) {
-
+//TODO Исправить, должны быть пути хранения а не сами файлы
         removeBackupFile(rDoc.getXmlBackupFile());
         removeBackupFile(rDoc.getPdfBackupFile());
         documentsRepo.delete(rDoc);
@@ -62,12 +65,12 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
 
     @Override
     public RailroadDocument getById(RailroadDocumentId id) {
-        return null;
+        return documentsRepo.getOne(id);
     }
 
     @Override
     public Page<RailroadDocument> getAll(Pageable pageable) {
-        return null;
+        return documentsRepo.findAll(pageable);
     }
 
     @Override
@@ -86,6 +89,7 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
     }
 
     private String saveBackupFile(RailroadDocument document, File file){
+        if(file == null) return null;
         String fileExtension = file.getName();
         fileExtension = fileExtension.substring(fileExtension.lastIndexOf("."));
         String fileName = String.format(

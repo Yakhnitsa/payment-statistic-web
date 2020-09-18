@@ -36,9 +36,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
 
     @Override
     public RailroadDocument putToTempDB(MultipartFile multipartFile) {
-
         File file = putMultipartToTempDir(multipartFile);
-
         if(file.getName().endsWith(".pdf")){
             return putPdfToTempDb(file);
         } else if(file.getName().endsWith(".xml")){

@@ -7,6 +7,14 @@ public class RailroadDocumentId implements Serializable {
     private int docNumber;
     private Date dateStamp;
 
+    public RailroadDocumentId() {
+    }
+
+    public RailroadDocumentId(int docNumber, Date dateStamp) {
+        this.docNumber = docNumber;
+        this.dateStamp = dateStamp;
+    }
+
     public int getDocNumber() {
         return docNumber;
     }

@@ -92,14 +92,12 @@ public class TempRailroadDocsServiceTest {
 
     @Test
     public void fixCorruptedFileTest() throws IOException {
+//        TODO очистить хранилище после предыдущих тестов
         File[] files = corruptedFilesTestDirectory.listFiles();
-
         for(File file: files){
-
             if(!file.isFile()) continue;
             byte[] content = Files.readAllBytes(file.toPath());
             MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);
-
             tempDocService.putToTempDB(multipartFile);
         }
 
