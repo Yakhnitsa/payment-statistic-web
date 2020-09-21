@@ -21,7 +21,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
 
     private static Logger logger = LoggerFactory.getLogger(TempRailroadDocsServiceImpl.class);
 
-    private List<RailroadDocument> documents = new LinkedList<>();
+    private Map<String,RailroadDocument> documents = new HashMap<>();
 
     private Set<File> pdfFiles = new HashSet<>();
 
@@ -47,33 +47,12 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
 
     @Override
     public RailroadDocument getFromTempDb(RailroadDocument railroadDocument){
-        if(isDocCorrect(railroadDocument)){
-            return documents.stream()
-                    .filter(doc -> doc.equals(railroadDocument)
-                    ).findFirst().orElse(null);
-        }
-        return null;
+        return documents.get(railroadDocument.getXmlBackupFile().getName());
     }
 
     @Override
     public RailroadDocument deleteFromTempDB(RailroadDocument railroadDocument) {
-        if(isDocCorrect(railroadDocument)){
-            RailroadDocument document = documents.stream()
-                    .filter(doc -> doc.equals(railroadDocument)
-            ).findFirst().orElse(null);
-            if(document != null) documents.remove(document);
-            return document;
-        } else{
-            Iterator<RailroadDocument> docIterator = documents.iterator();
-            while (docIterator.hasNext()){
-                RailroadDocument doc = docIterator.next();
-                if (doc.getXmlBackupFile().getName().equals(railroadDocument.getXmlBackupFile().getName())) {
-                    docIterator.remove();
-                    return doc;
-                }
-            }
-        }
-        return null;
+        return documents.remove(railroadDocument.getXmlBackupFile().getName());
 
     }
 
@@ -84,18 +63,16 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         document.setDateStamp(railroadDocument.getDateStamp());
         document.setPdfBackupFile(findPdfFileForDoc(document));
 
-        documents.add(railroadDocument);
-
-        return document;
+        return documents.put(railroadDocument.getXmlBackupFile().getName(),railroadDocument);
     }
 
     @Override
     public Collection<RailroadDocument> getAllFromTempDB() {
-        return documents;
+        return new LinkedList<RailroadDocument>(documents.values());
     }
 
     private RailroadDocument putPdfToTempDb(File file){
-        for(RailroadDocument document : documents){
+        for(RailroadDocument document : documents.values()){
             if(isDocCorrect(document) && file.getName().contains(document.getDocNumber().toString())){
                 document.setPdfBackupFile(file);
                 return document;
@@ -118,7 +95,7 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         File pdfFile = findPdfFileForDoc(document);
         document.setPdfBackupFile(pdfFile);
 
-        documents.add(document);
+        documents.put(document.getXmlBackupFile().getName(),document);
         return document;
     }
 

@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.service;
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.parser.RailroadDocsParserConfig;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +59,23 @@ public class TempRailroadDocsServiceTest {
             if(!file.isFile()) continue;
             byte[] content = Files.readAllBytes(file.toPath());
             MultipartFile multipartFile = new MockMultipartFile(file.getName(),file.getName(),"",content);
-
             tempDocService.putToTempDB(multipartFile);
         }
 
-        int count = tempDocService.getAllFromTempDB().size();
-//        TODO выполнить логику проверки файлов
+        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
+
+        assertEquals(documents.size(),16);
+
+        documents.forEach( document ->{
+            assertTrue(document.getDocNumber() != -1);
+            assertNotNull(document.getDateStamp());
+            assertNotNull(document.getSendStation());
+            assertNotNull(document.getReceiveStation());
+            assertNotNull(document.getXmlBackupFile());
+            assertNotNull(document.getPdfBackupFile());
+                }
+        );
+
     }
 
     @Test
@@ -92,7 +104,6 @@ public class TempRailroadDocsServiceTest {
 
     @Test
     public void fixCorruptedFileTest() throws IOException {
-//        TODO очистить хранилище после предыдущих тестов
         File[] files = corruptedFilesTestDirectory.listFiles();
         for(File file: files){
             if(!file.isFile()) continue;
@@ -120,6 +131,14 @@ public class TempRailroadDocsServiceTest {
         assertTrue(corruptedFilesCount==0);
 
     }
+    @Before
+    public void cleanTestDb(){
+        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
+        System.out.println(documents.size());
+        documents.forEach(document -> tempDocService.deleteFromTempDB(document));
+        System.out.println(tempDocService.getAllFromTempDB().size());
+    }
+
 }
 
 
