@@ -1,8 +1,8 @@
 package com.yurets_y.payment_statistic_web.service;
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
-import com.yurets_y.payment_statistic_web.parser.RailroadDocsParserConfig;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
+import com.yurets_y.payment_statistic_web.service.railroad_documents_services.TempRailroadDocsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,17 +13,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,6 +31,7 @@ import static org.junit.Assert.assertTrue;
 
 @Import({TempRailroadDocsServiceTestConfig.class})
 @RunWith(SpringRunner.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TempRailroadDocsServiceTest {
 
     @Autowired
@@ -131,13 +131,13 @@ public class TempRailroadDocsServiceTest {
         assertTrue(corruptedFilesCount==0);
 
     }
-    @Before
-    public void cleanTestDb(){
-        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
-        System.out.println(documents.size());
-        documents.forEach(document -> tempDocService.deleteFromTempDB(document));
-        System.out.println(tempDocService.getAllFromTempDB().size());
-    }
+//    @Before
+//    public void cleanTestDb(){
+//        Collection<RailroadDocument> documents = tempDocService.getAllFromTempDB();
+//        System.out.println(documents.size());
+//        documents.forEach(document -> tempDocService.deleteFromTempDB(document));
+//        System.out.println(tempDocService.getAllFromTempDB().size());
+//    }
 
 }
 

@@ -1,9 +1,10 @@
-package com.yurets_y.payment_statistic_web.service;
+package com.yurets_y.payment_statistic_web.service.railroad_documents_services;
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.entity.RailroadDocumentId;
 import com.yurets_y.payment_statistic_web.entity.Station;
 import com.yurets_y.payment_statistic_web.repo.RailroadDocumentsRepo;
+import com.yurets_y.payment_statistic_web.service.StationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -32,11 +33,14 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
     }
 
 //    @Value("#{${service.backup-path} + systemProperties.line.separator + 'rail_docs'}")
-    @Value("${service.backup-path}")
+    @Value("${service.backup-path}" + "/rail_docs")
     private String backupDir;
 
     @Override
     public void add(RailroadDocument rDoc) {
+
+        if(!isValid(rDoc)) throw new RuntimeException("Попытка сохранить документ неверного формата " + rDoc);
+
         Station sendStation = stationService.getByStationCode(rDoc.getSendStation().getCode());
         if(sendStation == null){
             stationService.addStation(rDoc.getSendStation());
@@ -57,11 +61,11 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
 
     @Override
     public void remove(RailroadDocument rDoc) {
-//TODO Исправить, должны быть пути хранения а не сами файлы
-        removeBackupFile(rDoc.getXmlBackupFile());
-        removeBackupFile(rDoc.getPdfBackupFile());
+        removeBackupFiles(rDoc);
         documentsRepo.delete(rDoc);
     }
+
+
 
     @Override
     public RailroadDocument getById(RailroadDocumentId id) {
@@ -75,7 +79,7 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
 
     @Override
     public boolean contains(RailroadDocument rDoc) {
-        return false;
+        return documentsRepo.existsById(new RailroadDocumentId(rDoc.getDocNumber(),rDoc.getDateStamp()));
     }
 
     @Override
@@ -110,11 +114,27 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         return fileName;
     }
 
-    private File savePdfBackupFile(RailroadDocument railroadDocument){
-        return null;
+    private void removeBackupFiles(RailroadDocument rDoc) {
+        File xmlBackup = new File(backupDir + File.separator + rDoc.getXmlBackupFilePath());
+        File pdfBackup = new File(backupDir + File.separator + rDoc.getPdfBackupFilePath());
+        if(xmlBackup.exists()){
+            try {
+                Files.deleteIfExists(xmlBackup.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка удаления файла " + xmlBackup);
+            }
+        }
+
+        if(pdfBackup.exists()){
+            try {
+                Files.deleteIfExists(pdfBackup.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException("Ошибка удаления файла " + xmlBackup);
+            }
+        }
     }
 
-    private void removeBackupFile(File file){
-
+    private boolean isValid(RailroadDocument railroadDocument){
+        return railroadDocument.getDocNumber() != -1 && railroadDocument.getDateStamp() != null;
     }
 }
