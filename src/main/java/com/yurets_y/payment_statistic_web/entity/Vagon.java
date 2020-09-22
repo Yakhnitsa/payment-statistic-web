@@ -19,7 +19,7 @@ public class Vagon  extends AuditableEntity{
     })
     private RailroadDocument railroadDocument;
 
-    private String number;
+    private int number;
     private int grossWeight;
     private int netWeight;
     private int tareWeight;
@@ -33,7 +33,7 @@ public class Vagon  extends AuditableEntity{
     public Vagon() {
     }
 
-    public Vagon(String number, int netWeight, int tareWeight) {
+    public Vagon(int number, int netWeight, int tareWeight) {
         zpuList = new ArrayList<>();
         this.number = number;
         this.netWeight = netWeight;
@@ -65,11 +65,11 @@ public class Vagon  extends AuditableEntity{
         this.netWeight = netWeight;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 

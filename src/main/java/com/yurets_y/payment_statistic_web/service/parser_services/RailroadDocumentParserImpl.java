@@ -22,6 +22,8 @@ import java.util.*;
 @Service("doc-parser-service")
 public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 
+    private final String VAGON_NUMB_PATTERN="\\d{7,8}";
+
     /*
      * Парсинг жд документа из файла
      */
@@ -193,7 +195,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
 
         Elements elements = docBody.getElementsByTag("VAGON");
         for (Element element : elements) {
-            String number = element.getElementsByAttribute("nomer").attr("nomer");
+            int number = parseNumber(element.getElementsByAttribute("nomer").attr("nomer"),VAGON_NUMB_PATTERN);
             int netWeight = 0;
             int tareWeight = 0;
             try {
@@ -206,7 +208,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-            if((number==null)||(number.equals(""))){
+            if(number== -1){
                 continue;
             }
 
@@ -279,7 +281,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
         String valueFormat = "OTPR/VAGON[%1$d]";
         for(int i = vagonCount; i >0 ;i--){
             Vagon vagon = railDoc.getVagonList().get(i-1);
-            String vagNumb = null;
+            int vagNumb = -1;
             String UpdateUTara = null;
             String tagname = "";
             try {
@@ -287,7 +289,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
                 Elements elements = jSoupDoc.getElementsByAttributeValue(attributeKey,value);
                 if(elements.first() != null){
                     tagname = elements.first().tagName();
-                    vagNumb = elements.first().getElementsByAttribute("nomer").attr("nomer");
+                    vagNumb = parseNumber(elements.first().getElementsByAttribute("nomer").attr("nomer"),VAGON_NUMB_PATTERN);
                     UpdateUTara = elements.first().getElementsByAttribute("u_tara").attr("u_tara");
                 }
 
@@ -298,7 +300,7 @@ public class RailroadDocumentParserImpl implements RailroadDocumentsParser {
                 railDoc.getVagonList().remove(i-1);
                 continue;
             }
-            if((vagNumb != null)&&(!vagNumb.equals(""))){
+            if(vagNumb != -1){
                 try{
                     vagon.setNumber(vagNumb);
                 }catch (Exception e){

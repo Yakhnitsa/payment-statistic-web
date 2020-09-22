@@ -2,6 +2,7 @@ package com.yurets_y.payment_statistic_web.parser;
 
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
+import com.yurets_y.payment_statistic_web.entity.Vagon;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -52,6 +54,10 @@ public class RailroadDocsParserTest {
         assertTrue(document.getTarifPayer().getRailroadCode() == 8210260);
         assertTrue(document.getTarifDistance() == 700);
         assertTrue(document.getPayment() == 2789200);
+
+        List<Vagon> vagonList = document.getVagonList();
+        assertTrue(vagonList.get(0).getNumber()==59501502);
+        assertTrue(vagonList.get(1).getNumber()==59501239);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy kk:mm:ss");
         Date date = dateFormat.parse("15.09.2020 14:45:00");
