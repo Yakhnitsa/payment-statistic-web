@@ -15,7 +15,7 @@ insert into hibernate_sequence values ( 1 );
 create table payment_details (
   id bigint not null,
   additional_payment bigint not null,
-  dateStamp dateStamp,
+  date date,
   document_number varchar(255),
   income_type integer,
   payment bigint not null,
@@ -26,20 +26,20 @@ create table payment_details (
   tax_payment bigint not null,
   total_payment bigint not null,
   type varchar(255),
-  docNumber integer,
+  number integer,
   payer_code integer,
   primary key (id)
 ) engine=InnoDB;
 
 create table payment_list (
-  docNumber integer not null,
+  number integer not null,
   payer_code integer not null,
   created_date datetime(6),
   last_modified_date datetime(6),
   backup_file_path varchar(255),
   closing_balance bigint not null,
   contract_number varchar(255),
-  dateStamp dateStamp,
+  date date,
   opening_balance bigint not null,
   payer_name varchar(255),
   payment_taxes bigint not null,
@@ -49,7 +49,7 @@ create table payment_list (
   test_passed bit not null,
   user_id bigint,
   last_modified_by bigint,
-  primary key (docNumber, payer_code)
+  primary key (number, payer_code)
 ) engine=InnoDB;
 
 create table user_role (
@@ -59,8 +59,8 @@ create table user_role (
 
 alter table payment_details
   add constraint payment_details__payment_list_fk
-  foreign key (docNumber, payer_code)
-  references payment_list (docNumber, payer_code);
+  foreign key (number, payer_code)
+  references payment_list (number, payer_code);
 
 alter table payment_list
   add constraint payment_list__app_user_creator_fk
