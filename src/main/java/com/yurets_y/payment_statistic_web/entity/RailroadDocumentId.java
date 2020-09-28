@@ -1,10 +1,14 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class RailroadDocumentId implements Serializable {
+    @JsonView(Views.ShortView.class)
     private int docNumber;
+    @JsonView(Views.ShortView.class)
     private Date dateStamp;
 
     public RailroadDocumentId() {

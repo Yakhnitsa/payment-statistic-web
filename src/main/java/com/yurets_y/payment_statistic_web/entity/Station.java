@@ -12,8 +12,11 @@ import java.util.Objects;
 @Table(name="railroad_stations")
 public class Station extends AuditableEntity{
     @Id
+    @JsonView(Views.ShortView.class)
     private Integer code;
+    @JsonView(Views.ShortView.class)
     private String rusName;
+    @JsonView(Views.ShortView.class)
     private String ukrName;
     private String administration;
     private String railDepartment;

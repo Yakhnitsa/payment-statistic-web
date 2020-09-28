@@ -2,14 +2,9 @@
     <div class="container-fluid">
 
 
-        <!--<button-->
-                <!--@click="test"-->
-                <!--class="btn btn-secondary">Test-->
-        <!--</button>-->
-
         <div class="row">
             <!--Окно файлов для загрузки файлов-->
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="flex-container">
                     <div class="h5 text-center">Список файлов</div>
                     <div v-if="files.length > 0" class="flex-element">
@@ -26,7 +21,7 @@
                         <div class="progress-bar" role="progressbar" :style="progressStyle" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
-                    <div class="control-panel my-1">
+                    <div class="control-panel-md my-1">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" id="customFile"
@@ -52,19 +47,22 @@
                 </div>
             </div>
             <!--Окно загруженных накладных-->
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="flex-container">
                     <div class="h5">Загруженные накладные</div>
                     <div class="flex-element">
-                        <ul class="list-group">
-                            <li class="list-group-item">New <span class="badge">12</span></li>
-                            <li class="list-group-item">Deleted <span class="badge">5</span></li>
-                            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-                            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-                            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-                            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-                            <li class="list-group-item">Warnings <span class="badge">3</span></li>
-                        </ul>
+                        <uploaded-documents-table>
+
+                        </uploaded-documents-table>
+                        <!--<ul class="list-group">-->
+                            <!--<li class="list-group-item">New <span class="badge">12</span></li>-->
+                            <!--<li class="list-group-item">Deleted <span class="badge">5</span></li>-->
+                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
+                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
+                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
+                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
+                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
+                        <!--</ul>-->
                     </div>
                     <div class="control-panel my-1">
                         <div class="input-group">
@@ -88,15 +86,17 @@
 
 <script>
     import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
+    import UploadedDocumentsTable from "../../components/rail-docs-components/UploadedDocumentsTable.vue";
 
     import {mapMutations, mapActions, mapGetters} from 'vuex';
 
+
     export default {
         name: "LoadingPage",
-        components: {FilesTable},
+        components: {UploadedDocumentsTable, FilesTable},
         data() {
             return {
-                uploadedDocs: []
+
             }
         },
         computed: {
@@ -104,14 +104,16 @@
                 files: 'uploadStore/files',
                 uploadedDocuments: 'uploadStore/uploadedDocuments',
                 selectedFiles:'uploadStore/selectedFiles',
-                loadingProgress:'uploadStore/onUploadProgress'
+                loadingProgress:'uploadStore/onUploadProgress',
+                hasEditorPermission:'commonStore/hasEditorPermission'
             }),
             progressStyle(){
                 return 'width: '+ this.loadingProgress + '%';
             },
             showProgressBar(){
                 return this.loadingProgress > 0 && this.loadingProgress < 100;
-            }
+            },
+
 
         },
         methods: {

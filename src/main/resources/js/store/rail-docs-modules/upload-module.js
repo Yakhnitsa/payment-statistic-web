@@ -54,13 +54,23 @@ export default {
         },
 
         addUploadedDocumentMutation(state, document){
-            const index = state.uploadedDocuments
-                .findIndex(doc => doc.number === document.number);
-            if(index !== -1){
-                state.uploadedDocuments.splice(index,1,document);
-            }else{
-                state.uploadedDocuments.push(document);
+            console.log(state.uploadedDocuments.length);
+            if(document.hasOwnProperty('docNumber')){
+                if(document.docNumber === -1){
+                    document.isValid = false;
+                    state.uploadedDocuments.push(document);
+                } else{
+                    document.isValid = true;
+                    const index = state.uploadedDocuments
+                        .findIndex(doc => doc.docNumber === document.docNumber);
+                    if(index !== -1){
+                        state.uploadedDocuments.splice(index,1,document);
+                    }else{
+                        state.uploadedDocuments.push(document);
+                    }
+                }
             }
+
         },
     },
     actions: {
@@ -84,6 +94,20 @@ export default {
             }
             commit('setOnUploadProgressMutation', 100);
 
+        },
+        async fetchTempUploadedDocs({commit}){
+            try{
+                const response = await uploadApi.fetchTempUploadedDocs();
+                const data = await response.data;
+                data.forEach(doc =>{
+                    console.log(doc);
+                    commit('addUploadedDocumentMutation',doc)
+                })
+            }catch{
+                if(error.response){
+                    messageManager.showOnLoadException('Ошибка загрузки файлов из временного хранилища');
+                }
+            }
         },
         async saveSelectedDocumentsToMainDbAction(){
 

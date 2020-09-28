@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,15 +15,18 @@ import java.util.*;
 public class RailroadDocument extends AuditableEntity {
     @Id
     @Column(updatable = false)
+    @JsonView(Views.ShortView.class)
     private Integer docNumber;
 
     @Id
     @Column(updatable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonView(Views.ShortView.class)
     private Date dateStamp;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonView(Views.ShortView.class)
     private Date docDate;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,41 +39,50 @@ public class RailroadDocument extends AuditableEntity {
     private Date credDate;
 
     @ManyToOne
-    @NotFound(action=NotFoundAction.IGNORE)
+//    @NotFound(action=NotFoundAction.IGNORE)
+    @JsonView(Views.ShortView.class)
     private Station sendStation;
 
     @ManyToOne
-    @NotFound(action=NotFoundAction.IGNORE)
+//    @NotFound(action=NotFoundAction.IGNORE)
+    @JsonView(Views.ShortView.class)
     private Station receiveStation;
 
     @OneToOne(
             cascade = {CascadeType.ALL},
             orphanRemoval = true)
+    @JsonView(Views.ShortView.class)
     private Client cargoSender;
 
     @OneToOne(
             cascade = {CascadeType.ALL},
             orphanRemoval = true)
+    @JsonView(Views.ShortView.class)
     private Client cargoReceiver;
 
     @OneToOne(
             cascade = {CascadeType.ALL},
             orphanRemoval = true)
+    @JsonView(Views.ShortView.class)
     private Client tarifPayer;
 
     @Transient
+    @JsonView(Views.ShortView.class)
     private File xmlBackupFile;
 
     private String xmlBackupFilePath;
 
     @Transient
+    @JsonView(Views.ShortView.class)
     private File pdfBackupFile;
 
     private String pdfBackupFilePath;
 
 //    private List<Carrier> carriers = new ArrayList<>();
 
+    @JsonView(Views.ShortView.class)
     private String cargoName;
+    @JsonView(Views.ShortView.class)
     private String cargoCode;
 
     private int payment;
@@ -101,6 +114,7 @@ public class RailroadDocument extends AuditableEntity {
     public void addVagon(Vagon vagon) {
         vagonList.add(vagon);
     }
+
     public void addVagons(Collection vagons) {
         vagonList.addAll(vagons);
     }

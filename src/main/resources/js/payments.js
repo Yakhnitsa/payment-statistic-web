@@ -7,7 +7,7 @@ import 'util/filters'
 
 import 'babel-polyfill'
 
-Vue.use(VueResouce)
+Vue.use(VueResouce);
 
 new Vue({
         el:'#app',

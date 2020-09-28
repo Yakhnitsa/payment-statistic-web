@@ -93,7 +93,10 @@ public class TempRailroadDocsServiceImpl implements TempRailroadDocsService{
         }
 
         File pdfFile = findPdfFileForDoc(document);
-        document.setPdfBackupFile(pdfFile);
+        if(pdfFile != null){
+            document.setPdfBackupFile(pdfFile);
+        }
+
 
         documents.put(document.getXmlBackupFile().getName(),document);
         return document;

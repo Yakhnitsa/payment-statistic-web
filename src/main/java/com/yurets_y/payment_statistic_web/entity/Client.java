@@ -1,5 +1,7 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +14,10 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(Views.ShortView.class)
     private String name;
 
+    @JsonView(Views.ShortView.class)
     private Integer railroadCode;
 
     private Integer edrpuCode;

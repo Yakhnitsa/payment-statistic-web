@@ -21,6 +21,9 @@ export default{
                 }
             })
     },
+    async fetchTempUploadedDocs(){
+        return await axios.get('get-temp-uploaded');
+    },
 
     async saveDocumentsToMainDb(documents){
         return await axios({

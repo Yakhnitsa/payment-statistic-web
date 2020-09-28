@@ -1,5 +1,7 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,12 @@ public class Vagon  extends AuditableEntity{
     })
     private RailroadDocument railroadDocument;
 
+    @JsonView(Views.ShortView.class)
     private int number;
     private int grossWeight;
+    @JsonView(Views.ShortView.class)
     private int netWeight;
+    @JsonView(Views.ShortView.class)
     private int tareWeight;
     private double carryingCapacity;
     private int payment;
