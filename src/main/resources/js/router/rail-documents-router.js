@@ -4,7 +4,7 @@ Vue.use(VueRouter);
 
 import RootPage from '../pages/rail-docs-pages/RailDocumensPage.vue'
 import Certificates from '../pages/rail-docs-pages/QualityCertsPage.vue'
-import LoadingPage from '../pages/rail-docs-pages/LoadingPage.vue'
+import LoadingPage from '../pages/rail-docs-pages/loading-page/LoadingPage.vue'
 
 const rootPath = '';
 

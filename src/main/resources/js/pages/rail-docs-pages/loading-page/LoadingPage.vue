@@ -85,8 +85,8 @@
 </template>
 
 <script>
-    import FilesTable from "../../components/rail-docs-components/FilesTable.vue";
-    import UploadedDocumentsTable from "../../components/rail-docs-components/UploadedDocumentsTable.vue";
+    import FilesTable from "./components/FilesTable.vue";
+    import UploadedDocumentsTable from "./components/UploadedDocumentsTable.vue";
 
     import {mapMutations, mapActions, mapGetters} from 'vuex';
 
