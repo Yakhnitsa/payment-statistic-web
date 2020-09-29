@@ -3,10 +3,10 @@
         <form class="mx-3">
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
+                    <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
+                    <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-primary" v-on:click="submitForm">Получить данные</button>
@@ -146,7 +146,7 @@
             getPropertyByDate(day,prop){
                 for(let i in this.paymentList){
                     let list = this.paymentList[i];
-                    if(list.dateStamp === day){
+                    if(list.date === day){
                         return list[prop];
                     }
                 }

@@ -7,10 +7,10 @@
         <div class="ml-3 my-2">
             <div class="form-row ">
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
+                    <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
+                    <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button class="btn btn-primary" v-on:click="updateList()">Получить данные</button>
@@ -28,45 +28,45 @@
 
             <table id="payments-table" class="table table-fixed table-sm table-striped">
                 <thead class="thead-light">
-                    <tr class="text-center">
-                        <th scope="col" class="col-2">№ перечня</th>
-                        <th scope="col" class="col-2">Дата</th>
-                        <th scope="col" class="col-2">Входящий остаток</th>
-                        <th scope="col" class="col-2">Исходящий остаток</th>
-                        <th scope="col" class="col-2">Сумма платежей</th>
-                        <th scope="col" class="col-2">
-                            Действия
-                        </th>
-                    </tr>
+                <tr class="text-center">
+                    <th scope="col" class="col-2">№ перечня</th>
+                    <th scope="col" class="col-2">Дата</th>
+                    <th scope="col" class="col-2">Входящий остаток</th>
+                    <th scope="col" class="col-2">Исходящий остаток</th>
+                    <th scope="col" class="col-2">Сумма платежей</th>
+                    <th scope="col" class="col-2">
+                        Действия
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-right text-nowrap" v-for="payment in checkedPayments">
-                        <td scope="col" class="col-2">{{payment.docNumber}}</td>
-                        <td scope="col" class="col-2">{{payment.dateStamp | formatDate}}</td>
-                        <td scope="col" class="col-2"
-                            :class="{'text-danger': !payment.checkedOpeningBalance}">
-                            {{payment.openingBalance | formatPayment }}
-                        </td>
-                        <td scope="col" class="col-2"
-                            :class="{'text-danger': !payment.checkedClosingBalace}">
-                            {{payment.closingBalance | formatPayment}}</td>
-                        <td scope="col" class="col-2">{{payment.paymentVsTaxes | formatPayment}}</td>
-                        <td scope="col" class="col-2">
-                            <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button type="button"
-                                    :disabled="!hasEditorPermission"
-                                    data-toggle="tooltip" data-placement="bottom"
-                                    :title="hasEditorPermission ? 'Удалить запись' : 'Недостаточно прав для совершения действия'"
-                                    class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-secondary btn-sm" @click="downloadPayment(payment)">
-                                <i class="fas fa-file-download"></i>
-                            </button>
-                        </td>
-                    </tr>
+                <tr class="text-right text-nowrap" v-for="payment in checkedPayments">
+                    <td scope="col" class="col-2">{{payment.number}}</td>
+                    <td scope="col" class="col-2">{{payment.date | formatDate}}</td>
+                    <td scope="col" class="col-2"
+                        :class="{'text-danger': !payment.checkedOpeningBalance}">
+                        {{payment.openingBalance | formatPayment }}
+                    </td>
+                    <td scope="col" class="col-2"
+                        :class="{'text-danger': !payment.checkedClosingBalace}">
+                        {{payment.closingBalance | formatPayment}}</td>
+                    <td scope="col" class="col-2">{{payment.paymentVsTaxes | formatPayment}}</td>
+                    <td scope="col" class="col-2">
+                        <button type="button" class="btn btn-secondary btn-sm" @click="showPayment(payment)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button type="button"
+                                :disabled="!hasEditorPermission"
+                                data-toggle="tooltip" data-placement="bottom"
+                                :title="hasEditorPermission ? 'Удалить запись' : 'Недостаточно прав для совершения действия'"
+                                class="btn btn-secondary btn-sm" @click="deletePayment(payment)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" @click="downloadPayment(payment)">
+                            <i class="fas fa-file-download"></i>
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <nav aria-label="Page navigation example">
@@ -111,7 +111,7 @@
                 return this.$store.getters.paymentLists
             },
             sortedPayments: function(){
-                return this.payments.sort((a,b)=> a.dateStamp - b.dateStamp)
+                return this.payments.sort((a,b)=> a.date - b.date)
             },
             // проверка перечней по логике конец предыдущего = начало текущего периода
             checkedPayments(){
@@ -182,16 +182,16 @@
             showPayment(payment){
 
                 const params = {
-                    listNumber: payment.docNumber,
+                    listNumber: payment.number,
                     payerCode: payment.payerCode,
                 };
 
                 paymentListApi.getSinglePayment(params)
                     .then(function (response) {
-                    //    TODO Реализовать отображение перечня в окне
-                    console.log(response)
-                    console.log('SUCCESS!')
-                })
+                        //    TODO Реализовать отображение перечня в окне
+                        console.log(response)
+                        console.log('SUCCESS!')
+                    })
                     .catch((error) => console.log(error))
             },
             deletePayment(list){
@@ -230,7 +230,7 @@
             },
             showWarningMessage(message){
                 alert(message)
-            //    TODO Реализовать всплывающее окно о неправильном периоде
+                //    TODO Реализовать всплывающее окно о неправильном периоде
             }
 
         },
@@ -244,8 +244,8 @@
                         .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ') // use ' ' as a separator
                 )
             },
-            formatDate(dateStamp){
-                return new Date(dateStamp).toLocaleDateString()
+            formatDate(date){
+                return new Date(date).toLocaleDateString()
             }
         },
     }
@@ -276,7 +276,4 @@
         font-weight: bold;
         font-style: italic;
     }
-
-
-
 </style>

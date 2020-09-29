@@ -5,8 +5,8 @@
                 :disabled="!hasEditorPermission"
                 class="btn btn-primary" data-toggle="modal" data-target="#loadingPage">
             <span data-toggle="tooltip"
-                 data-placement="bottom"
-                 :title="hasEditorPermission ? 'Загрузка с почты или файла' : 'Недостаточно прав для совершения действия'">
+                  data-placement="bottom"
+                  :title="hasEditorPermission ? 'Загрузка с почты или файла' : 'Недостаточно прав для совершения действия'">
                 Загрузить перечни <span v-show="countOfTempLists > 0"
                                         class="badge badge-light">{{countOfTempLists}}</span>
             </span>
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="input-group">
-                                    <input class="form-control" type="dateStamp" v-model="lastUpdate">
+                                    <input class="form-control" type="date" v-model="lastUpdate">
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary"
                                                 :disabled="lastUpdate === ''|| mailUpdateAwait"

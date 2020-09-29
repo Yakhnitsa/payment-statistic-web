@@ -16,7 +16,7 @@
             <tbody>
             <tr class="text-right text-nowrap" v-for="item in paymentDetails">
                 <td scope="col" class="col-1 text-center">{{item.paymentListNumber}}</td>
-                <td scope="col" class="col-1 text-center">{{item.dateStamp | formatDate}}</td>
+                <td scope="col" class="col-1 text-center">{{item.date | formatDate}}</td>
                 <td scope="col" class="col-3 text-left">{{item.type}}</td>
                 <td scope="col" class="col-3 text-left">({{item.stationCode}}) {{item.stationName}}</td>
                 <td scope="col" class="col-2 text-center">{{item.documentNumber}}</td>

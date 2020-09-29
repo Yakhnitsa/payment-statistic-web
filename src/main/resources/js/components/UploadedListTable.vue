@@ -11,7 +11,7 @@
                     </th>
                     <th>payer code</th>
                     <th>payer numb</th>
-                    <th>dateStamp</th>
+                    <th>date</th>
                     <th>open balance</th>
                     <th>close balance</th>
                 </tr>
