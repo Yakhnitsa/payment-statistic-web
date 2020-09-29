@@ -3,14 +3,20 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import statisticApi from '../api/statisticApi'
-import uploadApi from '../api/uploadApi'
 import paymentListApi from "../api/paymentListApi";
 import paymentDetailsApi from "../api/paymentDetailsApi";
 import messageManager from '../util/messageManager';
+import CommonModule from "./common-module";
+import UploadModule from "./payments-modules/upload-module";
+import ChartsModule from "./payments-modules/charts-module";
 
 
 export default new Vuex.Store({
-    // Состояние объекта, массивы и прочее
+    modules: {
+        uploadStore: UploadModule,
+        commonStore: CommonModule,
+        chartsStore: ChartsModule
+    },
     state: {
         payerCode:'',
         dailyStatistic: {
@@ -21,16 +27,16 @@ export default new Vuex.Store({
             dateFrom:'',
             dateUntil:''
         },
-        dailyChart:{
-            chartData:[],
-            dateFrom:'',
-            dateUntil:'',
-        },
-        yearChart:{
-            dateFrom:'',
-            dateUntil:'',
-            chartData:[],
-        },
+        // dailyChart:{
+        //     chartData:[],
+        //     dateFrom:'',
+        //     dateUntil:'',
+        // },
+        // yearChart:{
+        //     dateFrom:'',
+        //     dateUntil:'',
+        //     chartData:[],
+        // },
         paymentListPage:{
             paymentLists: [],
             currentPage:0,
@@ -52,21 +58,10 @@ export default new Vuex.Store({
             paymentType:'',
             paymentSum:''
         },
-        uploadedData:{
-            files:[],
-            selectedLists:[],
-            tempLists:[],
-            lastUpdate:'',
-            mailUpdateAwait: false
-        }
     },
     // Изменяемые свойства объекта, computed properties, ets...
     getters:{
         paymentLists: state => state.paymentListPage.paymentLists,
-        chosenFiles: state => state.uploadedData.files,
-        tempUploadedLists: state => state.uploadedData.tempLists,
-        selectedUploadedLists: state => state.uploadedData.selectedLists,
-        mailUpdateAwait: state => state.uploadedData.mailUpdateAwait,
         userRoles: () => userRoles,
         hasEditorPermission: () => userRoles.includes('ROLE_EDITOR'),
         inDeveloperMode:() => isDevMode,
@@ -100,18 +95,6 @@ export default new Vuex.Store({
             }
         },
 
-        addChosenFilesMutation(state,data){
-            state.uploadedData.files = [...data]
-        },
-
-        setMailUpdateAwaitMutation(state,waiting){
-            state.uploadedData.mailUpdateAwait = waiting
-        },
-
-        setTepListsMutation(state,data){
-            state.uploadedData.tempLists = [...data]
-        },
-
         addDailyStatisticMutation(state, data){
             state.dailyStatistic.dates = data.dates
             state.dailyStatistic.details = data.details;
@@ -125,23 +108,23 @@ export default new Vuex.Store({
             state.dailyStatistic.dateUntil = period.dateUntil
         },
 
-        addDailyChartMutation(state, data){
-            state.dailyChart.chartData = data
-        },
-
-        addDailyChartPeriodMutation(state,data){
-            state.dailyChart.dateFrom = data.dateFrom
-            state.dailyChart.dateUntil = data.dateUntil
-        },
-
-        addYearChartMutation(state, data){
-            state.yearChart.chartData = data;
-        },
-
-        addYearChartPeriodMutation(state,data){
-            state.yearChart.dateFrom = data.dateFrom
-            state.yearChart.dateUntil = data.dateUntil
-        },
+        // addDailyChartMutation(state, data){
+        //     state.dailyChart.chartData = data
+        // },
+        //
+        // addDailyChartPeriodMutation(state,data){
+        //     state.dailyChart.dateFrom = data.dateFrom
+        //     state.dailyChart.dateUntil = data.dateUntil
+        // },
+        //
+        // addYearChartMutation(state, data){
+        //     state.yearChart.chartData = data;
+        // },
+        //
+        // addYearChartPeriodMutation(state,data){
+        //     state.yearChart.dateFrom = data.dateFrom
+        //     state.yearChart.dateUntil = data.dateUntil
+        // },
 
         setPaymentTypesMutation(state,data){
             state.paymentDetailsPage.paymentTypes = data;
@@ -208,77 +191,77 @@ export default new Vuex.Store({
             });
         },
 
-        /*Методы для загрузки перечней на сервер*/
-        loadTempListsFromServerAction({commit}){
-            paymentListApi.downloadTempList()
-                .then(response =>{
-                if(response.status === 200){
-                    commit('setTepListsMutation',response.data)
-                }
-
-            }).catch((error) => console.log(error));
-        },
-
-        async uploadListsOnServerAction({commit,state}) {
-            try{
-                const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
-                const data = await response.data;
-                commit('addChosenFilesMutation',[])
-                commit('setTepListsMutation',data)
-            }catch(error){
-                if(error.response && error.response.status == 403){
-                    messageManager.showSecurityException403()
-                }
-            }
-
-        },
-
-        async scanFromMailAction({commit,state},params) {
-            commit('setMailUpdateAwaitMutation',true);
-            try{
-                const response = await uploadApi.scanFromMailToTempDB(params);
-                if(response.status === 200){
-                    const data = await response.data;
-                    commit('setTepListsMutation',data)
-                }
-            }catch(error){
-                if(error.response && error.response.status == 403){
-                    messageManager.showSecurityException403()
-                }
-            }finally {
-                commit('setMailUpdateAwaitMutation',false)
-            }
-
-
-        },
-
-        async saveSelectedListsAction({commit,state},lists){
-            try{
-                const response = await uploadApi.saveSelected(lists)
-                if(response.status === 200){
-                    const data = await response.data
-                    commit('setTepListsMutation',data)
-                }
-            }catch(error){
-                if(error.response && error.response.status == 403) {
-                    messageManager.showSecurityException403()
-                }
-            }
-        },
-
-        async deleteSelectedListsAction({commit,state},lists){
-            try{
-                const response = await uploadApi.deleteSelected(lists);
-                if(response.status === 200){
-                    const data = await response.data;
-                    commit('setTepListsMutation',data)
-                }
-            }catch(error){
-                if(error.response && error.response.status == 403) {
-                    messageManager.showSecurityException403()
-                }
-            }
-        },
+        // /*Методы для загрузки перечней на сервер*/
+        // loadTempListsFromServerAction({commit}){
+        //     paymentListApi.downloadTempList()
+        //         .then(response =>{
+        //         if(response.status === 200){
+        //             commit('setTepListsMutation',response.data)
+        //         }
+        //
+        //     }).catch((error) => console.log(error));
+        // },
+        //
+        // async uploadListsOnServerAction({commit,state}) {
+        //     try{
+        //         const response = await uploadApi.uploadListsOnServer(state.uploadedData.files);
+        //         const data = await response.data;
+        //         commit('addChosenFilesMutation',[])
+        //         commit('setTepListsMutation',data)
+        //     }catch(error){
+        //         if(error.response && error.response.status == 403){
+        //             messageManager.showSecurityException403()
+        //         }
+        //     }
+        //
+        // },
+        //
+        // async scanFromMailAction({commit,state},params) {
+        //     commit('setMailUpdateAwaitMutation',true);
+        //     try{
+        //         const response = await uploadApi.scanFromMailToTempDB(params);
+        //         if(response.status === 200){
+        //             const data = await response.data;
+        //             commit('setTepListsMutation',data)
+        //         }
+        //     }catch(error){
+        //         if(error.response && error.response.status == 403){
+        //             messageManager.showSecurityException403()
+        //         }
+        //     }finally {
+        //         commit('setMailUpdateAwaitMutation',false)
+        //     }
+        //
+        //
+        // },
+        //
+        // async saveSelectedListsAction({commit,state},lists){
+        //     try{
+        //         const response = await uploadApi.saveSelected(lists)
+        //         if(response.status === 200){
+        //             const data = await response.data
+        //             commit('setTepListsMutation',data)
+        //         }
+        //     }catch(error){
+        //         if(error.response && error.response.status == 403) {
+        //             messageManager.showSecurityException403()
+        //         }
+        //     }
+        // },
+        //
+        // async deleteSelectedListsAction({commit,state},lists){
+        //     try{
+        //         const response = await uploadApi.deleteSelected(lists);
+        //         if(response.status === 200){
+        //             const data = await response.data;
+        //             commit('setTepListsMutation',data)
+        //         }
+        //     }catch(error){
+        //         if(error.response && error.response.status == 403) {
+        //             messageManager.showSecurityException403()
+        //         }
+        //     }
+        // },
 
         // Методы обработки статистических данных
         getDailyStatisticAction({commit,state},params){

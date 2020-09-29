@@ -50,9 +50,9 @@
 </template>
 
 <script>
-    import LinearChart from '../components/charts/LinearChart.vue'
-    import PieChart from '../components/charts/PieChart'
-    import CollectivePieChart from '../components/charts/CollectivePieChart.vue'
+    import LinearChart from '../../../../components/charts/LinearChart.vue'
+    import PieChart from '../../../../components/charts/PieChart'
+    import CollectivePieChart from '../../../../components/charts/CollectivePieChart.vue'
 
     import { mapState } from 'vuex';
 
@@ -109,7 +109,7 @@
             }
         },
         computed:{
-            ...mapState({
+            ...mapState('chartsStore',{
                 dailyChartData: state => state.dailyChart.chartData,
                 // labels: state => state.dailyChart.labels,// ...
                 // expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
@@ -118,12 +118,11 @@
 
             }),
 
-
             dates(){
-                return this.dailyChartData.map(e => e.dateStamp);
+                return this.dailyChartData.map(e => e.date);
             },
             labels(){
-                return this.dailyChartData.map(e => e.dateStamp);
+                return this.dailyChartData.map(e => e.date);
             },
             expenses(){
                 return this.dailyChartData.map(e => e.expenses / 100);
@@ -138,12 +137,12 @@
                 return this.dailyChartData.map(e => e.expensesByStation);
             },
             average(){
-                const averageArray = []
+                const averageArray = [];
                 for(let i = 0; i < this.expenses.length; i++ ){
                     let startIndex = i - Math.trunc(this.averageIndex/2);
                     let endIndex = startIndex + this.averageIndex;
                     startIndex = startIndex < 0 ? 0 : startIndex;
-                    let micArray = this.expenses.slice(startIndex,endIndex)
+                    let micArray = this.expenses.slice(startIndex,endIndex);
                     let average = micArray.reduce((a, b) => a + b, 0)/ micArray.length
                     averageArray.push(average)
                 }
@@ -222,19 +221,19 @@
 
         methods:{
             updateChart(){
-                var params = {
+                const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                     payerCode: this.payerCode
-                }
-                this.$store.dispatch('getDailyChartAction', params)
+                };
+                this.$store.dispatch('chartsStore/getDailyChartAction', params)
             },
 
             setDefaultPeriod(){
-                this.dateFrom = this.$store.state.dailyChart.dateFrom
-                this.dateUntil = this.$store.state.dailyChart.dateUntil
+                this.dateFrom = this.$store.state.chartsStore.dailyChart.dateFrom;
+                this.dateUntil = this.$store.state.chartsStore.dailyChart.dateUntil;
 
-                if((this.dateFrom == '') && (this.dateUntil == '')){
+                if((this.dateFrom === '') && (this.dateUntil === '')){
                     let today = new Date();
                     let weekAgo = new Date(today.setDate(today.getDate()-15));
                     this.dateFrom = weekAgo.toISOString().substring(0, 10);
@@ -242,15 +241,15 @@
                     let period = {
                         dateFrom: this.dateFrom,
                         dateUntil: this.dateUntil
-                    }
-                    this.$store.commit('addDailyChartPeriodMutation',period)
+                    };
+                    this.$store.commit('chartsStore/addDailyChartPeriodMutation',period)
 
                 }
             }
         },
 
         mounted(){
-            this.setDefaultPeriod()
+            this.setDefaultPeriod();
             this.updateChart()
         }
     }
@@ -261,7 +260,7 @@
     .chart {
         background: #70fff7;
         border-radius: 5px;
-        box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
+        box-shadow: 0 2px 15px rgba(25, 25, 25, 0.27);
         margin:  25px 0;
     }
 

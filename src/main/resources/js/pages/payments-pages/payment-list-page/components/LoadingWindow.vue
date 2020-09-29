@@ -98,11 +98,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
     import UploadedListTable from './UploadedListTable.vue'
-    import {mapGetters} from 'vuex';
-    import {mapMutations} from 'vuex';
-    import {mapActions} from 'vuex';
+    import {mapGetters,mapMutations,mapActions} from 'vuex';
 
     export default {
         name: "LoadingWindow",
@@ -111,9 +108,9 @@
         },
         computed: {
             ...mapGetters({
-                files: 'chosenFiles',
-                loadedPayments: 'tempUploadedLists',
-                mailUpdateAwait: 'mailUpdateAwait'
+                files: 'uploadStore/chosenFiles',
+                loadedPayments: 'uploadStore/tempUploadedLists',
+                mailUpdateAwait: 'uploadStore/mailUpdateAwait'
             }),
             countOfTempLists() {
                 return this.loadedPayments.length;
@@ -130,40 +127,39 @@
             }
         },
         methods: {
-            ...mapMutations(['addChosenFilesMutation']),
-            ...mapActions(['uploadListsOnServerAction',
-                'deleteSelectedListsAction',
-                'saveSelectedListsAction',
-                'loadTempListsFromServerAction',
-                'getPaymentListsAction',
-                'scanFromMailAction'
-            ]),
+            ...mapMutations({
+                addFilesToUpload: 'uploadStore/addChosenFilesMutation',
+            }),
+            ...mapActions({
+                submitFileUpload: 'uploadStore/uploadListsOnServerAction',
+                deleteSelectedFromMainDb: 'uploadStore/deleteSelectedListsAction',
+                saveSelectedToMainDb: 'uploadStore/saveSelectedListsAction',
+                loadTempListsFromServer: 'uploadStore/loadTempListsFromServerAction',
+                startScanFromMail: 'uploadStore/scanFromMailAction'
+            }),
             addFile(event) {
                 const selectedFiles = event.target.files;
-                this.addChosenFilesMutation(Array.from(selectedFiles))
+                this.addFilesToUpload(Array.from(selectedFiles))
             },
-            submitFileUpload() {
-                this.uploadListsOnServerAction();
 
-            },
             saveSelected() {
-                this.saveSelectedListsAction(this.selectedPayments)
+                this.saveSelectedToMainDb(this.selectedPayments);
                 this.getPaymentListsAction()
             },
             deleteSelected() {
-                this.deleteSelectedListsAction(this.selectedPayments)
+                this.deleteSelectedFromMainDb(this.selectedPayments)
             },
             changeSelected(selected) {
                 this.selectedPayments = selected;
             },
             scanFromMail() {
-                this.scanFromMailAction(this.lastUpdate);
+                this.startScanFromMail(this.lastUpdate);
             }
         },
         created: function () {
         },
         mounted: function () {
-            this.loadTempListsFromServerAction()
+            this.loadTempListsFromServer()
         }
 
     }

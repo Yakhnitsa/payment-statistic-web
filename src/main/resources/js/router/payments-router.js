@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import DailyStatistic from '../pages/DailyStatistic.vue'
-import Payments from '../pages/PaymentsList.vue'
+import Payments from '../pages/payments-pages/payment-list-page/PaymentsList.vue'
 import PaymentDetailsPage from '../pages/PaymentDetailsPage.vue'
 import Test from '../pages/Test.vue'
-import ChartsPage from '../pages/ChartsPage.vue'
+import ChartsPage from '../pages/payments-pages/charts-page/ChartsPage.vue'
 
 export default new VueRouter({
     mode: 'history',

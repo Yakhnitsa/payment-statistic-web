@@ -36,8 +36,8 @@
 
 <script>
     import DailyStatistic from './DailyStatistic.vue'
-    import PaymentList from './PaymentsList.vue'
-    import LoadingWindow from '../components/LoadingWindow.vue'
+    import PaymentList from './payments-pages/payment-list-page/PaymentsList.vue'
+    import LoadingWindow from './payments-pages/payment-list-page/components/LoadingWindow.vue'
     import Sidebar from '../components/Sidebar.vue'
     import {mapGetters} from 'vuex'
 

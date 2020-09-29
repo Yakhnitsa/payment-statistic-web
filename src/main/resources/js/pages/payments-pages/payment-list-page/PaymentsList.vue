@@ -94,8 +94,8 @@
 <script>
     import axios from 'axios'
     import {mapActions,mapState,mapGetters} from 'vuex'
-    import LoadingWindow from "../components/LoadingWindow.vue";
-    import paymentListApi from "../api/paymentListApi"
+    import LoadingWindow from "./components/LoadingWindow.vue";
+    import paymentListApi from "../../../api/paymentListApi"
     export default {
         name: "PaymentListPage",
         components: {LoadingWindow},

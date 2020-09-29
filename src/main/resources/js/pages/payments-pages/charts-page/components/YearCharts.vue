@@ -46,8 +46,8 @@
 </template>
 
 <script>
-    import LinearChart from '../components/charts/LinearChart.vue'
-    import PieChart from '../components/charts/PieChart'
+    import LinearChart from '../../../../components/charts/LinearChart.vue'
+    import PieChart from '../../../../components/charts/PieChart'
 
     import { mapState } from 'vuex';
 
@@ -85,13 +85,8 @@
             }
         },
         computed:{
-            ...mapState({
+            ...mapState('chartsStore',{
                 yearChartData: state => state.yearChart.chartData,
-                // labels: state => state.dailyChart.labels,// ...
-                // expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
-                // payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
-                // average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
-
             }),
 
             linearChartLabels(){
@@ -172,16 +167,16 @@
                     dateUntil: this.dateUntil,
                     payerCode: this.payerCode
                 }
-                this.$store.dispatch('getYearChartAction', params)
+                this.$store.dispatch('chartsStore/getYearChartAction', params)
             },
 
             setDefaultPeriod(){
-                this.dateFrom = this.$store.state.yearChart.dateFrom
-                this.dateUntil = this.$store.state.yearChart.dateUntil
+                this.dateFrom = this.$store.state.chartsStore.yearChart.dateFrom;
+                this.dateUntil = this.$store.state.chartsStore.yearChart.dateUntil;
 
                 if((this.dateFrom === '') && (this.dateUntil === '')){
                     let yearAgo = new Date();
-                    yearAgo.setFullYear(yearAgo.getFullYear()-1)
+                    yearAgo.setFullYear(yearAgo.getFullYear()-1);
                     this.dateFrom = yearAgo.toISOString().substring(0, 10);
                     this.dateUntil = new Date().toISOString().slice(0,10);
                     let period = {
@@ -195,7 +190,7 @@
         },
 
         mounted(){
-            this.setDefaultPeriod()
+            this.setDefaultPeriod();
             this.updateChart()
         }
     }
