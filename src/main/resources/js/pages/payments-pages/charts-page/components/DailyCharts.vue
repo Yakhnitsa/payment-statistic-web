@@ -4,10 +4,10 @@
         <form>
             <div class="form-row mx-1">
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateFrom" class="form-control"/>
+                    <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="dateStamp" v-model="dateUntil" class="form-control"/>
+                    <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btn btn-primary" v-on:click="updateChart">Получить данные</button>
@@ -54,7 +54,8 @@
     import PieChart from '../../../../components/charts/PieChart'
     import CollectivePieChart from '../../../../components/charts/CollectivePieChart.vue'
 
-    import { mapState } from 'vuex';
+    import { createNamespacedHelpers } from 'vuex';
+    const { mapState, mapActions, mapGetters , mapMutations } = createNamespacedHelpers('chartsStore');
 
     import numeral from 'numeral'
 
@@ -68,8 +69,8 @@
         },
         data(){
             return{
-                dateFrom:'',
-                dateUntil:'',
+                // dateFrom:'',
+                // dateUntil:'',
                 colours:[
                     '#E47514',
                     '#ac4fe4',
@@ -109,14 +110,29 @@
             }
         },
         computed:{
-            ...mapState('chartsStore',{
+            ...mapState({
                 dailyChartData: state => state.dailyChart.chartData,
-                // labels: state => state.dailyChart.labels,// ...
-                // expenses: state => state.dailyChart.expensesStatistic.map(element => element/100),// ...
-                // payments: state => state.dailyChart.paymentStatistic.map(element => element/100),// ...
-                // average: state => state.dailyChart.averageStatistic.map(element => element/100),// ...
-
             }),
+            ...mapGetters({
+                dateFromStored: 'dailyChartDateFrom',
+                dateUntilStored: 'dailyChartDateUntil'
+            }),
+            dateFrom:{
+                get(){
+                    return this.dateFromStored;
+                },
+                set(value){
+                    this.setDateFrom(value);
+                }
+            },
+            dateUntil:{
+                get(){
+                    return this.dateUntilStored;
+                },
+                set(value){
+                    this.setDateUntil(value);
+                }
+            },
 
             dates(){
                 return this.dailyChartData.map(e => e.date);
@@ -220,6 +236,9 @@
         },
 
         methods:{
+            ...mapMutations({
+                setDateFrom: 'setDailyChartDateFromMutation',
+                setDateUntil:'setDailyChartDateUntilMutation'}),
             updateChart(){
                 const params = {
                     dateFrom: this.dateFrom,
@@ -230,19 +249,12 @@
             },
 
             setDefaultPeriod(){
-                this.dateFrom = this.$store.state.chartsStore.dailyChart.dateFrom;
-                this.dateUntil = this.$store.state.chartsStore.dailyChart.dateUntil;
-
                 if((this.dateFrom === '') && (this.dateUntil === '')){
                     let today = new Date();
+                    this.setDateUntil(today.toISOString().slice(0,10));
+
                     let weekAgo = new Date(today.setDate(today.getDate()-15));
-                    this.dateFrom = weekAgo.toISOString().substring(0, 10);
-                    this.dateUntil = new Date().toISOString().slice(0,10);
-                    let period = {
-                        dateFrom: this.dateFrom,
-                        dateUntil: this.dateUntil
-                    };
-                    this.$store.commit('chartsStore/addDailyChartPeriodMutation',period)
+                    this.setDateFrom(weekAgo.toISOString().substring(0, 10));
 
                 }
             }

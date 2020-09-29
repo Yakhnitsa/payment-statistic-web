@@ -14,8 +14,26 @@ export default {
             chartData: [],
         },
     }),
-    getters: {},
+    getters: {
+        dailyChartDateFrom: state => state.dailyChart.dateFrom,
+        dailyChartDateUntil: state => state.dailyChart.dateUntil,
+        yearChartDateFrom: state => state.yearChart.dateFrom,
+        yearChartDateUntil: state => state.yearChart.dateUntil,
+    },
     mutations: {
+        setDailyChartDateFromMutation(state,data){
+            state.dailyChart.dateFrom = data;
+        },
+        setDailyChartDateUntilMutation(state,data){
+            state.dailyChart.dateUntil = data;
+        },
+        setYearChartDateFromMutation(state,data){
+            state.yearChart.dateFrom = data;
+        },
+        setYearChartDateUntilMutation(state,data){
+            state.yearChart.dateUntil = data;
+        },
+
         addDailyChartMutation(state, data) {
             state.dailyChart.chartData = data
         },

@@ -48,8 +48,10 @@
 <script>
     import LinearChart from '../../../../components/charts/LinearChart.vue'
     import PieChart from '../../../../components/charts/PieChart'
+    import { createNamespacedHelpers } from 'vuex';
 
-    import { mapState } from 'vuex';
+    const { mapState,mapActions,mapGetters } = createNamespacedHelpers('chartsStore');
+
 
     import numeral from 'numeral'
 
@@ -85,7 +87,7 @@
             }
         },
         computed:{
-            ...mapState('chartsStore',{
+            ...mapState({
                 yearChartData: state => state.yearChart.chartData,
             }),
 
@@ -162,11 +164,11 @@
 
         methods:{
             updateChart(){
-                var params = {
+                const params = {
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                     payerCode: this.payerCode
-                }
+                };
                 this.$store.dispatch('chartsStore/getYearChartAction', params)
             },
 
@@ -183,8 +185,7 @@
                         dateFrom: this.dateFrom,
                         dateUntil: this.dateUntil
                     };
-                    this.$store.commit('addYearChartPeriodMutation',period)
-
+                    this.$store.commit('chartsStore/addYearChartPeriodMutation',period)
                 }
             }
         },
