@@ -8,10 +8,10 @@
                     <i class="form-icon"></i>
                 </label>
             </th>
-            <th>№ документа/Дата</th>
-
-            <th>ст Отправления/Назначения</th>
-            <th>Отправитель/получатель</th>
+            <th class="text-center">№ Накладной</th>
+            <th class="text-center">Дата</th>
+            <th class="text-center">Маршрут</th>
+            <th class="text-center">Отправитель/ получатель</th>
         </tr>
         </thead>
 
@@ -23,17 +23,18 @@
                     <i class="form-icon"></i>
                 </label>
             </td>
-            <td  scope="col" class="col-2">
+            <td  scope="col" class="text-center">
                 {{document.docNumber}}
-                <hr>
+            </td>
+            <td  scope="col" class="text-center small">
                 {{document.dateStamp | formatDate}}
             </td>
-            <td scope="col" class="col-4">
+            <td scope="col" class="small">
                 {{document.sendStation | formatStation}}
                 <hr>
                 {{document.receiveStation | formatStation}}
             </td>
-            <td scope="col" class="col-4">
+            <td scope="col" class="small">
                 {{document.cargoSender | formatClient}}
                 <hr>
                 {{document.cargoReceiver | formatClient}}
@@ -84,7 +85,7 @@
         text-overflow: ellipsis;
     }
     td:hover {
-        overflow: inherit;
+        overflow: visible;
         text-overflow: inherit;
         white-space: inherit;
         word-wrap: inherit;
@@ -96,8 +97,9 @@
         border-top: 1px solid rgba(0,0,0,.1);
     }
     .table td, .table th {
-        padding: .15rem;
-        vertical-align: top;
+        padding: .15rem .3rem;
+        vertical-align: middle;
         border-top: 1px solid #dee2e6;
+        max-width: 280px;
     }
 </style>
