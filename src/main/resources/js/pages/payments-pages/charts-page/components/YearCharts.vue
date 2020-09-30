@@ -49,8 +49,7 @@
     import LinearChart from '../../../../components/charts/LinearChart.vue'
     import PieChart from '../../../../components/charts/PieChart'
     import { createNamespacedHelpers } from 'vuex';
-
-    const { mapState,mapActions,mapGetters } = createNamespacedHelpers('chartsStore');
+    const { mapState } = createNamespacedHelpers('chartsStore');
 
 
     import numeral from 'numeral'

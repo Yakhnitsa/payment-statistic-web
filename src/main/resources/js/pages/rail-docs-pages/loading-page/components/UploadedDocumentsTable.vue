@@ -59,9 +59,20 @@
         computed:{
             ...mapGetters({
                     uploadedDocuments: 'uploadStore/uploadedDocuments',
+            }),
+        },
+        methods:{
+            // saveSelected(){
+            //     this.$store.dispatch('uploadStore/saveSelectedDocumentsToMainDbAction',this.selectedDocuments);
+            // },
+            // deleteSelected(){
+            //     this.$store.dispatch('uploadStore/deleteSelectedDocumentsFromTempDbAction',this.selectedDocuments);
+            // }
+        },
+        watch:{
+            selectedDocuments(val){
+                this.$store.commit('uploadStore/setSelectedDocumentsMutation',val);
             }
-
-            )
         },
         filters:{
             formatStation(station){

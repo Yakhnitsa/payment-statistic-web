@@ -51,26 +51,18 @@
                 <div class="flex-container">
                     <div class="h5">Загруженные накладные</div>
                     <div class="flex-element">
-                        <uploaded-documents-table>
+                        <uploaded-documents-table >
 
                         </uploaded-documents-table>
-                        <!--<ul class="list-group">-->
-                            <!--<li class="list-group-item">New <span class="badge">12</span></li>-->
-                            <!--<li class="list-group-item">Deleted <span class="badge">5</span></li>-->
-                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
-                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
-                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
-                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
-                            <!--<li class="list-group-item">Warnings <span class="badge">3</span></li>-->
-                        <!--</ul>-->
+
                     </div>
                     <div class="control-panel my-1">
                         <div class="input-group">
-                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">
+                            <button type="button" class="btn btn-primary mx-1" @click="saveSelectedDocuments()">
                                 Сохранить в БД
                             </button>
 
-                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelectedDocuments()">
                                 Удалить выбранные
                             </button>
                         </div>
@@ -117,13 +109,15 @@
 
         },
         methods: {
-            ...mapMutations({
-                addFilesToStorage: 'uploadStore/addFilesMutation',
-                deleteSelectedFiles: 'uploadStore/deleteSelectedFilesMutation',
-                deleteAllFiles: 'uploadStore/deleteAllFilesMutation'
+            ...mapMutations('uploadStore/',{
+                addFilesToStorage: 'addFilesMutation',
+                deleteSelectedFiles: 'deleteSelectedFilesMutation',
+                deleteAllFiles: 'deleteAllFilesMutation',
             }),
-            ...mapActions({
-                uploadFilesToServer: 'uploadStore/uploadFilesOnServerAction'
+            ...mapActions('uploadStore/',{
+                uploadFilesToServer: 'uploadFilesOnServerAction',
+                saveSelectedDocuments: 'saveSelectedDocumentsToMainDbAction',
+                deleteSelectedDocuments: 'deleteSelectedDocumentsFromTempDbAction'
             }),
             addFiles(event) {
                 this.addFilesToStorage([...event.target.files]);
@@ -131,14 +125,6 @@
             uploadFiles() {
                 this.uploadFilesToServer();
             },
-            //
-            // deleteSelectedFiles() {
-            //
-            // },
-            // deleteAllFiles() {
-            //
-            // },
-
             test() {
                 console.log(this.files);
             }

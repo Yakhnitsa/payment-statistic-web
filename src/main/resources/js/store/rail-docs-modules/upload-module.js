@@ -6,6 +6,7 @@ export default {
     state: () => ({
         files:[],
         uploadedDocuments:[],
+        selectedDocuments:[],
         onUploadProgress: 0
     }),
     getters: {
@@ -33,6 +34,9 @@ export default {
             state.files = []
         },
 
+        setSelectedDocumentsMutation(state, documents){
+            state.selectedDocuments = documents;
+        },
 
         setOnUploadProgressMutation(state, progress){
             state.onUploadProgress = progress;
@@ -54,7 +58,6 @@ export default {
         },
 
         addUploadedDocumentMutation(state, document){
-            console.log(state.uploadedDocuments.length);
             if(document.hasOwnProperty('docNumber')){
                 if(document.docNumber === -1){
                     document.isValid = false;
@@ -100,7 +103,6 @@ export default {
                 const response = await uploadApi.fetchTempUploadedDocs();
                 const data = await response.data;
                 data.forEach(doc =>{
-                    console.log(doc);
                     commit('addUploadedDocumentMutation',doc)
                 })
             }catch{
@@ -109,11 +111,32 @@ export default {
                 }
             }
         },
-        async saveSelectedDocumentsToMainDbAction(){
+        async saveSelectedDocumentsToMainDbAction({commit,state}, documents){
+            try{
+                const response = await uploadApi.saveDocumentsToMainDb(documents);
+                const data = await response.data;
+                data.forEach(doc =>{
+                    commit('addUploadedDocumentMutation',doc)
+                })
+            }catch{
+                if(error.response){
+                    messageManager.showOnLoadException('Ошибка при сохранении документов в основную базу данных');
+                }
+            }
 
         },
-        async deleteSelectedDocumentsFromTempDbAction(){
-
+        async deleteSelectedDocumentsFromTempDbAction({commit,state},documents){
+            try{
+                const response = await uploadApi.deleteDocumentsFromTempDb(documents);
+                const data = await response.data;
+                data.forEach(doc =>{
+                    commit('addUploadedDocumentMutation',doc)
+                })
+            }catch{
+                if(error.response){
+                    messageManager.showOnLoadException('Ошибка при удалении документов с временной БД');
+                }
+            }
         }
     },
 
