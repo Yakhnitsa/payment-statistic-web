@@ -12,16 +12,13 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class AbstractDocParser implements DocParser{
-    protected final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-    protected final String NUMBER_PATTERN = "(-?\\d+[,.]\\d+)";
+    final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+    final String NUMBER_PATTERN = "(-?\\d+[,.]\\d+)";
     private final String LIST_DATE_PATTERN = "\\d{2}\\.\\d{2}\\.\\d{4}";
     private final String LIST_NUMBER_PATTERN = "\\d{8}";
     private final String PAYMENT_CODE_PATTERN = "Код платника:(\\d*)";
@@ -59,10 +56,13 @@ public abstract class AbstractDocParser implements DocParser{
     private PaymentList parseFromJSoup(Document document,String rowSeparator) {
         PaymentList paymentList = new PaymentList();
 
-        Iterator<Element> stringIterator = document.select(rowSeparator).iterator();
+        ListIterator<Element> stringIterator = document.select(rowSeparator).listIterator();
 
         while (stringIterator.hasNext()) {
-            List<String> cellList = parseChartRow(stringIterator.next());
+
+            Element current = stringIterator.next();
+
+            List<String> cellList = parseChartRow(current);
 
             if (cellList.size() <= 0) {
                 continue;
@@ -73,12 +73,11 @@ public abstract class AbstractDocParser implements DocParser{
 
             parseTotalPayments(paymentList, cellList);
 
-            String type = fixType(cellList.get(0));
-
-            List<PaymentDetails> pdList = getPaymentDetailsByType(type, stringIterator);
-
-            paymentList.addAll(pdList);
-
+            if(cellList.size() == 1){
+                String type = fixType(cellList.get(0));
+                List<PaymentDetails> pdList = getPaymentDetailsByType(type, stringIterator);
+                paymentList.addAll(pdList);
+            }
         }
 
         return paymentList;
@@ -154,8 +153,6 @@ public abstract class AbstractDocParser implements DocParser{
         }
     }
 
-
-
     protected void parseOpeningAndClosingBalance(PaymentList paymentList, List<String> cellList) {
         String openBalancePattern = "Сальдо на початок.+:.+?(-?\\d+[,.]?\\d+?)";
         if (cellList.size() > 1 && cellList.get(1).matches(openBalancePattern)) {
@@ -213,7 +210,7 @@ public abstract class AbstractDocParser implements DocParser{
 
     abstract List<String> parseChartRow(Element tableString);
 
-    List<PaymentDetails> getPaymentDetailsByType(String type, Iterator<Element> iterator) {
+    List<PaymentDetails> getPaymentDetailsByType(String type, ListIterator<Element> iterator) {
 
         switch (type) {
             case "Відправлення":

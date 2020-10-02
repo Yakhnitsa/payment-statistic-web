@@ -9,19 +9,17 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 @Service("xml-doc-parser")
 public class XmlDocParser extends AbstractDocParser{
-
-
 
     @Override
     protected List<String> parseChartRow(Element tableString) {
 
         List<String> cellList = new ArrayList<String>();
-        Iterator<Element> cellIterator = tableString.select("Data").iterator();
-        while (cellIterator.hasNext()) {
-            cellList.add(cellIterator.next().text());
+        for (Element element : tableString.select("Data")) {
+            cellList.add(element.text());
         }
         return cellList;
     }
@@ -50,6 +48,43 @@ public class XmlDocParser extends AbstractDocParser{
         else if (cellList.size() >= 3 && cellList.get(1).matches(closingBalancePattern)) {
             paymentList.setClosingBalance(-getLongFromPattern(cellList.get(2), NUMBER_PATTERN));
         }
+    }
+
+    @Override
+    List<PaymentDetails> getPaymentDetailsByType(String type, ListIterator<Element> iterator) {
+        if(!iterator.hasNext()) return new ArrayList<>();
+
+        List<String> elements = parseChartRow(iterator.next());
+        if(elements.size() == 8){
+            return getTransportPayments(type,iterator);
+        }
+        else if(elements.size() == 9){
+            return getStationPayments(type,iterator);
+        }
+        else if(elements.size() == 4 || elements.size() == 5){
+            return getPayments(type,iterator);
+        }
+        iterator.previous();
+        return new ArrayList<>();
+
+//        switch (type) {
+//            case "Відправлення":
+//            case "Відправлення - міжнародне сполучення":
+//            case "Прибуття":
+//            case "Прибуття - імпорт":
+//                return getTransportPayments(type, iterator);
+//            case "Відомості плати за користування вагонами":
+//            case "Накопичувальні карточки":
+//            case "Коригування сум нарахованих платежів":
+//            case "Інформаційні повідомлення":
+//            case "Штрафи":
+//                return getStationPayments(type, iterator);
+//            case "Платіжні доручення":
+//            case "Зараховано на особовий рахунок":
+//                return getPayments(type, iterator);
+//            default:
+//                return new ArrayList<>();
+//        }
     }
 
     @Override
