@@ -214,6 +214,7 @@ public abstract class AbstractDocParser implements DocParser{
     abstract List<String> parseChartRow(Element tableString);
 
     List<PaymentDetails> getPaymentDetailsByType(String type, Iterator<Element> iterator) {
+
         switch (type) {
             case "Відправлення":
             case "Відправлення - міжнародне сполучення":
@@ -223,6 +224,7 @@ public abstract class AbstractDocParser implements DocParser{
             case "Відомості плати за користування вагонами":
             case "Накопичувальні карточки":
             case "Коригування сум нарахованих платежів":
+            case "Інформаційні повідомлення":
             case "Штрафи":
                 return getStationPayments(type, iterator);
             case "Платіжні доручення":
