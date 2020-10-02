@@ -1,0 +1,3037 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Title> Перелік залізничних документів по клієнту-8210260</Title>
+  <LastAuthor>Yuriy</LastAuthor>
+  <Created>2018-01-23T14:59:21Z</Created>
+  <LastSaved>2020-10-02T07:05:17Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9192</WindowHeight>
+  <WindowWidth>23040</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m353165120">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165140">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165160">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165180">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165200">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165220">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353165240">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164704">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164724">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164744">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164764">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164784">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353164804">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162208">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162228">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162248">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162268">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162288">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162308">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162328">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162348">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159920">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159940">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159960">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159980">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160000">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160020">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160040">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160060">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160960">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160980">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161000">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161020">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161040">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161060">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353161080">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353161100">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162416">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162436">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162456">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162476">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162496">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162516">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159712">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159732">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353159752">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159772">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353159792">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159812">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160544">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160564">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160584">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160604">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160624">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160644">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353158256">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158276">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158296">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158316">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158336">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158356">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158376">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353160128">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160148">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160168">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160188">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160208">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353160228">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158048">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158068">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158088">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158108">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158128">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158148">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162624">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162644">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162664">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162684">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162704">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162724">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161792">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161812">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161832">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161852">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161872">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353161892">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162000">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162020">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162040">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353162060">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162080">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353162100">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353158880">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158900">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158920">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158940">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353158960">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353158980">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353157840">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353157860">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353157880">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353157900">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353157920">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353157940">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164080">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164100">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164120">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164140">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164160">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353164180">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="m353159356">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159376">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m353159396">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s65">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s67">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s76">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <NumberFormat ss:Format="Short Date"/>
+  </Style>
+  <Style ss:ID="s77">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s78">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s79">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s91">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Size="7" ss:Bold="1"/>
+   <Interior ss:Color="#CCCCFF" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s106">
+   <Borders>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+     ss:Color="#000000"/>
+   </Borders>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="perelik">
+  <Table ss:ExpandedColumnCount="9" ss:ExpandedRowCount="153" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="38.4" ss:DefaultRowHeight="10.95">
+   <Column ss:Width="40.799999999999997" ss:Span="1"/>
+   <Column ss:Index="3" ss:AutoFitWidth="0" ss:Width="61.8"/>
+   <Column ss:Width="49.8"/>
+   <Column ss:AutoFitWidth="0" ss:Width="55.2"/>
+   <Column ss:AutoFitWidth="0" ss:Width="73.199999999999989"/>
+   <Column ss:AutoFitWidth="0" ss:Width="49.8"/>
+   <Column ss:AutoFitWidth="0" ss:Width="46.800000000000004"/>
+   <Column ss:AutoFitWidth="0" ss:Width="48"/>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s65"><Data ss:Type="String"> ФІЛІЯ ЄДИНИЙ РОЗРАХУНКОВИЙ ЦЕНТР ЗАЛІЗНИЧНИХ ПЕРЕВЕЗЕНЬ АТ &quot;УКРЗАЛІЗНИЦЯ&quot;</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s65"><Data ss:Type="String"> Перелік № 20200930  від 30.09.2020</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="30">
+    <Cell ss:MergeAcross="4" ss:StyleID="s63"><Data ss:Type="String"> Назва платника: ТОВ &quot;УТЛ-2&quot;</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="s63"><Data ss:Type="String"> Код платника:8210260</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"><Data ss:Type="String"> Номер єдиного договору: 8210260  від 17.03.2020</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"><Data ss:Type="String">  ВСП Київський  </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:MergeAcross="2" ss:StyleID="s63"><Data ss:Type="String"> Розрахунковий рахунок: UA413003460000026009023927901</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s63"><Data ss:Type="String"> Код МФО:300346</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="s63"><Data ss:Type="String"> ЄДРПОУ:41515562</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s63"><Data ss:Type="String"> Сальдо на початок розрахункової доби :      -2476606.59</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353159356"><Data ss:Type="String"> Вiдправлення</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Тариф</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дод. збори та послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String">  ПДВ</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353159376"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">336202</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> НЕМИРІВ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 33438201</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    1088.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      217.68</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353159396"><Data ss:Type="String">1306.08</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400108</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЧОРНОМОРСЬКА (ДЛЯ ТІС)</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41535352</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    2118.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      423.70</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164080"><Data ss:Type="String">2542.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400305</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ОДЕСА-ПОРТ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41564279</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    1926.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      385.30</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164100"><Data ss:Type="String">2311.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400305</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ОДЕСА-ПОРТ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41564287</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   40784.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8156.80</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164120"><Data ss:Type="String">48940.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400305</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ОДЕСА-ПОРТ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41564295</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   13583.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     2716.70</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164140"><Data ss:Type="String">16300.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">402000</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЧОРНОМОРСЬК-ПОРТ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41564303</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    4121.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      824.28</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164160"><Data ss:Type="String">4945.68</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400305</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ОДЕСА-ПОРТ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41567512</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   77489.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    15497.92</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164180"><Data ss:Type="String">92987.52</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41568288</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   48900.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     9780.12</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157840"><Data ss:Type="String">58680.72</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41571498</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   27167.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     5433.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157860"><Data ss:Type="String">32600.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41571506</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   27167.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     5433.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157880"><Data ss:Type="String">32600.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41577016</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    2716.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      543.34</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157900"><Data ss:Type="String">3260.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41584343</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   21733.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     4346.72</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157920"><Data ss:Type="String">26080.32</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400502</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> БЕРЕГОВА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41587759</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   22115.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     4423.14</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353157940"><Data ss:Type="String">26538.84</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41589433</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   40750.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8150.10</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158880"><Data ss:Type="String">48900.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400502</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> БЕРЕГОВА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41598996</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   24573.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     4914.60</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158900"><Data ss:Type="String">29487.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="3" ss:StyleID="m353158920"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">   356236.00</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">       0.00</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">   71247.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158940"><Data ss:Type="String">   427483.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353158960"><Data ss:Type="String"> т. ч. тар. 38:</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158980"><Data ss:Type="String">            </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353162000"><Data ss:Type="String"> т. ч. послуги</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162020"><Data ss:Type="String">            </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353162040"><Data ss:Type="String"> т. ч. охорона:</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162060"><Data ss:Type="String">            </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353162080"><Data ss:Type="String"> Вiдправлення - мiжнародне сполучення</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Тариф</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дод. збори та послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162100"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">336202</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> НЕМИРІВ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 33438763</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   34602.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   6920.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161792"><Data ss:Type="String">   41522.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">331707</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЯРОШЕНКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 33439332</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   60390.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  12078.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161812"><Data ss:Type="String">   72468.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">331707</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЯРОШЕНКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 33442278</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   20012.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   4002.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161832"><Data ss:Type="String">   24014.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36383529</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  129152.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  25830.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161852"><Data ss:Type="String">  154982.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36383834</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   64576.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  12915.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161872"><Data ss:Type="String">   77491.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36384212</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  129152.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  25830.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161892"><Data ss:Type="String">  154982.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">361609</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> РОГАТИН</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36384923</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   14746.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   2949.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162624"><Data ss:Type="String">   17695.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">361609</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> РОГАТИН</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36384931</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   44057.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   8811.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162644"><Data ss:Type="String">   52868.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">361609</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> РОГАТИН</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36388809</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   29492.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   5898.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162664"><Data ss:Type="String">   35390.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">361609</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> РОГАТИН</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36394419</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   44057.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   8811.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162684"><Data ss:Type="String">   52868.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">361609</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> РОГАТИН</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 36394500</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   14746.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   2949.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162704"><Data ss:Type="String">   17695.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">415207</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> МИКОЛАїВ-ВАНТАЖНИЙ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41581679</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   11722.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162724"><Data ss:Type="String">   11827.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400502</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> БЕРЕГОВА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41586298</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158048"><Data ss:Type="String">    6985.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">400409</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ОДЕСА-ПОРТ  (ЕКСП.)</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41586884</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   90303.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  18060.60</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158068"><Data ss:Type="String">  108363.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">433309</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПРИКОЛОТНЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43341668</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    7584.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   4965.58</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   2509.92</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158088"><Data ss:Type="String">   15059.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">429002</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПРИЛУКИ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43529551</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  473538.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  94707.60</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158108"><Data ss:Type="String">  568245.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">429002</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПРИЛУКИ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43529635</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   87507.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  17501.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158128"><Data ss:Type="String">  105008.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43530971</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    2649.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158148"><Data ss:Type="String">    2754.90</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">427505</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕСЕЛИЙ ПОДІЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43531037</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   24036.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   4807.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160128"><Data ss:Type="String">   28843.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43532043</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  104330.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  20866.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160148"><Data ss:Type="String">  125196.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43532068</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  104456.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  20891.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160168"><Data ss:Type="String">  125347.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43532076</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  104708.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  20941.60</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160188"><Data ss:Type="String">  125649.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43537968</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  105212.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  21042.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160208"><Data ss:Type="String">  126254.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43539162</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   52795.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  10559.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160228"><Data ss:Type="String">   63354.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43539436</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   41732.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   8346.40</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158256"><Data ss:Type="String">   50078.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 43539832</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   10559.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   2111.80</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158276"><Data ss:Type="String">   12670.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 46626354</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   31677.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  20994.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  10534.26</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158296"><Data ss:Type="String">   63205.56</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 46626370</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   21118.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  13996.20</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   7022.84</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158316"><Data ss:Type="String">   42137.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 50962067</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">   92691.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  18538.20</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158336"><Data ss:Type="String">  111229.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="3" ss:StyleID="m353158356"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">  1958479.70</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">   40272.58</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">  395436.82</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353158376"><Data ss:Type="String">  2394189.10</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353160544"><Data ss:Type="String"> т. ч. тар. 38:</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160564"><Data ss:Type="String">            </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353160584"><Data ss:Type="String"> т. ч. послуги:</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160604"><Data ss:Type="String">            </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="6" ss:StyleID="m353160624"><Data ss:Type="String"> т. ч. охорона:</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160644"><Data ss:Type="String">     4965.58</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353159712"><Data ss:Type="String"> Вiдомостi плати за користування вагонами</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Код</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Вид послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090004</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">268/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       36.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       7.26</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       43.56</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090004</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">183/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      469.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      93.94</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      563.64</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090006</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">285/16</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами ЦТЛ на підставі ГУ-45,ГУ-23, складені під час </Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      157.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      31.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      188.40</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090006</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">285/26</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами ЦТЛ: плата за актами ГУ-23а,ГУ-23 до подавання</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      107.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      21.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      129.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090007</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">188/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1769.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     353.80</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     2122.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090007</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">255/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     3675.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     735.08</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     4410.48</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">331707</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЯРОШЕНКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090009</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">183/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       54.40</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      10.88</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       65.28</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090010</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">186/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо п/к на бала</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     3578.90</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     715.78</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     4294.68</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090010</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">188/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Маневрова робота, що виконується локомотивом з-ці на вимогу вантажов</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1769.10</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     353.82</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     2122.92</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090011</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">268/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Корист.вл.ваг.,конт.iнш.держ.на мзк: плата за актами ГУ-23а,ГУ-23 до</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       26.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       5.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       31.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090011</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">183/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      132.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      26.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      159.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">427505</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕСЕЛИЙ ПОДІЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090075</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">183/2</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Користування вагонами УЗ на п/к: плата за актами ГУ-23а,ГУ-23 до под</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       20.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       4.12</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       24.72</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="5" ss:StyleID="m353159732"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    11796.90</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    2359.38</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    14156.28</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353159752"><Data ss:Type="String"> Накопичувальнi карточки</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Код</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Вид послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">29.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">350303</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ДУБНО</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 29090545</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">211/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       10.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       2.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       12.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">331707</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЯРОШЕНКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090096</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">195/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Зважування вантажів або пор.вагонів на вагах залізниці при перевезен</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     7273.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    1454.72</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8728.32</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">427505</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕСЕЛИЙ ПОДІЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090177</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">211/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       20.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       4.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       24.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">498905</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> КАБАННЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090268</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">195/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Зважування вантажів або пор.вагонів на вагах залізниці при перевезен</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1364.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     272.80</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1636.80</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">477307</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ВЕЛИКИЙ ТОКМАК</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090303</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">195/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Зважування вантажів або пор.вагонів на вагах залізниці при перевезен</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     2273.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     454.66</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     2727.96</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">336202</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> НЕМИРІВ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30090342</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">211/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Надання одержувачем інформації про прибуття вантажів наїхні адреси п</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       10.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       2.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       12.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">448501</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ПОЛТАВА-КИїВСЬКА</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 30091584</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">255/301</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Подача або забирання на п/к  та інші місця не з.к., якщо част. п/к н</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    23722.20</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    4744.44</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    28466.64</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="5" ss:StyleID="m353159772"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    34673.10</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    6934.62</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    41607.72</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353159792"><Data ss:Type="String"> Інформаційні повідомлення</Data></Cell>
+   </Row>
+   <Row ss:Height="48">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Балансоутримувач</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Виконавець</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Інформаційне повідомлення</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Код</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Вид послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String"> ЦТЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЦТЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 01100845</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">244</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Неустойка за невиконання Замовником умов надання послуги перевезення</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  6647088.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  6647088.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="39.450000000000003">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String"> ЦТЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> ЦТЛ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 01100850</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">244</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Неустойка за невиконання Замовником умов надання послуги перевезення</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  1631112.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">  1631112.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="5" ss:StyleID="m353159812"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">  8278200.00</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">       0.00</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">  8278200.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353162416"><Data ss:Type="String"> Коригування сум нарахованих платежів - поточний місяць</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Код</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Вид послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41003104</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41003104</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41003104</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41003104</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41018698</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41018698</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41018698</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41018698</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032046</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032046</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032046</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032046</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032053</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032053</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032053</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032053</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033226</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033226</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033226</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033226</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033234</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     -105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033234</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">    -6880.30</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033234</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/107</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір збору за покриття витрат на митний догляд експортно-імпортни</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      105.50</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033234</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">32'/1</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Перебір тарифу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      113.60</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="5" ss:StyleID="m353162436"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">   -40600.20</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">        0.00</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">   -40600.20</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353162456"><Data ss:Type="String"> Коригування сум нарахованих платежів - минулі місяці</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Станція</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Назва станції</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Код</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Вид послуги</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Всього</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41003104</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">21.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41018698</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032046</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41032053</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033226</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="26.55">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">19.09.2020</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">499005</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> СВАТОВЕ</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 41033234</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="String">21'/94</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> Тариф при видачі (прибутті) вантажу</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     6766.70</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     1353.34</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">     8120.04</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="5" ss:StyleID="m353162476"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    40600.20</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">     8120.04</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">    48720.24</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353162496"><Data ss:Type="String"> Платіжні доручення</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Дата</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Документ</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Підкод</Data></Cell>
+    <Cell ss:StyleID="s67"><Data ss:Type="String"> Сума</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353162516"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 10856</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">500</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">       500000.00</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353160960"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s76"><Data ss:Type="String">30.09.2020</Data></Cell>
+    <Cell ss:StyleID="s78"><Data ss:Type="String"> 284</Data></Cell>
+    <Cell ss:StyleID="s77"><Data ss:Type="Number">500</Data></Cell>
+    <Cell ss:StyleID="s79"><Data ss:Type="String">      1000000.00</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353160980"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="2" ss:StyleID="m353161000"><Data ss:Type="String"> Всього</Data></Cell>
+    <Cell ss:StyleID="s91"><Data ss:Type="String">  1500000.00</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353161020"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="m353161040"><Data ss:Type="String"> </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161060"><Data ss:Type="String"> Всього проведено платежів</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353161080"><Data ss:Type="String">     10679658.28</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353161100"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353159920"><Data ss:Type="String"> в т.ч. за ставкою 0%</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353159940"><Data ss:Type="String">       -19032.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353159960"><Data ss:Type="String"> Передоплата</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353159980"><Data ss:Type="String">      1500000.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160000"><Data ss:Type="String"> в т.ч. за ставкою 20%</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160020"><Data ss:Type="String">      2420490.28</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353160040"><Data ss:Type="String"> </Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353160060"><Data ss:Type="String"> </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="30">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162208"><Data ss:Type="String"> в т.ч. звіл. від оподаткув, штрафи,пеня</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162228"><Data ss:Type="String">      8278200.00</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162248"><Data ss:Type="String"> Списано</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353162268"><Data ss:Type="String">                </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162288"><Data ss:Type="String"> За додатковi послуги</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162308"/>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353162328"><Data ss:Type="String"> Зараховано</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353162348"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164704"><Data ss:Type="String"> Зарезервовано</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164724"/>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353164744"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164764"><Data ss:Type="String"> ПДВ</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353164784"><Data ss:Type="String">       484098.06</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="m353164804"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:MergeAcross="1" ss:StyleID="m353165120"><Data ss:Type="String"> Разом</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353165140"><Data ss:Type="String">     11163756.34</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353165160"><Data ss:Type="String"> Сальдо на кінець розрахункової доби</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353165180"><Data ss:Type="String">      7187149.75</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="19.950000000000003">
+    <Cell ss:MergeAcross="3" ss:StyleID="m353165200"><Data ss:Type="String"> </Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m353165220"><Data ss:Type="String"> в т.ч. резерв :</Data></Cell>
+    <Cell ss:MergeAcross="2" ss:StyleID="m353165240"><Data ss:Type="String">            0.00</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8" ss:StyleID="s106"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="2"><Data ss:Type="String"> </Data></Cell>
+    <Cell ss:MergeAcross="5"><Data ss:Type="String"> документ підписаний ЕЦП (електронною печаткою) філії &quot;ЄРЦ&quot; АТ &quot;Укрзалізниця&quot;</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="8"><Data ss:Type="String"> ПIБ вiдповiдального працiвника ________________</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996"
+     x:Right="0.78740157499999996" x:Top="0.984251969"/>
+   </PageSetup>
+   <Unsynced/>
+   <Selected/>
+   <DoNotDisplayGridlines/>
+   <TopRowVisible>117</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>126</ActiveRow>
+     <RangeSelection>R127C1:R134C9</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

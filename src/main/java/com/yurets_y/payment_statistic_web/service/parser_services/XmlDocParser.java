@@ -66,25 +66,6 @@ public class XmlDocParser extends AbstractDocParser{
         }
         iterator.previous();
         return new ArrayList<>();
-
-//        switch (type) {
-//            case "Відправлення":
-//            case "Відправлення - міжнародне сполучення":
-//            case "Прибуття":
-//            case "Прибуття - імпорт":
-//                return getTransportPayments(type, iterator);
-//            case "Відомості плати за користування вагонами":
-//            case "Накопичувальні карточки":
-//            case "Коригування сум нарахованих платежів":
-//            case "Інформаційні повідомлення":
-//            case "Штрафи":
-//                return getStationPayments(type, iterator);
-//            case "Платіжні доручення":
-//            case "Зараховано на особовий рахунок":
-//                return getPayments(type, iterator);
-//            default:
-//                return new ArrayList<>();
-//        }
     }
 
     @Override
@@ -136,7 +117,7 @@ public class XmlDocParser extends AbstractDocParser{
                 PaymentDetails pd = new PaymentDetails();
                 pd.setType(type);
                 pd.setDate(DATE_FORMAT.parse(row.get(0)));
-                pd.setStationCode(Integer.parseInt(row.get(1)));
+                pd.setStationCode(parseStationCode(row.get(1)));
                 pd.setStationName(row.get(2));
                 pd.setDocumentNumber(row.get(3));
                 pd.setPaymentCode(row.get(4));
@@ -183,6 +164,13 @@ public class XmlDocParser extends AbstractDocParser{
             }
         }
         return paymentDetailsList;
+    }
+
+    private int parseStationCode(String s) {
+        if(s.matches("\\d{5,6}")){
+            return Integer.parseInt(s);
+        }
+        else return -1;
     }
 
 }
