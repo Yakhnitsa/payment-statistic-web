@@ -18,7 +18,8 @@
                     </div>
 
                     <div class="progress" v-show="showProgressBar">
-                        <div class="progress-bar" role="progressbar" :style="progressStyle" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar"
+                             :style="progressStyle" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
                     <div class="control-panel-md my-1">
@@ -38,7 +39,7 @@
                                 Удалить все
                             </button>
 
-                            <button type="button" class="btn btn-primary mx-1" @click="uploadFilesToServer">
+                            <button type="button" class="btn btn-primary mx-1" @click="uploadFiles">
                                 Загрузить
                                 <span v-if="selectedFiles.length > 0" class="badge badge-light">{{selectedFiles.length}}</span>
                             </button>
@@ -51,18 +52,18 @@
                 <div class="flex-container">
                     <div class="h5">Загруженные накладные</div>
                     <div class="flex-element">
-                        <uploaded-documents-table >
+                        <uploaded-documents-table ref="uploadDocs">
 
                         </uploaded-documents-table>
 
                     </div>
                     <div class="control-panel my-1">
                         <div class="input-group">
-                            <button type="button" class="btn btn-primary mx-1" @click="saveSelectedDocuments()">
+                            <button type="button" class="btn btn-primary mx-1" @click="saveSelected()">
                                 Сохранить в БД
                             </button>
 
-                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelectedDocuments()">
+                            <button type="button" class="btn btn-primary mx-1" @click="deleteSelected()">
                                 Удалить выбранные
                             </button>
                         </div>
@@ -115,18 +116,23 @@
                 deleteAllFiles: 'deleteAllFilesMutation',
             }),
             ...mapActions('uploadStore/',{
-                uploadFilesToServer: 'uploadFilesOnServerAction',
+                uploadFiles: 'uploadFilesOnServerAction',
                 saveSelectedDocuments: 'saveSelectedDocumentsToMainDbAction',
                 deleteSelectedDocuments: 'deleteSelectedDocumentsFromTempDbAction'
             }),
             addFiles(event) {
                 this.addFilesToStorage([...event.target.files]);
             },
-            uploadFiles() {
-                this.uploadFilesToServer();
+            saveSelected(){
+                this.clearSelectedDocs();
+                this.saveSelectedDocuments();
             },
-            test() {
-                console.log(this.files);
+            deleteSelected(){
+                this.clearSelectedDocs();
+                this.deleteSelectedDocuments();
+            },
+            clearSelectedDocs(){
+                this.$refs.uploadDocs.clearSelectedDocs();
             }
         },
         watch: {

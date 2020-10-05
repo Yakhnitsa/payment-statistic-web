@@ -58,7 +58,6 @@
 
     export default {
         name: "UploadedDocumentsTable",
-        props:['selectedDocuments'],
         data(){
             return{
                 selectedDocuments:[],
@@ -70,10 +69,11 @@
             }),
             allSelected:{
                 get(){
-                    return this.selectedDocuments.length === this.uploadedDocuments.length;
+                    return this.selectedDocuments.length > 0 ?
+                        this.selectedDocuments.length=== this.uploadedDocuments.length : false;
                 },
                 set(selected){
-                    this.selectedDocuments.length = 0;
+                    this.clearSelectedDocs();
 
                     if(selected){
                         this.uploadedDocuments.forEach(doc => {
@@ -86,6 +86,10 @@
         methods:{
             isDocCorrect(document){
                 return document.docNumber !== -1;
+            },
+            clearSelectedDocs(){
+                console.log('selected docs cleared');
+                this.selectedDocuments = [];
             }
         },
         watch:{
