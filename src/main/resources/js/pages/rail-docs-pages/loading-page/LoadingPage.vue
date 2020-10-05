@@ -131,7 +131,7 @@
         },
         watch: {
             loadingProgress(value) {
-                console.log(value);
+                // console.log(value);
             }
         }
     }

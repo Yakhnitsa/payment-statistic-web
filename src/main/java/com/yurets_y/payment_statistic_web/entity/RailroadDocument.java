@@ -39,12 +39,12 @@ public class RailroadDocument extends AuditableEntity {
     private Date credDate;
 
     @ManyToOne
-//    @NotFound(action=NotFoundAction.IGNORE)
+    @NotFound(action=NotFoundAction.IGNORE)
     @JsonView(Views.ShortView.class)
     private Station sendStation;
 
     @ManyToOne
-//    @NotFound(action=NotFoundAction.IGNORE)
+    @NotFound(action=NotFoundAction.IGNORE)
     @JsonView(Views.ShortView.class)
     private Station receiveStation;
 
@@ -112,10 +112,12 @@ public class RailroadDocument extends AuditableEntity {
      * getters and setters:
      */
     public void addVagon(Vagon vagon) {
+        vagon.setRailroadDocument(this);
         vagonList.add(vagon);
     }
 
-    public void addVagons(Collection vagons) {
+    public void addVagons(Collection<Vagon> vagons) {
+        vagons.forEach(vagon -> vagon.setRailroadDocument(this));
         vagonList.addAll(vagons);
     }
 

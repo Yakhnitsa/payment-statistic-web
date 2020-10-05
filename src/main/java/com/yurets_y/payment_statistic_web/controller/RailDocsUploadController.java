@@ -52,18 +52,35 @@ public class RailDocsUploadController {
 
     @PostMapping("/api/documents/save-docs-to-main-db")
     @Secured({"ROLE_EDITOR"})
+    @JsonView(Views.ShortView.class)
     public ResponseEntity<?> saveDocumentsToMainDb(
-            @RequestBody Object[] payload
+            @RequestBody RailroadDocument[] documents
     ){
-        System.out.println(payload);
+        List<RailroadDocument> savedDocuments = new ArrayList<>();
+        for (RailroadDocument docFromRequest : documents) {
+            if(isDocCorrect(docFromRequest)){
+                RailroadDocument docFromTempDb = tempDocService.deleteFromTempDB(docFromRequest);
+                docService.add(docFromTempDb);
+                savedDocuments.add(docFromTempDb);
+            }
+            //TODO проверить в работе
+//            else{
+//                return new ResponseEntity<>(docFromRequest, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+//            }
 
-        return null;
+        }
+        Map<String, Collection<RailroadDocument>> responseMap = new HashMap<>();
+        responseMap.put("saved-docs",savedDocuments);
+        responseMap.put("temp-docs",tempDocService.getAllFromTempDB());
+
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
 
     @DeleteMapping("/api/documents/delete-docs-from-temp-db")
     @Secured({"ROLE_EDITOR"})
+    @JsonView(Views.ShortView.class)
     public ResponseEntity<?> deleteDocumentsFromTempDb(
-            @RequestBody Object[] payload
+            @RequestBody RailroadDocument[] payload
     )
     {
         System.out.println(payload);
@@ -74,5 +91,9 @@ public class RailDocsUploadController {
         Map<String,String> map = new HashMap<>();
         map.put("number",fileName);
         return map;
+    }
+
+    private boolean isDocCorrect(RailroadDocument railroadDocument){
+        return (railroadDocument.getDocNumber() != -1) && (railroadDocument.getDateStamp() != null);
     }
 }

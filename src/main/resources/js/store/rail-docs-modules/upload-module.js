@@ -111,13 +111,13 @@ export default {
                 }
             }
         },
-        async saveSelectedDocumentsToMainDbAction({commit,state}, documents){
+        async saveSelectedDocumentsToMainDbAction({commit,state}){
             try{
-                const response = await uploadApi.saveDocumentsToMainDb(documents);
+                const response = await uploadApi.saveDocumentsToMainDb(state.selectedDocuments);
                 const data = await response.data;
-                data.forEach(doc =>{
-                    commit('addUploadedDocumentMutation',doc)
-                })
+                state.uploadedDocuments = data['temp-docs'];
+                messageManager.showSuccessfullyUploadedDocs(data['saved-docs']);
+
             }catch{
                 if(error.response){
                     messageManager.showOnLoadException('Ошибка при сохранении документов в основную базу данных');
@@ -125,9 +125,9 @@ export default {
             }
 
         },
-        async deleteSelectedDocumentsFromTempDbAction({commit,state},documents){
+        async deleteSelectedDocumentsFromTempDbAction({commit,state}){
             try{
-                const response = await uploadApi.deleteDocumentsFromTempDb(documents);
+                const response = await uploadApi.deleteDocumentsFromTempDb(state.selectedDocuments);
                 const data = await response.data;
                 data.forEach(doc =>{
                     commit('addUploadedDocumentMutation',doc)
