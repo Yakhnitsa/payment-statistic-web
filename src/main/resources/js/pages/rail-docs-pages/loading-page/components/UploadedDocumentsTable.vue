@@ -4,7 +4,9 @@
         <tr>
             <th>
                 <label class="form-checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox"
+                           v-model="allSelected"
+                    >
                     <i class="form-icon"></i>
                 </label>
             </th>
@@ -19,11 +21,17 @@
         <tr v-for="document in uploadedDocuments">
             <td  scope="col" class="col-2">
                 <label class="form-checkbox">
-                    <input type="checkbox" :value="document" v-model="selectedDocuments">
+                    <input type="checkbox"
+                           :disabled="!isDocCorrect(document)"
+                           :value="document" v-model="selectedDocuments">
                     <i class="form-icon"></i>
                 </label>
+                <span>{{document.docNumber !== -1}}</span>
+                <span v-if="document.pdfBackupFile" class="far fa-file-pdf text-success"></span>
             </td>
-            <td  scope="col" class="text-center">
+            <td scope="col"
+                :class="{'incorrect' : !isDocCorrect(document)}"
+                class="text-center">
                 {{document.docNumber}}
             </td>
             <td  scope="col" class="text-center small">
@@ -50,24 +58,35 @@
 
     export default {
         name: "UploadedDocumentsTable",
+        props:['selectedDocuments'],
         data(){
             return{
                 selectedDocuments:[],
-                documents:[]
             }
         },
         computed:{
             ...mapGetters({
                     uploadedDocuments: 'uploadStore/uploadedDocuments',
             }),
+            allSelected:{
+                get(){
+                    return this.selectedDocuments.length === this.uploadedDocuments.length;
+                },
+                set(selected){
+                    this.selectedDocuments.length = 0;
+
+                    if(selected){
+                        this.uploadedDocuments.forEach(doc => {
+                            if(doc.number !== -1) this.selectedDocuments.push(doc)
+                        })
+                    }
+                }
+            }
         },
         methods:{
-            // saveSelected(){
-            //     this.$store.dispatch('uploadStore/saveSelectedDocumentsToMainDbAction',this.selectedDocuments);
-            // },
-            // deleteSelected(){
-            //     this.$store.dispatch('uploadStore/deleteSelectedDocumentsFromTempDbAction',this.selectedDocuments);
-            // }
+            isDocCorrect(document){
+                return document.docNumber !== -1;
+            }
         },
         watch:{
             selectedDocuments(val){
@@ -89,7 +108,12 @@
 </script>
 
 <style scoped>
-
+    .incorrect{
+        text-decoration: line-through;
+        font-style: italic;
+        font-weight: bold;
+        color: #eb2400;
+    }
     td{
         white-space: nowrap;
         overflow: hidden;

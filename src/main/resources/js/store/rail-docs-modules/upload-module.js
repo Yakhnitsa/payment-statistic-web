@@ -128,10 +128,8 @@ export default {
         async deleteSelectedDocumentsFromTempDbAction({commit,state}){
             try{
                 const response = await uploadApi.deleteDocumentsFromTempDb(state.selectedDocuments);
-                const data = await response.data;
-                data.forEach(doc =>{
-                    commit('addUploadedDocumentMutation',doc)
-                })
+                state.uploadedDocuments = await response.data;
+
             }catch{
                 if(error.response){
                     messageManager.showOnLoadException('Ошибка при удалении документов с временной БД');

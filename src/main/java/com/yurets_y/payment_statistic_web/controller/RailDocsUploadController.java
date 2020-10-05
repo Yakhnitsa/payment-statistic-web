@@ -83,8 +83,11 @@ public class RailDocsUploadController {
             @RequestBody RailroadDocument[] payload
     )
     {
-        System.out.println(payload);
-        return null;
+        for(RailroadDocument document: payload){
+//            System.out.println(document);
+            tempDocService.deleteFromTempDB(document);
+        }
+        return new ResponseEntity<>(tempDocService.getAllFromTempDB(),HttpStatus.OK);
     }
 
     private Map<String,String> getMockedFile(String fileName){
