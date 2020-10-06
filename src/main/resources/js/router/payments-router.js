@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 import DailyStatistic from '../pages/DailyStatistic.vue'
 import Payments from '../pages/payments-pages/payment-list-page/PaymentsList.vue'
@@ -14,7 +14,7 @@ export default new VueRouter({
     routes:[
         {
             path: '/',
-            component: ChartsPage
+            component: Test
         },
         {
             path: '/daily-statistic',

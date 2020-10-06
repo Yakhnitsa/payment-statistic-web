@@ -34,7 +34,7 @@
         },
         computed:{
             ...mapGetters(['inDeveloperMode'],{
-                
+
             }),
             payerCode:{
                 get() {
