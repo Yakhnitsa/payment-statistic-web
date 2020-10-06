@@ -1,33 +1,9 @@
 <template>
-    <div>
-        <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-
-            <!--<select class="selectpicker btn btn-light show-tick" v-model="payerCode">-->
-                <!--<option v-for="code in paymentCodes">{{code}}</option>-->
-            <!--</select>-->
-
-            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">-->
-                <!--<span class="navbar-toggler-icon"></span>-->
-            <!--</button>-->
-            <!--<div class="collapse navbar-collapse" id="navbarNavAltMarkup">-->
-                <!--<div class="navbar-nav">-->
-                    <!--<router-link to="/" class="nav-item nav-link">Графики затрат</router-link>-->
-                    <!--<router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>-->
-                    <!--<router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>-->
-                    <!--<router-link to="/payment-details" class="nav-item nav-link">Детали платежей</router-link>-->
-                    <!--<router-link-->
-                            <!--v-if="inDeveloperMode"-->
-                            <!--:to="{name: 'test', params: {dateFrom: '2020-07-20', dateUntil: '2020-08-03'}}"-->
-                            <!--class="nav-item nav-link">Test</router-link>-->
-                    <!--&lt;!&ndash;<a class="nav-item nav-link" href="#">Pricing</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>&ndash;&gt;-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</nav>-->
-        <div class="position-fixed" :style="sidebarStyle">
+    <div class="app-content" :style="appContentStyle">
+        <div class="position-fixed sidebar">
             <sidebar :sidebarSize.sync="sidebarSize"></sidebar>
         </div>
-        <div class="app-content" :style="mainBarStyle">
+        <div class="mainbar" :style="mainBarStyle">
             <router-view></router-view>
         </div>
 
@@ -57,7 +33,9 @@
             }
         },
         computed:{
-            ...mapGetters(['inDeveloperMode']),
+            ...mapGetters(['inDeveloperMode'],{
+                
+            }),
             payerCode:{
                 get() {
                     return this.$store.state.payerCode;
@@ -70,21 +48,16 @@
                 return  this.$store.getters.userRoles;
             },
 
-            sidebarStyle(){
+            appContentStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
                 const marginTop = headerSize + 10 + 'px';
                 return{
                     position: 'fixed',
                     top: marginTop,
-                    'z-index': 1
                 }
             },
             mainBarStyle(){
-                const headerSize = document.querySelector('#site-header').scrollHeight;
-                const marginTop = headerSize + 10 + 'px';
-
                 return {
-                    'margin-top' : marginTop,
                     'margin-left' : this.sidebarSize
                 }
             }
@@ -101,10 +74,9 @@
             }
         },
 
-        created: function(){
+        created(){
             this.paymentCodes = paymentCodes;
-            this.setDefaultCode()
-
+            this.setDefaultCode();
         },
         mounted(){
 
@@ -117,8 +89,8 @@
 <style scoped>
 
     .app-content {
-        /*margin-top: 60px;*/
-        /*margin-left: 60px;*/
+        width: 100%;
+        padding-left: 5px;
     }
 
 </style>
