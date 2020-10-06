@@ -14,7 +14,7 @@ export default new VueRouter({
     routes:[
         {
             path: '/',
-            component: Test
+            component: ChartsPage
         },
         {
             path: '/daily-statistic',
