@@ -1,36 +1,20 @@
 <template>
-    <div>
-        <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <div class="wrapper" :style="appContentStyle">
+        <!-- Sidebar  -->
+        <sidebar></sidebar>
 
-            <!--<select class="selectpicker btn btn-light show-tick" v-model="payerCode">-->
-                <!--<option v-for="code in paymentCodes">{{code}}</option>-->
-            <!--</select>-->
+        <!-- Page Content  -->
+        <div id="content">
+            <button type="button"
+                    :style="toggleButtonStyle"
+                    @click="toggleSidebar"
+                    id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Скрыть панель</span>
+            </button>
 
-            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">-->
-                <!--<span class="navbar-toggler-icon"></span>-->
-            <!--</button>-->
-            <!--<div class="collapse navbar-collapse" id="navbarNavAltMarkup">-->
-                <!--<div class="navbar-nav">-->
-                    <!--<router-link to="/" class="nav-item nav-link">Графики затрат</router-link>-->
-                    <!--<router-link to="/daily-statistic" class="nav-item nav-link">Статистика по дням</router-link>-->
-                    <!--<router-link to="/payments" class="nav-item nav-link">Список перечней</router-link>-->
-                    <!--<router-link to="/payment-details" class="nav-item nav-link">Детали платежей</router-link>-->
-                    <!--<router-link-->
-                            <!--v-if="inDeveloperMode"-->
-                            <!--:to="{name: 'test', params: {dateFrom: '2020-07-20', dateUntil: '2020-08-03'}}"-->
-                            <!--class="nav-item nav-link">Test</router-link>-->
-                    <!--&lt;!&ndash;<a class="nav-item nav-link" href="#">Pricing</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>&ndash;&gt;-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</nav>-->
-        <div class="position-fixed" :style="sidebarStyle">
-            <sidebar :sidebarSize.sync="sidebarSize"></sidebar>
-        </div>
-        <div class="app-content" :style="mainBarStyle">
             <router-view></router-view>
         </div>
-
     </div>
 </template>
 
@@ -57,7 +41,9 @@
             }
         },
         computed:{
-            ...mapGetters(['inDeveloperMode']),
+            ...mapGetters(['inDeveloperMode'],{
+
+            }),
             payerCode:{
                 get() {
                     return this.$store.state.payerCode;
@@ -70,24 +56,23 @@
                 return  this.$store.getters.userRoles;
             },
 
-            sidebarStyle(){
+            appContentStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
                 const marginTop = headerSize + 10 + 'px';
                 return{
-                    position: 'fixed',
-                    top: marginTop,
-                    'z-index': 1
+                    // position: 'fixed',
+                    'margin-top': marginTop,
                 }
             },
-            mainBarStyle(){
+            toggleButtonStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
-                const marginTop = headerSize + 10 + 'px';
-
+                const marginTop = headerSize + 5 + 'px';
                 return {
-                    'margin-top' : marginTop,
-                    'margin-left' : this.sidebarSize
+                    top: marginTop,
+                    position : 'sticky',
                 }
             }
+
         },
         methods:{
             test(event){
@@ -98,13 +83,15 @@
                 if(code === '' && paymentCodes.length > 0){
                     this.$store.commit('setPayerCodeMutation',paymentCodes[0])
                 }
+            },
+            toggleSidebar(){
+                $('#sidebar').toggleClass('active');
             }
         },
 
-        created: function(){
+        created(){
             this.paymentCodes = paymentCodes;
-            this.setDefaultCode()
-
+            this.setDefaultCode();
         },
         mounted(){
 
@@ -116,9 +103,41 @@
 
 <style scoped>
 
-    .app-content {
-        /*margin-top: 60px;*/
-        /*margin-left: 60px;*/
+
+    /* ---------------------------------------------------
+        SIDEBAR STYLE
+    ----------------------------------------------------- */
+
+    .wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .dropdown-toggle {
+        white-space: normal!important;
+    }
+
+    #content {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s;
+    }
+
+    /* ---------------------------------------------------
+        MEDIAQUERIES
+    ----------------------------------------------------- */
+
+    @media (max-width: 768px) {
+
+        .dropdown-toggle::after {
+            top: auto;
+            bottom: 10px;
+            right: 50%;
+            -webkit-transform: translateX(50%);
+            -ms-transform: translateX(50%);
+            transform: translateX(50%);
+        }
     }
 
 </style>
