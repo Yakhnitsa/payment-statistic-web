@@ -21,40 +21,24 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
+    import Sidebar from './Sidebar.vue';
 
-    import Sidebar from '../components/Sidebar.vue'
-    import {mapGetters} from 'vuex'
-
-    export default{
+    export default {
+        name: "DocumentsPage",
         components:{
             Sidebar
-        },
-        data: function() {
-            return{
-
-            }
         },
         computed:{
             ...mapGetters(['inDeveloperMode'],{
 
             }),
-            payerCode:{
-                get() {
-                    return this.$store.state.payerCode;
-                },
-                set(code){
-                    this.$store.commit('setPayerCodeMutation',code)
-                }
-            },
-            userRoles(){
-                return  this.$store.getters.userRoles;
-            },
-
-            appContentStyle(){
+            mainBarStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
-                return{
-                    // position: 'fixed',
-                    'margin-top': headerSize + 'px',
+                const marginTop = headerSize + 10 + 'px';
+
+                return {
+                    'margin-top' : marginTop,
                 }
             },
             toggleButtonStyle(){
@@ -65,34 +49,23 @@
                     position : 'sticky',
                 }
             },
+            appContentStyle(){
+                const headerSize = document.querySelector('#site-header').scrollHeight;
+                return {
+                    'margin-top': headerSize + 'px',
+                }
+            },
+
+
 
         },
         methods:{
-            test(event){
-                console.log(event)
-            },
-            setDefaultCode(){
-                let code = this.$store.state.payerCode;
-                if(code === '' && paymentCodes.length > 0){
-                    this.$store.commit('setPayerCodeMutation',paymentCodes[0])
-                }
-            },
             toggleSidebar(){
                 $('#sidebar').toggleClass('active');
             }
         },
-
-        created(){
-            this.paymentCodes = paymentCodes;
-            this.setDefaultCode();
-        },
-        mounted(){
-
-        }
-
     }
-
-</script >
+</script>
 
 <style scoped>
 

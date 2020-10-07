@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
-import RootPage from '../pages/rail-docs-pages/RailDocumensPage.vue'
-import Certificates from '../pages/rail-docs-pages/QualityCertsPage.vue'
+import RootPage from '../pages/rail-docs-pages/rail-docs-page/RailDocumensPage.vue'
+import Certificates from '../pages/rail-docs-pages/quality-certificates-page/QualityCertsPage.vue'
 import LoadingPage from '../pages/rail-docs-pages/loading-page/LoadingPage.vue'
 
 const rootPath = '';
@@ -14,7 +14,7 @@ export default new VueRouter({
     routes:[
         {
             path: '/',
-            component: LoadingPage
+            component: RootPage
         },
         {
             path: '/certificates',
