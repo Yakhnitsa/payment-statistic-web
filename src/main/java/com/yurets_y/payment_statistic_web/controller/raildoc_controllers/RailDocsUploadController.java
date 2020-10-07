@@ -1,4 +1,4 @@
-package com.yurets_y.payment_statistic_web.controller;
+package com.yurets_y.payment_statistic_web.controller.raildoc_controllers;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
