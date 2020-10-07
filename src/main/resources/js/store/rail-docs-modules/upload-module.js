@@ -1,4 +1,4 @@
-import uploadApi from "../../api/uploadDocumentsApi";
+import uploadApi from "../../api/rail-docs-api/uploadDocumentsApi";
 import messageManager from "../../util/messageManager";
 
 export default {
