@@ -56,7 +56,6 @@
 
     export default {
         name: "Sidebar",
-        props:['sidebarSize'],
         data(){
             return{
                 collapsed: true,
@@ -65,10 +64,6 @@
 
 
         methods:{
-            toggleSidebar(){
-                this.collapsed = !this.collapsed;
-                this.$emit('update:sidebarSize', this.sidebarWidth);
-            }
 
         },
         computed:{
@@ -81,10 +76,6 @@
                     this.$store.commit('setPayerCodeMutation',code)
                 }
             },
-            sidebarWidth(){
-                return this.collapsed ? '60px' : '230px'
-            }
-
         }
 
 
@@ -93,70 +84,72 @@
 
 <style scoped>
 
-    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: #fafafa;
-    }
+    /*@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";*/
+    /*!*@import "../css/sidebar_style.css";*!*/
+    /*body {*/
+        /*font-family: 'Poppins', sans-serif;*/
+        /*background: #fafafa;*/
+    /*}*/
 
-    p {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.1em;
-        font-weight: 300;
-        line-height: 1.7em;
-        color: #999;
-    }
+    /*p {*/
+        /*font-family: 'Poppins', sans-serif;*/
+        /*font-size: 1.1em;*/
+        /*font-weight: 300;*/
+        /*line-height: 1.7em;*/
+        /*color: #999;*/
+    /*}*/
 
-    a,
-    a:hover,
-    a:focus {
-        color: inherit;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
+    /*a,*/
+    /*a:hover,*/
+    /*a:focus {*/
+        /*color: inherit;*/
+        /*text-decoration: none;*/
+        /*transition: all 0.3s;*/
+    /*}*/
 
-    .navbar {
-        padding: 15px 10px;
-        background: #fff;
-        border: none;
-        border-radius: 0;
-        margin-bottom: 40px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
+    /*.navbar {*/
+        /*padding: 15px 10px;*/
+        /*background: #fff;*/
+        /*border: none;*/
+        /*border-radius: 0;*/
+        /*margin-bottom: 40px;*/
+        /*box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);*/
+    /*}*/
 
-    .navbar-btn {
-        box-shadow: none;
-        outline: none !important;
-        border: none;
-    }
+    /*.navbar-btn {*/
+        /*box-shadow: none;*/
+        /*outline: none !important;*/
+        /*border: none;*/
+    /*}*/
 
-    .line {
-        width: 100%;
-        height: 1px;
-        border-bottom: 1px dashed #ddd;
-        margin: 40px 0;
-    }
+    /*.line {*/
+        /*width: 100%;*/
+        /*height: 1px;*/
+        /*border-bottom: 1px dashed #ddd;*/
+        /*margin: 40px 0;*/
+    /*}*/
 
-    i,
-    span {
-        display: inline-block;
-    }
+    /*i,*/
+    /*span {*/
+        /*display: inline-block;*/
+    /*}*/
 
-    /* ---------------------------------------------------
-        SIDEBAR STYLE
-    ----------------------------------------------------- */
+    /*!* ---------------------------------------------------*/
+        /*!*SIDEBAR STYLE*!*/
+    /*!*----------------------------------------------------- *!*!*/
 
-    .wrapper {
-        display: flex;
-        align-items: stretch;
-    }
+    /*.wrapper {*/
+        /*display: flex;*/
+        /*align-items: stretch;*/
+    /*}*/
 
     #sidebar {
         min-width: 250px;
         max-width: 250px;
-        background: #7386D5;
-        color: #fff;
+        background: #ddefef;
+        color: #4d4d4d;
         transition: all 0.3s;
+        border-left: 2px solid #666466;
     }
 
     #sidebar.active {
@@ -210,12 +203,14 @@
 
     #sidebar .sidebar-header {
         padding: 20px;
-        background: #6d7fcc;
+        background: #d7d9d9;
+        text-align: center;
     }
 
     #sidebar .sidebar-header strong {
         display: none;
-        font-size: 1.8em;
+        font-size: 1.2em;
+        text-align: center;
     }
 
     #sidebar ul.components {

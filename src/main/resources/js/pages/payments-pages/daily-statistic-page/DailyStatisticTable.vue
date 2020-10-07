@@ -92,8 +92,6 @@
         text-align: center;
     }
     .zui-table {
-        /*border: none;*/
-        /*border-right: solid 1px #DDEFEF;*/
         border-collapse: separate;
         border-spacing: 1px;
         font: normal 13px Arial, sans-serif;
@@ -144,6 +142,18 @@
     }
     .font-weight-lighter{
         color: lightgrey!important;
+    }
+
+    td{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    td:hover {
+        overflow: auto;
+        white-space: pre-wrap;
+        text-overflow: inherit;
+        word-wrap: inherit;
     }
 
 </style>

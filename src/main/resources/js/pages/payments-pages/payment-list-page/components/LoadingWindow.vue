@@ -130,12 +130,12 @@
             ...mapMutations({
                 addFilesToUpload: 'uploadStore/addChosenFilesMutation',
             }),
-            ...mapActions({
-                submitFileUpload: 'uploadStore/uploadListsOnServerAction',
-                deleteSelectedFromMainDb: 'uploadStore/deleteSelectedListsAction',
-                saveSelectedToMainDb: 'uploadStore/saveSelectedListsAction',
-                loadTempListsFromServer: 'uploadStore/loadTempListsFromServerAction',
-                startScanFromMail: 'uploadStore/scanFromMailAction'
+            ...mapActions('uploadStore/',{
+                submitFileUpload: 'uploadListsOnServerAction',
+                deleteSelectedFromMainDb: 'deleteSelectedListsAction',
+                saveSelectedToMainDb: 'saveSelectedListsAction',
+                loadTempListsFromServer: 'loadTempListsFromServerAction',
+                startScanFromMail: 'scanFromMailAction',
             }),
             addFile(event) {
                 const selectedFiles = event.target.files;
@@ -144,7 +144,6 @@
 
             saveSelected() {
                 this.saveSelectedToMainDb(this.selectedPayments);
-                this.getPaymentListsAction()
             },
             deleteSelected() {
                 this.deleteSelectedFromMainDb(this.selectedPayments)

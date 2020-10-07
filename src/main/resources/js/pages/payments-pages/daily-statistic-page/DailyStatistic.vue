@@ -41,7 +41,7 @@
 
 <script>
     import { mapGetters, mapState ,mapActions, mapMutations } from 'vuex'
-    import DailyStatisticTable from '../components/DailyStatisticTable.vue'
+    import DailyStatisticTable from './DailyStatisticTable.vue'
 
     export default {
         name: "DailyStatistic",

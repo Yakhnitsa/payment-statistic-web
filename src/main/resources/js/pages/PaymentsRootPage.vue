@@ -10,16 +10,18 @@
                     @click="toggleSidebar"
                     id="sidebarCollapse" class="btn btn-info">
                 <i class="fas fa-align-left"></i>
-                <span>Скрыть панель</span>
+                <span>Отобразить/скрыть</span>
             </button>
+            <div class="container-fluid mt-2">
+                <router-view></router-view>
+            </div>
 
-            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-    import DailyStatistic from './DailyStatistic.vue'
+    import DailyStatistic from './payments-pages/daily-statistic-page/DailyStatistic.vue'
     import PaymentList from './payments-pages/payment-list-page/PaymentsList.vue'
     import LoadingWindow from './payments-pages/payment-list-page/components/LoadingWindow.vue'
     import Sidebar from '../components/Sidebar.vue'
@@ -37,7 +39,7 @@
                 paymentCodes:[],
                 payments:[],
                 loadedPayments:[],
-                sidebarSize: "60px"
+                sidebarSize: "60px",
             }
         },
         computed:{
@@ -58,10 +60,10 @@
 
             appContentStyle(){
                 const headerSize = document.querySelector('#site-header').scrollHeight;
-                const marginTop = headerSize + 10 + 'px';
+                // const marginTop = headerSize + 10 + 'px';
                 return{
                     // position: 'fixed',
-                    'margin-top': marginTop,
+                    'margin-top': headerSize + 'px',
                 }
             },
             toggleButtonStyle(){
@@ -71,7 +73,7 @@
                     top: marginTop,
                     position : 'sticky',
                 }
-            }
+            },
 
         },
         methods:{
@@ -103,11 +105,6 @@
 
 <style scoped>
 
-
-    /* ---------------------------------------------------
-        SIDEBAR STYLE
-    ----------------------------------------------------- */
-
     .wrapper {
         display: flex;
         align-items: stretch;
@@ -119,7 +116,7 @@
 
     #content {
         width: 100%;
-        padding: 20px;
+        padding: 5px;
         min-height: 100vh;
         transition: all 0.3s;
     }

@@ -91,7 +91,7 @@
 </template>
 
 <script>
-    import paymentDetailsApi from "../api/paymentDetailsApi";
+    import paymentDetailsApi from "../../../../api/paymentDetailsApi";
 
     export default {
         name: "PaymentDetailsRequestForm",

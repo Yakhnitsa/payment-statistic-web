@@ -50,9 +50,9 @@
 </template>
 
 <script>
-    import LinearChart from '../../../../components/charts/LinearChart.vue'
-    import PieChart from '../../../../components/charts/PieChart'
-    import CollectivePieChart from '../../../../components/charts/CollectivePieChart.vue'
+    import LinearChart from '../charts/LinearChart.vue'
+    import PieChart from '../charts/PieChart'
+    import CollectivePieChart from '../charts/CollectivePieChart.vue'
 
     import { createNamespacedHelpers } from 'vuex';
     const { mapState, mapActions, mapGetters , mapMutations } = createNamespacedHelpers('chartsStore');

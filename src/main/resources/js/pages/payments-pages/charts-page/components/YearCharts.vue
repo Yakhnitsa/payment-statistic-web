@@ -46,8 +46,8 @@
 </template>
 
 <script>
-    import LinearChart from '../../../../components/charts/LinearChart.vue'
-    import PieChart from '../../../../components/charts/PieChart'
+    import LinearChart from '../charts/LinearChart.vue'
+    import PieChart from '../charts/PieChart'
     import { createNamespacedHelpers } from 'vuex';
     const { mapState } = createNamespacedHelpers('chartsStore');
 
