@@ -15,7 +15,6 @@
             <div class="container-fluid mt-2">
                 <router-view></router-view>
             </div>
-
         </div>
     </div>
 </template>
