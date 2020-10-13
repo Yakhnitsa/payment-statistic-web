@@ -4,7 +4,7 @@ const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 
 export default{
 
-    getRailroadDocuments: params => axios.get('/api/railroad-documents',{params}),
+    getRailroadDocuments: params => axios.get('/railroad-documents',{params}),
 
     downloadArchive: params => axios({
         url: '/download-archive',

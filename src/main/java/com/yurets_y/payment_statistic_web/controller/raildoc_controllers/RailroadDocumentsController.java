@@ -30,7 +30,7 @@ public class RailroadDocumentsController {
         pageable = pageable == null? getDefaultPageable() : pageable;
 
         Page<RailroadDocument> railDocsPage = documentsService.getAll(pageable);
-        JsonPage<RailroadDocument> jsonPage = new JsonPage<>(railDocsPage,pageable);
+        JsonPage<RailroadDocument> jsonPage = new JsonPage<>(railDocsPage, pageable);
 
         return new ResponseEntity<>(jsonPage,HttpStatus.OK);
     }

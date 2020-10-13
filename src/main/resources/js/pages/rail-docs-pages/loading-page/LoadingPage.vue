@@ -83,7 +83,6 @@
 
     import {mapMutations, mapActions, mapGetters} from 'vuex';
 
-
     export default {
         name: "LoadingPage",
         components: {UploadedDocumentsTable, FilesTable},
