@@ -85,18 +85,23 @@ public class RailroadDocument extends AuditableEntity {
     @JsonView(Views.ShortView.class)
     private String cargoCode;
 
+    @JsonView(Views.NormalView.class)
     private int payment;
 
+    @JsonView(Views.NormalView.class)
     private int tarifDistance;
 
+    @JsonView(Views.NormalView.class)
     private String column7info;
+    @JsonView(Views.NormalView.class)
     private String column15info;
 
     @OneToMany(mappedBy="railroadDocument", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Vagon> vagonList = new ArrayList<>();
 
     @ElementCollection
-//            (fetch=FetchType.EAGER)
+            (fetch=FetchType.EAGER)
+    @JsonView(Views.NormalView.class)
     private Map<String, String> stamps = new HashMap<String, String>();
 
     public RailroadDocument() {
@@ -117,10 +122,10 @@ public class RailroadDocument extends AuditableEntity {
     }
 
     public void addVagons(Collection<Vagon> vagons) {
-        vagons.forEach(vagon -> vagon.setRailroadDocument(this));
-        vagonList.addAll(vagons);
+        vagons.forEach(this::addVagon);
     }
 
+    @JsonView(Views.NormalView.class)
     public List<Vagon> getVagonList() {
         return vagonList;
     }
@@ -240,6 +245,7 @@ public class RailroadDocument extends AuditableEntity {
     /*
      * Получение полной массы груза
      */
+    @JsonView(Views.NormalView.class)
     public int getFullWeight() {
         int fullWeight = 0;
         for (Vagon vagon : vagonList) {
@@ -248,6 +254,7 @@ public class RailroadDocument extends AuditableEntity {
         return fullWeight;
     }
 
+    @JsonView(Views.NormalView.class)
     public int getVagonCount() {
         return vagonList.size();
     }

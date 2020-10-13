@@ -9,6 +9,9 @@
                 <th class="text-center">ст. Призначення</th>
                 <th class="text-center">Відправник</th>
                 <th class="text-center">Отримувач</th>
+                <th class="text-center">Вантаж</th>
+                <th class="text-center">К-ть вагонів</th>
+                <th class="text-center">Маса вантажу</th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +22,9 @@
                 <td class="text-capitalize">{{value.receiveStation | formatStation}}</td>
                 <td class="text-capitalize">{{value.cargoSender | formatClient}}</td>
                 <td class="text-capitalize">{{value.cargoReceiver | formatClient}}</td>
+                <td class="text-capitalize">({{value.cargoCode}}) {{value.cargoName}}</td>
+                <td class="text-right">{{value.vagonCount}}</td>
+                <td class="text-right">{{value.fullWeight | formatPayment}}</td>
                 <!--<td class="text-capitalize">{{value.receiveStation | formatStation}}</td>-->
                 <!--<td>{{value}}</td>-->
             </tr>
@@ -52,7 +58,7 @@
     }
 
     .scrollable-table {
-        max-width: 80%;
+        max-width: 95%;
         max-height: 30em;
         overflow: scroll;
         position: relative;
@@ -97,19 +103,16 @@
         z-index: 2;
     }
 
-
     td, th{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 15em;
     }
+
     td:hover{
         white-space: normal;
         font-weight: 500;
     }
-
-
-
 
 </style>

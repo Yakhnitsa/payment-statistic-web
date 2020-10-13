@@ -25,7 +25,7 @@ public class RailroadDocumentsController {
 
     @GetMapping("/api/documents/railroad-documents")
     @Secured({"ROLE_EDITOR"})
-    @JsonView(Views.ShortView.class)
+    @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(Pageable pageable){
         pageable = pageable == null? getDefaultPageable() : pageable;
 
