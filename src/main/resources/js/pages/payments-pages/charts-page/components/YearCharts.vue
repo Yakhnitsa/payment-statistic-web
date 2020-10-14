@@ -1,16 +1,16 @@
 <template>
     <div class="chart">
         <h2 class="h4 mx-1">Годовая статистика платежей и затрат</h2>
-        <form>
+        <form class="container-sm update-form">
             <div class="form-row mx-1">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
-                <div class="form-group col-md-2">
-                    <button type="button" class="btn btn-primary" v-on:click="updateChart">Получить данные</button>
+                <div class="form-group col-md-4">
+                    <button type="button" class="btn btn-primary" v-on:click="updateChart">Обновить данные</button>
                 </div>
             </div>
         </form>
@@ -198,17 +198,4 @@
 
 <style scoped>
 
-    .chart {
-        background: #70fff7;
-        border-radius: 5px;
-        box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
-        margin:  25px 0;
-    }
-
-    .chart h2 {
-        margin-top: 0;
-        padding: 15px 0;
-        color:  rgba(255, 0,0, 0.5);
-        border-bottom: 1px solid #323d54;
-    }
 </style>
