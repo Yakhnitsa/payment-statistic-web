@@ -4,15 +4,16 @@
         <sidebar></sidebar>
 
         <!-- Page Content  -->
-        <div id="content">
+        <div class="content-bar">
             <button type="button"
+                    class="sidebar-toggle-button btn btn-info"
                     :style="toggleButtonStyle"
                     @click="toggleSidebar"
-                    id="sidebarCollapse" class="btn btn-info">
+                    id="sidebarCollapse">
                 <i class="fas fa-align-left"></i>
                 <!--<span>Отобразить/скрыть</span>-->
             </button>
-            <div class="container-fluid mt-2">
+            <div class="router-container mt-2">
                 <router-view></router-view>
             </div>
 
@@ -62,7 +63,6 @@
                 const marginTop = headerSize + 5 + 'px';
                 return {
                     top: marginTop,
-                    position : 'sticky',
                 }
             },
 
@@ -94,18 +94,8 @@
 
 </script >
 
-<style scoped>
+<style>
 
-    .wrapper {
-        display: flex;
-        align-items: stretch;
-    }
-
-    #content {
-        width: 100%;
-        padding: 5px;
-        min-height: 100vh;
-        transition: all 0.3s;
-    }
+    @import "../css/mainbar_style.css";
 
 </style>

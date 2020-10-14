@@ -71,7 +71,7 @@
 
 <style scoped>
     .scrollable-table {
-        max-width: 80%;
+        max-width: 100%;
         max-height: 25em;
         overflow: scroll;
         position: relative;
