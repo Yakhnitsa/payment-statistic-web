@@ -58,7 +58,7 @@
     }
 
     .scrollable-table {
-        max-width: 95%;
+        max-width: 100%;
         max-height: 30em;
         overflow: scroll;
         position: relative;
