@@ -5,6 +5,9 @@
             RailDocumentsPage
         </h1>
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
+        <div class="row mx-0 mt-2 float-right">
+            <span>pageable...</span>
+        </div>
     </div>
 
 </template>
