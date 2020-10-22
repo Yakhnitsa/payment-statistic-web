@@ -16,7 +16,7 @@ export default {
         documents: state => state.documents,
         currentPage: state => state.currentPage,
         totalPages: state => state.totalPages,
-        totalResults: state => state.totalResults,
+        totalElements: state => state.totalElements,
     },
     mutations: {
         setDocumentsMutation(state, documents){

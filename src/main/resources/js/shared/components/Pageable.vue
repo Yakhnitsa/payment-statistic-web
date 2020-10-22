@@ -1,23 +1,38 @@
 <template>
     <nav>
         <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
+            <li     :class="{disabled:  currentPage <= 0 }"
+                    class="page-item">
+                <a class="page-link" @click="setCurrentPage(0)">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+            </li>
+            <li     :class="{disabled:  currentPage <= 0 }"
+                    class="page-item">
+                <a class="page-link" @click="setCurrentPage(currentPage - 1)">
+                    <i class="fas fa-angle-left"></i>
                 </a>
             </li>
             <li     v-for="page in pagesRange"
                     @click="setCurrentPage(page)"
-                    :disabled=" page === currentPage || page "
-                    :class="{ active : page === currentPage, disabled: page === currentPage}"
+                    :class="{ active : page === currentPage, disabled: page === currentPage || page === null}"
                     class="page-item">
-                <a class="page-link">{{page+1}}</a>
+                <a class="page-link">{{page === null ? '...' : page + 1}}</a>
             </li>
-            <li class="page-item">
-                <a class="page-link">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
+            <li
+                    :class="{disabled: currentPage >= totalPages - 1}"
+                    class="page-item">
+                <a class="page-link"
+                   @click="setCurrentPage(currentPage + 1)">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </li>
+            <li
+                    :class="{disabled: currentPage >= totalPages - 1}"
+                    class="page-item">
+                <a class="page-link"
+                   @click="setCurrentPage(totalPages -1)">
+                    <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>
         </ul>
@@ -32,14 +47,18 @@
             pagesRange(){
                 const range = [];
                 for(let i = 0; i < this.totalPages; i++){
-                    range.push(i);
+                    if(i === this.currentPage - 2 || i === this.currentPage + 2 )
+                        range.push(null);
+                    else if(i >= this.currentPage -1 && i <= this.currentPage + 1)
+                        range.push(i);
                 }
                 return range;
             }
         },
         methods:{
             setCurrentPage(page){
-                if(page < 0 || page >= this.totalPages || page=== this.currentPage) return;
+                console.log(page);
+                if(page < 0 || page >= this.totalPages || page === this.currentPage) return;
                 this.$emit('changePage',page);
             }
         }

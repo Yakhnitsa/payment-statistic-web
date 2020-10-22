@@ -6,7 +6,7 @@
         </h1>
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
         <div class="row mx-0 mt-2 float-right">
-            <pageable @changePage="changePage" :total-pages="10" :current-page="5"></pageable>
+            <pageable @changePage="changePage" :total-pages="10" :current-page="currentPage"></pageable>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
     import { createNamespacedHelpers } from 'vuex';
     import Pageable from "../../../shared/components/Pageable.vue";
 
-    const { mapState, mapActions, mapMutations } = createNamespacedHelpers('railDocsStore');
+    const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('railDocsStore');
 
 
     export default {
@@ -27,11 +27,14 @@
         computed:{
             ...mapState({
                 railroadDocuments: state => state.documents,
-                currentPage: state => state.currentPage,
+                // currentPage: state => state.currentPage,
                 totalPages: state => state.totalPages,
                 totalElements: state => state.totalElements,
                 // b: state => state.b
             }),
+            ...mapGetters({
+                currentPage: 'currentPage'
+            })
             // railroadDocuments(){
             //
             // }
@@ -40,11 +43,13 @@
             ...mapActions(['fetchRailroadDocumentsAction'],{
 
             }),
+            ...mapMutations(['setCurrentPageMutation']),
             test(){
                 this.fetchRailroadDocumentsAction();
             },
             changePage(page){
-                console.log(page);
+                this.setCurrentPageMutation(page);
+                console.log(this.currentPage)
             }
         },
         mounted(){
