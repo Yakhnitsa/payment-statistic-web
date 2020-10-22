@@ -13,14 +13,13 @@
                     <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
                 <div class="form-group col-md-2">
-                    <button class="btn btn-primary" v-on:click="updateList()">Получить данные</button>
+                    <button class="btn btn-primary" v-on:click="updateList()">Обновить</button>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <button class="btn btn-secondary" @click="downloadArchive()">Архив за период
                         <i class="fas fa-file-archive"></i>
                     </button>
                 </div>
-
             </div>
         </div>
 
@@ -69,36 +68,39 @@
                 </tr>
                 </tbody>
             </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"
-                        :class="{disabled: currentPage < 1}">
-                        <a class="page-link" @click="loadPage(currentPage-1)"><i class="fas fa-caret-left"></i></a>
-                    </li>
-                    <li v-for="page in totalPages"
-                        class="page-item"
-                        :class="{active: page === currentPage + 1}"
-                    ><a class="page-link" @click="loadPage(page-1)" >{{page}}</a></li>
-                    <!--<li class="page-item"><a class="page-link">2</a></li>-->
-                    <!--<li class="page-item"><a class="page-link">3</a></li>-->
-                    <li class="page-item"
-                        :class="{disabled: currentPage >= totalPages -1}">
-                        <a class="page-link" @click="loadPage(currentPage+1)"><i class="fas fa-caret-right"></i></a>
-                    </li>
-                </ul>
-            </nav>
+            <pageable
+                    @changePage="loadPage"
+                    :total-pages="totalPages"
+                    :current-page="currentPage"></pageable>
+            <!--<nav aria-label="Page navigation example">-->
+                <!--<ul class="pagination">-->
+                    <!--<li class="page-item"-->
+                        <!--:class="{disabled: currentPage < 1}">-->
+                        <!--<a class="page-link" @click="loadPage(currentPage-1)"><i class="fas fa-caret-left"></i></a>-->
+                    <!--</li>-->
+                    <!--<li v-for="page in totalPages"-->
+                        <!--class="page-item"-->
+                        <!--:class="{active: page === currentPage + 1}"-->
+                    <!--&gt;<a class="page-link" @click="loadPage(page-1)" >{{page}}</a></li>-->
+                    <!--&lt;!&ndash;<li class="page-item"><a class="page-link">2</a></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li class="page-item"><a class="page-link">3</a></li>&ndash;&gt;-->
+                    <!--<li class="page-item"-->
+                        <!--:class="{disabled: currentPage >= totalPages -1}">-->
+                        <!--<a class="page-link" @click="loadPage(currentPage+1)"><i class="fas fa-caret-right"></i></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</nav>-->
         </div>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
     import {mapActions,mapState,mapGetters} from 'vuex'
     import LoadingWindow from "./components/LoadingWindow.vue";
-    import paymentListApi from "../../../api/paymentListApi"
+    import Pageable from "../../../shared/components/Pageable.vue"
     export default {
         name: "PaymentListPage",
-        components: {LoadingWindow},
+        components: {LoadingWindow, Pageable},
         data: function(){
             return{
                 dateFrom:'',
@@ -106,7 +108,9 @@
             }
         },
         computed: {
-            ...mapGetters(['hasEditorPermission']),
+            ...mapGetters(['hasEditorPermission'],
+
+            ),
             payments: function(){
                 return this.$store.getters.paymentLists
             },
@@ -154,14 +158,14 @@
         },
         watch:{
             payerCode(newVal){
-                alert("Код плательщика изменен на: " + newVal)
+                alert("Код плательщика изменен на: " + newVal);
                 this.loadPage(this.currentPage);
             }
         },
 
         created: function(){
-            this.dateFrom = this.$store.state.paymentListPage.dateFrom
-            this.dateUntil = this.$store.state.paymentListPage.dateUntil
+            this.dateFrom = this.$store.state.paymentListPage.dateFrom;
+            this.dateUntil = this.$store.state.paymentListPage.dateUntil;
             this.updateList();
         },
         methods:{
@@ -175,24 +179,24 @@
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
                     payerCode: this.payerCode
-                }
-                this.$store.commit('setPaymentListPeriod',params)
+                };
+                this.$store.commit('setPaymentListPeriod',params);
                 this.getPaymentListsAction(params)
             },
             showPayment(payment){
-
-                const params = {
-                    listNumber: payment.number,
-                    payerCode: payment.payerCode,
-                };
-
-                paymentListApi.getSinglePayment(params)
-                    .then(function (response) {
-                        //    TODO Реализовать отображение перечня в окне
-                        console.log(response)
-                        console.log('SUCCESS!')
-                    })
-                    .catch((error) => console.log(error))
+                //
+                // const params = {
+                //     listNumber: payment.number,
+                //     payerCode: payment.payerCode,
+                // };
+                //
+                // paymentListApi.getSinglePayment(params)
+                //     .then(function (response) {
+                //         //    TODO Реализовать отображение перечня в окне
+                //         console.log(response)
+                //         console.log('SUCCESS!')
+                //     })
+                //     .catch((error) => console.log(error))
             },
             deletePayment(list){
                 this.deletePaymentListAction(list)

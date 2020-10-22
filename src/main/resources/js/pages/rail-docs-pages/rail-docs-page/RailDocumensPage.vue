@@ -1,9 +1,11 @@
 <template>
     <div>
-        <button type="button" @click="test">test button</button>
+        <button type="button" @click="showModal = true">test button</button>
+        <rail-documents-search-modal :show-modal.sync="showModal"></rail-documents-search-modal>
         <h1>
             RailDocumentsPage
         </h1>
+
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
         <div class="row mx-0 mt-2 float-right">
             <pageable @changePage="changePage" :total-pages="10" :current-page="currentPage"></pageable>
@@ -17,23 +19,26 @@
 
     import { createNamespacedHelpers } from 'vuex';
     import Pageable from "../../../shared/components/Pageable.vue";
+    import RailDocumentsSearchModal from "./components/RailDocumentsSearchModal.vue";
 
-    const { mapState, mapActions, mapMutations, mapGetters } = createNamespacedHelpers('railDocsStore');
+    const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('railDocsStore');
 
 
     export default {
         name: "RailDocumentsPage",
-        components: {Pageable, RailroadDocumentsTable},
+        components: {RailDocumentsSearchModal, Pageable, RailroadDocumentsTable},
+        data(){
+            return{
+                showModal: false,
+            }
+        },
+
         computed:{
-            ...mapState({
-                railroadDocuments: state => state.documents,
-                // currentPage: state => state.currentPage,
-                totalPages: state => state.totalPages,
-                totalElements: state => state.totalElements,
-                // b: state => state.b
-            }),
             ...mapGetters({
-                currentPage: 'currentPage'
+                currentPage: 'currentPage',
+                totalPages: 'totalPages',
+                totalElements: 'totalElements',
+                railroadDocuments: 'documents',
             })
             // railroadDocuments(){
             //
@@ -49,8 +54,8 @@
             },
             changePage(page){
                 this.setCurrentPageMutation(page);
-                console.log(this.currentPage)
-            }
+                this.fetchRailroadDocumentsAction();
+            },
         },
         mounted(){
             this.test();

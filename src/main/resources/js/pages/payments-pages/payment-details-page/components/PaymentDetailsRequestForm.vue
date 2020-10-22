@@ -59,8 +59,8 @@
                             <input type="date" v-model="dateFrom" class="form-control" id="inputDateFrom">
                         </div>
                         <div class="form-group col-lg-2">
-                            <label for="inputPassword4">Конец периода</label>
-                            <input type="date" v-model="dateUntil" class="form-control" id="inputPassword4">
+                            <label for="inputDateTo">Конец периода</label>
+                            <input type="date" v-model="dateUntil" class="form-control" id="inputDateTo">
                         </div>
                     </div>
                     <div class="form-row">
@@ -72,12 +72,12 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputDocNumber">Документ</label>
-                            <input type="docNumber" v-model="docNumber" class="form-control" id="inputDocNumber"
+                            <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber"
                                    placeholder="№ документа">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPaymentSum">Сумма платежа</label>
-                            <input type="docNumber" v-model="paymentSum" class="form-control" id="inputPaymentSum"
+                            <input type="number" v-model="paymentSum" class="form-control" id="inputPaymentSum"
                                    placeholder="Сумма">
                         </div>
                     </div>

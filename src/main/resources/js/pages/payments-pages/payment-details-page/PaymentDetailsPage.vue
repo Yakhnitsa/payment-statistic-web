@@ -35,11 +35,11 @@
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="inputDateFrom">Начало периода</label>
-                                <input type="dateStamp" v-model="dateFrom" class="form-control" id="inputDateFrom">
+                                <input type="date" v-model="dateFrom" class="form-control" id="inputDateFrom">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="inputPassword4">Конец периода</label>
-                                <input type="dateStamp" v-model="dateUntil" class="form-control" id="inputPassword4">
+                                <input type="date" v-model="dateUntil" class="form-control" id="inputPassword4">
                             </div>
                         </div>
                         <div class="form-row">
