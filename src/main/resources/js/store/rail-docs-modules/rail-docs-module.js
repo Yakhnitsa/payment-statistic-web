@@ -1,5 +1,5 @@
 import railDocumentsApi from "../../api/rail-docs-api/railroadDocumentsApi";
-import messageManager from "../../util/messageManager";
+import messageManager from "../../shared/services/messageManager";
 
 export default {
     namespaced: true,

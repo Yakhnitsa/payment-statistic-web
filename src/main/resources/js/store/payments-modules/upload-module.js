@@ -1,5 +1,5 @@
 import uploadApi from "../../api/uploadApi";
-import messageManager from "../../util/messageManager";
+import messageManager from "../../shared/services/messageManager";
 import paymentListApi from "../../api/paymentListApi";
 
 export default {

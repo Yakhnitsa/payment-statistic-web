@@ -142,7 +142,7 @@
 </template>
 
 <script>
-    import StationInput from "../components/StationInput.vue";
+    import StationInput from "../shared/components/StationInput.vue";
 
     export default {
         components: {StationInput},

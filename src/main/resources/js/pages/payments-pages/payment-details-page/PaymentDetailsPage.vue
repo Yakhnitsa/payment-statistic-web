@@ -113,7 +113,7 @@
     import PaymentDetailsRequestForm from "./components/PaymentDetailsRequestForm.vue";
     import PaymentDetailsTable from "./components/PaymentDetailsTable.vue";
     import paymentDetailsApi from "../../../api/paymentDetailsApi"
-    import StationInput from "../../../components/StationInput.vue";
+    import StationInput from "../../../shared/components/StationInput.vue";
 
     export default {
         name: "PaymentDetailsPage",

@@ -3,7 +3,7 @@ import App from './pages/PaymentsRootPage.vue'
 import VueResouce from 'vue-resource'
 import router from 'router/payments-router'
 import store from 'store/payments-store'
-import 'util/filters'
+import 'shared/filters/filters'
 
 import 'babel-polyfill'
 

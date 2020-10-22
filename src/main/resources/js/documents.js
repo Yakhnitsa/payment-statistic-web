@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import router from 'router/rail-documents-router'
 import store from 'store/rail-documents-store'
-import 'util/filters'
+import 'shared/filters/filters'
 
 import MainPage from './pages/rail-docs-pages/RailDocumentsRootPage.vue'
 
