@@ -13,6 +13,23 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label for="validationDefault01">ст Отправления ({{stationFrom.code}})</label>
+                                        <station-input :station.sync="stationFrom"
+                                                       :stations="stations"
+                                                       :input-class="'form-control'"
+                                        ></station-input>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="validationDefault02">ст Назначения ({{stationTo.code}})</label>
+                                        <station-input :station.sync="stationTo"
+                                                       :stations="stations"
+                                                       :input-class="'form-control'"
+                                        ></station-input>
+                                    </div>
+                                </div>
+                                <hr class="separator">
+                                <div class="form-row">
                                     <label for="cargoSenderInput" class="col-sm-3 col-form-label text-nowrap">Отправитель</label>
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control" id="cargoSenderInput" placeholder="код 4 знач.">
@@ -25,31 +42,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label for="validationDefault01">ст Отправления ({{stationFrom.code}})</label>
-                                        <station-input :station.sync="stationFrom"
-                                                       :stations="stations"
-                                                       :input-class="'form-control'"
-                                        ></station-input>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="validationDefault02">ст Назначения ({{stationTo.code}})</label>
-                                        <station-input :station.sync="stationTo"
-                                                       :stations="stations"
-                                                       :input-class="'form-control'"
-                                        ></station-input>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationDefaultUsername">Username</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                            </div>
-                                            <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationDefault03">City</label>

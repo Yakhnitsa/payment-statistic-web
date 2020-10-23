@@ -2,10 +2,10 @@
     <div>
         <!--<label>({{station.code}})</label>-->
         <input v-model=stationSearch type="search"
-               list="stations"
+               :list="id"
                :class="[{ 'is-valid' : station.code }, inputClass]"
         />
-        <datalist id="stations">
+        <datalist :id="id">
             <option v-for="station in filteredStations" v-bind:value="station.code">
                 ({{station.code}}) {{station.rusName}}
             </option>
@@ -22,6 +22,7 @@
         data(){
             return{
                 stationSearch:'',
+                id:'',
             }
         },
 
@@ -55,6 +56,9 @@
             }
 
         },
+        created(){
+            this.id = `stations_f${(~~(Math.random()*1e8)).toString(16)}`;
+        }
 
     }
 </script>
