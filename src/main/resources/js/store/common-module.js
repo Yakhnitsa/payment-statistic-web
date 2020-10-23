@@ -11,6 +11,7 @@ export default {
         hasEditorPermission: () => userRoles.includes('ROLE_EDITOR'),
         hasAdminPermission: () => userRoles.includes('ROLE_ADMIN'),
         inDeveloperMode:() => isDevMode,
+        stations: () => stations,
     },
     mutations: {
 

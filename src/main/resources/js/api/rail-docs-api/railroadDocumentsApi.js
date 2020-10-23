@@ -1,27 +1,26 @@
 import axios from 'axios'
-axios.defaults.baseURL = '/api/documents/';
 const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 
 export default{
 
-    getRailroadDocuments: params => axios.get('/railroad-documents',{params}),
+    getRailroadDocuments: params => axios.get('/api/documents/railroad-documents',{params}),
 
     downloadArchive: params => axios({
-        url: '/download-archive',
+        url: '/api/documents/download-archive',
         method: 'GET',
         params,
         responseType: 'blob',
     }),
 
     downloadPdfBackupFile: params => axios({
-        url: '/download-pdf',
+        url: '/api/documents/download-pdf',
         method: 'GET',
         params,
         responseType: 'blob',
     }),
 
     downloadXmlBackupFile: params => axios({
-        url: '/download-xml',
+        url: '/api/documents/download-xml',
         method: 'GET',
         params,
         responseType: 'blob',

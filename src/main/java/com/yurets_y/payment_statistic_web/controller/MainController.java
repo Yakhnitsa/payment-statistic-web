@@ -67,7 +67,6 @@ public class MainController {
         model.addAttribute("paymentCodes",codes);
         model.addAttribute("isDevMode", "dev".equals(profile));
 
-
         try {
             model.addAttribute("stations",marshallJSON(stationService.getAllStations()));
         } catch (JsonProcessingException e) {
@@ -98,8 +97,23 @@ public class MainController {
             model.addAttribute("userRoles", user.getAuthorities());
         }
 
+        try {
+            model.addAttribute("stations",marshallJSON(stationService.getAllStations()));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         return "rail-doc-page";
     }
+
+    @GetMapping("/api/stations")
+    @ResponseBody
+    @JsonView(Views.ShortView.class)
+    public ResponseEntity<?> getStations(){
+        List<Station> stations = stationService.getAllStations();
+        return new ResponseEntity<>(stations,HttpStatus.OK);
+    }
+
 
 
     @Autowired

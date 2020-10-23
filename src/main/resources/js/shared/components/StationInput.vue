@@ -36,7 +36,7 @@
                     return [];
                 }
                 return filterArray;
-            }
+            },
         },
         methods:{
             checkStation(patt,station){
@@ -55,8 +55,6 @@
             }
 
         },
-
-
 
     }
 </script>

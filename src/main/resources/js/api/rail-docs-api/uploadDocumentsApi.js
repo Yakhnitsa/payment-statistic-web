@@ -1,5 +1,4 @@
 import axios from 'axios'
-axios.defaults.baseURL = '/api/documents/';
 const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 
 export default{
@@ -9,7 +8,7 @@ export default{
 
         formData.append('file',file);
 
-        return await axios.post('upload-single-raildoc',
+        return await axios.post('/api/documents/upload-single-raildoc',
             formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -22,13 +21,13 @@ export default{
             })
     },
     async fetchTempUploadedDocs(){
-        return await axios.get('get-temp-uploaded');
+        return await axios.get('/api/documents/get-temp-uploaded');
     },
 
     async saveDocumentsToMainDb(documents){
         return await axios({
             method:'post',
-            url: 'save-docs-to-main-db',
+            url: '/api/documents/save-docs-to-main-db',
             data: documents,
             headers:{
                 'X-CSRF-Token': CSRF_TOKEN
@@ -38,15 +37,12 @@ export default{
     async deleteDocumentsFromTempDb(documents){
         return await axios({
             method:'delete',
-            url: 'delete-docs-from-temp-db',
+            url: '/api/documents/delete-docs-from-temp-db',
             data: documents,
             headers:{
                 'X-CSRF-Token': CSRF_TOKEN
             }
         })
     }
-
-
-
 
 }

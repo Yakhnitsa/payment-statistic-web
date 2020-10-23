@@ -93,7 +93,7 @@
         },
         computed: {
             ...mapGetters({
-                files: 'uploadStore/files',
+                    files: 'uploadStore/files',
                 uploadedDocuments: 'uploadStore/uploadedDocuments',
                 selectedFiles:'uploadStore/selectedFiles',
                 loadingProgress:'uploadStore/onUploadProgress',

@@ -1,7 +1,9 @@
 <template>
     <div>
         <button type="button" @click="showModal = true">test button</button>
-        <rail-documents-search-modal :show-modal.sync="showModal"></rail-documents-search-modal>
+        <rail-documents-search-modal
+                v-show="showModal"
+                @close-modal="closeModal"></rail-documents-search-modal>
         <h1>
             RailDocumentsPage
         </h1>
@@ -56,6 +58,9 @@
                 this.setCurrentPageMutation(page);
                 this.fetchRailroadDocumentsAction();
             },
+            closeModal(){
+                this.showModal = false;
+            }
         },
         mounted(){
             this.test();
