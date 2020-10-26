@@ -11,21 +11,32 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form @submit="checkAndSubmit">
                                 <div class="form-row">
                                     <div class="col-md-6">
-                                        <label for="validationDefault01">ст Отправления ({{stationFrom.code}})</label>
+                                        <label>ст Отправления ({{stationFrom.code}})</label>
                                         <station-input :station.sync="stationFrom"
                                                        :stations="stations"
                                                        :input-class="'form-control'"
                                         ></station-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="validationDefault02">ст Назначения ({{stationTo.code}})</label>
+                                        <label>ст Назначения ({{stationTo.code}})</label>
                                         <station-input :station.sync="stationTo"
                                                        :stations="stations"
                                                        :input-class="'form-control'"
                                         ></station-input>
+                                    </div>
+                                </div>
+                                <hr class="separator">
+                                <div class="form-row">
+                                    <label for="docNumberInput" class="col-sm-3 col-form-label text-nowrap">№ накладной</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="docNumberInput" placeholder="№ ЖД накладной">
+                                    </div>
+                                    <label for="vagonNumberInput" class="col-sm-3 col-form-label text-nowrap">№ вагона</label>
+                                    <div class="col-sm-3">
+                                        <input type="number" class="form-control" id="vagonNumberInput" placeholder="№ вагона 8 знач">
                                     </div>
                                 </div>
                                 <hr class="separator">
@@ -37,30 +48,42 @@
                                     <label for="cargoReceiverInput" class="col-sm-3 col-form-label text-nowrap">Получатель</label>
                                     <div class="col-sm-3">
                                         <input type="number" class="form-control" id="cargoReceiverInput" placeholder="код 4 знач.">
-                                        <div class="invalid-feedback">
-                                            Please choose a username.
-                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="separator">
+                                <div class="form-row">
+                                    <label for="tarifPayerInput" class="col-sm-4 col-form-label text-nowrap">Код плательщика</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" id="tarifPayerInput" placeholder="7 знач.">
+                                    </div>
+                                </div>
+                                <hr class="separator">
+                                <div class="form-row">
+                                    <label for="cargoCodeInput" class="col-sm-4 col-form-label text-nowrap">Код груза</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" id="cargoCodeInput" placeholder="6 знач.">
+                                    </div>
+                                </div>
+                                <hr class="separator">
+                                <div class="row">
+                                    <div class="form-group col-sm-4 my-auto">
+                                        Дата документа
+                                        <!--<input type="date" v-model="dateFrom" class="form-control" id="inputDateFrom">-->
+                                    </div>
+                                    <div class="form-group col-sm-4 my-auto">
+                                        <input type="date" v-model="dateFrom" class="form-control" id="inputDateFrom">
+                                    </div>
+                                    <div class="form-group col-sm-4 my-auto">
+                                        <input type="date" v-model="dateUntil" class="form-control" id="inputDateUntil">
                                     </div>
                                 </div>
 
-                                <div class="form-row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="validationDefault03">City</label>
-                                        <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="validationDefault04">State</label>
-                                        <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="validationDefault05">Zip</label>
-                                        <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
-                                    </div>
-                                </div>
+
+
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Применить</button>
+                            <button type="submit" class="btn btn-primary">Применить</button>
                             <button type="button" class="btn btn-primary">Очистить форму</button>
                             <button type="button" class="btn btn-secondary" @click="closeModal">Закрыть</button>
                         </div>
@@ -114,6 +137,9 @@
             },
             clearAllData(){
 
+            },
+            checkAndSubmit(){
+                console.log('check and submit data')
             }
         },
         mounted(){
@@ -149,5 +175,10 @@
     .modal-fade-enter-active,
     .modal-fade-leave-active {
         transition: opacity .3s ease
+    }
+
+    .separator{
+        margin-top: .5rem;
+        margin-bottom: .5rem;
     }
 </style>
