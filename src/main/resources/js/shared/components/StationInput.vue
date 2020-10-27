@@ -58,6 +58,9 @@
         },
         created(){
             this.id = `stations_f${(~~(Math.random()*1e8)).toString(16)}`;
+        },
+        mounted(){
+            this.stationSearch = this.station.code;
         }
 
     }
