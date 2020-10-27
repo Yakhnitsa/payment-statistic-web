@@ -17,6 +17,7 @@
                                         <label>ст Отправления ({{stationFrom.code}})</label>
                                         <station-input :station.sync="stationFrom"
                                                        :stations="stations"
+                                                       :stationCode="stationFromCode"
                                                        :input-class="'form-control'"
                                         ></station-input>
                                     </div>
@@ -24,6 +25,7 @@
                                         <label>ст Назначения ({{stationTo.code}})</label>
                                         <station-input :station.sync="stationTo"
                                                        :stations="stations"
+                                                       :stationCode="stationToCode"
                                                        :input-class="'form-control'"
                                         ></station-input>
                                     </div>
@@ -119,6 +121,8 @@
             return {
                 stationFrom: {code: '', rusName: '', ukrName: ''},
                 stationTo: {code: '', rusName: '', ukrName: ''},
+                stationFromCode :'',
+                stationToCode:'',
                 cargoSenderCode: '',
                 cargoReceiverCode: '',
                 tarifPayerCode: '',
@@ -174,8 +178,8 @@
             },
 
             getParamsFromStore() {
-                this.stationFrom.code = this.storedParams.stationFromCode;
-                this.stationTo.code = this.storedParams.stationToCode;
+                this.stationFromCode = this.storedParams.stationFromCode;
+                this.stationToCode = this.storedParams.stationToCode;
                 this.cargoSenderCode = this.storedParams.cargoSenderCode;
                 this.cargoReceiverCode = this.storedParams.cargoReceiverCode;
                 this.tarifPayerCode = this.storedParams.tarifPayerCode;
