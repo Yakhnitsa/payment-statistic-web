@@ -30,38 +30,48 @@
                                 </div>
                                 <hr class="separator">
                                 <div class="form-row">
-                                    <label for="docNumberInput" class="col-sm-3 col-form-label text-nowrap">№ накладной</label>
+                                    <label for="docNumberInput" class="col-sm-3 col-form-label text-nowrap">№
+                                        накладной</label>
                                     <div class="col-sm-3">
-                                        <input v-model="docNumber" type="number" class="form-control" id="docNumberInput" placeholder="№ ЖД накладной">
+                                        <input v-model="docNumber" type="number" class="form-control"
+                                               id="docNumberInput" placeholder="№ ЖД накладной">
                                     </div>
-                                    <label for="vagonNumberInput" class="col-sm-3 col-form-label text-nowrap">№ вагона</label>
+                                    <label for="vagonNumberInput" class="col-sm-3 col-form-label text-nowrap">№
+                                        вагона</label>
                                     <div class="col-sm-3">
-                                        <input v-model="vagonNumber" type="number" class="form-control" id="vagonNumberInput" placeholder="№ вагона 8 знач">
+                                        <input v-model="vagonNumber" type="number" class="form-control"
+                                               id="vagonNumberInput" placeholder="№ вагона 8 знач">
                                     </div>
                                 </div>
                                 <hr class="separator">
                                 <div class="form-row">
                                     <label for="cargoSenderInput" class="col-sm-3 col-form-label text-nowrap">Отправитель</label>
                                     <div class="col-sm-3">
-                                        <input v-model="cargoSenderCode" type="number" class="form-control" id="cargoSenderInput" placeholder="код 4 знач.">
+                                        <input v-model="cargoSenderCode" type="number" class="form-control"
+                                               id="cargoSenderInput" placeholder="код 4 знач.">
                                     </div>
                                     <label for="cargoReceiverInput" class="col-sm-3 col-form-label text-nowrap">Получатель</label>
                                     <div class="col-sm-3">
-                                        <input v-model="cargoReceiverCode" type="number" class="form-control" id="cargoReceiverInput" placeholder="код 4 знач.">
+                                        <input v-model="cargoReceiverCode" type="number" class="form-control"
+                                               id="cargoReceiverInput" placeholder="код 4 знач.">
                                     </div>
                                 </div>
                                 <hr class="separator">
                                 <div class="form-row">
-                                    <label for="tarifPayerInput" class="col-sm-4 col-form-label text-nowrap">Код плательщика</label>
+                                    <label for="tarifPayerInput" class="col-sm-4 col-form-label text-nowrap">Код
+                                        плательщика</label>
                                     <div class="col-sm-4">
-                                        <input v-model="tarifPayerCode" type="number" class="form-control" id="tarifPayerInput" placeholder="7 знач.">
+                                        <input v-model="tarifPayerCode" type="number" class="form-control"
+                                               id="tarifPayerInput" placeholder="7 знач.">
                                     </div>
                                 </div>
                                 <hr class="separator">
                                 <div class="form-row">
-                                    <label for="cargoCodeInput" class="col-sm-4 col-form-label text-nowrap">Код груза</label>
+                                    <label for="cargoCodeInput" class="col-sm-4 col-form-label text-nowrap">Код
+                                        груза</label>
                                     <div class="col-sm-4">
-                                        <input v-model="cargoCode" type="number" class="form-control" id="cargoCodeInput" placeholder="6 знач.">
+                                        <input v-model="cargoCode" type="number" class="form-control"
+                                               id="cargoCodeInput" placeholder="6 знач.">
                                     </div>
                                 </div>
                                 <hr class="separator">
@@ -79,12 +89,11 @@
                                 </div>
 
 
-
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Применить</button>
-                            <button type="button" class="btn btn-primary">Очистить форму</button>
+                            <button type="submit" class="btn btn-primary" @click="updateData">Применить</button>
+                            <button type="button" class="btn btn-primary" @click="clearAllData">Очистить форму</button>
                             <button type="button" class="btn btn-secondary" @click="closeModal">Закрыть</button>
                         </div>
                     </div>
@@ -95,68 +104,92 @@
     <!-- Button trigger modal -->
 
 
-
 </template>
 
 <script>
     import StationInput from "../../../../shared/components/StationInput.vue";
 
-    import { mapGetters, mapMutations } from 'vuex';
+    import {mapGetters, mapMutations, mapActions } from 'vuex';
+
     export default {
         name: "RailDocumentsSearchModal",
         components: {StationInput},
-        props:['show-modal'],
-        data(){
-            return{
-                stationFrom:{code:'',rusName:'',ukrName:''},
-                stationTo:{code:'',rusName:'',ukrName:''},
-                cargoSenderCode:'',
-                cargoReceiverCode:'',
-                tarifPayerCode:'',
-                dateFrom:'',
-                dateUntil:'',
-                docNumber:'',
-                vagonNumber:'',
-                cargoCode:''
+        props: ['show-modal'],
+        data() {
+            return {
+                stationFrom: {code: '', rusName: '', ukrName: ''},
+                stationTo: {code: '', rusName: '', ukrName: ''},
+                cargoSenderCode: '',
+                cargoReceiverCode: '',
+                tarifPayerCode: '',
+                dateFrom: '',
+                dateUntil: '',
+                docNumber: '',
+                vagonNumber: '',
+                cargoCode: ''
             }
         },
-        computed:{
-            ...mapGetters(['storedRequestParams'],{
+        computed: {
+            ...mapGetters({
+                storedParams: 'railDocsStore/storedRequestParams',
                 stations: 'commonStore/stations',
 
             }),
         },
-        methods:{
-            ...mapMutations(['clearRequestParams']),
-            closeModal(){
+        methods: {
+            ...mapMutations({
+                clearRequestParams: 'railDocsStore/clearRequestParams',
+                storeRequestParams:'railDocsStore/setRequestParamsMutation'
+            }),
+            ...mapActions({
+                fetchDataFromServer: 'railDocsStore/fetchRailroadDocumentsAction'
+            }),
+            closeModal() {
                 this.$emit('close-modal');
             },
-            updateData(){
+            updateData() {
+                const requestParams = {
+                    currentPage: 0,
+                    stationFromCode: this.stationFrom.code,
+                    stationToCode: this.stationTo.code,
+                    cargoSenderCode: this.cargoSenderCode,
+                    cargoReceiverCode: this.cargoReceiverCode,
+                    tarifPayerCode: this.tarifPayerCode,
+                    dateFrom: this.dateFrom,
+                    dateUntil: this.dateUntil,
+                    docNumber: this.docNumber,
+                    vagonNumber: this.vagonNumber,
+                    cargoCode: this.cargoCode,
+                };
+                this.storeRequestParams(requestParams);
+                this.fetchDataFromServer();
 
             },
-            clearAllData(){
+            clearAllData() {
                 this.clearRequestParams();
                 this.getParamsFromStore();
             },
-            checkAndSubmit(){
+            checkAndSubmit() {
                 console.log('check and submit data')
+            },
+
+            getParamsFromStore() {
+                this.stationFrom.code = this.storedParams.stationFromCode;
+                this.stationTo.code = this.storedParams.stationToCode;
+                this.cargoSenderCode = this.storedParams.cargoSenderCode;
+                this.cargoReceiverCode = this.storedParams.cargoReceiverCode;
+                this.tarifPayerCode = this.storedParams.tarifPayerCode;
+                this.dateFrom = this.storedParams.dateFrom;
+                this.dateUntil = this.storedParams.dateUntil;
+                this.docNumber = this.storedParams.docNumber;
+                this.vagonNumber = this.storedParams.vagonNumber;
+                this.cargoCode = this.storedParams.cargoCode;
             }
         },
-        mounted(){
+        mounted() {
             this.getParamsFromStore();
         },
-        getParamsFromStore(){
-            this.stationFrom.code = this.storedRequestParams.stationFromCode;
-            this.stationTo.code = this.storedRequestParams.stationToCode;
-            this.cargoSenderCode = this.storedRequestParams.cargoSenderCode;
-            this.cargoReceiverCode = this.storedRequestParams.cargoReceiverCode;
-            this.tarifPayerCode = this.storedRequestParams.tarifPayerCode;
-            this.dateFrom = this.storedRequestParams.dateFrom;
-            this.dateUntil = this.storedRequestParams.dateUntil;
-            this.docNumber = this.storedRequestParams.docNumber;
-            this.vagonNumber = this.storedRequestParams.vagonNumber;
-            this.cargoCode = this.storedRequestParams.cargoCode;
-        }
+
     }
 </script>
 
@@ -189,7 +222,7 @@
         transition: opacity .3s ease
     }
 
-    .separator{
+    .separator {
         margin-top: .5rem;
         margin-bottom: .5rem;
     }
