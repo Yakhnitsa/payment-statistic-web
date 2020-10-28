@@ -82,10 +82,5 @@ public class RailroadDocumentRepositoryTest {
 
         RailroadDocument document = documentsRepo.findAll().get(0);
         assertEquals("Жовтневая(экспортная)",document.getReceiveStation().getRusName());
-
-
-
     }
-
-
 }

@@ -8,8 +8,10 @@ import com.yurets_y.payment_statistic_web.service.StationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -65,8 +67,6 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         documentsRepo.delete(rDoc);
     }
 
-
-
     @Override
     public RailroadDocument getById(RailroadDocumentId id) {
         return documentsRepo.getOne(id);
@@ -75,6 +75,11 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
     @Override
     public Page<RailroadDocument> getAll(Pageable pageable) {
         return documentsRepo.findAll(pageable);
+    }
+
+    @Override
+    public Page<RailroadDocument> getAllBySpecification(Specification<RailroadDocument> spec, Pageable pageable) {
+        return documentsRepo.findAll( spec , pageable);
     }
 
     @Override

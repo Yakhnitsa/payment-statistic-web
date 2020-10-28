@@ -5,6 +5,7 @@ import com.yurets_y.payment_statistic_web.entity.RailroadDocumentId;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -19,6 +20,7 @@ public interface RailroadDocumentsService {
 
     Page<RailroadDocument> getAll(Pageable pageable);
 
+    Page<RailroadDocument> getAllBySpecification(Specification<RailroadDocument> spec, Pageable pageable);
 
     boolean contains(RailroadDocument paymentList);
 

@@ -2,7 +2,6 @@ package com.yurets_y.payment_statistic_web.controller.raildoc_controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.dto.JsonPage;
-import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsService;

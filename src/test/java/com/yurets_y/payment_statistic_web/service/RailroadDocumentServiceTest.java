@@ -49,10 +49,18 @@ import static org.junit.Assert.assertTrue;
 @ActiveProfiles("test")
 public class RailroadDocumentServiceTest {
 
-    @Resource(name="test-file")
+    @Resource(name = "test-file")
     private File testFile;
 
-    @Resource(name="corrupted-test-file")
+    @Resource(name = "test-files-dir")
+    private File testFilesDirectory;
+
+    @Resource(name = "test-files-dir-for-spec-test")
+    private File testFilesDirectoryForSpecTest;
+
+
+
+    @Resource(name = "corrupted-test-file")
     private File corruptedTestFile;
 
     @Value("${service.backup-path}" + "/rail_docs")
@@ -69,10 +77,11 @@ public class RailroadDocumentServiceTest {
     private StationsRepo stationsRepo;
 
     @Test
-    public void resourceIntegrationTest(){
+    public void resourceIntegrationTest() {
         assertNotNull(documentsService);
         assertNotNull(documentsParser);
         assertTrue(testFile.exists());
+        assertTrue(testFilesDirectoryForSpecTest.exists());
     }
 
     @Test
@@ -88,8 +97,8 @@ public class RailroadDocumentServiceTest {
         documentsService.add(document);
 
         Sort dateSort = Sort.by("docNumber").descending();
-        Pageable pageRequest = PageRequest.of(0,10,dateSort);
-        RailroadDocumentId id = new RailroadDocumentId(document.getDocNumber(),document.getDateStamp());
+        Pageable pageRequest = PageRequest.of(0, 10, dateSort);
+        RailroadDocumentId id = new RailroadDocumentId(document.getDocNumber(), document.getDateStamp());
         RailroadDocument documentFromDb = documentsService.getById(id);
 
         assertNotNull(documentFromDb.getDateStamp());
@@ -107,11 +116,11 @@ public class RailroadDocumentServiceTest {
         assertEquals(2, stationList.size());
 
         List<RailroadDocument> documents = documentsService.getAll(pageRequest).getContent();
-        assertEquals(documents.size(),1);
+        assertEquals(documents.size(), 1);
     }
 
     @Test(expected = RuntimeException.class)
-    public void corruptedFileSavingTest()throws IOException, ParseException {
+    public void corruptedFileSavingTest() throws IOException, ParseException {
         RailroadDocument document = documentsParser.parseFromFile(corruptedTestFile);
         document.setXmlBackupFile(testFile);
         documentsService.add(document);
@@ -119,9 +128,9 @@ public class RailroadDocumentServiceTest {
 
     @Test
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
-    public void deleteRailDocTest() throws IOException, ParseException{
+    public void deleteRailDocTest() throws IOException, ParseException {
         Sort dateSort = Sort.by("docNumber").descending();
-        Pageable pageRequest = PageRequest.of(0,10,dateSort);
+        Pageable pageRequest = PageRequest.of(0, 10, dateSort);
         File backupDir = new File(backupDirPath);
         // Проверка пуста ли папка с бекап файлами.
         assertTrue(backupDir.exists() && backupDir.listFiles().length == 0);
@@ -142,10 +151,31 @@ public class RailroadDocumentServiceTest {
 
     }
 
+    @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
+    public void getDocumentsBySpecificationTest() throws IOException, ParseException {
+        loadTestDocumentsToDb(testFilesDirectoryForSpecTest);
+        Sort dateSort = Sort.by("docNumber").descending();
+        Pageable pageRequest = PageRequest.of(0, 1000, dateSort);
+
+        Collection<RailroadDocument> allRailDocuments = documentsService.getAll(pageRequest).getContent();
+        System.out.println(allRailDocuments.size());
+
+    }
+
+    private void loadTestDocumentsToDb(File testDir) throws IOException, ParseException {
+        for(File file : testDir.listFiles()){
+            if(file.isFile() && file.toString().endsWith(".xml")){
+                RailroadDocument document = documentsParser.parseFromFile(file);
+                documentsService.add(document);
+            }
+        }
+    }
+
     @Before
     public void cleanBackupDir() throws IOException {
         File backup = new File(backupDirPath);
-        for(File file: backup.listFiles()){
+        for (File file : backup.listFiles()) {
             Files.deleteIfExists(file.toPath());
         }
 
@@ -155,10 +185,10 @@ public class RailroadDocumentServiceTest {
 }
 
 @TestConfiguration
-@TestPropertySource(locations= "classpath:db_properties/inmemory-db.properties")
+@TestPropertySource(locations = "classpath:db_properties/inmemory-db.properties")
 @EntityScan(basePackages = "com.yurets_y.payment_statistic_web.entity")
 @ComponentScan(
-        basePackages="com.yurets_y.payment_statistic_web.service",
+        basePackages = "com.yurets_y.payment_statistic_web.service",
         useDefaultFilters = false,
         includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
                 classes = {
@@ -169,15 +199,26 @@ public class RailroadDocumentServiceTest {
                         StationsRepo.class
                 })
 )
-class RailroadDocumentServiceTestConfig{
+class RailroadDocumentServiceTestConfig {
 
     @Bean("test-file")
-    public File testFile(){
+    public File testFile() {
         return new File("src/test/resources/test_files/railroad-documents/33230095.xml");
     }
 
+    @Bean("test-files-dir")
+    public File getTestFilesDirectory() {
+        return new File("src/test/resources/test_files/railroad-documents/correct");
+    }
+
+    @Bean("test-files-dir-for-spec-test")
+    public File getTestFilesForSpecTest() {
+        return new File("src/test/resources/test_files/railroad-documents/spec-test-files");
+    }
+
+
     @Bean("corrupted-test-file")
-    public File corruptedTestFile(){
+    public File corruptedTestFile() {
         return new File("src/test/resources/test_files/railroad-documents/corrupted/33248824.xml");
     }
 }
