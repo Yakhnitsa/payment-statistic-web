@@ -1,13 +1,11 @@
 package com.yurets_y.payment_statistic_web.service.railroad_documents_services;
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
+import com.yurets_y.payment_statistic_web.entity.Vagon;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Date;
 
 
@@ -55,6 +53,14 @@ public class RailroadDocumentsSpecification {
     public Specification<RailroadDocument> receiverCodeSpec(Integer code){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
                 -> criteriaBuilder.equal(root.get("cargoReceiver").get("railroadCode"),code);
+    }
+
+    public Specification<RailroadDocument> vagonNumberSpec(Integer vagonNumb){
+        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+                -> {
+            Join<RailroadDocument, Vagon> vagon = root.join("vagonList");
+            return criteriaBuilder.equal(vagon.get("number"),vagonNumb);
+        };
     }
 
 

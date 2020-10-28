@@ -156,7 +156,6 @@ public class RailroadDocumentsSpecificationTest {
         Specification<RailroadDocument> groupSpec = sendStationSpec.and(receiveStationSpec);
         foundDocs = documentsService
                 .getAllBySpecification(groupSpec,defaultPageRequest()).getContent();
-        System.out.println(foundDocs);
 
         filteredDocs = allRailDocuments
                 .stream()
@@ -167,7 +166,13 @@ public class RailroadDocumentsSpecificationTest {
 
     }
 
-
+    @Test
+    public void findByVagonNumberTest(){
+        int vagNumber = 59595314;
+        Specification<RailroadDocument> vagonNumbSpec = documentsSpecification.vagonNumberSpec(vagNumber);
+        Collection<RailroadDocument> foundDocs = documentsService.getAllBySpecification(vagonNumbSpec,defaultPageRequest()).getContent();
+        System.out.println(foundDocs);
+    }
     @Before
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     public void loadTestDocumentsToDb() throws IOException, ParseException {
