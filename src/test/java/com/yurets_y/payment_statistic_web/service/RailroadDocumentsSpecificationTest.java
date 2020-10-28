@@ -81,7 +81,7 @@ public class RailroadDocumentsSpecificationTest {
     }
 
     @Test
-    public void findByDocsDateTest() throws IOException, ParseException {
+    public void findByDocsDateTest() throws ParseException {
 
         Collection<RailroadDocument> allRailDocuments = documentsService.getAll(defaultPageRequest()).getContent();
 
@@ -120,6 +120,50 @@ public class RailroadDocumentsSpecificationTest {
                 .getAllBySpecification(docDateSpecification,defaultPageRequest())
                 .getContent();
         assertEquals(foundDocs.size(),allRailDocuments.size());
+
+    }
+
+    @Test
+    public void findByStationCodesTest(){
+        Collection<RailroadDocument> allRailDocuments = documentsService.getAll(defaultPageRequest()).getContent();
+
+        int receiveStationCode = 415601;
+        Specification<RailroadDocument> receiveStationSpec = documentsSpecification.receiveStationSpec(receiveStationCode);
+
+        Collection<RailroadDocument> foundDocs = documentsService
+                .getAllBySpecification(receiveStationSpec,defaultPageRequest()).getContent();
+        Collection<RailroadDocument> filteredDocs = allRailDocuments
+                .stream()
+                .filter(doc -> doc.getReceiveStation().getCode()==receiveStationCode)
+                .collect(Collectors.toList());
+        assertEquals(foundDocs.size(),filteredDocs.size());
+
+        int sendStationCode = 444905;
+        Specification<RailroadDocument> sendStationSpec = documentsSpecification.sendStationSpec(sendStationCode);
+        foundDocs = documentsService
+                .getAllBySpecification(sendStationSpec,defaultPageRequest()).getContent();
+
+        filteredDocs = allRailDocuments
+                .stream()
+                .filter(doc -> doc.getSendStation().getCode()==sendStationCode)
+                .collect(Collectors.toList());
+        assertEquals(foundDocs.size(),filteredDocs.size());
+
+        int sendStation = 329209;
+        int receiveStation = 424507;
+        sendStationSpec = documentsSpecification.sendStationSpec(sendStation);
+        receiveStationSpec = documentsSpecification.receiveStationSpec(receiveStation);
+        Specification<RailroadDocument> groupSpec = sendStationSpec.and(receiveStationSpec);
+        foundDocs = documentsService
+                .getAllBySpecification(groupSpec,defaultPageRequest()).getContent();
+        System.out.println(foundDocs);
+
+        filteredDocs = allRailDocuments
+                .stream()
+                .filter(doc -> doc.getSendStation().getCode()==sendStation && doc.getReceiveStation().getCode() == receiveStation)
+                .collect(Collectors.toList());
+
+        assertEquals(foundDocs,filteredDocs);
 
     }
 

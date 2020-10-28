@@ -57,7 +57,7 @@ public class RailroadDocumentsSpecification {
                 -> criteriaBuilder.equal(root.get("cargoReceiver").get("railroadCode"),code);
     }
 
-    
+
 
 
 }
