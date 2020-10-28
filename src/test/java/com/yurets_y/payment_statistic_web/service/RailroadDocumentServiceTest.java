@@ -7,6 +7,7 @@ import com.yurets_y.payment_statistic_web.repo.RailroadDocumentsRepo;
 import com.yurets_y.payment_statistic_web.repo.StationsRepo;
 import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocumentsParser;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsService;
+import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsSpecification;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -33,8 +35,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
-import java.util.Collection;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -48,6 +50,8 @@ import static org.junit.Assert.assertTrue;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class RailroadDocumentServiceTest {
+
+    private SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd-Z");
 
     @Resource(name = "test-file")
     private File testFile;
@@ -75,6 +79,9 @@ public class RailroadDocumentServiceTest {
 
     @Autowired
     private StationsRepo stationsRepo;
+
+    @Autowired
+    private RailroadDocumentsSpecification documentsSpecification;
 
     @Test
     public void resourceIntegrationTest() {
@@ -151,27 +158,6 @@ public class RailroadDocumentServiceTest {
 
     }
 
-    @Test
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
-    public void getDocumentsBySpecificationTest() throws IOException, ParseException {
-        loadTestDocumentsToDb(testFilesDirectoryForSpecTest);
-        Sort dateSort = Sort.by("docNumber").descending();
-        Pageable pageRequest = PageRequest.of(0, 1000, dateSort);
-
-        Collection<RailroadDocument> allRailDocuments = documentsService.getAll(pageRequest).getContent();
-        System.out.println(allRailDocuments.size());
-
-    }
-
-    private void loadTestDocumentsToDb(File testDir) throws IOException, ParseException {
-        for(File file : testDir.listFiles()){
-            if(file.isFile() && file.toString().endsWith(".xml")){
-                RailroadDocument document = documentsParser.parseFromFile(file);
-                documentsService.add(document);
-            }
-        }
-    }
-
     @Before
     public void cleanBackupDir() throws IOException {
         File backup = new File(backupDirPath);
@@ -196,7 +182,8 @@ public class RailroadDocumentServiceTest {
                         RailroadDocumentsParser.class,
                         RailroadDocumentsRepo.class,
                         StationService.class,
-                        StationsRepo.class
+                        StationsRepo.class,
+                        RailroadDocumentsSpecification.class
                 })
 )
 class RailroadDocumentServiceTestConfig {

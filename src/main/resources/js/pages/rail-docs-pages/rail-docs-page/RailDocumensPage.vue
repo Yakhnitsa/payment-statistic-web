@@ -21,7 +21,7 @@
 
     import { createNamespacedHelpers } from 'vuex';
     import Pageable from "../../../shared/components/Pageable.vue";
-    import RailDocumentsSearchModal from "./components/RailDocumentsSearchModal.vue";
+    import RailDocumentsSearchModal from "./components/ModalSearchForm.vue";
 
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('railDocsStore');
 
