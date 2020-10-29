@@ -74,7 +74,6 @@ export default {
     },
     actions: {
         async fetchRailroadDocumentsAction({commit, state}) {
-            console.log(state.requestParams);
             try {
                 const response = await railDocumentsApi.getRailroadDocuments(state.requestParams);
                 const data = await response.data;

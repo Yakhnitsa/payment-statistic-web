@@ -36,7 +36,7 @@ public class RailroadDocumentsController {
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
-            @RequestParam(required = false, defaultValue = "100") Integer elementsCount,
+            @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
             @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
