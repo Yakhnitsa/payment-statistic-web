@@ -7,14 +7,12 @@ import com.yurets_y.payment_statistic_web.service.parser_services.RailroadDocume
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsService;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsSpecification;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -164,7 +162,6 @@ public class RailroadDocumentsSpecificationTest {
                 .collect(Collectors.toList());
 
         assertEquals(foundDocs,filteredDocs);
-//        null station test
         sendStationSpec = documentsSpecification.sendStationSpec(null);
         receiveStationSpec = documentsSpecification.receiveStationSpec(receiveStation);
         groupSpec = sendStationSpec.and(receiveStationSpec);
@@ -183,7 +180,35 @@ public class RailroadDocumentsSpecificationTest {
         int vagNumber = 59595314;
         Specification<RailroadDocument> vagonNumbSpec = documentsSpecification.vagonNumberSpec(vagNumber);
         Collection<RailroadDocument> foundDocs = documentsService.getAllBySpecification(vagonNumbSpec,defaultPageRequest()).getContent();
-        System.out.println(foundDocs);//TODO произвести фильтрацию и создать проверку.
+
+        Collection<RailroadDocument> allRailDocuments = documentsService.getAll(defaultPageRequest()).getContent();
+        Collection<RailroadDocument> filteredDocs = allRailDocuments
+                .stream()
+                .filter(document -> document.getVagonList()
+                        .stream().anyMatch(vagon -> vagon.getNumber() == vagNumber))
+                .collect(Collectors.toList());
+        assertEquals(foundDocs,filteredDocs);
+        assertTrue(foundDocs.iterator().next().getVagonList().stream().anyMatch(vagon -> vagon.getNumber() == vagNumber));
+    }
+
+    @Test
+    public void findByCargoCodeTest(){
+        String cargoCode = "015006";
+        Specification<RailroadDocument> cargoCodeSpec = documentsSpecification.cargoCode(cargoCode);
+        Collection<RailroadDocument> foundDocs = documentsService.getAllBySpecification(cargoCodeSpec,defaultPageRequest()).getContent();
+
+        Collection<RailroadDocument> allRailDocuments = documentsService.getAll(defaultPageRequest()).getContent();
+        Collection<RailroadDocument> filteredDocs = allRailDocuments
+                .stream()
+                .filter(doc -> doc.getCargoCode().equals(cargoCode))
+                .collect(Collectors.toList());
+        assertEquals(foundDocs,filteredDocs);
+
+    }
+
+
+    @Test
+    public void groupSpecificationTest(){
 
     }
 

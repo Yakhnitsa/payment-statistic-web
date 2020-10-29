@@ -60,6 +60,12 @@ public class RailroadDocumentsSpecification {
                     criteriaBuilder.equal(root.get("cargoReceiver").get("railroadCode"),code);
     }
 
+    public Specification<RailroadDocument> tarifPayerCodeSpec(Integer code){
+        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+                -> code == null ? criteriaBuilder.and() :
+                criteriaBuilder.equal(root.get("tarifPayer").get("railroadCode"),code);
+    }
+
     public Specification<RailroadDocument> vagonNumberSpec(Integer vagonNumb){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
                 -> {
@@ -67,6 +73,12 @@ public class RailroadDocumentsSpecification {
             Join<RailroadDocument, Vagon> vagon = root.join("vagonList");
             return criteriaBuilder.equal(vagon.get("number"),vagonNumb);
         };
+    }
+
+    public Specification<RailroadDocument> cargoCode(String cargoCode){
+        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+                -> cargoCode == null || cargoCode.equals("") ? criteriaBuilder.and() :
+                criteriaBuilder.equal(root.get("cargoCode"),cargoCode);
     }
 
 
