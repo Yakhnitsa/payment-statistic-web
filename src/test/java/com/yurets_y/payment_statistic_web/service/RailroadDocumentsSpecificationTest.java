@@ -154,6 +154,7 @@ public class RailroadDocumentsSpecificationTest {
         sendStationSpec = documentsSpecification.sendStationSpec(sendStation);
         receiveStationSpec = documentsSpecification.receiveStationSpec(receiveStation);
         Specification<RailroadDocument> groupSpec = sendStationSpec.and(receiveStationSpec);
+
         foundDocs = documentsService
                 .getAllBySpecification(groupSpec,defaultPageRequest()).getContent();
 
@@ -163,6 +164,17 @@ public class RailroadDocumentsSpecificationTest {
                 .collect(Collectors.toList());
 
         assertEquals(foundDocs,filteredDocs);
+//        null station test
+        sendStationSpec = documentsSpecification.sendStationSpec(null);
+        receiveStationSpec = documentsSpecification.receiveStationSpec(receiveStation);
+        groupSpec = sendStationSpec.and(receiveStationSpec);
+        foundDocs = documentsService
+                .getAllBySpecification(groupSpec,defaultPageRequest()).getContent();
+        filteredDocs = allRailDocuments
+                .stream()
+                .filter(doc -> doc.getReceiveStation().getCode() == receiveStation)
+                .collect(Collectors.toList());
+        assertEquals(foundDocs,filteredDocs);
 
     }
 
@@ -171,8 +183,11 @@ public class RailroadDocumentsSpecificationTest {
         int vagNumber = 59595314;
         Specification<RailroadDocument> vagonNumbSpec = documentsSpecification.vagonNumberSpec(vagNumber);
         Collection<RailroadDocument> foundDocs = documentsService.getAllBySpecification(vagonNumbSpec,defaultPageRequest()).getContent();
-        System.out.println(foundDocs);
+        System.out.println(foundDocs);//TODO произвести фильтрацию и создать проверку.
+
     }
+
+
     @Before
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     public void loadTestDocumentsToDb() throws IOException, ParseException {

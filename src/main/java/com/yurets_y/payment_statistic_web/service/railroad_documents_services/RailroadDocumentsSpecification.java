@@ -33,31 +33,37 @@ public class RailroadDocumentsSpecification {
 
     public Specification<RailroadDocument> docNumberSpecification(Integer docNumber){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("docNumber"),docNumber);
+                -> docNumber == null ? criteriaBuilder.and() :
+                    criteriaBuilder.equal(root.get("docNumber"),docNumber);
     }
 
     public Specification<RailroadDocument> sendStationSpec(Integer stationCode){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("sendStation").get("code"),stationCode);
+                -> stationCode == null ? criteriaBuilder.and() :
+                    criteriaBuilder.equal(root.get("sendStation").get("code"),stationCode);
     }
     public Specification<RailroadDocument> receiveStationSpec(Integer stationCode){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("receiveStation").get("code"),stationCode);
+                -> stationCode == null ? criteriaBuilder.and() :
+                    criteriaBuilder.equal(root.get("receiveStation").get("code"),stationCode);
     }
 
     public Specification<RailroadDocument> senderCodeSpec(Integer code){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("cargoSender").get("railroadCode"),code);
+                -> code == null ? criteriaBuilder.and() :
+                    criteriaBuilder.equal(root.get("cargoSender").get("railroadCode"),code);
     }
 
     public Specification<RailroadDocument> receiverCodeSpec(Integer code){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
-                -> criteriaBuilder.equal(root.get("cargoReceiver").get("railroadCode"),code);
+                -> code == null ? criteriaBuilder.and() :
+                    criteriaBuilder.equal(root.get("cargoReceiver").get("railroadCode"),code);
     }
 
     public Specification<RailroadDocument> vagonNumberSpec(Integer vagonNumb){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
                 -> {
+            if(vagonNumb == null) return criteriaBuilder.and();
             Join<RailroadDocument, Vagon> vagon = root.join("vagonList");
             return criteriaBuilder.equal(vagon.get("number"),vagonNumb);
         };
