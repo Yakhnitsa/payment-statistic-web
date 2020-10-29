@@ -75,7 +75,7 @@ public class RailroadDocumentsSpecification {
         };
     }
 
-    public Specification<RailroadDocument> cargoCode(String cargoCode){
+    public Specification<RailroadDocument> cargoCodeSpec(String cargoCode){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
                 -> cargoCode == null || cargoCode.equals("") ? criteriaBuilder.and() :
                 criteriaBuilder.equal(root.get("cargoCode"),cargoCode);

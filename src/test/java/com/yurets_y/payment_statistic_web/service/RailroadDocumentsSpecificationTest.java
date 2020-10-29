@@ -194,7 +194,7 @@ public class RailroadDocumentsSpecificationTest {
     @Test
     public void findByCargoCodeTest(){
         String cargoCode = "015006";
-        Specification<RailroadDocument> cargoCodeSpec = documentsSpecification.cargoCode(cargoCode);
+        Specification<RailroadDocument> cargoCodeSpec = documentsSpecification.cargoCodeSpec(cargoCode);
         Collection<RailroadDocument> foundDocs = documentsService.getAllBySpecification(cargoCodeSpec,defaultPageRequest()).getContent();
 
         Collection<RailroadDocument> allRailDocuments = documentsService.getAll(defaultPageRequest()).getContent();

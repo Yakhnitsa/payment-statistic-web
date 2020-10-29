@@ -1,13 +1,15 @@
 <template>
-    <nav>
+    <nav v-show="totalPages > 1">
         <ul class="pagination">
-            <li     :class="{disabled:  currentPage <= 0 }"
+            <li     v-show="totalPages > 5"
+                    :class="{disabled:  currentPage <= 0 }"
                     class="page-item">
                 <a class="page-link" @click="setCurrentPage(0)">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
             </li>
-            <li     :class="{disabled:  currentPage <= 0 }"
+            <li     v-show="totalPages > 3"
+                    :class="{disabled:  currentPage <= 0 }"
                     class="page-item">
                 <a class="page-link" @click="setCurrentPage(currentPage - 1)">
                     <i class="fas fa-angle-left"></i>
@@ -20,6 +22,7 @@
                 <a class="page-link">{{page === null ? '...' : page + 1}}</a>
             </li>
             <li
+                    v-show="totalPages > 3"
                     :class="{disabled: currentPage >= totalPages - 1}"
                     class="page-item">
                 <a class="page-link"
@@ -28,6 +31,7 @@
                 </a>
             </li>
             <li
+                    v-show="totalPages > 5"
                     :class="{disabled: currentPage >= totalPages - 1}"
                     class="page-item">
                 <a class="page-link"
@@ -57,7 +61,6 @@
         },
         methods:{
             setCurrentPage(page){
-                console.log(page);
                 if(page < 0 || page >= this.totalPages || page === this.currentPage) return;
                 this.$emit('changePage',page);
             }

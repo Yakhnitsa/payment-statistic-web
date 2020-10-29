@@ -26,7 +26,6 @@
                            :value="document" v-model="selectedDocuments">
                     <i class="form-icon"></i>
                 </label>
-                <span>{{document.docNumber !== -1}}</span>
                 <span v-if="document.pdfBackupFile" class="far fa-file-pdf text-success"></span>
             </td>
             <td scope="col"
@@ -34,7 +33,7 @@
                 class="text-center">
                 {{document.docNumber}}
             </td>
-            <td  scope="col" class="text-center small">
+            <td  scope="col" class="text-center">
                 {{document.dateStamp | formatDate}}
             </td>
             <td scope="col" class="small">
@@ -112,6 +111,9 @@
 </script>
 
 <style scoped>
+    table{
+        font-size: 1rem;
+    }
     .incorrect{
         text-decoration: line-through;
         font-style: italic;

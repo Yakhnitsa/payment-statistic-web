@@ -3,8 +3,6 @@ export default{
     showNotFoundException404: () => alert("Запрашиваемый ресурс не найден, 404"),
     showOnLoadException: (filename) => alert("Ошибка при загрузке файла: " + filename),
     showSuccessfullyUploadedDocs: (docs) => {
-        docs.forEach(doc =>{
-            console.log(doc);
-        })
+        console.log('susessfuly uploaded: ' + docs.length + ' documents');
     }
 }

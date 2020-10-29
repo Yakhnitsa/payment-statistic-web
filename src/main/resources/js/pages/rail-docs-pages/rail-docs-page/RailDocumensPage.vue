@@ -10,7 +10,8 @@
 
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
         <div class="row mx-0 mt-2 float-right">
-            <pageable @changePage="changePage" :total-pages="10" :current-page="currentPage"></pageable>
+            <span>Всего найдено накладных: {{totalElements}}</span>
+            <pageable @changePage="changePage" :total-pages="totalPages" :current-page="currentPage"></pageable>
         </div>
     </div>
 
@@ -42,9 +43,6 @@
                 totalElements: 'totalElements',
                 railroadDocuments: 'documents',
             })
-            // railroadDocuments(){
-            //
-            // }
         },
         methods:{
             ...mapActions(['fetchRailroadDocumentsAction'],{

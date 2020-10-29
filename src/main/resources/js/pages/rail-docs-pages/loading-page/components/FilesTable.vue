@@ -109,9 +109,15 @@
 
     .list-group-item{
         padding: .15rem 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .sticky-top{
         background-color: whitesmoke;
+    }
+    .list-group-item:hover{
+        white-space: normal;
     }
 
 </style>
