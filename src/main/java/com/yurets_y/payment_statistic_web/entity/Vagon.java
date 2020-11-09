@@ -12,6 +12,7 @@ public class Vagon  extends AuditableEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.FullView.class)
     private Long id;
 
     @ManyToOne
@@ -23,13 +24,24 @@ public class Vagon  extends AuditableEntity{
 
     @JsonView(Views.ShortView.class)
     private int number;
+
     private int grossWeight;
+
     @JsonView(Views.ShortView.class)
     private int netWeight;
+
     @JsonView(Views.ShortView.class)
     private int tareWeight;
+
     private double carryingCapacity;
+
     private int payment;
+
+    @OneToOne(
+            cascade = {CascadeType.ALL},
+            orphanRemoval = true )
+    @JsonView(Views.NormalView.class)
+    private AditionalVagonInfo vagonInfo;
 
     @ElementCollection
 //            (fetch=FetchType.EAGER)
@@ -118,6 +130,15 @@ public class Vagon  extends AuditableEntity{
 
     public void setRailroadDocument(RailroadDocument railroadDocument) {
         this.railroadDocument = railroadDocument;
+    }
+
+
+    public AditionalVagonInfo getVagonInfo() {
+        return vagonInfo;
+    }
+
+    public void setVagonInfo(AditionalVagonInfo vagonInfo) {
+        this.vagonInfo = vagonInfo;
     }
 
     @Override
