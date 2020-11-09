@@ -1,12 +1,12 @@
 package com.yurets_y.payment_statistic_web.controller.raildoc_controllers;
 
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.dto.JsonPage;
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.entity.Views;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsService;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsSpecification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,41 +22,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-
 @RestController
-public class RailroadDocumentsController {
+public class CertRegisterController {
+
 
     private RailroadDocumentsService documentsService;
 
     private RailroadDocumentsSpecification docSpec;
 
+    public CertRegisterController(RailroadDocumentsService documentsService, RailroadDocumentsSpecification docSpec) {
+        this.documentsService = documentsService;
+        this.docSpec = docSpec;
+    }
 
-    @GetMapping("/api/documents/railroad-documents")
+    @GetMapping("/api/documents/certificates")
     @Secured({"ROLE_VIEWER"})
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
             @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
             @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
+            @RequestParam(required = false, defaultValue = "desc") String sortDirection,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             @RequestParam(required = false) Integer stationFromCode,
             @RequestParam(required = false) Integer stationToCode,
             @RequestParam(required = false) Integer cargoSenderCode,
             @RequestParam(required = false) Integer cargoReceiverCode,
-            @RequestParam(required = false) Integer tarifPayerCode,
             @RequestParam(required = false) Integer docNumber,
             @RequestParam(required = false) Integer vagonNumber,
             @RequestParam(required = false) String cargoCode
-            ){
-        Pageable pageable = getPageable(currentPage, elementsCount, sortBy);
+    ){
+        Pageable pageable = getPageable(currentPage, elementsCount, sortBy,sortDirection);
 
         Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
         specification = specification.and(docSpec.sendStationSpec(stationFromCode));
         specification = specification.and(docSpec.receiveStationSpec(stationToCode));
         specification = specification.and(docSpec.senderCodeSpec(cargoSenderCode));
         specification = specification.and(docSpec.receiverCodeSpec(cargoReceiverCode));
-        specification = specification.and(docSpec.tarifPayerCodeSpec(tarifPayerCode));
         specification = specification.and(docSpec.docNumberSpecification(docNumber));
         specification = specification.and(docSpec.vagonNumberSpec(vagonNumber));
         specification = specification.and(docSpec.cargoCodeSpec(cargoCode));
@@ -67,24 +70,8 @@ public class RailroadDocumentsController {
         return new ResponseEntity<>(jsonPage,HttpStatus.OK);
     }
 
-
-
-
-    @Autowired
-    public void setDocumentsService(RailroadDocumentsService documentsService) {
-        this.documentsService = documentsService;
-    }
-
-    @Autowired
-    public void setDocSpec(RailroadDocumentsSpecification docSpec) {
-        this.docSpec = docSpec;
-    }
-
-    private Pageable getDefaultPageable(){
-        return PageRequest.of(0,100);
-    }
-
-    private Pageable getPageable(int page, int size, String sort){
-        return PageRequest.of(page,size, Sort.by(sort));
+    private Pageable getPageable(int page, int size, String sort, String direction){
+        return "ASC".equalsIgnoreCase(direction) ? PageRequest.of(page,size, Sort.by(sort).ascending())
+                : PageRequest.of(page,size, Sort.by(sort).ascending().descending());
     }
 }
