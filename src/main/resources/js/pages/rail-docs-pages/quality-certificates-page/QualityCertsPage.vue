@@ -1,35 +1,39 @@
 <template>
     <div>
         <h1> Реестр качественных </h1>
-        <pre>
-            TODO:
-            - Шапка с элементами
-                - элементы поиска по табличным показателям, фильтры с возможностью запроса на сервер
-                - Сортировка по элементу
-                -
-            - Таблица накладных со следующими колонками:
-                - Отправитель (код)
-                - Ст отправления + код
-                - Дата документа
-                - № ЖД накладной
-                - № Вагона
-                - Отметка о сертификате
-                - ст Назначения +  код
-                - Получатель + код
-                - Груз + код
-                - Тара
-                - нетто
-                - Инфо по графам (7, 15 при клике всплывающее окно)
-        </pre>
+        <quality-cert-table :railroad-documents="railroadDocuments"></quality-cert-table>
     </div>
 </template>
 
 <script>
+    import { createNamespacedHelpers } from 'vuex';
+    import QualityCertTable from "./components/QualityCertTable.vue";
+    const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
+
     export default {
-        name: "QualityCertsList"
+        name: "QualityCertsList",
+        components: {QualityCertTable},
+        computed:{
+            ...mapGetters({
+                    currentPage: 'currentPage',
+                    totalPages: 'totalPages',
+                    totalElements: 'totalElements',
+                    railroadDocuments: 'documents',
+                })
+        },
+        methods:{
+            ...mapActions(['fetchRailroadDocumentsAction'])
+        },
+
+        created(){
+            this.fetchRailroadDocumentsAction();
+        }
+
+
     }
 </script>
 
 <style scoped>
+
 
 </style>

@@ -43,7 +43,7 @@ export default {
         setTotalElementsMutation(state, elements) {
             state.totalElements = elements;
         },
-        addChanges(state, { vagonId , changes}){
+        addChangesMutation(state, { vagonId , changes}){
             const index = state.changes
                 .findIndex(item =>  item === vagonId);
             index >= 0 ? state.changes.splice(index,1) :
@@ -98,9 +98,10 @@ export default {
             try {
                 const response = await certificatesApi.uploadChangesToServer(state.requestParams, state.changes);
                 const data = await response.data;
-                commit('setDocumentsMutation', data.content);
-                commit('setTotalPagesMutation', data.totalPages);
-                commit('setTotalElementsMutation', data.totalElements)
+                console.log(data);
+                // commit('setDocumentsMutation', data.content);
+                // commit('setTotalPagesMutation', data.totalPages);
+                // commit('setTotalElementsMutation', data.totalElements)
             } catch (error) {
                 if (error.response) {
                     messageManager.showOnLoadException(error);

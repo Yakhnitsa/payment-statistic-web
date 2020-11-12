@@ -12,7 +12,7 @@ public class Vagon  extends AuditableEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(Views.FullView.class)
+    @JsonView(Views.NormalView.class)
     private Long id;
 
     @ManyToOne
