@@ -30,9 +30,8 @@
                                 <input
                                         type="checkbox"
                                         :checked="hasCert(vagon)"
-                                        @change="addChanges($event)"
+                                        @change="setCertSelected(vagon)"
                                 >
-                                {{ vagon.vagonInfo ? vagon.vagonInfo.hasCert : false }}
                             </td>
                             <td class="text-capitalize">{{doc.receiveStation | formatStation}}</td>
                             <td class="text-capitalize">{{doc.cargoReceiver | formatClient}}</td>
@@ -67,12 +66,25 @@
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
     export default {
         name: "QualityCertTable",
-        props:['railroadDocuments'],
+        // props:['railroadDocuments'],
+        computed:{
+            ...mapGetters({
+                railroadDocuments: 'documents',
+            })
+        },
 
         methods:{
             ...mapMutations(['addChangesMutation']),
             addChanges(event){
                 console.log(event);
+            },
+            setCertSelected(vagon){
+                const hasCert = vagon.vagonInfo ? !vagon.vagonInfo.hasCert : true;
+                const vagonId = vagon.id;
+                const changes = {
+                    hasCert: hasCert
+                };
+                this.addChangesMutation({vagonId, changes});
             },
             // addChanges(vagonId,changes){
             //     this.addChangesMutation({vagonId, changes});

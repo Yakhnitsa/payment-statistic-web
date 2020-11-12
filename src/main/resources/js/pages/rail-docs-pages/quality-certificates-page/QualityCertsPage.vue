@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1> Реестр качественных </h1>
-        <quality-cert-table :railroad-documents="railroadDocuments"></quality-cert-table>
+        <quality-cert-table></quality-cert-table>
     </div>
 </template>
 

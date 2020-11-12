@@ -43,9 +43,9 @@ export default {
         setTotalElementsMutation(state, elements) {
             state.totalElements = elements;
         },
-        addChangesMutation(state, { vagonId , changes}){
+        addChangesMutation(state, { vagonId, changes}){
             const index = state.changes
-                .findIndex(item =>  item === vagonId);
+                .findIndex(item =>  item.vagonId === vagonId);
             index >= 0 ? state.changes.splice(index,1) :
                 state.changes.push({vagonId, changes});
 
