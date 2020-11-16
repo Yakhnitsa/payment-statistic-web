@@ -20,6 +20,7 @@ echo -e $delimiter\\n\\t'Restart server'
 ssh -p 822 yri@myapp.ukrtranslogistic.com.ua << EOF
     lsof -t -i:8443 | xargs kill -9
     nohup java -Dfile.encoding=UTF8 -jar utl-web-app/payment-statistic-web-0.0.1-SNAPSHOT.jar > logfile.txt \
+    --spring.profiles.active=prod \
     --MAIL_PASSWORD=$1 \
     --MYSQL_PASSWORD=$2 &
 EOF
