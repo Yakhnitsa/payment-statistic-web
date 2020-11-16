@@ -32,7 +32,7 @@ public class RailroadDocumentsController {
 
 
     @GetMapping("/api/documents/railroad-documents")
-    @Secured({"ROLE_VIEWER"})
+    @Secured({"ROLE_VIEWER","ROLE_EDITOR","ROLE_ADMIN"})
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
@@ -67,9 +67,6 @@ public class RailroadDocumentsController {
         return new ResponseEntity<>(jsonPage,HttpStatus.OK);
     }
 
-
-
-
     @Autowired
     public void setDocumentsService(RailroadDocumentsService documentsService) {
         this.documentsService = documentsService;
@@ -78,10 +75,6 @@ public class RailroadDocumentsController {
     @Autowired
     public void setDocSpec(RailroadDocumentsSpecification docSpec) {
         this.docSpec = docSpec;
-    }
-
-    private Pageable getDefaultPageable(){
-        return PageRequest.of(0,100);
     }
 
     private Pageable getPageable(int page, int size, String sort){

@@ -25,7 +25,6 @@ import java.util.Date;
 @RestController
 public class CertRegisterController {
 
-
     private RailroadDocumentsService documentsService;
 
     private RailroadDocumentsSpecification docSpec;
@@ -36,7 +35,7 @@ public class CertRegisterController {
     }
 
     @GetMapping("/api/documents/certificates")
-    @Secured({"ROLE_VIEWER"})
+    @Secured({"ROLE_VIEWER","ROLE_EDITOR","ROLE_ADMIN"})
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
