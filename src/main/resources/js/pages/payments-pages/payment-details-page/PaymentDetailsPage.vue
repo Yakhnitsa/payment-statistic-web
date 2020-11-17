@@ -8,8 +8,6 @@
                 </button>
 
                 <button class="btn btn-outline-secondary" @click="submitForm()">Обновить данные</button>
-
-
             </div>
 
             <div>
@@ -56,7 +54,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputDocNumber">Документ</label>
-                                <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber"
+                                <input type="text" v-model="docNumber" class="form-control" id="inputDocNumber"
                                        placeholder="№ документа">
                             </div>
                             <div class="form-group col-md-3">

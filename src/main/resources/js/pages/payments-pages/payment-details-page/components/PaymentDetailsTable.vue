@@ -4,23 +4,27 @@
         <table id="payments-table" class="table table-fixed table-sm table-striped">
             <thead class="thead-light">
             <tr class="text-center">
-                <th scope="col" class="col-1">Перечень</th>
-                <th scope="col" class="col-1">Дата</th>
-                <th scope="col" class="col-3">Тип платежа</th>
-                <th scope="col" class="col-3">(код) Станция</th>
-                <th scope="col" class="col-2">Документ</th>
-                <th scope="col" class="col-2">Всего</th>
+                <th scope="col" class="col">Перечень</th>
+                <th scope="col" class="col">Дата</th>
+                <th scope="col" class="col">Тип платежа</th>
+                <th scope="col" class="col">(код) Станция</th>
+                <th scope="col" class="col">Документ</th>
+                <th scope="col" class="col">Оплачено</th>
+                <th scope="col" class="col">НДС</th>
+                <th scope="col" class="col">Всего с НДС</th>
 
             </tr>
             </thead>
             <tbody>
             <tr class="text-right text-nowrap" v-for="item in paymentDetails">
-                <td scope="col" class="col-1 text-center">{{item.paymentListNumber}}</td>
-                <td scope="col" class="col-1 text-center">{{item.date | formatDate}}</td>
-                <td scope="col" class="col-3 text-left">{{item.type}}</td>
-                <td scope="col" class="col-3 text-left">({{item.stationCode}}) {{item.stationName}}</td>
-                <td scope="col" class="col-2 text-center">{{item.documentNumber}}</td>
-                <td scope="col" class="col-2 text-right">{{item.totalPayment | formatPayment}}</td>
+                <td scope="col" class="col text-center">{{item.paymentListNumber}}</td>
+                <td scope="col" class="col text-center">{{item.date | formatDate}}</td>
+                <td scope="col" class="col text-left">{{item.type}}</td>
+                <td scope="col" class="col text-left">({{item.stationCode}}) {{item.stationName}}</td>
+                <td scope="col" class="col text-center">{{item.documentNumber}}</td>
+                <td scope="col" class="col text-right">{{item.payment | formatPayment}}</td>
+                <td scope="col" class="col text-right">{{item.taxPayment | formatPayment}}</td>
+                <td scope="col" class="col text-right">{{item.totalPayment | formatPayment}}</td>
             </tr>
             </tbody>
         </table>
@@ -57,16 +61,16 @@
         float: left;
         border-bottom-width: 0;
     }
-    td{
+    td, th{
+        max-width: 15em;
+    }
+    td {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
     td:hover {
-        overflow: inherit;
-        text-overflow: inherit;
-        white-space: inherit;
-        word-wrap: inherit;
+        white-space: normal;
     }
 
 </style>
