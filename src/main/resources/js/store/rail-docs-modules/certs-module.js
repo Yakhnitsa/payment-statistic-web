@@ -50,6 +50,13 @@ export default {
                 state.changes.push({vagonId, changes});
 
         },
+        updateChangesInDocumentsMutation(state,changes){
+            changes.forEach(item =>{
+                state.documents.forEach(document =>{
+                    updateVagonInfoInDocument(document,item)
+                });
+            });
+        },
         clearRequestParams(state) {
             state.requestParams.currentPage = 0;
             state.requestParams.stationFromCode = '';
@@ -96,13 +103,10 @@ export default {
 
         async uploadChangesToServerAction({commit,state}) {
             try {
-                const response = await certificatesApi.uploadChangesToServer(state.requestParams, state.changes);
+                const response = await certificatesApi.uploadChangesToServer(state.changes);
                 const data = await response.data;
                 state.changes = [];
-                console.log(data);
-                // commit('setDocumentsMutation', data.content);
-                // commit('setTotalPagesMutation', data.totalPages);
-                // commit('setTotalElementsMutation', data.totalElements)
+                commit('updateChangesInDocumentsMutation',data);
             } catch (error) {
                 if (error.response) {
                     messageManager.showOnLoadException(error);
@@ -110,5 +114,15 @@ export default {
             }
         }
     },
+
+
+
+}
+function updateVagonInfoInDocument(railDoc,changes){
+    let index = railDoc.vagonList.findIndex(vagon => vagon.id === changes.vagon.id);
+    if(index !== -1){
+        railDoc.vagonList[index].vagonInfo = changes;
+        console.log(railDoc.vagonList[index]);
+    }
 
 }

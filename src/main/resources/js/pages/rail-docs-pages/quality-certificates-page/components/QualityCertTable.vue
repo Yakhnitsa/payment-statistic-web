@@ -20,13 +20,13 @@
                 </thead>
                 <tbody>
                     <template v-for="doc in railroadDocuments">
-                        <tr v-for="vagon in doc.vagonList">
+                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in doc.vagonList">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
                             <td>{{doc.docDate | formatDate}}</td>
                             <td>{{doc.docNumber}}</td>
                             <td>{{vagon.number}}</td>
-                            <td>
+                            <td class="cert-checkbox">
                                 <input
                                         type="checkbox"
                                         :checked="hasCert(vagon)"
@@ -103,14 +103,12 @@
                 };
                 testApi.testPostRequest({},json);
             },
+            isChanged(vagonId){
+                return this.changes.findIndex(item => item.vagonId === vagonId) !== -1;
+            },
 
             hasCert(vagon){
                 return vagon.vagonInfo ? vagon.vagonInfo.hasCert : false;
-            }
-        },
-        watch:{
-            changes(){
-                console.log(this.changes)
             }
         },
 
@@ -197,6 +195,15 @@
     }
     .submit-button:hover{
         opacity: 1;
+    }
+    .cert-checkbox input{
+        width: 1em;
+        height: 1em;
+    }
+    .changed{
+        font-style: italic;
+        color: gray;
+        background-color: #cfe1e1 !important;
     }
 
 
