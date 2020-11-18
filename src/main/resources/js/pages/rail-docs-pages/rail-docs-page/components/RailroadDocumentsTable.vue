@@ -30,6 +30,7 @@
             </tr>
             </tbody>
         </table>
+
     </div>
 </template>
 
@@ -114,5 +115,7 @@
         white-space: normal;
         font-weight: 500;
     }
+
+
 
 </style>

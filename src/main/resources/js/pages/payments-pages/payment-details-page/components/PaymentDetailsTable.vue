@@ -1,33 +1,32 @@
 <template>
-
-    <div class="container-fluid">
+    <div class="scrollable-table">
         <table id="payments-table" class="table table-fixed table-sm table-striped">
             <thead class="thead-light">
             <tr class="text-center">
-                <th scope="col" class="col">Перечень</th>
-                <th scope="col" class="col">Дата</th>
-                <th scope="col" class="col">Тип платежа</th>
-                <th scope="col" class="col">(код) Станция</th>
-                <th scope="col" class="col">Документ</th>
-                <th scope="col" class="col">Оплачено</th>
-                <th scope="col" class="col">НДС</th>
-                <th scope="col" class="col">Всего с НДС</th>
-
+                <th>Перечень</th>
+                <th>Дата</th>
+                <th>Тип платежа</th>
+                <th>(код) Станция</th>
+                <th>Документ</th>
+                <th>Оплачено</th>
+                <th>НДС</th>
+                <th>Всего с НДС</th>
             </tr>
             </thead>
             <tbody>
-            <tr class="text-right text-nowrap" v-for="item in paymentDetails">
-                <td scope="col" class="col text-center">{{item.paymentListNumber}}</td>
-                <td scope="col" class="col text-center">{{item.date | formatDate}}</td>
-                <td scope="col" class="col text-left">{{item.type}}</td>
-                <td scope="col" class="col text-left">({{item.stationCode}}) {{item.stationName}}</td>
-                <td scope="col" class="col text-center">{{item.documentNumber}}</td>
-                <td scope="col" class="col text-right">{{item.payment | formatPayment}}</td>
-                <td scope="col" class="col text-right">{{item.taxPayment | formatPayment}}</td>
-                <td scope="col" class="col text-right">{{item.totalPayment | formatPayment}}</td>
+            <tr v-for="item in paymentDetails">
+                <td class="text-center">{{item.paymentListNumber}}</td>
+                <td class="text-center">{{item.date | formatDate}}</td>
+                <td class="text-left">{{item.type}}</td>
+                <td class="text-left">({{item.stationCode}}) {{item.stationName}}</td>
+                <td class="text-center">{{item.documentNumber}}</td>
+                <td class="text-right">{{item.payment | formatPayment}}</td>
+                <td class="text-right">{{item.taxPayment | formatPayment}}</td>
+                <td class="text-right">{{item.totalPayment | formatPayment}}</td>
             </tr>
             </tbody>
         </table>
+
     </div>
 
 </template>
@@ -46,31 +45,62 @@
 </script>
 
 <style scoped>
-    .table-fixed thead {
+    .scrollable-table {
         width: 100%;
+        max-height: 40em;
+        overflow-y: scroll;
+        position: relative;
     }
-    .table-fixed tbody {
-        height: 400px;
-        overflow-y: auto;
-        width: 100%;
+
+    table {
+        max-width: 100%;
     }
-    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-        display: block;
+
+    thead th {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background-color: var(--header-bg-color);
+        z-index: 1;
     }
-    .table-fixed tbody td, .table-fixed thead > tr> th {
-        float: left;
-        border-bottom-width: 0;
+
+    .sticky-first-column {
+        font-weight: 500;
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        left: 0;
+        min-width: 8em;
+        max-width: 8em;
+        white-space: nowrap;
+        background-color: var(--header-bg-color);
     }
+    th.sticky-first-column{
+        z-index: 2;
+    }
+
+    .sticky-second-column {
+        font-weight: 500;
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        left: 8em;
+        max-width: 8em;
+        white-space: nowrap;
+        background-color: var(--header-bg-color);
+    }
+    th.sticky-second-column{
+        z-index: 2;
+    }
+
     td, th{
-        max-width: 15em;
-    }
-    td {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: 15em;
     }
-    td:hover {
+
+    td:hover{
         white-space: normal;
+        font-weight: 500;
     }
 
 </style>

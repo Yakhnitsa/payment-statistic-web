@@ -30,7 +30,7 @@ public class RailDocsUploadController {
     }
 
     @PostMapping("/api/documents/upload-single-raildoc")
-    @Secured({"ROLE_EDITOR"})
+    @Secured({"ROLE_EDITOR", "ROLE_ADMIN"})
     @JsonView(Views.ShortView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam("file") MultipartFile file

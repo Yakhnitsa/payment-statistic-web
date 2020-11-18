@@ -33,7 +33,6 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         this.documentsRepo = documentsRepo;
     }
 
-//    @Value("#{${service.backup-path} + systemProperties.line.separator + 'rail_docs'}")
     @Value("${service.backup-path}" + "/rail_docs")
     private String backupDir;
 

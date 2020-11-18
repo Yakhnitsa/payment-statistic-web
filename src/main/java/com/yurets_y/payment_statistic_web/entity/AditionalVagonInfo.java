@@ -18,14 +18,12 @@ public class AditionalVagonInfo {
     @JsonView(Views.NormalView.class)
     private Boolean hasCert;
 
-
     public AditionalVagonInfo() {
     }
 
     public AditionalVagonInfo(Vagon vagon) {
         this.vagon = vagon;
     }
-
 
     public Vagon getVagon() {
         return vagon;

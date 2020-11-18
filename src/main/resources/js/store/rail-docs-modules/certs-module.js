@@ -98,6 +98,7 @@ export default {
             try {
                 const response = await certificatesApi.uploadChangesToServer(state.requestParams, state.changes);
                 const data = await response.data;
+                state.changes = [];
                 console.log(data);
                 // commit('setDocumentsMutation', data.content);
                 // commit('setTotalPagesMutation', data.totalPages);

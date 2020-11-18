@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="position-relative">
         <div class="scrollable-table">
             <table class="table table-striped table-hover table-sm">
                 <thead>
@@ -57,11 +57,14 @@
             </table>
         </div>
 
+        <button class="btn btn-secondary submit-button" @click="sendDataToServer">{{changes.length}}</button>
+
     </div>
 </template>
 
 <script>
 
+    import testApi from '../../../../api/testApi';
     import { createNamespacedHelpers } from 'vuex';
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
     export default {
@@ -70,11 +73,13 @@
         computed:{
             ...mapGetters({
                 railroadDocuments: 'documents',
+                changes: 'changesList'
             })
         },
 
         methods:{
             ...mapMutations(['addChangesMutation']),
+            ...mapActions(['uploadChangesToServerAction']),
             addChanges(event){
                 console.log(event);
             },
@@ -86,11 +91,26 @@
                 };
                 this.addChangesMutation({vagonId, changes});
             },
-            // addChanges(vagonId,changes){
-            //     this.addChangesMutation({vagonId, changes});
-            // }
+            sendDataToServer(){
+                this.uploadChangesToServerAction();
+            },
+            test(){
+                const json = {
+                    "vagonId": 1818,
+                    "changes":{
+                        "hasCert": true,
+                    },
+                };
+                testApi.testPostRequest({},json);
+            },
+
             hasCert(vagon){
                 return vagon.vagonInfo ? vagon.vagonInfo.hasCert : false;
+            }
+        },
+        watch:{
+            changes(){
+                console.log(this.changes)
             }
         },
 
@@ -168,5 +188,16 @@
         white-space: normal;
         font-weight: 500;
     }
+
+    .submit-button{
+        opacity: .7;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+    }
+    .submit-button:hover{
+        opacity: 1;
+    }
+
 
 </style>
