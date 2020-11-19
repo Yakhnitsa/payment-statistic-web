@@ -4,11 +4,61 @@
             <table class="table table-striped table-hover table-sm">
                 <thead>
                 <tr>
-                    <th class="sticky-first-column text-center">Відправник</th>
-                    <th class="text-center">ст. Відправлення</th>
-                    <th class="text-center">Дата</th>
-                    <th class="text-center">№ Накладної</th>
-                    <th class="text-center">№ Вагону</th>
+                    <th class="text-center">Відправник</th>
+                    <th class="text-center">
+                        <span v-if="!stationFilter.active">
+                            ст. Відправлення
+                        </span>
+                        <span v-else>
+                             <input type="text" class="form-control"
+                                    placeholder="ст Відправл..."
+                                    v-model="stationFilter.value">
+                        </span>
+                        <span class="text-secondary" @click="stationFilter.active = !stationFilter.active">
+                            <i :class="['fas', stationFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                        </span>
+                    </th>
+                    <th class="text-center">
+                        <span v-if="!dateFilter.active">
+                            Дата
+                        </span>
+                        <span v-else>
+                             <input type="date" class="form-control"
+                                    placeholder="Дата"
+                                    v-model="dateFilter.value">
+                        </span>
+                        <span class="text-secondary" @click="dateFilter.active = !dateFilter.active">
+                            <i :class="['fas', dateFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                        </span>
+                    </th>
+
+
+                    <th class="text-center">
+                        <span v-if="!docNumberFilter.active">
+                            № Накладної
+                        </span>
+                        <span v-else>
+                             <input type="text" class="form-control"
+                                    placeholder="№ Накладної"
+                                    v-model="docNumberFilter.value">
+                        </span>
+                        <span class="text-secondary" @click="docNumberFilter.active = !docNumberFilter.active">
+                            <i :class="['fas', docNumberFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                        </span>
+                    </th>
+                    <th class="text-center">
+                        <span v-if="!vagNumberFilter.active">
+                            № Вагону
+                        </span>
+                        <span v-else>
+                             <input type="text" class="form-control"
+                                     placeholder="№ Вагону"
+                                     v-model="vagNumberFilter.value">
+                        </span>
+                        <span class="text-secondary" @click="vagNumberFilter.active = !vagNumberFilter.active">
+                            <i :class="['fas', vagNumberFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                        </span>
+                    </th>
                     <th class="text-center">[ ]</th>
                     <th class="text-center">ст Призначення</th>
                     <th class="text-center">Отримувач</th>
@@ -20,7 +70,7 @@
                 </thead>
                 <tbody>
                     <template v-for="doc in railroadDocuments">
-                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in doc.vagonList">
+                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in vagonFilter(doc)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
                             <td>{{doc.docDate | formatDate}}</td>
@@ -28,6 +78,7 @@
                             <td>{{vagon.number}}</td>
                             <td class="cert-checkbox">
                                 <input
+
                                         type="checkbox"
                                         :checked="hasCert(vagon)"
                                         @change="setCertSelected(vagon)"
@@ -40,35 +91,42 @@
                             <td>{{vagon.netWeight}}</td>
                         </tr>
                     </template>
-                <!--<tr v-for="(value ,key) in railroadDocuments">-->
-                    <!--<tr>-->
-                    <!--<tr>-->
-                    <!--<td class="sticky-first-column text-center">{{value.docNumber}}</td>-->
-                    <!--<td class="sticky-second-column text-center">{{value.dateStamp | formatDate}}</td>-->
-                    <!--<td class="text-capitalize">{{value.sendStation | formatStation}}</td>-->
-                    <!--<td class="text-capitalize">{{value.receiveStation | formatStation}}</td>-->
-                    <!--<td class="text-capitalize">{{value.cargoSender | formatClient}}</td>-->
-                    <!--<td class="text-capitalize">{{value.cargoReceiver | formatClient}}</td>-->
-                    <!--<td class="text-capitalize">({{value.cargoCode}}) {{value.cargoName}}</td>-->
-                    <!--<td class="text-right">{{value.vagonCount}}</td>-->
-                    <!--<td class="text-right">{{value.fullWeight | formatPayment}}</td>-->
-                <!--</tr>-->
                 </tbody>
             </table>
         </div>
 
-        <button class="btn btn-secondary submit-button" @click="sendDataToServer">{{changes.length}}</button>
+        <button class="btn btn-secondary submit-button" @click="sendDataToServer">{{changes.length}} Обновить</button>
 
     </div>
 </template>
 
 <script>
 
-    import testApi from '../../../../api/testApi';
     import { createNamespacedHelpers } from 'vuex';
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
     export default {
         name: "QualityCertTable",
+        data(){
+            return {
+                stationFilter: {
+                    active: false,
+                    value: ''
+                },
+                dateFilter: {
+                    active: false,
+                    value: ''
+                },
+                docNumberFilter:{
+                    active: false,
+                    value: ''
+                },
+                vagNumberFilter: {
+                    active: false,
+                    value: ''
+                }
+
+            }
+        },
         // props:['railroadDocuments'],
         computed:{
             ...mapGetters({
@@ -94,21 +152,37 @@
             sendDataToServer(){
                 this.uploadChangesToServerAction();
             },
-            test(){
-                const json = {
-                    "vagonId": 1818,
-                    "changes":{
-                        "hasCert": true,
-                    },
-                };
-                testApi.testPostRequest({},json);
-            },
+
             isChanged(vagonId){
                 return this.changes.findIndex(item => item.vagonId === vagonId) !== -1;
             },
 
             hasCert(vagon){
                 return vagon.vagonInfo ? vagon.vagonInfo.hasCert : false;
+            },
+        //    Array filtering methods
+            vagonFilter(document){
+                const result = document.vagonList;
+                const val = this.vagNumberFilter.value;
+                if(val === '' || !this.vagNumberFilter.active) return result;
+                return result.filter(vagon => {
+                    console.log(vagon.number);
+                    return vagon.number
+                        .toString()
+                        .indexOf(val) > -1;
+                });
+            },
+            certSelectedFilter(vagons){
+
+            },
+            docDateFilter(documents){
+
+            },
+            sendStationFilter(documents){
+
+            },
+            docNumberFilter(documents){
+
             }
         },
 
@@ -204,6 +278,17 @@
         font-style: italic;
         color: gray;
         background-color: #cfe1e1 !important;
+    }
+
+    .form-control {
+        display: inline-block;
+        width: 7em;
+        height: 2em;
+        padding: inherit;
+        font-size: inherit;
+    }
+    .filter-block{
+        color: #636363;
     }
 
 
