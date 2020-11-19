@@ -6,16 +6,16 @@
                 <tr>
                     <th class="text-center">Відправник</th>
                     <th class="text-center">
-                        <span v-if="!stationFilter.active">
+                        <span v-if="!sendStationFilter.active">
                             ст. Відправлення
                         </span>
                         <span v-else>
-                             <input type="text" class="form-control"
+                             <input type="search" class="form-control"
                                     placeholder="ст Відправл..."
-                                    v-model="stationFilter.value">
+                                    v-model="sendStationFilter.value">
                         </span>
-                        <span class="text-secondary" @click="stationFilter.active = !stationFilter.active">
-                            <i :class="['fas', stationFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                        <span class="text-secondary" @click="sendStationFilter.active = !sendStationFilter.active">
+                            <i :class="['fas', sendStationFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
                     <th class="text-center">
@@ -38,7 +38,7 @@
                             № Накладної
                         </span>
                         <span v-else>
-                             <input type="text" class="form-control"
+                             <input type="search" class="form-control"
                                     placeholder="№ Накладної"
                                     v-model="docNumberFilter.value">
                         </span>
@@ -51,7 +51,7 @@
                             № Вагону
                         </span>
                         <span v-else>
-                             <input type="text" class="form-control"
+                             <input type="search" class="form-control"
                                      placeholder="№ Вагону"
                                      v-model="vagNumberFilter.value">
                         </span>
@@ -69,7 +69,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <template v-for="doc in railroadDocuments">
+                    <template v-for="doc in documentsMainFilter(railroadDocuments)">
                         <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in vagonFilter(doc)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
@@ -78,7 +78,6 @@
                             <td>{{vagon.number}}</td>
                             <td class="cert-checkbox">
                                 <input
-
                                         type="checkbox"
                                         :checked="hasCert(vagon)"
                                         @change="setCertSelected(vagon)"
@@ -108,7 +107,7 @@
         name: "QualityCertTable",
         data(){
             return {
-                stationFilter: {
+                sendStationFilter: {
                     active: false,
                     value: ''
                 },
@@ -121,6 +120,10 @@
                     value: ''
                 },
                 vagNumberFilter: {
+                    active: false,
+                    value: ''
+                },
+                certSelectedFilter:{
                     active: false,
                     value: ''
                 }
@@ -160,6 +163,8 @@
             hasCert(vagon){
                 return vagon.vagonInfo ? vagon.vagonInfo.hasCert : false;
             },
+
+
         //    Array filtering methods
             vagonFilter(document){
                 const result = document.vagonList;
@@ -172,18 +177,58 @@
                         .indexOf(val) > -1;
                 });
             },
-            certSelectedFilter(vagons){
-
+            vagonNumberFilterFunc(vagons){
+                const val = this.vagNumberFilter.value;
+                if(val === '' || !this.vagNumberFilter.active) return vagons;
+                return vagons.filter(vagon => {
+                    return vagon.number
+                        .toString()
+                        .indexOf(val) > -1;
+                });
             },
-            docDateFilter(documents){
-
+            //TODO Проверить или это работает!!!
+            certSelectedFilterFunc(vagons){
+                const selected = this.certSelectedFilter.value;
+                if(!this.certSelectedFilter.active) return vagons;
+                return vagons.filter(vagon => {
+                    return vagon.vagonInfo === null ? !selected : vagon.vagonInfo.hasCert === selected;
+                });
             },
-            sendStationFilter(documents){
 
+
+            documentsMainFilter(documents){
+                documents = this.docDateFilterFunc(documents);
+                documents = this.docNumberFilterFunc(documents);
+                return this.sendStationFilterFunc(documents);
             },
-            docNumberFilter(documents){
+            docDateFilterFunc(documents){
+                const date = this.dateFilter.value;
+                if(date === '' || !this.dateFilter.active) return documents;
+                return documents.filter(doc =>{
+                        return doc.docDate === date;
+                    }
 
-            }
+                )
+            },
+
+            sendStationFilterFunc(documents){
+                const val = this.sendStationFilter.value.toLowerCase();
+                if(val===''|| !this.sendStationFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.sendStation.code.toString().indexOf(val) > -1 ||
+                        doc.sendStation.rusName.toLowerCase().indexOf(val) > -1 ||
+                        doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
+                })
+            },
+            docNumberFilterFunc(documents){
+                const docNumb = this.docNumberFilter.value;
+                if(docNumb ==='' || !this.docNumberFilter.active) return documents;
+                return documents
+                    .filter(doc => doc.docNumber.toString().indexOf(docNumb) > -1
+                    )
+            },
+
+
         },
 
         filters:{
@@ -282,7 +327,7 @@
 
     .form-control {
         display: inline-block;
-        width: 7em;
+        width: 8.5em;
         height: 2em;
         padding: inherit;
         font-size: inherit;
