@@ -15,7 +15,7 @@
                                     v-model="sendStationFilter.value">
                         </span>
                         <span class="text-secondary" @click="sendStationFilter.active = !sendStationFilter.active">
-                            <i :class="['fas', sendStationFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                            <i :class="['fas', sendStationFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
                     <th class="text-center">
@@ -28,7 +28,7 @@
                                     v-model="dateFilter.value">
                         </span>
                         <span class="text-secondary" @click="dateFilter.active = !dateFilter.active">
-                            <i :class="['fas', dateFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                            <i :class="['fas', dateFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
 
@@ -43,7 +43,7 @@
                                     v-model="docNumberFilter.value">
                         </span>
                         <span class="text-secondary" @click="docNumberFilter.active = !docNumberFilter.active">
-                            <i :class="['fas', docNumberFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                            <i :class="['fas', docNumberFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
                     <th class="text-center">
@@ -56,7 +56,7 @@
                                      v-model="vagNumberFilter.value">
                         </span>
                         <span class="text-secondary" @click="vagNumberFilter.active = !vagNumberFilter.active">
-                            <i :class="['fas', vagNumberFilter.active ? 'fa-times' : 'fa-filter','fa-sm']"></i>
+                            <i :class="['fas', vagNumberFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
                     <th class="text-center">[ ]</th>
@@ -171,7 +171,6 @@
                 const val = this.vagNumberFilter.value;
                 if(val === '' || !this.vagNumberFilter.active) return result;
                 return result.filter(vagon => {
-                    console.log(vagon.number);
                     return vagon.number
                         .toString()
                         .indexOf(val) > -1;
@@ -242,11 +241,11 @@
     }
 </script>
 
-<style>
+<style scoped>
 
-    :root{
-        --header-bg-color: #d5e7e7;
-    }
+    /*:root{*/
+        /*--header-bg-color: #d5e7e7;*/
+    /*}*/
 
     .scrollable-table {
         max-width: 100%;
