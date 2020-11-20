@@ -89,6 +89,38 @@
                                         <input type="date" v-model="searchParams.dateUntil" class="form-control" id="inputDateUntil">
                                     </div>
                                 </div>
+                                <hr class="separator">
+                                <div class="row">
+                                    <label for="itemsCountInput" class="col-sm-4 col-form-label text-nowrap">Элементов на странице</label>
+                                    <div class="col-sm-2">
+                                        <select v-model="searchParams.itemsPerPage" class="form-control" id="itemsCountInput">
+                                            <option>10</option>
+                                            <option>20</option>
+                                            <option>50</option>
+                                            <option>100</option>
+                                        </select>
+
+                                    </div>
+                                    <label class="col-sm-2 col-form-label text-nowrap">Сортировка</label>
+                                    <div class="col-sm-4">
+                                        <div class="btn-group btn-group-toggle">
+                                            <label class="btn btn-outline-secondary">
+                                                <input type="radio" value="desc" v-model="searchParams.sortDirection">
+                                                Обратная
+                                            </label>
+                                            <label class="btn btn-outline-secondary">
+                                                <input type="radio" value="asc" v-model="searchParams.sortDirection">
+                                                Прямая
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <input type="radio" value="desc" v-model="searchParams.sortDirection">
+                                    <input type="radio" value="asc" v-model="searchParams.sortDirection">
+                                    {{searchParams.sortDirection}}
+                                </div>
 
 
                             </form>
@@ -121,6 +153,7 @@
             return {
                 stationFrom: {code: '', rusName: '', ukrName: ''},
                 stationTo: {code: '', rusName: '', ukrName: ''},
+                radio:'',
                 searchParams:{
                     stationFromCode: '',
                     stationToCode: '',
@@ -131,7 +164,10 @@
                     dateUntil: '',
                     docNumber: '',
                     vagonNumber: '',
-                    cargoCode: ''
+                    cargoCode: '',
+                    itemsPerPage:'50',
+                    sortDirection:'desc',
+                    sortBy:'dateStamp'
                 }
             }
         },
