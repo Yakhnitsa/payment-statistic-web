@@ -6,14 +6,14 @@ export default {
     state: () => ({
         documents: [],
         changes:[],
-        currentPage: 0,
+        currentPage:0,
         totalPages: 0,
         totalElements: 0,
         requestParams: {}
     }),
     getters: {
         documents: state => state.documents,
-        currentPage: state => state.requestParams.currentPage,
+        currentPage: state => state.currentPage,
         totalPages: state => state.totalPages,
         totalElements: state => state.totalElements,
         storedRequestParams: state => state.requestParams,
@@ -24,7 +24,7 @@ export default {
             state.documents = documents;
         },
         setCurrentPageMutation(state, page) {
-            state.requestParams.currentPage = page;
+            state.currentPage = page;
         },
         setTotalPagesMutation(state, pages) {
             state.totalPages = pages;
@@ -58,6 +58,7 @@ export default {
     actions: {
         async fetchRailroadDocumentsAction({commit, state}) {
             try {
+                state.requestParams.currentPage = state.currentPage;
                 const response = await certificatesApi.getCertificatesRegister(state.requestParams);
                 const data = await response.data;
                 commit('setDocumentsMutation', data.content);
@@ -91,7 +92,6 @@ function updateVagonInfoInDocument(railDoc,changes){
     let index = railDoc.vagonList.findIndex(vagon => vagon.id === changes.vagon.id);
     if(index !== -1){
         railDoc.vagonList[index].vagonInfo = changes;
-        console.log(railDoc.vagonList[index]);
     }
 
 }

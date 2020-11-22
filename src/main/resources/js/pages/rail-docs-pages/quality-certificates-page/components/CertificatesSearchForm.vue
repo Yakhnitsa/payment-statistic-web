@@ -180,7 +180,8 @@
         },
         methods: {
             ...mapMutations({
-                storeRequestParams:'certStore/setRequestParamsMutation'
+                storeRequestParams:'certStore/setRequestParamsMutation',
+                setCurrentPage: 'certStore/setCurrentPageMutation'
             }),
             ...mapActions({
                 fetchDataFromServer: 'certStore/fetchRailroadDocumentsAction'
@@ -190,6 +191,7 @@
             },
             updateData() {
                 this.storeRequestParams(this.searchParams);
+                this.setCurrentPage(0);
                 this.fetchDataFromServer();
 
             },

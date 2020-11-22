@@ -46,7 +46,7 @@ public class CertRegisterController {
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
-            @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
+            @RequestParam(required = false, defaultValue = "50") Integer itemsPerPage,
             @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
             @RequestParam(required = false, defaultValue = "desc") String sortDirection,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
@@ -59,7 +59,7 @@ public class CertRegisterController {
             @RequestParam(required = false) Integer vagonNumber,
             @RequestParam(required = false) String cargoCode
     ){
-        Pageable pageable = getPageable(currentPage, elementsCount, sortBy,sortDirection);
+        Pageable pageable = getPageable(currentPage, itemsPerPage, sortBy,sortDirection);
 
         Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
         specification = specification.and(docSpec.sendStationSpec(stationFromCode));
@@ -79,35 +79,7 @@ public class CertRegisterController {
     @PostMapping("/api/documents/certificates")
     @Secured({"ROLE_EDITOR","ROLE_ADMIN"})
     @JsonView(Views.NormalView.class)
-    public ResponseEntity<?> postChanges(
-            @RequestBody VagonChangesDto[] changes,
-            @RequestParam(required = false, defaultValue = "0") Integer currentPage,
-            @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
-            @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
-            @RequestParam(required = false, defaultValue = "desc") String sortDirection,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
-            @RequestParam(required = false) Integer stationFromCode,
-            @RequestParam(required = false) Integer stationToCode,
-            @RequestParam(required = false) Integer cargoSenderCode,
-            @RequestParam(required = false) Integer cargoReceiverCode,
-            @RequestParam(required = false) Integer docNumber,
-            @RequestParam(required = false) Integer vagonNumber,
-            @RequestParam(required = false) String cargoCode
-    ){
-        Pageable pageable = getPageable(currentPage, elementsCount, sortBy,sortDirection);
-
-        Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
-        specification = specification.and(docSpec.sendStationSpec(stationFromCode));
-        specification = specification.and(docSpec.receiveStationSpec(stationToCode));
-        specification = specification.and(docSpec.senderCodeSpec(cargoSenderCode));
-        specification = specification.and(docSpec.receiverCodeSpec(cargoReceiverCode));
-        specification = specification.and(docSpec.docNumberSpecification(docNumber));
-        specification = specification.and(docSpec.vagonNumberSpec(vagonNumber));
-        specification = specification.and(docSpec.cargoCodeSpec(cargoCode));
-
-        Page<RailroadDocument> railDocsPage = documentsService.getAllBySpecification(specification,pageable);
-        JsonPage<RailroadDocument> jsonPage = new JsonPage<>(railDocsPage, pageable);
+    public ResponseEntity<?> postChanges(@RequestBody VagonChangesDto[] changes){
 
         List<AditionalVagonInfo> appliedChanges = new ArrayList<>();
         for(VagonChangesDto dto: changes){
