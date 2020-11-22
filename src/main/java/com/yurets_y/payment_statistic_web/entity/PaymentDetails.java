@@ -28,6 +28,7 @@ public class PaymentDetails {
 
     @Temporal(TemporalType.DATE)
     @JsonView(Views.ShortView.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     @JsonView(Views.ShortView.class)
