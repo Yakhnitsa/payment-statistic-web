@@ -131,7 +131,7 @@ public class RailroadDocument extends AuditableEntity {
         vagons.forEach(this::addVagon);
     }
 
-    @JsonView(Views.NormalView.class)
+    @JsonView(Views.ExtendedView.class)
     public List<Vagon> getVagonList() {
         return vagonList;
     }

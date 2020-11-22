@@ -78,7 +78,7 @@ public class CertRegisterController {
 
     @PostMapping("/api/documents/certificates")
     @Secured({"ROLE_EDITOR","ROLE_ADMIN"})
-    @JsonView(Views.NormalView.class)
+    @JsonView(Views.ExtendedView.class)
     public ResponseEntity<?> postChanges(@RequestBody VagonChangesDto[] changes){
 
         List<AditionalVagonInfo> appliedChanges = new ArrayList<>();

@@ -22,7 +22,7 @@ public class Views {
     /*
     * Отображение всех полей, кроме полей аудитинга.
     * */
-    public interface FullView extends NormalView {
+    public interface FullView extends ExtendedView {
 
     }
 //    Предназначен для дебага приложения админом, только сервисные поля
