@@ -83,7 +83,7 @@
 </script>
 
 <style scoped>
-    @import "../css/sidebar_style.css";
+    @import "../../css/sidebar_style.css";
 
     /*#sidebar {*/
          /*min-width: 250px;*/

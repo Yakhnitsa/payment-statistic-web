@@ -112,7 +112,7 @@
     import {mapGetters, mapMutations, mapActions } from 'vuex';
 
     export default {
-        name: "RailDocumentsSearchModal",
+        name: "DocumentsSearchForm",
         components: {StationInput},
         props: ['show-modal'],
         data() {

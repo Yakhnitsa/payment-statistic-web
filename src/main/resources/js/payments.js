@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './pages/PaymentsRootPage.vue'
+import App from './pages/payments-pages/PaymentsRootPage.vue'
 import VueResouce from 'vue-resource'
 import router from 'router/payments-router'
 import store from 'store/payments-store'

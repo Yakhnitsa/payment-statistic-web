@@ -23,7 +23,7 @@
 
 <script>
 
-    import Sidebar from '../components/Sidebar.vue'
+    import Sidebar from './Sidebar.vue'
     import {mapGetters} from 'vuex'
 
     export default{
@@ -96,6 +96,6 @@
 
 <style>
 
-    @import "../css/mainbar_style.css";
+    @import "../../css/mainbar_style.css";
 
 </style>

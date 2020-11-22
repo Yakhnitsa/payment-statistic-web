@@ -54,67 +54,74 @@
         /*--header-bg-color: #999799;*/
         /*color: var(--header-bg-color);*/
     /*}*/
-    :root{
-        --header-bg-color: #d5e7e7;
-    }
+    @import "../../../../css/railroad-documents/tables-style.css";
+    /*:root{*/
+        /*--header-bg-color: #d5e7e7;*/
+    /*}*/
 
-    .scrollable-table {
-        max-width: 100%;
-        max-height: 30em;
-        overflow: scroll;
-        position: relative;
-    }
 
-    table {
-        font-size: .9em;
-    }
+    /*.scrollable-table {*/
+        /*max-width: 100%;*/
+        /*max-height: 30em;*/
+        /*overflow: scroll;*/
+        /*position: relative;*/
+    /*}*/
 
-    thead th {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        background-color: var(--header-bg-color);
-        z-index: 1;
-    }
+    /*table {*/
+        /*font-size: .9em;*/
+    /*}*/
 
-    .sticky-first-column {
-        font-weight: 500;
-        position: -webkit-sticky; /* for Safari */
-        position: sticky;
-        left: 0;
-        min-width: 8em;
-        max-width: 8em;
-        white-space: nowrap;
-        background-color: var(--header-bg-color);
-    }
-    th.sticky-first-column{
-        z-index: 2;
-    }
+    /*thead th {*/
+        /*position: -webkit-sticky;*/
+        /*position: sticky;*/
+        /*top: 0;*/
+        /*border-top-width: 0;*/
+        /*background-color: var(--header-bg-color);*/
+        /*z-index: 1;*/
+    /*}*/
+    /*.table th {*/
+        /*border-top: 0;*/
+    /*}*/
 
-    .sticky-second-column {
-        font-weight: 500;
-        position: -webkit-sticky; /* for Safari */
-        position: sticky;
-        left: 8em;
-        max-width: 8em;
-        white-space: nowrap;
-        background-color: var(--header-bg-color);
-    }
-    th.sticky-second-column{
-        z-index: 2;
-    }
+    /*.sticky-first-column {*/
+        /*font-weight: 500;*/
+        /*position: -webkit-sticky; !* for Safari *!*/
+        /*position: sticky;*/
+        /*left: 0;*/
+        /*min-width: 8em;*/
+        /*max-width: 8em;*/
+        /*white-space: nowrap;*/
+        /*background-color: var(--header-bg-color);*/
+    /*}*/
+    /*th.sticky-first-column{*/
+        /*z-index: 2;*/
+    /*}*/
 
-    td, th{
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 15em;
-    }
+    /*.sticky-second-column {*/
+        /*font-weight: 500;*/
+        /*position: -webkit-sticky; !* for Safari *!*/
+        /*position: sticky;*/
+        /*left: 8em;*/
+        /*max-width: 8em;*/
+        /*white-space: nowrap;*/
+        /*background-color: var(--header-bg-color);*/
+    /*}*/
+    /*th.sticky-second-column{*/
+        /*z-index: 2;*/
+    /*}*/
 
-    td:hover{
-        white-space: normal;
-        font-weight: 500;
-    }
+    /*td, th{*/
+        /*white-space: nowrap;*/
+        /*overflow: hidden;*/
+        /*text-overflow: ellipsis;*/
+        /*max-width: 15em;*/
+        /*padding: .1rem .3rem;*/
+    /*}*/
+
+    /*td:hover{*/
+        /*white-space: normal;*/
+        /*font-weight: 500;*/
+    /*}*/
 
 
 

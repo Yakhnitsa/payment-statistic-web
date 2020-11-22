@@ -69,5 +69,8 @@
 </script>
 
 <style scoped>
+    .page-link {
+        padding: .4rem .6rem;
+    }
 
 </style>

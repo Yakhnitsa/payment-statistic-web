@@ -1,17 +1,24 @@
 <template>
     <div>
-        <button type="button" @click="showModal = true">test button</button>
-        <rail-documents-search-modal
-                v-show="showModal"
-                @close-modal="closeModal"></rail-documents-search-modal>
-        <h1>
-            RailDocumentsPage
-        </h1>
+        <!--<button type="button" @click="showModal = true">test button</button>-->
+        <!--<rail-documents-search-modal-->
+                <!--v-show="showModal"-->
+                <!--@close-modal="closeModal"></rail-documents-search-modal>-->
+        <div class="row mx-0 my-1">
+            <control-panel></control-panel>
+        </div>
+
 
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
-        <div class="row mx-0 mt-2 float-right">
-            <span>Всего найдено накладных: {{totalElements}}</span>
-            <pageable @changePage="changePage" :total-pages="totalPages" :current-page="currentPage"></pageable>
+        <div class="row mx-0 mt-2" style="display: flow-root">
+            <div class="float-left">
+                <span>Всего документов: {{totalElements}}</span>
+            </div>
+            <div class="float-right">
+                <pageable @changePage="changePage" :total-pages="totalPages" :current-page="currentPage"></pageable>
+            </div>
+
+
         </div>
     </div>
 
@@ -22,14 +29,15 @@
 
     import { createNamespacedHelpers } from 'vuex';
     import Pageable from "../../../shared/components/Pageable.vue";
-    import RailDocumentsSearchModal from "./components/ModalSearchForm.vue";
+    import RailDocumentsSearchModal from "./components/DocumentsSearchForm.vue";
+    import ControlPanel from "./components/ControlPanel.vue";
 
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('railDocsStore');
 
 
     export default {
         name: "RailDocumentsPage",
-        components: {RailDocumentsSearchModal, Pageable, RailroadDocumentsTable},
+        components: {ControlPanel, RailDocumentsSearchModal, Pageable, RailroadDocumentsTable},
         data(){
             return{
                 showModal: false,

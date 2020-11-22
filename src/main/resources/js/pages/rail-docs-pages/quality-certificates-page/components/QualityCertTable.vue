@@ -243,66 +243,22 @@
 
 <style scoped>
 
-    /*:root{*/
-        /*--header-bg-color: #d5e7e7;*/
-    /*}*/
+    @import "../../../../css/railroad-documents/tables-style.css";
 
-    .scrollable-table {
-        max-width: 100%;
-        max-height: 30em;
-        overflow: scroll;
-        position: relative;
+    .form-control {
+        display: inline-block;
+        width: 8.5em;
+        height: 2em;
+        padding: inherit;
+        font-size: inherit;
     }
-
-    table {
-        font-size: .9em;
+    .filter-block{
+        color: #636363;
     }
-
-    thead th {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        background-color: var(--header-bg-color);
-        z-index: 1;
-    }
-
-    .sticky-first-column {
-        font-weight: 500;
-        position: -webkit-sticky; /* for Safari */
-        position: sticky;
-        left: 0;
-        min-width: 8em;
-        max-width: 8em;
-        white-space: nowrap;
-        background-color: var(--header-bg-color);
-    }
-    th.sticky-first-column{
-        z-index: 2;
-    }
-
-    .sticky-second-column {
-        font-weight: 500;
-        position: -webkit-sticky; /* for Safari */
-        position: sticky;
-        left: 8em;
-        max-width: 8em;
-        white-space: nowrap;
-        background-color: var(--header-bg-color);
-    }
-    th.sticky-second-column{
-        z-index: 2;
-    }
-
-    td, th{
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 15em;
-    }
-
-    td:hover{
-        white-space: normal;
-        font-weight: 500;
+    .changed{
+        font-style: italic;
+        color: gray;
+        background-color: #cfe1e1 !important;
     }
 
     .submit-button{
@@ -317,22 +273,6 @@
     .cert-checkbox input{
         width: 1em;
         height: 1em;
-    }
-    .changed{
-        font-style: italic;
-        color: gray;
-        background-color: #cfe1e1 !important;
-    }
-
-    .form-control {
-        display: inline-block;
-        width: 8.5em;
-        height: 2em;
-        padding: inherit;
-        font-size: inherit;
-    }
-    .filter-block{
-        color: #636363;
     }
 
 
