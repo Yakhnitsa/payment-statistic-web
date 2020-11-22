@@ -43,7 +43,7 @@ public class CertRegisterController {
 
     @GetMapping("/api/documents/certificates")
     @Secured({"ROLE_VIEWER","ROLE_EDITOR","ROLE_ADMIN"})
-    @JsonView(Views.NormalView.class)
+    @JsonView(Views.ExtendedView.class)
     public ResponseEntity<?> uploadSingleList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
             @RequestParam(required = false, defaultValue = "50") Integer itemsPerPage,

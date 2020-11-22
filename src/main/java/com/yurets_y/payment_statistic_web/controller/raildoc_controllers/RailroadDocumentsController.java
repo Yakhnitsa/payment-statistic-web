@@ -36,8 +36,9 @@ public class RailroadDocumentsController {
     @JsonView(Views.NormalView.class)
     public ResponseEntity<?> getDocumentsList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
-            @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
+            @RequestParam(required = false, defaultValue = "50") Integer itemsPerPage,
             @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
+            @RequestParam(required = false, defaultValue = "desc") String sortDirection,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
             @RequestParam(required = false) Integer stationFromCode,
@@ -49,7 +50,7 @@ public class RailroadDocumentsController {
             @RequestParam(required = false) Integer vagonNumber,
             @RequestParam(required = false) String cargoCode
             ){
-        Pageable pageable = getPageable(currentPage, elementsCount, sortBy);
+        Pageable pageable = getPageable(currentPage, itemsPerPage, sortBy, sortDirection);
 
         Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
         specification = specification.and(docSpec.sendStationSpec(stationFromCode));
@@ -64,7 +65,7 @@ public class RailroadDocumentsController {
         Page<RailroadDocument> railDocsPage = documentsService.getAllBySpecification(specification,pageable);
         JsonPage<RailroadDocument> jsonPage = new JsonPage<>(railDocsPage, pageable);
 
-        return new ResponseEntity<>(jsonPage,HttpStatus.OK);
+            return new ResponseEntity<>(jsonPage,HttpStatus.OK);
     }
 
     @Autowired
@@ -77,7 +78,9 @@ public class RailroadDocumentsController {
         this.docSpec = docSpec;
     }
 
-    private Pageable getPageable(int page, int size, String sort){
-        return PageRequest.of(page,size, Sort.by(sort));
+    private Pageable getPageable(int page, int size, String sort, String direction){
+        return "ASC".equalsIgnoreCase(direction) ? PageRequest.of(page,size, Sort.by(sort).ascending())
+                : PageRequest.of(page,size, Sort.by(sort).ascending().descending());
+
     }
 }

@@ -204,7 +204,8 @@
                 const date = this.dateFilter.value;
                 if(date === '' || !this.dateFilter.active) return documents;
                 return documents.filter(doc =>{
-                        return doc.docDate === date;
+                        return this.$options.filters.formatDate(doc.docDate)
+                            === this.$options.filters.formatDate(date);
                     }
 
                 )

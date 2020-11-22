@@ -104,11 +104,13 @@
                                     <label class="col-sm-2 col-form-label text-nowrap">Сортировка</label>
                                     <div class="col-sm-4">
                                         <div class="btn-group btn-group-toggle">
-                                            <label class="btn btn-outline-secondary">
+                                            <label class="btn btn-outline-secondary"
+                                                   :class="{'active': searchParams.sortDirection === 'desc'}">
                                                 <input type="radio" value="desc" v-model="searchParams.sortDirection">
                                                 Обратная
                                             </label>
-                                            <label class="btn btn-outline-secondary">
+                                            <label class="btn btn-outline-secondary"
+                                                   :class="{'active': searchParams.sortDirection === 'asc'}">
                                                 <input type="radio" value="asc" v-model="searchParams.sortDirection">
                                                 Прямая
                                             </label>
@@ -116,13 +118,6 @@
                                     </div>
 
                                 </div>
-                                <div class="row">
-                                    <input type="radio" value="desc" v-model="searchParams.sortDirection">
-                                    <input type="radio" value="asc" v-model="searchParams.sortDirection">
-                                    {{searchParams.sortDirection}}
-                                </div>
-
-
                             </form>
                         </div>
                         <div class="modal-footer">
