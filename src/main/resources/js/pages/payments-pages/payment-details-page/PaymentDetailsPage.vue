@@ -8,8 +8,6 @@
                 </button>
 
                 <button class="btn btn-outline-secondary" @click="submitForm()">Обновить данные</button>
-
-
             </div>
 
             <div>
@@ -56,7 +54,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputDocNumber">Документ</label>
-                                <input type="number" v-model="docNumber" class="form-control" id="inputDocNumber"
+                                <input type="text" v-model="docNumber" class="form-control" id="inputDocNumber"
                                        placeholder="№ документа">
                             </div>
                             <div class="form-group col-md-3">
@@ -72,38 +70,44 @@
 
         </div>
 
-        <div class="float-right mr-4">
-            <div class="row">
-                <!--<span>Страница</span>-->
-                <nav aria-label="Page nav ">
-                    <ul class="pagination pagination-sm">
-                        <li class="page-item"
-                            :class="{disabled: currentPage <= 1}">
-                            <a @click="currentPage--" class="page-link"><i class="fas fa-caret-left"></i></a>
-                        </li>
-                        <li>
-                            <select
-                                    v-model="currentPage"
-                                    class="form-control form-control-sm" id="inputPageSelect">
-                                <option
-                                        :value="page"
-                                        v-for="page in pages">{{page}}</option>
-                            </select>
-                        </li>
-                        <li class="page-item"
-                            :class="{disabled: currentPage >= pages}"
-                        >
-                            <a @click="currentPage++"class="page-link"><i class="fas fa-caret-right"></i></a>
-                        </li>
-                    </ul>
-                </nav>
+        <div class="row">
+            <div class="float-right mr-4">
+                <div class="row">
+                    <!--<span>Страница</span>-->
+                    <nav aria-label="Page nav ">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item"
+                                :class="{disabled: currentPage <= 1}">
+                                <a @click="currentPage--" class="page-link"><i class="fas fa-caret-left"></i></a>
+                            </li>
+                            <li>
+                                <select
+                                        v-model="currentPage"
+                                        class="form-control form-control-sm" id="inputPageSelect">
+                                    <option
+                                            :value="page"
+                                            v-for="page in pages">{{page}}</option>
+                                </select>
+                            </li>
+                            <li class="page-item"
+                                :class="{disabled: currentPage >= pages}"
+                            >
+                                <a @click="currentPage++"class="page-link"><i class="fas fa-caret-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+
 
             </div>
-
-
         </div>
 
-        <payment-details-table></payment-details-table>
+
+        <div class="row container-fluid">
+            <payment-details-table></payment-details-table>
+        </div>
+
     </div>
 
 

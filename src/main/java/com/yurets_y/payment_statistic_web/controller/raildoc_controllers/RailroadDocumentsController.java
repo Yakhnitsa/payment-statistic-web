@@ -34,7 +34,7 @@ public class RailroadDocumentsController {
     @GetMapping("/api/documents/railroad-documents")
     @Secured({"ROLE_VIEWER","ROLE_EDITOR","ROLE_ADMIN"})
     @JsonView(Views.NormalView.class)
-    public ResponseEntity<?> uploadSingleList(
+    public ResponseEntity<?> getDocumentsList(
             @RequestParam(required = false, defaultValue = "0") Integer currentPage,
             @RequestParam(required = false, defaultValue = "50") Integer elementsCount,
             @RequestParam(required = false, defaultValue = "dateStamp") String sortBy,
