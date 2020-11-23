@@ -25,20 +25,11 @@ public class SimpleTest {
     @Test
     public void clearDateTest() throws IllegalAccessException, IntrospectionException, InvocationTargetException {
 
-        BeanUtilsBean notNull = new NullAwareBeanUtilsBean();
+        String stationName = "Гадяч имени сергиенка николая ивановича".substring(0,15);
+        String stationName2 = "Черноморская(эксп. для ОПЗ)".substring(0,30);
+        System.out.println(stationName);
+        System.out.println(stationName2);
 
-        TestClass destination =  new TestClass();
-        destination.setId(115);
-        destination.setName("Vitaliy");
-        destination.setLastName("Andreychikov");
-
-        TestClass source =  new TestClass();
-        source.setId(222);
-        source.setName("Sergey");
-
-        copyNonNullProperties(source, destination);
-
-        System.out.println(destination);
 
     }
 

@@ -15,16 +15,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(value ,key) in railroadDocuments">
-                <td class="sticky-first-column text-center">{{value.docNumber}}</td>
-                <td class="sticky-second-column text-center">{{value.dateStamp | formatDate}}</td>
-                <td class="text-capitalize">{{value.sendStation | formatStation}}</td>
-                <td class="text-capitalize">{{value.receiveStation | formatStation}}</td>
-                <td class="text-capitalize">{{value.cargoSender | formatClient}}</td>
-                <td class="text-capitalize">{{value.cargoReceiver | formatClient}}</td>
-                <td class="text-capitalize">({{value.cargoCode}}) {{value.cargoName}}</td>
-                <td class="text-right">{{value.vagonCount}}</td>
-                <td class="text-right">{{value.fullWeight | formatPayment}}</td>
+            <tr v-for="document in railroadDocuments">
+                <td class="sticky-first-column text-center">{{document.docNumber}}</td>
+                <td class="sticky-second-column text-center">
+                    {{document.docDate | formatDate}}
+                    <span class="show-on-hover">{{document.docDate | formatTime }}</span>
+                </td>
+                <td class="text-capitalize">{{document.sendStation | formatStation}}</td>
+                <td class="text-capitalize">{{document.receiveStation | formatStation}}</td>
+                <td class="text-capitalize">{{document.cargoSender | formatClient}}</td>
+                <td class="text-capitalize">{{document.cargoReceiver | formatClient}}</td>
+                <td class="text-capitalize">({{document.cargoCode}}) {{document.cargoName}}</td>
+                <td class="text-right">{{document.vagonCount}}</td>
+                <td class="text-right">{{document.fullWeight | formatPayment}}</td>
                 <!--<td class="text-capitalize">{{value.receiveStation | formatStation}}</td>-->
                 <!--<td>{{value}}</td>-->
             </tr>
@@ -50,11 +53,16 @@
 </script>
 
 <style>
-    /*.custom-variables {*/
-        /*--header-bg-color: #999799;*/
-        /*color: var(--header-bg-color);*/
-    /*}*/
     @import "../../../../css/railroad-documents/tables-style.css";
+
+    .show-on-hover{
+        display: none;
+    }
+    td:hover .show-on-hover{
+        display: block;
+        color: darkslategray;
+    }
+
     /*:root{*/
         /*--header-bg-color: #d5e7e7;*/
     /*}*/

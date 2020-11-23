@@ -12,7 +12,7 @@ export default {
     }),
     getters: {
         documents: state => state.documents,
-        currentPage: state => state.requestParams.currentPage,
+        currentPage: state => state.currentPage,
         totalPages: state => state.totalPages,
         totalElements: state => state.totalElements,
         storedRequestParams: state => state.requestParams,

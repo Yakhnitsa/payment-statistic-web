@@ -148,7 +148,6 @@
             return {
                 stationFrom: {code: '', rusName: '', ukrName: ''},
                 stationTo: {code: '', rusName: '', ukrName: ''},
-                radio:'',
                 searchParams:{
                     stationFromCode: '',
                     stationToCode: '',

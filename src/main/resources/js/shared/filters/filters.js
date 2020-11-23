@@ -13,3 +13,13 @@ Vue.filter('formatPayment', numb => {
 Vue.filter('formatDate', date => {
     return new Date(date).toLocaleDateString()
 });
+
+Vue.filter('formatTime', dateString =>{
+    const date = new Date(dateString);
+    const hours  = date.getHours();
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let seconds = date.getSeconds();
+    seconds = seconds < 10? '0' + seconds : seconds;
+    return hours + ':' + minutes + ':' + seconds;
+});

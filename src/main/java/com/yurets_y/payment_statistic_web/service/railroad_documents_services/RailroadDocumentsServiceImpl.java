@@ -8,6 +8,7 @@ import com.yurets_y.payment_statistic_web.service.StationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +17,10 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
@@ -87,7 +91,19 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
 
     @Override
     public Resource getFileAsResource(String filename) throws FileNotFoundException {
-        return null;
+        try {
+            Path file = Paths.get(backupDir, filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new FileNotFoundException(
+                        "Could not read file: " + filename);
+
+            }
+        } catch (MalformedURLException e) {
+            throw new FileNotFoundException("Could not read file: " + filename);
+        }
     }
 
     @Override
