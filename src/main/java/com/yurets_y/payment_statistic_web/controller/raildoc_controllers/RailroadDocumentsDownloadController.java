@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -53,7 +57,7 @@ public class RailroadDocumentsDownloadController {
 
         Resource resource = documentsService.getFileAsResource(fileName);
 
-        String resourceName = getFileName(document,type);
+        String resourceName = getFileNameASCII(document,type);
 
         String contentType = "application/octet-stream";
         try {
@@ -64,18 +68,25 @@ public class RailroadDocumentsDownloadController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resourceName + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resourceName)
                 .body(resource);
     }
 
-    private String getFileName(RailroadDocument document, String type) {
-        Date date = document.getDocDate();
-        String station = document.getSendStation().getRusName();
-        int vagCount = document.getVagonCount();
-        int railroadCode = document.getDocNumber();
-        int receiveCode = document.getCargoReceiver().getRailroadCode();
-        return String.format("%1$td_%1$tm_%1$tY %2$s %3$d ваг ЖД %4$s (%5$s).%6s",
-                date, station, vagCount, railroadCode, receiveCode, type);
+    private String getFileNameASCII(RailroadDocument document, String type) {
+           return String.format("%1$td_%1$tm_%1$tY__%2$s_.%3$s",
+                document.getDateStamp(), document.getDocNumber(),type);
+//        Date date = document.getDocDate();
+//        String station = document.getSendStation().getRusName();
+//        int vagCount = document.getVagonCount();
+//        int railroadCode = document.getDocNumber();
+//        int receiveCode = document.getCargoReceiver().getRailroadCode();
+//        String filename = String.format("%1$td_%1$tm_%1$tY__%2$s_%3$d_ваг_ЖД_%4$s_(%5$s).%6$s",
+//                date, station, vagCount, railroadCode, receiveCode, type);
+//        try {
+//            return URLEncoder.encode(filename, "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            return "file." + type;
+//        }
     }
 
 /*    @GetMapping("/archive")

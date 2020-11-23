@@ -16,7 +16,11 @@
             </thead>
             <tbody>
             <tr v-for="document in railroadDocuments">
-                <td class="sticky-first-column text-center">{{document.docNumber}}</td>
+                <td class="sticky-first-column text-center">
+                    <span @click="downloadXml(document)">
+                        <i class="fas fa-file-excel"></i>
+                    </span>
+                    {{document.docNumber}}</td>
                 <td class="sticky-second-column text-center">
                     {{document.docDate | formatDate}}
                     <span class="show-on-hover">{{document.docDate | formatTime }}</span>
@@ -38,9 +42,17 @@
 </template>
 
 <script>
+
+    import {mapActions} from 'vuex';
     export default {
         name: "RailroadDocumentsTable",
         props:['railroadDocuments'],
+        methods:{
+            ...mapActions({
+                downloadPdf: 'downloadStore/downloadPdfFileAction',
+                downloadXml: 'downloadStore/downloadXmlFileAction'
+            }),
+        },
         filters:{
             formatStation(station){
                 return '(' + station.code + ') ' + station.rusName.toLowerCase();

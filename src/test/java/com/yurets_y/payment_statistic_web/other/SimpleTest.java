@@ -12,8 +12,11 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,14 +26,13 @@ import java.util.regex.Pattern;
 
 public class SimpleTest {
     @Test
-    public void clearDateTest() throws IllegalAccessException, IntrospectionException, InvocationTargetException {
+    public void clearDateTest() throws IllegalAccessException, IntrospectionException, InvocationTargetException, UnsupportedEncodingException {
+        String rawString = "Entwickeln Sie mit Vergnügen";
+        ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString);
 
-        String stationName = "Гадяч имени сергиенка николая ивановича".substring(0,15);
-        String stationName2 = "Черноморская(эксп. для ОПЗ)".substring(0,30);
-        System.out.println(stationName);
-        System.out.println(stationName2);
+        String utf8EncodedString = StandardCharsets.US_ASCII.decode(buffer).toString();
 
-
+        System.out.println(true);
     }
 
     public class NullAwareBeanUtilsBean extends BeanUtilsBean {
