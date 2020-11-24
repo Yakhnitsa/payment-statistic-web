@@ -76,15 +76,15 @@ public class RailroadDocument extends AuditableEntity {
     @JsonView(Views.ShortView.class)
     private File xmlBackupFile;
 
+    @JsonView(Views.NormalView.class)
     private String xmlBackupFilePath;
 
     @Transient
     @JsonView(Views.ShortView.class)
     private File pdfBackupFile;
 
+    @JsonView(Views.NormalView.class)
     private String pdfBackupFilePath;
-
-//    private List<Carrier> carriers = new ArrayList<>();
 
     @JsonView(Views.ShortView.class)
     private String cargoName;

@@ -17,10 +17,12 @@
             <tbody>
             <tr v-for="document in railroadDocuments">
                 <td class="sticky-first-column text-center">
-                    <span class="show-on-hover btn btn-outline-secondary btn-sm link-button"
-                            @click="downloadPdf(document)">
-                        <i class="fa fa-file-pdf"></i>
-                    </span>
+                    <button class="show-on-hover btn btn-outline-secondary btn-sm link-button"
+                          @click="downloadPdf(document)"
+                         :class="{disabled : !docContainsPdf(document)}"
+                          :disabled="!docContainsPdf(document)">
+                        <i  class="fa fa-file-pdf"></i>
+                    </button>
                     {{document.docNumber}}</td>
                 <td class="sticky-second-column text-center">
                     {{document.docDate | formatDate}}
@@ -53,6 +55,9 @@
                 downloadPdf: 'downloadStore/downloadPdfFileAction',
                 downloadXml: 'downloadStore/downloadXmlFileAction'
             }),
+            docContainsPdf(railroadDocument){
+                return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
+            }
         },
         filters:{
             formatStation(station){

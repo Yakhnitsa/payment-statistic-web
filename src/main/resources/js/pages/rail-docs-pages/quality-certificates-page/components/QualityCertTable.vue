@@ -1,7 +1,18 @@
 <template>
     <div class="position-relative">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Action</button>
+                <button class="dropdown-item" type="button">Another action</button>
+                <button class="dropdown-item" type="button">Something else here</button>
+            </div>
+        </div>
+
         <div class="scrollable-table">
-            <table class="table table-striped table-hover table-sm">
+            <table class="table table-striped table-hover table-sm" id="certificatesTable">
                 <thead>
                 <tr>
                     <th class="text-center">Відправник</th>
@@ -59,7 +70,29 @@
                             <i :class="['fas', vagNumberFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
                         </span>
                     </th>
-                    <th class="text-center">[ ]</th>
+                    <th class="text-center overfrow-visible">
+                        <div class="dropdown">
+                            Ку
+                            <span class="text-secondary" id="certFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-filter fa-sm"></i>
+                            </span>
+                            <div class="dropdown-menu" aria-labelledby="certFilterDropdown">
+                                <a class="dropdown-item"
+                                    @click="changeCertFilter(false,false)">
+                                    <i class="far fa-times-circle"></i>
+                                    Все</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" type="button"
+                                   @click="changeCertFilter(true,true)">
+                                    <i class="far fa-check-circle"></i>
+                                    Выбранные</a>
+                                <a class="dropdown-item" type="button"
+                                   @click="changeCertFilter(true,false)">
+                                    <i class="far fa-circle"></i>
+                                    Не выбранные</a>
+                            </div>
+                        </div>
+                    </th>
                     <th class="text-center">ст Призначення</th>
                     <th class="text-center">Отримувач</th>
                     <th class="text-center">Вантаж</th>
@@ -70,7 +103,7 @@
                 </thead>
                 <tbody>
                     <template v-for="doc in documentsMainFilter(railroadDocuments)">
-                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in vagonFilter(doc)">
+                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in vagonFilter(doc.vagonList)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
                             <td>{{doc.docDate | formatDate}}</td>
@@ -88,13 +121,29 @@
                             <td>({{doc.cargoCode}}) {{doc.cargoName}}</td>
                             <td>{{vagon.tareWeight}}</td>
                             <td>{{vagon.netWeight}}</td>
+                            <td>
+                            </td>
                         </tr>
                     </template>
                 </tbody>
             </table>
         </div>
 
-        <button class="btn btn-secondary submit-button" @click="sendDataToServer">{{changes.length}} Обновить</button>
+        <div class="btn-group float-buttons" role="group">
+
+
+            <button class="btn btn-secondary"
+                    data-toggle="tooltip" data-placement="left" title="Обновить данные на сервере"
+                    @click="sendDataToServer">
+                <span class="badge badge-light">{{changes.length}}</span>
+                Обновить</button>
+            <button class="btn btn-outline-secondary" @click="copyTableToClipboard"
+                    data-toggle="tooltip" data-placement="left" title="Копировать в буфер обмена">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+
+
 
     </div>
 </template>
@@ -164,17 +213,30 @@
                 return vagon.vagonInfo ? vagon.vagonInfo.hasCert : false;
             },
 
+            copyTableToClipboard(){
+                let urlField = document.getElementById('certificatesTable');
+                let range = document.createRange();
+                range.selectNode(urlField);
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                //remove selection
+                if (window.getSelection) {
+                    if (window.getSelection().empty) {  // Chrome
+                        window.getSelection().empty();
+                    } else if (window.getSelection().removeAllRanges) {  // Firefox
+                        window.getSelection().removeAllRanges();
+                    }
+                } else if (document.selection) {  // IE?
+                    document.selection.empty();
+                }
+            },
+
 
         //    Array filtering methods
-            vagonFilter(document){
-                const result = document.vagonList;
-                const val = this.vagNumberFilter.value;
-                if(val === '' || !this.vagNumberFilter.active) return result;
-                return result.filter(vagon => {
-                    return vagon.number
-                        .toString()
-                        .indexOf(val) > -1;
-                });
+
+            vagonFilter(vagons){
+                vagons = this.vagonNumberFilterFunc(vagons);
+                return this.certSelectedFilterFunc(vagons);
             },
             vagonNumberFilterFunc(vagons){
                 const val = this.vagNumberFilter.value;
@@ -193,6 +255,10 @@
                     return vagon.vagonInfo === null ? !selected : vagon.vagonInfo.hasCert === selected;
                 });
             },
+            changeCertFilter(active,value){
+                this.certSelectedFilter.active = active;
+                this.certSelectedFilter.value = value;
+            },
 
 
             documentsMainFilter(documents){
@@ -200,6 +266,7 @@
                 documents = this.docNumberFilterFunc(documents);
                 return this.sendStationFilterFunc(documents);
             },
+
             docDateFilterFunc(documents){
                 const date = this.dateFilter.value;
                 if(date === '' || !this.dateFilter.active) return documents;
@@ -220,6 +287,7 @@
                         doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
                 })
             },
+
             docNumberFilterFunc(documents){
                 const docNumb = this.docNumberFilter.value;
                 if(docNumb ==='' || !this.docNumberFilter.active) return documents;
@@ -262,18 +330,28 @@
         background-color: #cfe1e1 !important;
     }
 
-    .submit-button{
-        opacity: .7;
+    .float-buttons {
+        opacity: .8;
         position: absolute;
         bottom: 30px;
         right: 30px;
     }
-    .submit-button:hover{
+    .float-buttons:hover{
         opacity: 1;
     }
+
     .cert-checkbox input{
         width: 1em;
         height: 1em;
+    }
+    .link-button{
+        padding: .1rem .35rem;
+        font-size: .7rem;
+        line-height: 1.5;
+        border-radius: 50%!important;
+    }
+    .overfrow-visible{
+        overflow: visible!important;
     }
 
 

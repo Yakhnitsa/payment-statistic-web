@@ -4,6 +4,7 @@
 
 .scrollable-table {
     max-width: 100%;
+    min-height: 10em;
     max-height: 30em;
     overflow: scroll;
     position: relative;
@@ -33,7 +34,6 @@ td, th{
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 15em;
-
 }
 
 td:hover{
