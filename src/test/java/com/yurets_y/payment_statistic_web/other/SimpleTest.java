@@ -27,10 +27,9 @@ import java.util.regex.Pattern;
 public class SimpleTest {
     @Test
     public void clearDateTest() throws IllegalAccessException, IntrospectionException, InvocationTargetException, UnsupportedEncodingException {
-        String rawString = "Entwickeln Sie mit Vergnügen";
-        ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString);
-
-        String utf8EncodedString = StandardCharsets.US_ASCII.decode(buffer).toString();
+        String utf = "Прилуки";
+        byte[] data = utf.getBytes("UTF8");
+        String ascii = new String(data, StandardCharsets.US_ASCII);
 
         System.out.println(true);
     }

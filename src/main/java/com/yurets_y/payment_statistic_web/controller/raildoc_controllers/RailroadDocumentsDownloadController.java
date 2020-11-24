@@ -65,10 +65,11 @@ public class RailroadDocumentsDownloadController {
         } catch (IOException ex) {
             System.out.println("Could not determine file type.");
         }
+        String contendDispString = "attachment; filename=" + resourceName;
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resourceName)
+                .header(HttpHeaders.CONTENT_DISPOSITION, contendDispString)
                 .body(resource);
     }
 
