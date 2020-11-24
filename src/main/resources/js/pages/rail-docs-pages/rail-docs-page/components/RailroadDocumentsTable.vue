@@ -17,8 +17,9 @@
             <tbody>
             <tr v-for="document in railroadDocuments">
                 <td class="sticky-first-column text-center">
-                    <span @click="downloadXml(document)">
-                        <i class="fas fa-file-excel"></i>
+                    <span class="show-on-hover btn btn-outline-secondary btn-sm link-button"
+                            @click="downloadPdf(document)">
+                        <i class="fa fa-file-pdf"></i>
                     </span>
                     {{document.docNumber}}</td>
                 <td class="sticky-second-column text-center">
@@ -71,8 +72,14 @@
         display: none;
     }
     td:hover .show-on-hover{
-        display: block;
+        display: inline-block;
         color: darkslategray;
+    }
+    .link-button{
+        padding: .1rem .35rem;
+        font-size: .7rem;
+        line-height: 1.5;
+        border-radius: 50%!important;
     }
 
     /*:root{*/

@@ -22,7 +22,7 @@ export default {
             state.documents = documents;
         },
         setCurrentPageMutation(state, page) {
-            state.requestParams.currentPage = page;
+            state.currentPage = page;
         },
         setTotalPagesMutation(state, pages) {
             state.totalPages = pages;

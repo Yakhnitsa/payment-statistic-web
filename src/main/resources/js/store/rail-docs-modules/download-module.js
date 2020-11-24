@@ -59,11 +59,11 @@ function getFilenameFromDoc(railDoc,fileExtension) {
     const month  = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
 
     date = day + '_' + month + '_' + date.getFullYear();
-    let docNumber = railDoc.docNumber;
-    let cargoSender = railDoc.cargoSender.railroadCode;
-    let cargoReceiver = railDoc.cargoReceiver.railroadCode;
-    let sendStation = railDoc.sendStation.rusName;
-    let vagCount = railDoc.vagonCount;
+    const docNumber = railDoc.docNumber;
+    const cargoSender = railDoc.cargoSender.railroadCode;
+    const cargoReceiver = railDoc.cargoReceiver.railroadCode;
+    const sendStation = railDoc.sendStation.rusName;
+    const vagCount = railDoc.vagonCount;
     return date + '_(' + cargoSender + ')_' + sendStation +
         '_ЖД_' + docNumber + '_' + vagCount +'ваг_(' + cargoReceiver + ')'+ fileExtension;
 
