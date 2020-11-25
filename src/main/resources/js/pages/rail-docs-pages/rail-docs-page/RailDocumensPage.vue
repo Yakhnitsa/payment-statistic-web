@@ -12,7 +12,10 @@
         <railroad-documents-table :railroadDocuments="railroadDocuments"></railroad-documents-table>
         <div class="row mx-0 mt-2" style="display: flow-root">
             <div class="float-left">
-                <span>Всего документов: {{totalElements}}</span>
+                <span class="font-weight-bold">Документов:</span>
+                <span> Всего: {{totalElements}}</span>
+                <span> На странице: {{filteredDocuments.length}}</span>
+                <span> Выбрано: {{selectedDocuments.length}}</span>
             </div>
             <div class="float-right">
                 <pageable @changePage="changePage" :total-pages="totalPages" :current-page="currentPage"></pageable>
@@ -50,6 +53,8 @@
                 totalPages: 'totalPages',
                 totalElements: 'totalElements',
                 railroadDocuments: 'documents',
+                selectedDocuments: 'selectedDocuments',
+                filteredDocuments: 'filteredDocuments'
             })
         },
         methods:{

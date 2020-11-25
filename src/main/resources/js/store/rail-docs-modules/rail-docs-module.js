@@ -1,5 +1,6 @@
 import railDocumentsApi from "../../api/rail-docs-api/railroadDocumentsApi";
 import messageManager from "../../shared/services/messageManager";
+import downloadApi from "../../api/rail-docs-api/railDocsDownloadApi";
 
 export default {
     namespaced: true,
@@ -14,6 +15,8 @@ export default {
     }),
     getters: {
         documents: state => state.documents,
+        selectedDocuments: state => state.selectedDocuments,
+        filteredDocuments: state => state.filteredDocuments,
         currentPage: state => state.currentPage,
         totalPages: state => state.totalPages,
         totalElements: state => state.totalElements,
@@ -62,11 +65,63 @@ export default {
             }
         },
         async downloadSelectedDocumentsArchiveAction({commit,state}){
-            console.log(state.selectedDocuments)
+            const docIds = mapDocsToDocsId(state.selectedDocuments);
+            console.log(docIds)
         },
         async downloadFilteredDocumentsArchiveAction({commit,state}){
-            console.log(state.filteredDocuments)
-        }
+            const docIds = mapDocsToDocsId(state.filteredDocuments);
+            console.log(docIds)
+        },
+        async downloadXmlFileAction({commit,state,getters},railDoc) {
+            downloadApi.downloadSingleFile('xml',railDoc).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                let fileName = getFilenameFromDoc(railDoc,'.xml');
+                link.href = url;
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+            });
+        },
+        async downloadPdfFileAction({commit,state,getters},railDoc) {
+            downloadApi.downloadSingleFile('pdf',railDoc).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                let fileName = getFilenameFromDoc(railDoc,'.pdf');
+
+                link.href = url;
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+            });
+        },
     },
 
 }
+
+function getFilenameFromDoc(railDoc,fileExtension) {
+    let date = new Date(railDoc.dateStamp);
+    const day = date.getDay() < 10 ? '0' + date.getDay() : date.getDay();
+    const month  = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+
+    date = day + '_' + month + '_' + date.getFullYear();
+    const docNumber = railDoc.docNumber;
+    const cargoSender = railDoc.cargoSender.railroadCode;
+    const cargoReceiver = railDoc.cargoReceiver.railroadCode;
+    const sendStation = railDoc.sendStation.rusName;
+    const vagCount = railDoc.vagonCount;
+    return date + '_(' + cargoSender + ')_' + sendStation +
+        vagCount +'ваг_' +  '_ЖД_' + docNumber + '_(' + cargoReceiver + ')'+ fileExtension;
+
+}
+
+function mapDocsToDocsId(railDocuments){
+    return railDocuments.map( document =>   {
+        return {
+            docNumber : document.docNumber,
+            dateStamp: document.dateStamp
+        }
+    })
+}
+
+

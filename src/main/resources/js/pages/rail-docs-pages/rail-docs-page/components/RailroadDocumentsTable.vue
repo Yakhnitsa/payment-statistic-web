@@ -163,8 +163,8 @@
         },
         methods:{
             ...mapActions({
-                downloadPdf: 'downloadStore/downloadPdfFileAction',
-                downloadXml: 'downloadStore/downloadXmlFileAction'
+                downloadPdf: 'railDocsStore/downloadPdfFileAction',
+                downloadXml: 'railDocsStore/downloadXmlFileAction'
             }),
             ...mapMutations({
                 storeSelectedDocuments:'railDocsStore/setSelectedDocumentsMutation',
