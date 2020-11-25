@@ -1,13 +1,25 @@
 <template>
     <div>
-        <span v-if="!filter.active">{{header}}</span>
-        <span v-else>
-             <input :type="inputType" class="form-control"
-                    :placeholder="inputPlaceholder"
-                    v-model="value">
+        <span v-if="!filter.active">
+            {{header}}
+            <span class="text-secondary" @click="switchFilter">
+                <i class="fas fa-filter fa-sm"></i>
+            </span>
         </span>
-        <span class="text-secondary" @click="switchFilter">
-             <i :class="['fas', filter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
+        <span v-else>
+
+             <!--<input :type="inputType" class="form-control"-->
+                    <!--:placeholder="inputPlaceholder"-->
+                    <!--v-model="value">-->
+
+             <div class="input-group">
+                 <input :type="inputType" class="form-control" :placeholder="inputPlaceholder" v-model="value">
+                 <div class="input-group-append">
+                    <span @click="switchFilter" class="input-group-text" id="inputGroupPrepend">
+                        <i class="fas fa-level-up-alt fa-sm"></i>
+                    </span>
+                 </div>
+             </div>
         </span>
     </div>
 </template>
@@ -41,10 +53,15 @@
 <style scoped>
     .form-control {
         display: inline-block;
-        width: 7em;
+        /*width: 7em;*/
+        max-width: 12em;
         height: 2em;
         padding: inherit;
         font-size: inherit;
+    }
+
+    .input-group-text {
+        padding: .1rem .3rem
     }
 
 </style>
