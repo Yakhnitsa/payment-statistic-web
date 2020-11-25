@@ -3,6 +3,9 @@
         <table class="table table-striped table-hover table-sm">
             <thead>
             <tr>
+                <th class="sticky-checkbox">
+                    <input type="checkbox" v-model="allSelected">
+                </th>
                 <th class="sticky-first-column text-center">№ документа</th>
                 <th class="sticky-second-column text-center">Дата</th>
                 <th class="text-center">ст. Відправлення</th>
@@ -15,8 +18,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="document in railroadDocuments">
+            <tr v-for="document in filteredDocuments">
+                <td class="sticky-checkbox">
+                    <input type="checkbox"
+                           :value="document" v-model="selectedDocuments">
+                </td>
                 <td class="sticky-first-column text-center">
+
                     <button class="show-on-hover btn btn-outline-secondary btn-sm link-button"
                           @click="downloadPdf(document)"
                          :class="{disabled : !docContainsPdf(document)}"
@@ -46,17 +54,59 @@
 
 <script>
 
-    import {mapActions} from 'vuex';
+    import {mapActions, mapMutations} from 'vuex';
     export default {
         name: "RailroadDocumentsTable",
         props:['railroadDocuments'],
+        data(){
+            return{
+                selectedDocuments:[]
+            }
+        },
+        computed:{
+            filteredDocuments(){
+                return this.railroadDocuments;
+            },
+            allSelected:{
+                get(){
+                    return this.selectedDocuments.length > 0 ?
+                        this.selectedDocuments.length === this.filteredDocuments.length : false;
+                },
+                set(selected){
+                    this.clearSelectedDocuments();
+
+                    if(selected){
+                        this.filteredDocuments.forEach(doc => {
+                            this.selectedDocuments.push(doc)
+                        })
+                    }
+                }
+            }
+        },
         methods:{
             ...mapActions({
                 downloadPdf: 'downloadStore/downloadPdfFileAction',
                 downloadXml: 'downloadStore/downloadXmlFileAction'
             }),
+            ...mapMutations({
+                storeSelectedDocuments:'railDocsStore/setSelectedDocumentsMutation',
+                storeFilteredDocuments:'railDocsStore/setFilteredDocumentsMutation',
+            }),
+
+            clearSelectedDocuments(){
+                this.selectedDocuments = [];
+            },
+
             docContainsPdf(railroadDocument){
                 return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
+            }
+        },
+        watch:{
+            selectedDocuments(){
+                this.storeSelectedDocuments(this.selectedDocuments)
+            },
+            filteredDocuments(){
+                this.storeFilteredDocuments(this.filteredDocuments)
             }
         },
         filters:{
@@ -86,74 +136,33 @@
         line-height: 1.5;
         border-radius: 50%!important;
     }
+    .sticky-checkbox {
+        left: 0;
+        min-width: 2em;
+        max-width: 2em;
+    }
+    .sticky-first-column {
+        min-width: 8em;
+        max-width: 8em;
+        left: 2em;
 
-    /*:root{*/
-        /*--header-bg-color: #d5e7e7;*/
-    /*}*/
+    }
+    .sticky-second-column {
+        min-width: 8em;
+        max-width: 8em;
+        left: 10em;
+    }
+    .sticky-first-column, .sticky-second-column, .sticky-checkbox{
+        font-weight: 500;
+        position: -webkit-sticky; /* for Safari */
+        position: sticky;
+        white-space: nowrap;
+        background-color: var(--header-bg-color);
+    }
+    th.sticky-first-column, th.sticky-second-column, th.sticky-checkbox{
+        z-index: 2;
+    }
 
-
-    /*.scrollable-table {*/
-        /*max-width: 100%;*/
-        /*max-height: 30em;*/
-        /*overflow: scroll;*/
-        /*position: relative;*/
-    /*}*/
-
-    /*table {*/
-        /*font-size: .9em;*/
-    /*}*/
-
-    /*thead th {*/
-        /*position: -webkit-sticky;*/
-        /*position: sticky;*/
-        /*top: 0;*/
-        /*border-top-width: 0;*/
-        /*background-color: var(--header-bg-color);*/
-        /*z-index: 1;*/
-    /*}*/
-    /*.table th {*/
-        /*border-top: 0;*/
-    /*}*/
-
-    /*.sticky-first-column {*/
-        /*font-weight: 500;*/
-        /*position: -webkit-sticky; !* for Safari *!*/
-        /*position: sticky;*/
-        /*left: 0;*/
-        /*min-width: 8em;*/
-        /*max-width: 8em;*/
-        /*white-space: nowrap;*/
-        /*background-color: var(--header-bg-color);*/
-    /*}*/
-    /*th.sticky-first-column{*/
-        /*z-index: 2;*/
-    /*}*/
-
-    /*.sticky-second-column {*/
-        /*font-weight: 500;*/
-        /*position: -webkit-sticky; !* for Safari *!*/
-        /*position: sticky;*/
-        /*left: 8em;*/
-        /*max-width: 8em;*/
-        /*white-space: nowrap;*/
-        /*background-color: var(--header-bg-color);*/
-    /*}*/
-    /*th.sticky-second-column{*/
-        /*z-index: 2;*/
-    /*}*/
-
-    /*td, th{*/
-        /*white-space: nowrap;*/
-        /*overflow: hidden;*/
-        /*text-overflow: ellipsis;*/
-        /*max-width: 15em;*/
-        /*padding: .1rem .3rem;*/
-    /*}*/
-
-    /*td:hover{*/
-        /*white-space: normal;*/
-        /*font-weight: 500;*/
-    /*}*/
 
 
 

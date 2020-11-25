@@ -41,32 +41,7 @@ td:hover{
     font-weight: 500;
 }
 
-.sticky-first-column {
-    font-weight: 500;
-    position: -webkit-sticky; /* for Safari */
-    position: sticky;
-    left: 0;
-    min-width: 8em;
-    max-width: 8em;
-    white-space: nowrap;
-    background-color: var(--header-bg-color);
-}
-th.sticky-first-column{
-    z-index: 2;
-}
 
-.sticky-second-column {
-    font-weight: 500;
-    position: -webkit-sticky; /* for Safari */
-    position: sticky;
-    left: 8em;
-    max-width: 8em;
-    white-space: nowrap;
-    background-color: var(--header-bg-color);
-}
-th.sticky-second-column{
-    z-index: 2;
-}
 
 
 

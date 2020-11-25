@@ -65,6 +65,6 @@ function getFilenameFromDoc(railDoc,fileExtension) {
     const sendStation = railDoc.sendStation.rusName;
     const vagCount = railDoc.vagonCount;
     return date + '_(' + cargoSender + ')_' + sendStation +
-        '_ЖД_' + docNumber + '_' + vagCount +'ваг_(' + cargoReceiver + ')'+ fileExtension;
+        vagCount +'ваг_' +  '_ЖД_' + docNumber + '_(' + cargoReceiver + ')'+ fileExtension;
 
 }

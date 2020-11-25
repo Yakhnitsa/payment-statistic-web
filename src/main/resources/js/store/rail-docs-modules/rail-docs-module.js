@@ -5,6 +5,8 @@ export default {
     namespaced: true,
     state: () => ({
         documents: [],
+        selectedDocuments:[],
+        filteredDocuments:[],
         currentPage: 0,
         totalPages: 0,
         totalElements: 0,
@@ -33,6 +35,14 @@ export default {
 
         setRequestParamsMutation(state, params) {
             state.requestParams = params;
+        },
+
+        setSelectedDocumentsMutation(state, params){
+            state.selectedDocuments = params;
+        },
+
+        setFilteredDocumentsMutation(state,params){
+            state.filteredDocuments = params
         }
 
     },
@@ -51,6 +61,12 @@ export default {
                 }
             }
         },
+        async downloadSelectedDocumentsArchiveAction({commit,state}){
+            console.log(state.selectedDocuments)
+        },
+        async downloadFilteredDocumentsArchiveAction({commit,state}){
+            console.log(state.filteredDocuments)
+        }
     },
 
 }

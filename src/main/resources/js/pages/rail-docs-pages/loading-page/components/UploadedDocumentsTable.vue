@@ -69,7 +69,7 @@
             allSelected:{
                 get(){
                     return this.selectedDocuments.length > 0 ?
-                        this.selectedDocuments.length=== this.uploadedDocuments.length : false;
+                        this.selectedDocuments.length === this.uploadedDocuments.length : false;
                 },
                 set(selected){
                     this.clearSelectedDocs();
@@ -87,7 +87,6 @@
                 return document.docNumber !== -1;
             },
             clearSelectedDocs(){
-                console.log('selected docs cleared');
                 this.selectedDocuments = [];
             }
         },
