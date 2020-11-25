@@ -6,12 +6,21 @@
                 <th class="sticky-checkbox">
                     <input type="checkbox" v-model="allSelected">
                 </th>
-                <th class="sticky-first-column text-center">№ документа</th>
+                <th class="sticky-first-column text-center">
+                    <table-header-with-filter
+                        :filterIsActive.sync="docNumberFilter.active"
+                        :filterValue.sync="docNumberFilter.value"
+                        header="№ Документу" inputType="search" inputPlaceholder="№ документу"
+                    >
+
+                    </table-header-with-filter>
+                </th>
                 <th class="sticky-second-column text-center">Дата</th>
                 <th class="text-center">ст. Відправлення</th>
                 <th class="text-center">ст. Призначення</th>
                 <th class="text-center">Відправник</th>
                 <th class="text-center">Отримувач</th>
+                <th class="text-center">Платник</th>
                 <th class="text-center">Вантаж</th>
                 <th class="text-center">К-ть вагонів</th>
                 <th class="text-center">Маса вантажу</th>
@@ -40,6 +49,7 @@
                 <td class="text-capitalize">{{document.receiveStation | formatStation}}</td>
                 <td class="text-capitalize">{{document.cargoSender | formatClient}}</td>
                 <td class="text-capitalize">{{document.cargoReceiver | formatClient}}</td>
+                <td class="text-capitalize">{{document.tarifPayer | formatClient}}</td>
                 <td class="text-capitalize">({{document.cargoCode}}) {{document.cargoName}}</td>
                 <td class="text-right">{{document.vagonCount}}</td>
                 <td class="text-right">{{document.fullWeight | formatPayment}}</td>
@@ -55,12 +65,47 @@
 <script>
 
     import {mapActions, mapMutations} from 'vuex';
+    import TableHeaderWithFilter from "../../../../shared/components/TableHeaderWithFilter.vue";
     export default {
         name: "RailroadDocumentsTable",
+        components: {TableHeaderWithFilter},
         props:['railroadDocuments'],
         data(){
             return{
-                selectedDocuments:[]
+                selectedDocuments:[],
+
+                docNumberFilter:{
+                    active: false,
+                    value: ''
+                },
+                dateFilter: {
+                    active: false,
+                    value: ''
+                },
+                sendStationFilter: {
+                    active: false,
+                    value: ''
+                },
+                receiveStationFilter: {
+                    active: false,
+                    value: ''
+                },
+                cargoSenderFilter:{
+                    active: false,
+                    value: ''
+                },
+                cargoReceiverFilter:{
+                    active: false,
+                    value: ''
+                },
+                tarifPayerFilter:{
+
+                },
+                cargoNameFilter:{
+                    active: false,
+                    value: ''
+                },
+
             }
         },
         computed:{
@@ -99,7 +144,38 @@
 
             docContainsPdf(railroadDocument){
                 return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
-            }
+            },
+            /*
+            * Filter methods
+             */
+            docDateFilterFunc(documents){
+                // const date = this.dateFilter.value;
+                // if(date === '' || !this.dateFilter.active) return documents;
+                // return documents.filter(doc =>{
+                //         return this.$options.filters.formatDate(doc.docDate)
+                //             === this.$options.filters.formatDate(date);
+                //     }
+                //
+                // )
+            },
+
+            sendStationFilterFunc(documents){
+                // const val = this.sendStationFilter.value.toLowerCase();
+                // if(val===''|| !this.sendStationFilter.active) return documents;
+                // return documents.filter(doc => {
+                //     return doc.sendStation.code.toString().indexOf(val) > -1 ||
+                //         doc.sendStation.rusName.toLowerCase().indexOf(val) > -1 ||
+                //         doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
+                // })
+            },
+
+            docNumberFilterFunc(documents){
+                // const docNumb = this.docNumberFilter.value;
+                // if(docNumb ==='' || !this.docNumberFilter.active) return documents;
+                // return documents
+                //     .filter(doc => doc.docNumber.toString().indexOf(docNumb) > -1
+                //     )
+            },
         },
         watch:{
             selectedDocuments(){
@@ -142,15 +218,15 @@
         max-width: 2em;
     }
     .sticky-first-column {
-        min-width: 8em;
-        max-width: 8em;
+        min-width: 9em;
+        max-width: 9em;
         left: 2em;
 
     }
     .sticky-second-column {
         min-width: 8em;
         max-width: 8em;
-        left: 10em;
+        left: 11em;
     }
     .sticky-first-column, .sticky-second-column, .sticky-checkbox{
         font-weight: 500;

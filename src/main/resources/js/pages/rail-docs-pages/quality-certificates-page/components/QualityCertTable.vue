@@ -236,7 +236,6 @@
                         .indexOf(val) > -1;
                 });
             },
-            //TODO Проверить или это работает!!!
             certSelectedFilterFunc(vagons){
                 const selected = this.certSelectedFilter.value;
                 if(!this.certSelectedFilter.active) return vagons;
