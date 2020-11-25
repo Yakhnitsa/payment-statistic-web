@@ -123,7 +123,8 @@
                     value: ''
                 },
                 tarifPayerFilter:{
-
+                    active: false,
+                    value: ''
                 },
                 cargoNameFilter:{
                     active: false,
@@ -136,6 +137,12 @@
             filteredDocuments(){
                 let documents = this.docNumberFilterFunc(this.railroadDocuments);
                 documents = this.docDateFilterFunc(documents);
+                documents = this.sendStationFilterFunc(documents);
+                documents = this.receiveStationFilterFunc(documents);
+                documents = this.cargoSenderFilterFunc(documents);
+                documents = this.cargoReceiverFilterFunc(documents);
+                documents = this.tarifPayerFilterFunc(documents);
+                documents = this.cargoNameFilterFunc(documents);
                 return documents;
             },
             allSelected:{
@@ -181,6 +188,7 @@
 
                 return documents.filter(doc => doc.docNumber.toString().indexOf(docNumb) > -1)
             },
+
             docDateFilterFunc(documents){
                 const date = this.dateFilter.value;
                 if(date === '' || !this.dateFilter.active) return documents;
@@ -192,14 +200,62 @@
             },
 
             sendStationFilterFunc(documents){
-                // const val = this.sendStationFilter.value.toLowerCase();
-                // if(val===''|| !this.sendStationFilter.active) return documents;
-                // return documents.filter(doc => {
-                //     return doc.sendStation.code.toString().indexOf(val) > -1 ||
-                //         doc.sendStation.rusName.toLowerCase().indexOf(val) > -1 ||
-                //         doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
-                // })
+                const val = this.sendStationFilter.value.toLowerCase();
+                if(val===''|| !this.sendStationFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.sendStation.code.toString().indexOf(val) > -1 ||
+                        doc.sendStation.rusName.toLowerCase().indexOf(val) > -1 ||
+                        doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
+                })
             },
+
+            receiveStationFilterFunc(documents){
+                const val = this.receiveStationFilter.value.toLowerCase();
+                if(val===''|| !this.receiveStationFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.receiveStation.code.toString().indexOf(val) > -1 ||
+                        doc.receiveStation.rusName.toLowerCase().indexOf(val) > -1 ||
+                        doc.receiveStation.ukrName.toLowerCase().indexOf(val) > -1;
+                })
+            },
+
+            cargoSenderFilterFunc(documents){
+                const val = this.cargoSenderFilter.value.toLowerCase();
+                if(val===''|| !this.cargoSenderFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.cargoSender.railroadCode.toString().indexOf(val) > -1 ||
+                        doc.cargoSender.name.toLowerCase().indexOf(val) > -1
+                })
+            },
+
+            cargoReceiverFilterFunc(documents){
+                const val = this.cargoReceiverFilter.value.toLowerCase();
+                if(val===''|| !this.cargoReceiverFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.cargoReceiver.railroadCode.toString().indexOf(val) > -1 ||
+                        doc.cargoReceiver.name.toLowerCase().indexOf(val) > -1
+                })
+            },
+
+            tarifPayerFilterFunc(documents){
+                const val = this.tarifPayerFilter.value.toLowerCase();
+                if(val===''|| !this.tarifPayerFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.tarifPayer.railroadCode.toString().indexOf(val) > -1 ||
+                        doc.tarifPayer.name.toLowerCase().indexOf(val) > -1
+                })
+            },
+
+            cargoNameFilterFunc(documents){
+                const val = this.cargoNameFilter.value.toLowerCase();
+                if(val===''|| !this.cargoNameFilter.active) return documents;
+                return documents.filter(doc => {
+                    let index = doc.cargoName.toLowerCase().indexOf(val);
+                    return index > -1 ||
+                        doc.cargoCode.indexOf(val) > -1
+                })
+            },
+
 
 
         },

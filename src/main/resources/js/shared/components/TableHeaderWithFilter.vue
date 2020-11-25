@@ -25,13 +25,13 @@
                     const filter = {active: true, value: val};
                     this.$emit('update:filter', filter);
                 }
-            }
+            },
         },
         methods:{
             switchFilter(){
                 const filter = {
                     active: !this.filter.active,
-                    value: this.value};
+                    value: this.filter.active ? '' : this.value};
                 this.$emit('update:filter', filter);
             }
         }
