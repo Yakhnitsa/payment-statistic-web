@@ -1,13 +1,13 @@
 <template>
     <div>
-        <span v-if="!filterIsActive">{{header}}</span>
+        <span v-if="!filter.active">{{header}}</span>
         <span v-else>
              <input :type="inputType" class="form-control"
                     :placeholder="inputPlaceholder"
                     v-model="value">
         </span>
         <span class="text-secondary" @click="switchFilter">
-             <i :class="['fas', filterIsActive ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
+             <i :class="['fas', filter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
         </span>
     </div>
 </template>
@@ -15,20 +15,24 @@
 <script>
     export default {
         name: "TableHeaderWithFilter",
-        props:['filter','filterIsActive', 'inputType','inputPlaceholder','filterValue','header'],
+        props:['filter', 'inputType','inputPlaceholder','header'],
         computed:{
             value:{
                 get(){
-                    return this.filterValue;
+                    return this.filter.value;
                 },
                 set(val){
-                    this.$emit('update:filterValue', val);
+                    const filter = {active: true, value: val};
+                    this.$emit('update:filter', filter);
                 }
             }
         },
         methods:{
             switchFilter(){
-                this.$emit('update:filterIsActive', !this.filterIsActive);
+                const filter = {
+                    active: !this.filter.active,
+                    value: this.value};
+                this.$emit('update:filter', filter);
             }
         }
     }

@@ -7,21 +7,45 @@
                     <input type="checkbox" v-model="allSelected">
                 </th>
                 <th class="sticky-first-column text-center">
-                    <table-header-with-filter
-                        :filterIsActive.sync="docNumberFilter.active"
-                        :filterValue.sync="docNumberFilter.value"
-                        header="№ Документу" inputType="search" inputPlaceholder="№ документу"
-                    >
-
+                    <table-header-with-filter :filter.sync="docNumberFilter"
+                        header="№ документа" inputType="search" inputPlaceholder="№ документа">
                     </table-header-with-filter>
                 </th>
-                <th class="sticky-second-column text-center">Дата</th>
-                <th class="text-center">ст. Відправлення</th>
-                <th class="text-center">ст. Призначення</th>
-                <th class="text-center">Відправник</th>
-                <th class="text-center">Отримувач</th>
-                <th class="text-center">Платник</th>
-                <th class="text-center">Вантаж</th>
+                <th class="sticky-second-column text-center">
+                    <table-header-with-filter :filter.sync="dateFilter"
+                         header="Дата" inputType="date" inputPlaceholder="">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="sendStationFilter"
+                          header="ст Отправления" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="receiveStationFilter"
+                        header="ст Назначения" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="cargoSenderFilter"
+                        header="Отправитель" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="cargoReceiverFilter"
+                        header="Получатель" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="tarifPayerFilter"
+                         header="Плательщик" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
+                <th class="text-center">
+                    <table-header-with-filter :filter.sync="cargoNameFilter"
+                        header="Груз" inputType="search" inputPlaceholder="код, название">
+                    </table-header-with-filter>
+                </th>
                 <th class="text-center">К-ть вагонів</th>
                 <th class="text-center">Маса вантажу</th>
             </tr>
@@ -110,7 +134,9 @@
         },
         computed:{
             filteredDocuments(){
-                return this.railroadDocuments;
+                let documents = this.docNumberFilterFunc(this.railroadDocuments);
+                documents = this.docDateFilterFunc(documents);
+                return documents;
             },
             allSelected:{
                 get(){
@@ -148,15 +174,21 @@
             /*
             * Filter methods
              */
+            docNumberFilterFunc(documents){
+                const docNumb = this.docNumberFilter.value;
+                if(docNumb ==='' || !this.docNumberFilter.active)
+                    return documents;
+
+                return documents.filter(doc => doc.docNumber.toString().indexOf(docNumb) > -1)
+            },
             docDateFilterFunc(documents){
-                // const date = this.dateFilter.value;
-                // if(date === '' || !this.dateFilter.active) return documents;
-                // return documents.filter(doc =>{
-                //         return this.$options.filters.formatDate(doc.docDate)
-                //             === this.$options.filters.formatDate(date);
-                //     }
-                //
-                // )
+                const date = this.dateFilter.value;
+                if(date === '' || !this.dateFilter.active) return documents;
+                return documents.filter(doc =>{
+                        return this.$options.filters.formatDate(doc.docDate)
+                            === this.$options.filters.formatDate(date);
+                    }
+                )
             },
 
             sendStationFilterFunc(documents){
@@ -169,13 +201,7 @@
                 // })
             },
 
-            docNumberFilterFunc(documents){
-                // const docNumb = this.docNumberFilter.value;
-                // if(docNumb ==='' || !this.docNumberFilter.active) return documents;
-                // return documents
-                //     .filter(doc => doc.docNumber.toString().indexOf(docNumb) > -1
-                //     )
-            },
+
         },
         watch:{
             selectedDocuments(){
@@ -224,8 +250,8 @@
 
     }
     .sticky-second-column {
-        min-width: 8em;
-        max-width: 8em;
+        min-width: 9em;
+        max-width: 9em;
         left: 11em;
     }
     .sticky-first-column, .sticky-second-column, .sticky-checkbox{
