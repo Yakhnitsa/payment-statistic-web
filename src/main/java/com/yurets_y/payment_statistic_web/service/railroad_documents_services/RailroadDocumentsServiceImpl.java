@@ -22,7 +22,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
@@ -151,6 +156,47 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
                 throw new RuntimeException("Ошибка удаления файла " + xmlBackup);
             }
         }
+    }
+
+    private Path getFilesArchive(Map<String,Path> filesMap) throws IOException {
+        Path zipFilePath = Files.createTempFile("zip_archive", ".zip");
+
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFilePath))) {
+            filesMap.forEach((fileName,path) -> {
+                ZipEntry zipEntry = new ZipEntry(fileName);
+                try {
+                    zipOutputStream.putNextEntry(zipEntry);
+                    zipOutputStream.write(Files.readAllBytes(path));
+                    zipOutputStream.closeEntry();
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            });
+
+            return zipFilePath;
+        }
+    }
+
+    private Map<String,Path> getFilesMap(List<RailroadDocument> documents){
+        Map<String,Path> resultMap = new HashMap<>();
+        documents.forEach(document ->{
+            String fileName = getFileName(document);
+            Path pdfFile = Paths.get(backupDir,document.getPdfBackupFilePath());
+            if(Files.exists(pdfFile)) resultMap.put(fileName + ".pdf",pdfFile);
+            Path xmlFile = Paths.get(backupDir,document.getXmlBackupFilePath());
+            if(Files.exists(xmlFile)) resultMap.put(fileName + ".xml",pdfFile);
+        });
+        return resultMap;
+     }
+    private String getFileName(RailroadDocument document){
+        Date date = document.getDocDate();
+        String station = document.getSendStation().getRusName();
+        int vagCount = document.getVagonCount();
+        int docNumber = document.getDocNumber();
+        int senderCode = document.getCargoSender().getRailroadCode();
+        int receiverCode = document.getCargoReceiver().getRailroadCode();
+        return String.format("%1$td_%1$tm_%1$tY__(%2$04d)_%3$s_%4$d_ваг_ЖД_%5$d_(%6$04d)",
+                date,senderCode, station, vagCount, docNumber, receiverCode);
     }
 
     private boolean isValid(RailroadDocument railroadDocument){
