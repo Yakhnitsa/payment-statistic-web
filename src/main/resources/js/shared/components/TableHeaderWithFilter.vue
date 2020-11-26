@@ -51,9 +51,13 @@
 </script>
 
 <style scoped>
+    .input-group{
+        min-width: 8em;
+    }
     .form-control {
         display: inline-block;
         /*width: 7em;*/
+
         max-width: 12em;
         height: 2em;
         padding: inherit;

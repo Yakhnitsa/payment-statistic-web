@@ -6,58 +6,27 @@
                 <tr>
                     <th class="text-center">Відправник</th>
                     <th class="text-center">
-                        <span v-if="!sendStationFilter.active">
-                            ст. Відправлення
-                        </span>
-                        <span v-else>
-                             <input type="search" class="form-control"
-                                    placeholder="ст Відправл..."
-                                    v-model="sendStationFilter.value">
-                        </span>
-                        <span class="text-secondary" @click="sendStationFilter.active = !sendStationFilter.active">
-                            <i :class="['fas', sendStationFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
-                        </span>
+                        <table-header-with-filter :filter.sync="sendStationFilter"
+                                                  header="ст Отправления" inputType="search"
+                                                  inputPlaceholder="Код, название">
+                        </table-header-with-filter>
                     </th>
                     <th class="text-center">
-                        <span v-if="!dateFilter.active">
-                            Дата
-                        </span>
-                        <span v-else>
-                             <input type="date" class="form-control"
-                                    placeholder="Дата"
-                                    v-model="dateFilter.value">
-                        </span>
-                        <span class="text-secondary" @click="dateFilter.active = !dateFilter.active">
-                            <i :class="['fas', dateFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
-                        </span>
-                    </th>
-
-
-                    <th class="text-center">
-                        <span v-if="!docNumberFilter.active">
-                            № Накладної
-                        </span>
-                        <span v-else>
-                             <input type="search" class="form-control"
-                                    placeholder="№ Накладної"
-                                    v-model="docNumberFilter.value">
-                        </span>
-                        <span class="text-secondary" @click="docNumberFilter.active = !docNumberFilter.active">
-                            <i :class="['fas', docNumberFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
-                        </span>
+                        <table-header-with-filter :filter.sync="dateFilter"
+                                                  header="Дата" inputType="date" inputPlaceholder="">
+                        </table-header-with-filter>
                     </th>
                     <th class="text-center">
-                        <span v-if="!vagNumberFilter.active">
-                            № Вагону
-                        </span>
-                        <span v-else>
-                             <input type="search" class="form-control"
-                                     placeholder="№ Вагону"
-                                     v-model="vagNumberFilter.value">
-                        </span>
-                        <span class="text-secondary" @click="vagNumberFilter.active = !vagNumberFilter.active">
-                            <i :class="['fas', vagNumberFilter.active ? 'fa-level-up-alt' : 'fa-filter','fa-sm']"></i>
-                        </span>
+                        <table-header-with-filter :filter.sync="docNumberFilter"
+                                                  header="№ Документа" inputType="search"
+                                                  inputPlaceholder="накладная">
+                        </table-header-with-filter>
+                    </th>
+                    <th class="text-center">
+                        <table-header-with-filter :filter.sync="vagNumberFilter"
+                                                  header="№ Вагона" inputType="search"
+                                                  inputPlaceholder="Вагон">
+                        </table-header-with-filter>
                     </th>
                     <th class="text-center overfrow-visible">
                         <div class="dropdown">
@@ -82,9 +51,14 @@
                             </div>
                         </div>
                     </th>
-                    <th class="text-center">ст Призначення</th>
-                    <th class="text-center">Отримувач</th>
-                    <th class="text-center">Вантаж</th>
+                    <th class="text-center">
+                        <table-header-with-filter :filter.sync="receiveStationFilter"
+                                                  header="ст Назначения" inputType="search"
+                                                  inputPlaceholder="Код, название">
+                        </table-header-with-filter>
+                    </th>
+                    <th class="text-center">Получатель</th>
+                    <th class="text-center">Груз</th>
                     <th class="text-center">Тара</th>
                     <th class="text-center">Нетто</th>
                     <th class="text-center">Додаткова інформація</th>
@@ -141,11 +115,19 @@
 
     import { createNamespacedHelpers } from 'vuex';
     const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
+    import MesssageManager from '../../../../shared/services/messageManager'
+    import TableHeaderWithFilter from "../../../../shared/components/TableHeaderWithFilter.vue";
+
     export default {
         name: "QualityCertTable",
+        components: {TableHeaderWithFilter},
         data(){
             return {
                 sendStationFilter: {
+                    active: false,
+                    value: ''
+                },
+                receiveStationFilter:{
                     active: false,
                     value: ''
                 },
@@ -203,12 +185,18 @@
             },
 
             copyTableToClipboard(){
+                this.removeSelection();
+
                 let urlField = document.getElementById('certificatesTable');
                 let range = document.createRange();
                 range.selectNode(urlField);
                 window.getSelection().addRange(range);
                 document.execCommand('copy');
-                //remove selection
+                MesssageManager.showInfoMessage("Данные скопированы в буфер обмена");
+
+                this.removeSelection();
+            },
+            removeSelection(){
                 if (window.getSelection) {
                     if (window.getSelection().empty) {  // Chrome
                         window.getSelection().empty();
@@ -252,7 +240,8 @@
             documentsMainFilter(documents){
                 documents = this.docDateFilterFunc(documents);
                 documents = this.docNumberFilterFunc(documents);
-                return this.sendStationFilterFunc(documents);
+                documents = this.sendStationFilterFunc(documents);
+                return this.receiveStationFilterFunc(documents);
             },
 
             docDateFilterFunc(documents){
@@ -273,6 +262,15 @@
                     return doc.sendStation.code.toString().indexOf(val) > -1 ||
                         doc.sendStation.rusName.toLowerCase().indexOf(val) > -1 ||
                         doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
+                })
+            },
+            receiveStationFilterFunc(documents){
+                const val = this.receiveStationFilter.value.toLowerCase();
+                if(val===''|| !this.receiveStationFilter.active) return documents;
+                return documents.filter(doc => {
+                    return doc.receiveStation.code.toString().indexOf(val) > -1 ||
+                        doc.receiveStation.rusName.toLowerCase().indexOf(val) > -1 ||
+                        doc.receiveStation.ukrName.toLowerCase().indexOf(val) > -1;
                 })
             },
 

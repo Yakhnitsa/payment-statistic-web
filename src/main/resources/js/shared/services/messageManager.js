@@ -19,11 +19,12 @@ export default{
         Vue.$toast.error(message, {
             timeout: 6000,
             showCloseButtonOnHover: false,
+
         });
     },
     showWarningMessage(message){
         Vue.$toast.warning(message, {
-            timeout: 4000,
+            timeout: 5000,
             showCloseButtonOnHover: false,
         });
     },
@@ -31,12 +32,14 @@ export default{
         Vue.$toast.info(message, {
             timeout: 2000,
             showCloseButtonOnHover: false,
+            hideProgressBar: true,
         });
     },
     showSuccessMessage(message){
         Vue.$toast.success(message, {
             timeout: 3000,
             showCloseButtonOnHover: false,
+            hideProgressBar: true,
         });
     },
 

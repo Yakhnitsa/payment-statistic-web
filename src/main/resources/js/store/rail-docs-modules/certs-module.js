@@ -46,10 +46,6 @@ export default {
                 });
             });
         },
-        clearRequestParams(state) {
-            state.requestParams = {};
-        },
-
         setRequestParamsMutation(state, params) {
             state.requestParams = params;
         }

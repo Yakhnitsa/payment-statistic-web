@@ -6,7 +6,7 @@
             <i class="fas fa-search"></i>
             Поиск</button>
 
-        <button type="button" class="btn btn-secondary disabled">
+        <button type="button" class="btn btn-secondary" @click="clearSearchAndUpdate">
             <i class="fas fa-search-minus"></i>
             Сбросить поиск</button>
 
@@ -33,6 +33,8 @@
 
 <script>
     import CertificatesSearchForm from "./CertificatesSearchForm.vue";
+    import {mapActions,mapMutations, mapGetters} from 'vuex';
+
     export default {
         name: "ControlPanel",
         components: {CertificatesSearchForm},
@@ -41,10 +43,32 @@
                 showModal : false
             }
         },
+        computed:{
+            ...mapGetters({
+                storedParams: 'certStore/storedRequestParams',
+            }),
+        },
         methods:{
+            ...mapActions({
+                fetchDataFromServer: 'certStore/fetchRailroadDocumentsAction'
+            }),
+            ...mapMutations({
+                setCurrentPage: 'certStore/setCurrentPageMutation',
+                storeRequestParams:'certStore/setRequestParamsMutation'
+            }),
             closeModal(){
                 this.showModal = false;
-            }
+            },
+            clearSearchAndUpdate(){
+                this.setCurrentPage(0);
+                const cleanedParams = {};
+                for (const [key, value] of Object.entries(this.storedParams)) {
+                    cleanedParams[key] = '';
+                }
+                this.storeRequestParams(cleanedParams);
+
+                this.fetchDataFromServer();
+            },
         }
     }
 </script>

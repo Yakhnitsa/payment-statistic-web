@@ -96,7 +96,7 @@
             },
             showAchLimitMessage(){
                 let message = "Ошибка загрузки архива, \n";
-                message += "пшевышен лимит на скачивание ";
+                message += "Превышен лимит на скачивание ";
                 message += this.arcLimit + " документов";
                 MessageManager.showWarningMessage(message);
 
