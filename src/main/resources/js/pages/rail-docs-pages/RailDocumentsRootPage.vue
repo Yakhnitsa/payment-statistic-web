@@ -67,7 +67,8 @@
                 $('#sidebar').toggleClass('active');
             },
             test(){
-                MessageManager.testMessage("message");
+                MessageManager.showNotFoundException404();
+                MessageManager.showSecurityException403();
             }
         },
     }

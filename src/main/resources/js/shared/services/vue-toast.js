@@ -14,7 +14,7 @@ const options = {
     pauseOnHover: false,
     draggable: true,
     draggablePercent: 0.7,
-    showCloseButtonOnHover: false,
+    showCloseButtonOnHover: true,
     // hideProgressBar: true,
     closeButton: "button",
     icon: true,

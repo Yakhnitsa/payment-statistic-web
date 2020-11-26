@@ -4,6 +4,7 @@ import VueResouce from 'vue-resource'
 import router from 'router/payments-router'
 import store from 'store/payments-store'
 import 'shared/filters/filters'
+import 'shared/services/vue-toast'
 
 import 'babel-polyfill'
 

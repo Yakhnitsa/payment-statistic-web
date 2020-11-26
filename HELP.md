@@ -386,3 +386,52 @@ The following guides illustrate how to use some features concretely:
     - Создаем директорию миграции `resouces/db.migration` 
     - Создаем файлы миграции: `V{numb_version}__{explanation}` 
         - пример `V1__init_db.sql`             
+        
+        
+## Добавление уведомлений
+   Устанавливаем службу уведомлений [vue-toastification](https://maronato.github.io/vue-toastification/)    
+   Настраиваем в отдельном классе:
+   
+    import Vue from "vue";
+    import Toast from "vue-toastification";
+    // import "vue-toastification/dist/index.css";
+    import "../../css/vue-toastification/index.css"; - меняем стили на свой стили
+    
+    const options = {
+        transition: "Vue-Toastification__bounce",
+        maxToasts: 5,
+        newestOnTop: true,
+        position: "bottom-right",
+        timeout: 50000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: false,
+        draggable: true,
+        draggablePercent: 0.7,
+        showCloseButtonOnHover: false,
+        // hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false,
+    };
+    
+    Vue.use(Toast, options);
+    
+   Добавляем в message manager и юзаем:
+   
+    import Vue from "vue";  
+    
+    Vue.$toast.success("I'm a toast!", {
+          position: "top-right",
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: true,
+          closeButton: "button",
+          icon: true,
+          rtl: false
+    });  `
