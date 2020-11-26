@@ -13,6 +13,9 @@
                 <!--<span>Отобразить/скрыть</span>-->
             </button>
             <div class="router-container">
+                <button @click="test">
+                    TestButton
+                </button>
                 <router-view></router-view>
             </div>
         </div>
@@ -22,6 +25,7 @@
 <script>
     import {mapGetters} from 'vuex';
     import Sidebar from './Sidebar.vue';
+    import MessageManager from '../../shared/services/messageManager';
 
     export default {
         name: "DocumentsPage",
@@ -61,6 +65,9 @@
         methods:{
             toggleSidebar(){
                 $('#sidebar').toggleClass('active');
+            },
+            test(){
+                MessageManager.testMessage("message");
             }
         },
     }

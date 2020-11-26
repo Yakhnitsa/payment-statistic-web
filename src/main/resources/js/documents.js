@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from 'router/rail-documents-router'
 import store from 'store/rail-documents-store'
 import 'shared/filters/filters'
+import 'shared/services/vue-toast'
 
 import MainPage from './pages/rail-docs-pages/RailDocumentsRootPage.vue'
 
