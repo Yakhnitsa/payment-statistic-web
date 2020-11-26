@@ -1,6 +1,7 @@
 import railDocumentsApi from "../../api/rail-docs-api/railroadDocumentsApi";
 import messageManager from "../../shared/services/messageManager";
 import downloadApi from "../../api/rail-docs-api/railDocsDownloadApi";
+import paymentListApi from "../../api/paymentListApi";
 
 export default {
     namespaced: true,
@@ -64,14 +65,35 @@ export default {
                 }
             }
         },
-        async downloadSelectedDocumentsArchiveAction({commit,state}){
+
+        async downloadSelectedDocumentsArchiveAction({state,dispatch}){
             const docIds = mapDocsToDocsId(state.selectedDocuments);
-            console.log(docIds)
+            dispatch('downloadDocsArchiveAction',docIds);
         },
-        async downloadFilteredDocumentsArchiveAction({commit,state}){
+        async downloadFilteredDocumentsArchiveAction({state,dispatch}){
             const docIds = mapDocsToDocsId(state.filteredDocuments);
-            console.log(docIds)
+            dispatch('downloadDocsArchiveAction',docIds);
         },
+
+        async downloadDocsArchiveAction({state}, documents){
+            downloadApi.downloadArchive(documents).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                let achName = 'archive.zip';
+                const disposition = response.headers['content-disposition'];
+                // if (disposition && disposition.indexOf('attachment') !== -1) {
+                //     const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                //     let matches = filenameRegex.exec(disposition);
+                //     if (matches != null && matches[1]) achName = matches[1].replace(/['"]/g, '');
+                // }
+
+                link.href = url;
+                link.setAttribute('download', achName);
+                document.body.appendChild(link);
+                link.click();
+            });
+        },
+
         async downloadXmlFileAction({commit,state,getters},railDoc) {
             downloadApi.downloadSingleFile('xml',railDoc).then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -83,6 +105,7 @@ export default {
                 link.click();
             });
         },
+
         async downloadPdfFileAction({commit,state,getters},railDoc) {
             downloadApi.downloadSingleFile('pdf',railDoc).then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));

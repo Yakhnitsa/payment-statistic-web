@@ -112,8 +112,11 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
     }
 
     @Override
-    public Resource getFilesArchiveAsResource(List<RailroadDocument> documents) {
-        return null;
+    public Resource getFilesArchiveAsResource(List<RailroadDocumentId> documentIds) throws IOException {
+        List<RailroadDocument> documents = documentsRepo.findAllById(documentIds);
+        Map<String,Path> documentMap = getFilesMap(documents);
+        Path filesArch = getFilesArchive(documentMap);
+        return new UrlResource(filesArch.toUri());
     }
 
     private String saveBackupFile(RailroadDocument document, File file){
@@ -181,13 +184,21 @@ public class RailroadDocumentsServiceImpl implements RailroadDocumentsService{
         Map<String,Path> resultMap = new HashMap<>();
         documents.forEach(document ->{
             String fileName = getFileName(document);
-            Path pdfFile = Paths.get(backupDir,document.getPdfBackupFilePath());
-            if(Files.exists(pdfFile)) resultMap.put(fileName + ".pdf",pdfFile);
-            Path xmlFile = Paths.get(backupDir,document.getXmlBackupFilePath());
-            if(Files.exists(xmlFile)) resultMap.put(fileName + ".xml",pdfFile);
+            if(document.getPdfBackupFilePath() != null){
+                Path pdfFile = Paths.get(backupDir, document.getPdfBackupFilePath());
+                if(Files.exists(pdfFile)) resultMap.put(fileName + ".pdf",pdfFile);
+            }
+
+            if(document.getXmlBackupFilePath() != null){
+                Path xmlFile = Paths.get(backupDir,document.getXmlBackupFilePath());
+                if(Files.exists(xmlFile)) resultMap.put(fileName + ".xml",xmlFile);
+            }
+
+
         });
         return resultMap;
      }
+
     private String getFileName(RailroadDocument document){
         Date date = document.getDocDate();
         String station = document.getSendStation().getRusName();

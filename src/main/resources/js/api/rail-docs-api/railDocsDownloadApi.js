@@ -4,22 +4,20 @@ const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 export default{
 
     downloadSingleFile: (type,document) => axios({
-        url: '/api/raildocs-download/' + type,
+        url: '/api/raildocs-download/file/' + type,
         method: 'GET',
-        params:{dateStamp: document.dateStamp, docNumber: document.docNumber},
+        params:{dateStamp: document.dateStamp, docNumber: document.docNumber, fileType: type},
         responseType: 'blob',
     }),
-    // downloadXml: document => axios({
-    //     url: '/api/raildocs-download/xml' + file,
-    //     method: 'GET',
-    //     params:{dateStamp: document.dateStamp, docDate: document.docDate},
-    //     responseType: 'blob',
-    // }),
-    // downloadArchive: params => axios({
-    //     url: '/api/download/archive',
-    //     method: 'GET',
-    //     params,
-    //     responseType: 'blob',
-    // }),
+
+    downloadArchive: payload => axios({
+        url: '/api/raildocs-download/archive',
+        method: 'POST',
+        data: payload,
+        headers:{
+            'X-CSRF-Token': CSRF_TOKEN
+        },
+        responseType: 'blob',
+    }),
 
 }

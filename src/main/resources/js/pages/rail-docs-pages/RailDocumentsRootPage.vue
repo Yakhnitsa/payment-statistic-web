@@ -13,9 +13,6 @@
                 <!--<span>Отобразить/скрыть</span>-->
             </button>
             <div class="router-container">
-                <button @click="test">
-                    TestButton
-                </button>
                 <router-view></router-view>
             </div>
         </div>
@@ -66,10 +63,6 @@
             toggleSidebar(){
                 $('#sidebar').toggleClass('active');
             },
-            test(){
-                MessageManager.showNotFoundException404();
-                MessageManager.showSecurityException403();
-            }
         },
     }
 </script>

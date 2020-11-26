@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface RailroadDocumentsService {
@@ -26,5 +27,5 @@ public interface RailroadDocumentsService {
 
     Resource getFileAsResource(String filename) throws FileNotFoundException;
 
-    Resource getFilesArchiveAsResource(List<RailroadDocument> documents);
+    Resource getFilesArchiveAsResource(List<RailroadDocumentId> documentIds) throws IOException;
 }

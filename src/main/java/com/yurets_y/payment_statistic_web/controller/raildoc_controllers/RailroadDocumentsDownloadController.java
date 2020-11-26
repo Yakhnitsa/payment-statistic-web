@@ -23,6 +23,7 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Date;
 
 @RestController
@@ -40,10 +41,10 @@ public class RailroadDocumentsDownloadController {
         this.documentsService = documentsService;
     }
 
-    @GetMapping("/{type}")
+    @GetMapping("/file")
     @ResponseBody
     public ResponseEntity<Resource> getFileById(
-            @PathVariable String type,
+            @RequestParam String fileType,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date  dateStamp,
             @RequestParam Integer docNumber,
             HttpServletRequest request
@@ -51,13 +52,13 @@ public class RailroadDocumentsDownloadController {
         RailroadDocument document = documentsService.getById(new RailroadDocumentId(docNumber,dateStamp));
         if (document == null) return ResponseEntity.noContent().build();
 
-        String fileName = type.equalsIgnoreCase("xml") ? document.getXmlBackupFilePath() :
-                type.equalsIgnoreCase("pdf") ? document.getPdfBackupFilePath() : null;
+        String fileName = fileType.equalsIgnoreCase("xml") ? document.getXmlBackupFilePath() :
+                fileType.equalsIgnoreCase("pdf") ? document.getPdfBackupFilePath() : null;
         if(fileName == null) return ResponseEntity.noContent().build();
 
         Resource resource = documentsService.getFileAsResource(fileName);
 
-        String resourceName = getFileNameASCII(document,type);
+        String resourceName = getFileNameASCII(document,fileType);
 
         String contentType = "application/octet-stream";
         try {
@@ -73,8 +74,47 @@ public class RailroadDocumentsDownloadController {
                 .body(resource);
     }
 
+
+
+    @PostMapping("/archive")
+    @ResponseBody
+    public ResponseEntity<?> downloadArchive(
+            @RequestBody RailroadDocumentId[] documentsIds,
+            HttpServletRequest request
+    ) {
+
+        Resource resource = null;
+        try {
+            resource = documentsService.getFilesArchiveAsResource(Arrays.asList(documentsIds));
+            String contentType = "application/zip";
+            try {
+                contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            } catch (IOException ex) {
+                System.out.println("Could not determine file type.");
+            }
+
+            String arcName = "documents_archive.zip";
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .contentLength(resource.contentLength())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + arcName + "\"")
+                    .body(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.noContent().build();
+        }
+
+
+    }
+
+    @Autowired
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
+
     private String getFileNameASCII(RailroadDocument document, String type) {
-           return String.format("%1$td_%1$tm_%1$tY__%2$s_.%3$s",
+        return String.format("%1$td_%1$tm_%1$tY__%2$s_.%3$s",
                 document.getDateStamp(), document.getDocNumber(),type);
 //        Date date = document.getDocDate();
 //        String station = document.getSendStation().getRusName();
@@ -88,42 +128,6 @@ public class RailroadDocumentsDownloadController {
 //        } catch (UnsupportedEncodingException e) {
 //            return "file." + type;
 //        }
-    }
-
-/*    @GetMapping("/archive")
-    @ResponseBody
-    public ResponseEntity<?> serveArchive(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateFrom,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateUntil,
-            @RequestParam Integer payerCode,
-            HttpServletRequest request
-    ) throws ParseException, IOException {
-        if (dateFrom == null || dateUntil == null) {
-            String message = messageProvider.get("application.controller.void-request-param");
-            return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
-        }
-        Resource resource = paymentListService.getFilesArchiveAsResource(dateFrom,dateUntil,payerCode);
-
-        String contentType = "application/zip";
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            System.out.println("Could not determine file type.");
-        }
-
-        String arcName = String
-                .format("archive_%1s_%2$tY_%2$tm_%2$td__%3$tY_%3$tm_%3$td.zip",payerCode, dateFrom, dateUntil);
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .contentLength(resource.contentLength())
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + arcName + "\"")
-                .body(resource);
-    }*/
-
-    @Autowired
-    public void setMessageProvider(MessageProvider messageProvider) {
-        this.messageProvider = messageProvider;
     }
 
 }
