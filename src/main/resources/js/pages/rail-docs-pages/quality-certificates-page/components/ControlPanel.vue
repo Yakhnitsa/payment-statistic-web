@@ -6,21 +6,21 @@
             <i class="fas fa-search"></i>
             Поиск</button>
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary disabled">
             <i class="fas fa-search-minus"></i>
             Сбросить поиск</button>
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary disabled">
             <i class="fas fa-file-archive"></i>
             Скачать архив</button>
 
 
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary disabled">
             <i class="fas fa-file-excel"></i>
             Скачать реестр</button>
 
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary disabled">
             <i class="fas fa-cogs"></i>
             Настройки реестра</button>
 

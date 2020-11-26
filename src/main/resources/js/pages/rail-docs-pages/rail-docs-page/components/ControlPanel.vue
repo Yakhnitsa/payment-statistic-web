@@ -10,7 +10,7 @@
                 @close-modal="closeModal"></documents-search-form>
 
 
-        <button type="button" class="btn btn-secondary disabled">
+        <button type="button" class="btn btn-secondary" @click="clearSearchAndUpdate">
             <i class="fas fa-search-minus"></i>
             Сбросить поиск</button>
 
@@ -21,8 +21,8 @@
                 Скачать архив
             </button>
             <div class="dropdown-menu" aria-labelledby="downloadArchiveDropdown">
-                <a class="dropdown-item" @click="downloadArchiveAll">Все документы</a>
-                <a class="dropdown-item" @click="downloadArchiveSelected">Выбранные документы</a>
+                <a class="dropdown-item" @click="downloadAll">Все документы</a>
+                <a class="dropdown-item" @click="downloadSelected">Выбранные документы</a>
             </div>
         </div>
 
@@ -40,26 +40,67 @@
 
 <script>
     import DocumentsSearchForm from "./DocumentsSearchForm.vue";
-    import {mapActions} from 'vuex';
+    import {mapActions,mapMutations, mapGetters} from 'vuex';
+
+    import MessageManager from '../../../../shared/services/messageManager'
 
     export default {
         name: "ControlPanel",
         components: {DocumentsSearchForm},
         data(){
             return {
-                showModal : false
+                showModal : false,
+                arcLimit: 250,
             }
         },
+        computed:{
+            ...mapGetters({
+                storedParams: 'railDocsStore/storedRequestParams',
+                filteredDocuments: 'railDocsStore/filteredDocuments',
+                selectedDocuments : 'railDocsStore/selectedDocuments'
+            }),
+        },
         methods:{
-
             ...mapActions({
                 downloadArchiveAll: 'railDocsStore/downloadFilteredDocumentsArchiveAction',
-                downloadArchiveSelected: 'railDocsStore/downloadSelectedDocumentsArchiveAction'
+                downloadArchiveSelected: 'railDocsStore/downloadSelectedDocumentsArchiveAction',
+                fetchDataFromServer: 'railDocsStore/fetchRailroadDocumentsAction'
             }),
+            ...mapMutations({
+                setCurrentPage: 'railDocsStore/setCurrentPageMutation',
+                storeRequestParams:'railDocsStore/setRequestParamsMutation'
+            }),
+
+            downloadSelected(){
+                this.selectedDocuments.length > this.arcLimit ?
+                    this.showAchLimitMessage() : this.downloadArchiveSelected();
+            },
+
+            downloadAll(){
+                this.filteredDocuments.length > this.arcLimit ?
+                    this.showAchLimitMessage() : this.downloadArchiveAll();
+            },
 
             closeModal(){
                 this.showModal = false;
-            }
+            },
+            clearSearchAndUpdate(){
+                this.setCurrentPage(0);
+                const cleanedParams = {};
+                for (const [key, value] of Object.entries(this.storedParams)) {
+                    cleanedParams[key] = '';
+                }
+                this.storeRequestParams(cleanedParams);
+
+                this.fetchDataFromServer();
+            },
+            showAchLimitMessage(){
+                let message = "Ошибка загрузки архива, \n";
+                message += "пшевышен лимит на скачивание ";
+                message += this.arcLimit + " документов";
+                MessageManager.showWarningMessage(message);
+
+            },
         }
     }
 </script>

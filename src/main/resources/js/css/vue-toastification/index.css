@@ -93,7 +93,7 @@
     color: #fff;
 }
 .Vue-Toastification__toast--info {
-    background-color: #2196f3;
+    background-color: #d5e7e7;
     color: #fff;
 }
 .Vue-Toastification__toast--success {
@@ -105,8 +105,8 @@
     color: #fff;
 }
 .Vue-Toastification__toast--warning {
-    background-color: #ffc107;
-    color: #fff;
+    background-color: #c0bec0;
+    color: #d3d501;
 }
 @media only screen and (max-width : 600px) {
     .Vue-Toastification__toast {

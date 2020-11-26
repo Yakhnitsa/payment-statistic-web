@@ -21,6 +21,12 @@ export default{
             showCloseButtonOnHover: false,
         });
     },
+    showWarningMessage(message){
+        Vue.$toast.warning(message, {
+            timeout: 4000,
+            showCloseButtonOnHover: false,
+        });
+    },
     showInfoMessage(message){
         Vue.$toast.info(message, {
             timeout: 2000,
