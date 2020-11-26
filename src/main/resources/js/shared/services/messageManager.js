@@ -17,7 +17,7 @@ export default{
 
     showErrorMessage(message){
         Vue.$toast.error(message, {
-            timeout: 5500,
+            timeout: 6000,
             showCloseButtonOnHover: false,
         });
     },

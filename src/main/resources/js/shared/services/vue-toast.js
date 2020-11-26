@@ -4,7 +4,7 @@ import Toast from "vue-toastification";
 import "../../css/vue-toastification/index.css";
 
 const options = {
-    transition: "Vue-Toastification__bounce",
+    transition: "Vue-Toastification__fade",
     maxToasts: 5,
     newestOnTop: true,
     position: "bottom-right",

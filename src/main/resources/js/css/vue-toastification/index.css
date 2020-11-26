@@ -93,11 +93,11 @@
     color: #fff;
 }
 .Vue-Toastification__toast--info {
-    background-color: #d5e7e7;
+    background-color: #76a7a7eb;
     color: #fff;
 }
 .Vue-Toastification__toast--success {
-    background-color: #4caf50;
+    background-color: #8db85ee3;
     color: #fff;
 }
 .Vue-Toastification__toast--error {
@@ -105,12 +105,12 @@
     color: #fff;
 }
 .Vue-Toastification__toast--warning {
-    background-color: #c0bec0;
-    color: #d3d501;
+    background-color: #345c86;
+    color: #fff;
 }
 @media only screen and (max-width : 600px) {
     .Vue-Toastification__toast {
-        border-radius: 0px;
+        border-radius: 1px;
         margin-bottom: 0.5rem;
     }
 }
@@ -139,7 +139,6 @@
     padding: 0;
     padding-left: 10px;
     cursor: pointer;
-    transition: 0.3s ease;
     align-items: center;
     color: #fff;
     opacity: 0.3;

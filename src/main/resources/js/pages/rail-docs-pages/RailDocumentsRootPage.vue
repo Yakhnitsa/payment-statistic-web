@@ -13,6 +13,7 @@
                 <!--<span>Отобразить/скрыть</span>-->
             </button>
             <div class="router-container">
+                <button @click="test">Test</button>
                 <router-view></router-view>
             </div>
         </div>
@@ -63,6 +64,12 @@
             toggleSidebar(){
                 $('#sidebar').toggleClass('active');
             },
+            test(){
+                MessageManager.showInfoMessage("info message");
+                MessageManager.showErrorMessage("error message");
+                MessageManager.showWarningMessage("warning message");
+                MessageManager.showSuccessMessage("Success message");
+            }
         },
     }
 </script>
