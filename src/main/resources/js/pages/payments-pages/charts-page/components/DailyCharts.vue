@@ -3,13 +3,13 @@
         <h2 class="h2 mx-1">Графики показателей по дням</h2>
         <form class="container-sm update-form">
             <div class="form-row mx-1">
-                <div class="form-group col-md-4">
+                <div class="form-group col-4">
                     <input type="date" v-model="dateFrom" class="form-control"/>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-4">
                     <input type="date" v-model="dateUntil" class="form-control"/>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-4">
                     <button type="button" class="btn btn-primary" v-on:click="updateChart">
                         <span class="button-text">Обновить данные</span>
 
@@ -138,10 +138,10 @@
             },
 
             dates(){
-                return this.dailyChartData.map(e => e.date);
+                return this.dailyChartData.map(e => this.$options.filters.formatDate(e.date));
             },
             labels(){
-                return this.dailyChartData.map(e => e.date);
+                return this.dailyChartData.map(e => this.$options.filters.formatDate(e.date));
             },
             expenses(){
                 return this.dailyChartData.map(e => e.expenses / 100);

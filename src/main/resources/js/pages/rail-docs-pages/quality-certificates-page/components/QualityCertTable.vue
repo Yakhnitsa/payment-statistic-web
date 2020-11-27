@@ -61,7 +61,7 @@
                     <th class="text-center">Груз</th>
                     <th class="text-center">Тара</th>
                     <th class="text-center">Нетто</th>
-                    <th class="text-center">Додаткова інформація</th>
+                    <th class="text-center">Дополнительно</th>
                 </tr>
                 </thead>
                 <tbody>

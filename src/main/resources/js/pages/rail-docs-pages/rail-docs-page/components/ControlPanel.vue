@@ -16,8 +16,13 @@
 
         <div class="btn-group" role="group">
             <button id="downloadArchiveDropdown" type="button" class="btn btn-secondary"
+                    :class="{'disabled' : archAwait}"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-file-archive"></i>
+                <i v-if="!archAwait" class="fas fa-file-archive"></i>
+                <span v-else
+                      class="spinner-border spinner-border-sm" role="status"
+                      aria-hidden="true">
+                </span>
                 Скачать архив
             </button>
             <div class="dropdown-menu" aria-labelledby="downloadArchiveDropdown">
@@ -57,7 +62,8 @@
             ...mapGetters({
                 storedParams: 'railDocsStore/storedRequestParams',
                 filteredDocuments: 'railDocsStore/filteredDocuments',
-                selectedDocuments : 'railDocsStore/selectedDocuments'
+                selectedDocuments : 'railDocsStore/selectedDocuments',
+                archAwait: 'railDocsStore/archAwait'
             }),
         },
         methods:{
@@ -79,6 +85,7 @@
             downloadAll(){
                 this.filteredDocuments.length > this.arcLimit ?
                     this.showAchLimitMessage() : this.downloadArchiveAll();
+
             },
 
             closeModal(){

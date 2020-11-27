@@ -34,12 +34,12 @@
             <pie-chart :height="300"
                        :chart-data="typesChartData"
                        :options="typesChartOptions"
-                       class="col my-1"
+                       class="col-md my-1"
             ></pie-chart>
             <pie-chart :height="300"
                        :chart-data="stationsChartData"
                        :options="stationsChartOptions"
-                       class="col my-1"
+                       class="col-md my-1"
 
             ></pie-chart>
         </div>
@@ -208,7 +208,7 @@
                 return dataArray.map(element => element.type)
             },
             getValues(dataArray){
-                if(dataArray === undefined) return [0]
+                if(dataArray === undefined) return [0];
                 return dataArray.map(element => element.value / 100)
             }
         },

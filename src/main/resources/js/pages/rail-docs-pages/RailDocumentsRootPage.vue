@@ -13,7 +13,6 @@
                 <!--<span>Отобразить/скрыть</span>-->
             </button>
             <div class="router-container">
-                <button @click="test">Test</button>
                 <router-view></router-view>
             </div>
         </div>

@@ -30,6 +30,7 @@
         border-radius: 5px;
         box-shadow: 0 2px 15px rgba(25, 25, 25, 0.27);
         margin:  25px 0;
+        min-width: 620px;
     }
 
     .chart h2 {

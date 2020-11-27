@@ -91,7 +91,7 @@
             }),
 
             linearChartLabels(){
-                return this.yearChartData.map(element => element.date);
+                return this.yearChartData.map(element => this.$options.filters.formatDate(element.date));
             },
             linearChartExpenses(){
                 return this.yearChartData.map(element => element.expenses/100);
@@ -146,7 +146,7 @@
                                 const label = data.datasets[tooltipItem.datasetIndex].label;
 
                                 // Format the y-axis value.
-                                const value = numeral(tooltipItem.yLabel).format('₴0,0')
+                                const value = numeral(tooltipItem.yLabel).format('₴0,0');
 
                                 return `${label}: ${value}`;
                             }

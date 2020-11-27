@@ -12,9 +12,11 @@ export default {
         currentPage: 0,
         totalPages: 0,
         totalElements: 0,
-        requestParams: {}
+        requestParams: {},
+        archAwait: false,
     }),
     getters: {
+
         documents: state => state.documents,
         selectedDocuments: state => state.selectedDocuments,
         filteredDocuments: state => state.filteredDocuments,
@@ -22,6 +24,7 @@ export default {
         totalPages: state => state.totalPages,
         totalElements: state => state.totalElements,
         storedRequestParams: state => state.requestParams,
+        archAwait: state => state.archAwait,
     },
     mutations: {
         setDocumentsMutation(state, documents) {
@@ -47,6 +50,9 @@ export default {
 
         setFilteredDocumentsMutation(state,params){
             state.filteredDocuments = params
+        },
+        setArchAwaitMutation(state,params){
+            state.archAwait = params;
         }
 
     },
@@ -75,7 +81,8 @@ export default {
             dispatch('downloadDocsArchiveAction',docIds);
         },
 
-        async downloadDocsArchiveAction({state}, documents){
+        async downloadDocsArchiveAction({state,commit}, documents){
+            commit('setArchAwaitMutation',true);
             downloadApi.downloadArchive(documents).then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
@@ -90,7 +97,9 @@ export default {
                 link.href = url;
                 link.setAttribute('download', achName);
                 document.body.appendChild(link);
+                console.log('archive downloaded');
                 link.click();
+                commit('setArchAwaitMutation',false);
             });
         },
 
