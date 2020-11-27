@@ -75,9 +75,10 @@
                             <td class="cert-checkbox">
                                 <input
                                         type="checkbox"
-                                        :checked="hasCert(vagon)"
-                                        @change="setCertSelected(vagon)"
+                                        :value="vagon"
+                                        v-model="selected"
                                 >
+                                <i v-show="hasCert(vagon)" class="far fa-check-square"></i>
                             </td>
                             <td class="text-capitalize">{{doc.receiveStation | formatStation}}</td>
                             <td class="text-capitalize">{{doc.cargoReceiver | formatClient}}</td>
@@ -123,6 +124,7 @@
         components: {TableHeaderWithFilter},
         data(){
             return {
+                selected:[],
                 sendStationFilter: {
                     active: false,
                     value: ''
@@ -159,20 +161,12 @@
         },
 
         methods:{
-            ...mapMutations(['addChangesMutation']),
+            ...mapMutations(['setChangesListMutation']),
             ...mapActions(['uploadChangesToServerAction']),
-            addChanges(event){
-                console.log(event);
-            },
-            setCertSelected(vagon){
-                const hasCert = vagon.vagonInfo ? !vagon.vagonInfo.hasCert : true;
-                const vagonId = vagon.id;
-                const changes = {
-                    hasCert: hasCert
-                };
-                this.addChangesMutation({vagonId, changes});
-            },
+
             sendDataToServer(){
+                this.selected = [];
+
                 this.uploadChangesToServerAction();
             },
 
@@ -196,6 +190,7 @@
 
                 this.removeSelection();
             },
+
             removeSelection(){
                 if (window.getSelection) {
                     if (window.getSelection().empty) {  // Chrome
@@ -208,6 +203,16 @@
                 }
             },
 
+            mapArrayToChanges(selected){
+                return selected.map(vagon =>{
+
+                    const changes = {
+                        hasCert: vagon.vagonInfo ? !vagon.vagonInfo.hasCert : true
+                    };
+                    return { vagonId: vagon.id, changes};
+                })
+            },
+
 
         //    Array filtering methods
 
@@ -215,6 +220,7 @@
                 vagons = this.vagonNumberFilterFunc(vagons);
                 return this.certSelectedFilterFunc(vagons);
             },
+
             vagonNumberFilterFunc(vagons){
                 const val = this.vagNumberFilter.value;
                 if(val === '' || !this.vagNumberFilter.active) return vagons;
@@ -224,6 +230,7 @@
                         .indexOf(val) > -1;
                 });
             },
+
             certSelectedFilterFunc(vagons){
                 const selected = this.certSelectedFilter.value;
                 if(!this.certSelectedFilter.active) return vagons;
@@ -231,11 +238,11 @@
                     return vagon.vagonInfo === null ? !selected : vagon.vagonInfo.hasCert === selected;
                 });
             },
+
             changeCertFilter(active,value){
                 this.certSelectedFilter.active = active;
                 this.certSelectedFilter.value = value;
             },
-
 
             documentsMainFilter(documents){
                 documents = this.docDateFilterFunc(documents);
@@ -264,6 +271,7 @@
                         doc.sendStation.ukrName.toLowerCase().indexOf(val) > -1;
                 })
             },
+
             receiveStationFilterFunc(documents){
                 const val = this.receiveStationFilter.value.toLowerCase();
                 if(val===''|| !this.receiveStationFilter.active) return documents;
@@ -283,6 +291,14 @@
             },
 
 
+
+
+        },
+        watch:{
+            selected(){
+                const changesList = this.mapArrayToChanges(this.selected);
+                this.setChangesListMutation(changesList);
+            }
         },
 
         filters:{
