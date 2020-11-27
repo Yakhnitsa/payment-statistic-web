@@ -35,19 +35,37 @@
                                 <i class="fas fa-filter fa-sm"></i>
                             </span>
                             <div class="dropdown-menu" aria-labelledby="certFilterDropdown">
-                                <a class="dropdown-item"
-                                    @click="changeCertFilter(false,false)">
-                                    <i class="far fa-times-circle"></i>
-                                    Все</a>
+                                <a class="dropdown-item" >
+                                    <input type="checkbox" v-model="certFilter.active">
+                                    По сертификатам
+                                </a>
+                                <a class="dropdown-item" :class="{'disabled': !certFilter.active}">
+                                    <input type="radio" v-model="certFilter.value" :value=true>
+                                    <input type="radio" v-model="certFilter.value" :value=false>
+                                    {{certFilter.value ? 'C сертификатом' : 'Без сертификата'}}
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" type="button"
-                                   @click="changeCertFilter(true,true)">
-                                    <i class="far fa-check-circle"></i>
-                                    Выбранные</a>
-                                <a class="dropdown-item" type="button"
-                                   @click="changeCertFilter(true,false)">
-                                    <i class="far fa-circle"></i>
-                                    Не выбранные</a>
+                                <a class="dropdown-item" >
+                                    <input type="checkbox" v-model="selectedFilter.active">
+                                    По выбранным
+                                </a>
+                                <a class="dropdown-item" :class="{'disabled': !selectedFilter.active}">
+                                    <input type="radio" v-model="selectedFilter.value" :value=true>
+                                    <input type="radio" v-model="selectedFilter.value" :value=false>
+                                    {{selectedFilter.value ? 'Выбранные' : 'Не выбранные'}}
+                                </a>
+
+
+                                <!--<a class="dropdown-item" :class="{'disabled' : !certSelectedFilter.active }" >-->
+                                    <!--<input type="checkbox"-->
+                                            <!--v-model="certSelectedFilter.value.selected">-->
+                                    <!--{{certSelectedFilter.value.selected ? 'Отмеченные' :'Не отмеченные'}}</a>-->
+                                <!--<a class="dropdown-item" :class="{'disabled' : !certSelectedFilter.active }" >-->
+                                    <!--<input :disable="!certSelectedFilter.active"-->
+                                            <!--type="checkbox"-->
+                                            <!--v-model="certSelectedFilter.value.hasCert">-->
+                                    <!--{{certSelectedFilter.value.hasCert ? 'С сертификатами' :'Без сертификатов'}}-->
+                                <!--</a>-->
                             </div>
                         </div>
                     </th>
@@ -66,7 +84,7 @@
                 </thead>
                 <tbody>
                     <template v-for="doc in documentsMainFilter(railroadDocuments)">
-                        <tr :class="{'changed': isChanged(vagon.id)}" v-for="vagon in vagonFilter(doc.vagonList)">
+                        <tr :class="{'has-cert': hasCert(vagon)}" v-for="vagon in vagonFilter(doc.vagonList)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
                             <td>{{doc.docDate | formatDate}}</td>
@@ -76,8 +94,7 @@
                                 <input
                                         type="checkbox"
                                         :value="vagon"
-                                        v-model="selected"
-                                >
+                                        v-model="selected">
                                 <i v-show="hasCert(vagon)" class="far fa-check-square"></i>
                             </td>
                             <td class="text-capitalize">{{doc.receiveStation | formatStation}}</td>
@@ -145,9 +162,13 @@
                     active: false,
                     value: ''
                 },
-                certSelectedFilter:{
+                certFilter:{
                     active: false,
-                    value: ''
+                    value: false
+                },
+                selectedFilter:{
+                    active: false,
+                    value: false
                 }
 
             }
@@ -170,8 +191,8 @@
                 this.uploadChangesToServerAction();
             },
 
-            isChanged(vagonId){
-                return this.changes.findIndex(item => item.vagonId === vagonId) !== -1;
+            isSelected(vagon){
+                return this.selected.findIndex(item => item.id === vagon.id) !== -1;
             },
 
             hasCert(vagon){
@@ -218,7 +239,8 @@
 
             vagonFilter(vagons){
                 vagons = this.vagonNumberFilterFunc(vagons);
-                return this.certSelectedFilterFunc(vagons);
+                vagons = this.selectedFilterFunc(vagons);
+                return this.hasCertFilterFunc(vagons);
             },
 
             vagonNumberFilterFunc(vagons){
@@ -231,17 +253,18 @@
                 });
             },
 
-            certSelectedFilterFunc(vagons){
-                const selected = this.certSelectedFilter.value;
-                if(!this.certSelectedFilter.active) return vagons;
+            hasCertFilterFunc(vagons){
+                const selected = this.certFilter.value;
+                if(!this.certFilter.active) return vagons;
                 return vagons.filter(vagon => {
-                    return vagon.vagonInfo === null ? !selected : vagon.vagonInfo.hasCert === selected;
+                    return this.hasCert(vagon) === selected;
                 });
             },
-
-            changeCertFilter(active,value){
-                this.certSelectedFilter.active = active;
-                this.certSelectedFilter.value = value;
+            selectedFilterFunc(vagons){
+                if(!this.selectedFilter.active) return vagons;
+                return vagons.filter(vagon => {
+                    return this.isSelected(vagon) === this.selectedFilter.value;
+                });
             },
 
             documentsMainFilter(documents){
@@ -290,9 +313,6 @@
                     )
             },
 
-
-
-
         },
         watch:{
             selected(){
@@ -326,7 +346,7 @@
     .filter-block{
         color: #636363;
     }
-    .changed{
+    .has-cert{
         font-style: italic;
         color: gray;
         background-color: #cfe1e1 !important;
@@ -354,6 +374,18 @@
     }
     .overfrow-visible{
         overflow: visible!important;
+    }
+
+    .dropdown-item {
+        padding: .15rem .5rem;
+    }
+
+    .dropdown-divider {
+        margin: .2rem 0;
+    }
+    .custom-control-input {
+        position: inherit;
+        margin-left: 1em;
     }
 
 

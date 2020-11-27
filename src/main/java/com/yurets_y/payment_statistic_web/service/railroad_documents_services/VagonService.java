@@ -35,6 +35,7 @@ public class VagonService {
             copyNonNullProperties(vagonInfo,info);
         }
         info.setVagon(vagon);
+        vagon.setVagonInfo(info);
         vagonsRepo.save(vagon);
         return info;
     }
