@@ -29,9 +29,12 @@
                         </table-header-with-filter>
                     </th>
                     <th class="text-center overfrow-visible">
-                        <div class="dropdown">
-                            Ку
-                            <span class="text-secondary" id="certFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown cert-checkbox">
+                            <input
+                                    type="checkbox"
+                                    v-model="allSelected">
+                            <span class="text-secondary" id="certFilterDropdown" data-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-filter fa-sm"></i>
                             </span>
                             <div class="dropdown-menu" aria-labelledby="certFilterDropdown">
@@ -54,18 +57,6 @@
                                     <input type="radio" v-model="selectedFilter.value" :value=false>
                                     {{selectedFilter.value ? 'Выбранные' : 'Не выбранные'}}
                                 </a>
-
-
-                                <!--<a class="dropdown-item" :class="{'disabled' : !certSelectedFilter.active }" >-->
-                                    <!--<input type="checkbox"-->
-                                            <!--v-model="certSelectedFilter.value.selected">-->
-                                    <!--{{certSelectedFilter.value.selected ? 'Отмеченные' :'Не отмеченные'}}</a>-->
-                                <!--<a class="dropdown-item" :class="{'disabled' : !certSelectedFilter.active }" >-->
-                                    <!--<input :disable="!certSelectedFilter.active"-->
-                                            <!--type="checkbox"-->
-                                            <!--v-model="certSelectedFilter.value.hasCert">-->
-                                    <!--{{certSelectedFilter.value.hasCert ? 'С сертификатами' :'Без сертификатов'}}-->
-                                <!--</a>-->
                             </div>
                         </div>
                     </th>
@@ -149,6 +140,8 @@
         data(){
             return {
                 selected:[],
+                allSelected: false,
+
                 sendStationFilter: {
                     active: false,
                     value: ''
@@ -278,6 +271,7 @@
                     return this.hasCert(vagon) === selected;
                 });
             },
+
             selectedFilterFunc(vagons){
                 if(!this.selectedFilter.active) return vagons;
                 return vagons.filter(vagon => {
@@ -336,6 +330,19 @@
             selected(){
                 const changesList = this.mapArrayToChanges(this.selected);
                 this.setChangesList(changesList);
+            },
+            allSelected(val){
+                if(val){
+                    const filteredDocs = this.documentsMainFilter(this.railroadDocuments);
+                    const filteredVagons = [];
+                    filteredDocs.forEach(doc =>{
+                        filteredVagons.push(...this.vagonFilter(doc.vagonList))
+                    });
+                    this.selected.push(...filteredVagons);
+                }else{
+                    this.selected = [];
+                }
+
             }
         },
 
