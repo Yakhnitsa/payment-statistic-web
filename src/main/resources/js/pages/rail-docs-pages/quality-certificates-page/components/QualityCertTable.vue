@@ -88,7 +88,14 @@
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
                             <td>{{doc.docDate | formatDate}}</td>
-                            <td>{{doc.docNumber}}</td>
+                            <td>
+                                <button class="show-on-hover btn btn-outline-secondary btn-sm link-button"
+                                        @click="downloadPdf(doc)"
+                                        :class="{disabled : !docContainsPdf(doc)}"
+                                        :disabled="!docContainsPdf(doc)">
+                                    <i  class="fa fa-file-pdf"></i>
+                                </button>
+                                {{doc.docNumber}}</td>
                             <td>{{vagon.number}}</td>
                             <td class="cert-checkbox">
                                 <input
@@ -132,7 +139,7 @@
 <script>
 
     import { createNamespacedHelpers } from 'vuex';
-    const { mapActions, mapMutations, mapGetters } = createNamespacedHelpers('certStore');
+    import { mapActions, mapMutations, mapGetters } from 'vuex';
     import MesssageManager from '../../../../shared/services/messageManager'
     import TableHeaderWithFilter from "../../../../shared/components/TableHeaderWithFilter.vue";
 
@@ -176,19 +183,26 @@
         // props:['railroadDocuments'],
         computed:{
             ...mapGetters({
-                railroadDocuments: 'documents',
-                changes: 'changesList'
+                railroadDocuments: 'certStore/documents',
+                changes: 'certStore/changesList'
             })
         },
 
         methods:{
-            ...mapMutations(['setChangesListMutation']),
-            ...mapActions(['uploadChangesToServerAction']),
+            ...mapMutations({
+                setChangesList:'certStore/setChangesListMutation'
+            }),
+            ...mapActions({
+                downloadPdf: 'railDocsStore/downloadPdfFileAction',
+                uploadChangesToServer: 'certStore/uploadChangesToServerAction',
+            }),
+
+
 
             sendDataToServer(){
                 this.selected = [];
 
-                this.uploadChangesToServerAction();
+                this.uploadChangesToServer();
             },
 
             isSelected(vagon){
@@ -232,6 +246,10 @@
                     };
                     return { vagonId: vagon.id, changes};
                 })
+            },
+
+            docContainsPdf(railroadDocument){
+                return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
             },
 
 
@@ -317,7 +335,7 @@
         watch:{
             selected(){
                 const changesList = this.mapArrayToChanges(this.selected);
-                this.setChangesListMutation(changesList);
+                this.setChangesList(changesList);
             }
         },
 

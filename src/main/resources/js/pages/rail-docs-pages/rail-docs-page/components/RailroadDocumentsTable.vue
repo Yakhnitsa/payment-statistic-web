@@ -281,19 +281,6 @@
 <style>
     @import "../../../../css/railroad-documents/tables-style.css";
 
-    .show-on-hover{
-        display: none;
-    }
-    td:hover .show-on-hover{
-        display: inline-block;
-        color: darkslategray;
-    }
-    .link-button{
-        padding: .1rem .35rem;
-        font-size: .7rem;
-        line-height: 1.5;
-        border-radius: 50%!important;
-    }
     .sticky-checkbox {
         left: 0;
         min-width: 2em;
