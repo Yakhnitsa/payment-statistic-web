@@ -4,7 +4,7 @@
             <table class="table table-striped table-hover table-sm" id="certificatesTable">
                 <thead>
                 <tr>
-                    <th class="text-center">Відправник</th>
+                    <th class="text-center">Отправитель</th>
                     <th class="text-center">
                         <table-header-with-filter :filter.sync="sendStationFilter"
                                                   header="ст Отправления" inputType="search"
