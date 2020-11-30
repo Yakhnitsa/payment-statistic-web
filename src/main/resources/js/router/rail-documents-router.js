@@ -10,7 +10,7 @@ const rootPath = '';
 
 export default new VueRouter({
     mode: 'history',
-    base: '/railroad-documents',
+    // base: '/railroad-documents',
     routes:[
         {
             path: '/',

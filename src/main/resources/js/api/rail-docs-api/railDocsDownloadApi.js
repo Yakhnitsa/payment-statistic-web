@@ -4,7 +4,7 @@ const CSRF_TOKEN = $("meta[name='_csrf']").attr("content");
 export default{
 
     downloadSingleFile: (type,document) => axios({
-        url: '/api/raildocs-download/file/' + type,
+        url: '/api/raildocs-download/file',
         method: 'GET',
         params:{dateStamp: document.dateStamp, docNumber: document.docNumber, fileType: type},
         responseType: 'blob',

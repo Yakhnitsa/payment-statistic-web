@@ -142,8 +142,8 @@ function getFilenameFromDoc(railDoc,fileExtension) {
     const cargoReceiver = railDoc.cargoReceiver.railroadCode;
     const sendStation = railDoc.sendStation.rusName;
     const vagCount = railDoc.vagonCount;
-    return date + '_(' + cargoSender + ')_' + sendStation +
-        vagCount +'ваг_' +  '_ЖД_' + docNumber + '_(' + cargoReceiver + ')'+ fileExtension;
+    return date + '_(' + cargoSender + ')_' + sendStation + '_' +
+        vagCount +'_ваг_' +  '_ЖД_' + docNumber + '_(' + cargoReceiver + ')'+ fileExtension;
 
 }
 

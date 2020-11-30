@@ -57,8 +57,28 @@ public class MainController {
 
     private StationService stationService;
 
+    @GetMapping("")
+    public String railroadDocuments(
+            Model model,
+            @AuthenticationPrincipal User user
+    ) {
+        model.addAttribute("isDevMode", "dev".equals(profile));
 
-    @GetMapping
+        if(user != null){
+            model.addAttribute("userRoles", user.getAuthorities());
+        }
+
+        try {
+            model.addAttribute("stations",marshallJSON(stationService.getAllStations()));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return "rail-doc-page";
+    }
+
+
+    @GetMapping("payment-statistic")
     public String paymentStatistic(
             Model model,
             @AuthenticationPrincipal User user
@@ -78,7 +98,7 @@ public class MainController {
         }
 
 
-        return "index";
+        return "payment-statistic";
     }
 
     @GetMapping("test")
@@ -86,25 +106,7 @@ public class MainController {
         return "test";
     }
 
-    @GetMapping("railroad-documents")
-    public String railroadDocuments(
-            Model model,
-            @AuthenticationPrincipal User user
-    ) {
-        model.addAttribute("isDevMode", "dev".equals(profile));
 
-        if(user != null){
-            model.addAttribute("userRoles", user.getAuthorities());
-        }
-
-        try {
-            model.addAttribute("stations",marshallJSON(stationService.getAllStations()));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return "rail-doc-page";
-    }
 
     @GetMapping("/api/stations")
     @ResponseBody
