@@ -133,9 +133,9 @@ export default {
 
 function getFilenameFromDoc(railDoc,fileExtension) {
     let date = new Date(railDoc.dateStamp);
-    const day = date.getDay() < 10 ? '0' + date.getDay() : date.getDay();
-    const month  = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
-
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    let month  = date.getMonth() +1;
+    month = month < 10 ? '0' + month : month;
     date = day + '_' + month + '_' + date.getFullYear();
     const docNumber = railDoc.docNumber;
     const cargoSender = railDoc.cargoSender.railroadCode;
