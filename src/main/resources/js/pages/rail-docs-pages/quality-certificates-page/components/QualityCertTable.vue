@@ -73,7 +73,7 @@
                     <th class="text-center">Дополнительно</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="certificatesTableBody">
                     <template v-for="doc in documentsMainFilter(railroadDocuments)">
                         <tr :class="{'has-cert': hasCert(vagon)}" v-for="vagon in vagonFilter(doc.vagonList)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
@@ -209,7 +209,7 @@
             copyTableToClipboard(){
                 this.removeSelection();
 
-                let urlField = document.getElementById('certificatesTable');
+                let urlField = document.getElementById('certificatesTableBody');
                 let range = document.createRange();
                 range.selectNode(urlField);
                 window.getSelection().addRange(range);
