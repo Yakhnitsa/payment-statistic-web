@@ -51,6 +51,9 @@
 </script>
 
 <style scoped>
+    div{
+        display: inline-block;
+    }
     .input-group{
         min-width: 8em;
     }

@@ -7,6 +7,7 @@
                     <input type="checkbox" v-model="allSelected">
                 </th>
                 <th class="sticky-first-column text-center">
+
                     <table-header-with-filter :filter.sync="docNumberFilter"
                         header="№ документа" inputType="search" inputPlaceholder="№ документа">
                     </table-header-with-filter>
@@ -17,11 +18,20 @@
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <span @click="changeSorting('receiveStation')">
+                        <i class="fas fa-sort"></i>
+                    </span>
+                    <!--<sort-icon></sort-icon>-->
                     <table-header-with-filter :filter.sync="sendStationFilter"
                           header="ст Отправления" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <sort-icon class="mr-1"
+                               @change-sorting="changeSorting"
+                               sort-field="receiveStation"
+                               :sorting="sorting"
+                    ></sort-icon>
                     <table-header-with-filter :filter.sync="receiveStationFilter"
                         header="ст Назначения" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
@@ -76,9 +86,7 @@
                 <td class="text-capitalize">{{document.tarifPayer | formatClient}}</td>
                 <td class="text-capitalize">({{document.cargoCode}}) {{document.cargoName}}</td>
                 <td class="text-right">{{document.vagonCount}}</td>
-                <td class="text-right">{{document.fullWeight | formatPayment}}</td>
-                <!--<td class="text-capitalize">{{value.receiveStation | formatStation}}</td>-->
-                <!--<td>{{value}}</td>-->
+                <td class="text-right">{{document.fullWeight | formatWeight}}</td>
             </tr>
             </tbody>
         </table>
@@ -90,9 +98,10 @@
 
     import {mapActions, mapMutations} from 'vuex';
     import TableHeaderWithFilter from "../../../../shared/components/TableHeaderWithFilter.vue";
+    import SortIcon from "../../../../shared/components/SortIcon.vue";
     export default {
         name: "RailroadDocumentsTable",
-        components: {TableHeaderWithFilter},
+        components: {SortIcon, TableHeaderWithFilter},
         props:['railroadDocuments'],
         data(){
             return{
@@ -130,7 +139,10 @@
                     active: false,
                     value: ''
                 },
-
+                sorting:{
+                    asc: true,
+                    field:''
+                }
             }
         },
         computed:{
@@ -178,8 +190,18 @@
             docContainsPdf(railroadDocument){
                 return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
             },
+            changeSorting(field){
+                console.log("changed");
+                if(this.sorting.field === field){
+                    this.sorting.asc = !this.sorting.asc;
+                }
+                else{
+                    this.sorting.asc = true;
+                    this.sorting.field = field;
+                }
+            },
             /*
-            * Filter methods
+             * Filter methods
              */
             docNumberFilterFunc(documents){
                 const docNumb = this.docNumberFilter.value;
@@ -255,8 +277,6 @@
                         doc.cargoCode.indexOf(val) > -1
                 })
             },
-
-
 
         },
         watch:{
