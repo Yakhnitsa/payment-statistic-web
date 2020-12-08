@@ -4,14 +4,23 @@
             <table class="table table-striped table-hover table-sm" id="certificatesTable">
                 <thead>
                 <tr>
-                    <th class="text-center">Отправитель</th>
                     <th class="text-center">
+                        <!--<sort-icon class="mr-1" @change-sorting="changeSorting"-->
+                                   <!--sort-field="cargoSender" :sorting="sorting"/>-->
+                        Отправитель</th>
+                    <th class="text-center">
+                        <sort-icon class="mr-1"
+                                   @change-sorting="changeSorting"
+                                   sort-field="sendStation"
+                                   :sorting="sorting"/>
                         <table-header-with-filter :filter.sync="sendStationFilter"
                                                   header="ст Отправления" inputType="search"
                                                   inputPlaceholder="Код, название">
                         </table-header-with-filter>
                     </th>
                     <th class="text-center">
+                        <sort-icon class="mr-1" @change-sorting="changeSorting"
+                                   sort-field="docDate" :sorting="sorting"/>
                         <table-header-with-filter :filter.sync="dateFilter"
                                                   header="Дата" inputType="date" inputPlaceholder="">
                         </table-header-with-filter>
@@ -61,20 +70,28 @@
                         </div>
                     </th>
                     <th class="text-center">
+                        <sort-icon class="mr-1" @change-sorting="changeSorting"
+                                   sort-field="receiveStation" :sorting="sorting"/>
                         <table-header-with-filter :filter.sync="receiveStationFilter"
                                                   header="ст Назначения" inputType="search"
                                                   inputPlaceholder="Код, название">
                         </table-header-with-filter>
                     </th>
-                    <th class="text-center">Получатель</th>
-                    <th class="text-center">Груз</th>
+                    <th class="text-center">
+                        <!--<sort-icon class="mr-1" @change-sorting="changeSorting"-->
+                                   <!--sort-field="cargoReceiver" :sorting="sorting"/>-->
+                        Получатель</th>
+                    <th class="text-center">
+                        <sort-icon class="mr-1" @change-sorting="changeSorting"
+                                   sort-field="cargoCode" :sorting="sorting"/>
+                        Груз</th>
                     <th class="text-center">Тара</th>
                     <th class="text-center">Нетто</th>
                     <th class="text-center">Дополнительно</th>
                 </tr>
                 </thead>
                 <tbody id="certificatesTableBody">
-                    <template v-for="doc in documentsMainFilter(railroadDocuments)">
+                    <template v-for="doc in sortedDocs">
                         <tr :class="{'has-cert': hasCert(vagon)}" v-for="vagon in vagonFilter(doc.vagonList)">
                             <td class="text-capitalize">{{doc.cargoSender | formatClient}}</td>
                             <td class="text-capitalize">{{doc.sendStation | formatStation}}</td>
@@ -133,10 +150,11 @@
     import { mapActions, mapMutations, mapGetters } from 'vuex';
     import MesssageManager from '../../../../shared/services/messageManager'
     import TableHeaderWithFilter from "../../../../shared/components/TableHeaderWithFilter.vue";
+    import SortIcon from "../../../../shared/components/SortIcon.vue";
 
     export default {
         name: "QualityCertTable",
-        components: {TableHeaderWithFilter},
+        components: {SortIcon, TableHeaderWithFilter},
         data(){
             return {
                 selected:[],
@@ -169,6 +187,10 @@
                 selectedFilter:{
                     active: false,
                     value: false
+                },
+                sorting:{
+                    asc: true,
+                    field:''
                 }
 
             }
@@ -178,7 +200,13 @@
             ...mapGetters({
                 railroadDocuments: 'certStore/documents',
                 changes: 'certStore/changesList'
-            })
+            }),
+            filteredDocs(){
+                return this.documentsMainFilter(this.railroadDocuments);
+            },
+            sortedDocs(){
+                return this.sortDocuments(this.filteredDocs);
+            }
         },
 
         methods:{
@@ -243,6 +271,16 @@
 
             docContainsPdf(railroadDocument){
                 return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
+            },
+
+            changeSorting(field){
+                if(this.sorting.field === field){
+                    this.sorting.asc = !this.sorting.asc;
+                }
+                else{
+                    this.sorting.asc = true;
+                    this.sorting.field = field;
+                }
             },
 
 
@@ -325,6 +363,22 @@
                     )
             },
 
+            sortDocuments(documents){
+                if(this.sorting.field ==='') return documents;
+                const sorted =  documents.sort((a,b) =>{
+                    let aField = a[this.sorting.field];
+                    aField = aField.hasOwnProperty('code') ? aField.code : aField;
+                    let bField = b[this.sorting.field];
+                    bField = bField.hasOwnProperty('code') ? bField.code : bField;
+                    let result = 0;
+                    if(aField > bField) result = 1;
+                    else if(aField < bField) result = -1;
+                    return this.sorting.asc ? result : -result;
+                });
+                console.log(sorted);
+                return sorted;
+            }
+
         },
         watch:{
             selected(){
@@ -352,6 +406,15 @@
             },
             formatClient(client){
                 return '(' + client.railroadCode + ') ' + client.name;
+            },
+
+            sortDocuments(documents){
+                if(this.sorting.field ==='') return documents;
+                return documents.sort((a,b) =>{
+                    let result =  this.sorting.asc ? a[this.sorting.field] < b[this.sorting.field] :
+                        a[this.sorting.field] > b[this.sorting.field];
+                    return result;
+                })
             }
         }
     }

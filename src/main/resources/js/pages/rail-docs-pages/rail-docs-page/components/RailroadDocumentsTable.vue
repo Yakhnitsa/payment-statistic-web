@@ -18,9 +18,6 @@
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
-                    <span @click="changeSorting('receiveStation')">
-                        <i class="fas fa-sort"></i>
-                    </span>
                     <!--<sort-icon></sort-icon>-->
                     <table-header-with-filter :filter.sync="sendStationFilter"
                           header="ст Отправления" inputType="search" inputPlaceholder="код, название">

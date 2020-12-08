@@ -52,7 +52,7 @@
 
 <style scoped>
     div{
-        display: inline-block;
+        display: inline-flex;
     }
     .input-group{
         min-width: 8em;
