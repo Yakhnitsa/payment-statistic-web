@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -51,7 +52,7 @@ public class RailroadDocumentsController {
             @RequestParam(required = false) String cargoCode
             ){
         Pageable pageable = getPageable(currentPage, itemsPerPage, sortBy, sortDirection);
-
+        dateUntil = dateUntil == null ? null :  addDays(dateUntil,1);
         Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
         specification = specification.and(docSpec.sendStationSpec(stationFromCode));
         specification = specification.and(docSpec.receiveStationSpec(stationToCode));
@@ -82,5 +83,13 @@ public class RailroadDocumentsController {
         return "ASC".equalsIgnoreCase(direction) ? PageRequest.of(page,size, Sort.by(sort).ascending())
                 : PageRequest.of(page,size, Sort.by(sort).ascending().descending());
 
+    }
+
+    private Date addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return cal.getTime();
     }
 }
