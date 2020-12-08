@@ -22,10 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class CertRegisterController {
@@ -60,7 +57,7 @@ public class CertRegisterController {
             @RequestParam(required = false) String cargoCode
     ){
         Pageable pageable = getPageable(currentPage, itemsPerPage, sortBy,sortDirection);
-
+        dateUntil = dateUntil == null ? null :  addDays(dateUntil,1);
         Specification<RailroadDocument> specification = docSpec.docDateSpecification(dateFrom,dateUntil);
         specification = specification.and(docSpec.sendStationSpec(stationFromCode));
         specification = specification.and(docSpec.receiveStationSpec(stationToCode));
@@ -118,5 +115,13 @@ public class CertRegisterController {
         public void setChanges(AditionalVagonInfo changes) {
             this.changes = changes;
         }
+    }
+
+    private Date addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return cal.getTime();
     }
 }

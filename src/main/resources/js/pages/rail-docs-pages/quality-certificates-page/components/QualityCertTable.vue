@@ -274,8 +274,12 @@
             },
 
             changeSorting(field){
-                if(this.sorting.field === field){
-                    this.sorting.asc = !this.sorting.asc;
+                if(this.sorting.field === field && this.sorting.asc){
+                    this.sorting.asc = false;
+                }
+                else if(this.sorting.field === field && !this.sorting.asc){
+                    this.sorting.field = '';
+                    this.sorting.asc = true;
                 }
                 else{
                     this.sorting.asc = true;
