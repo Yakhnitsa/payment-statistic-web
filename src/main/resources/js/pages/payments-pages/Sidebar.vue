@@ -9,13 +9,13 @@
             <li>
                 <a href="#payerCodeMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fa fa-exchange-alt"></i>
-                    Код плательщика
+                    Код {{payerCode}}
                 </a>
                 <ul class="collapse list-unstyled" id="payerCodeMenu">
                     <li v-for="code in paymentCodes">
                         <a
                                 :class="payerCode === code ? 'active': ''"
-                                class="dropdown-item text-center"  @click="payerCode = code">
+                                class="text-center dropdown-item"  @click="payerCode = code">
                             {{code}}
                         </a>
                     </li>

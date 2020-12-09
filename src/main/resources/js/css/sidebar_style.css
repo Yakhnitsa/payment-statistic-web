@@ -30,7 +30,7 @@
 }
 
 
-.dropdown-item.active, .dropdown-item:active {
+#sidebar .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
     background-color: #999799;

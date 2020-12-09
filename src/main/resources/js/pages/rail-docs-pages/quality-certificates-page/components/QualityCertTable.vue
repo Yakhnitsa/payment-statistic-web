@@ -218,8 +218,6 @@
                 uploadChangesToServer: 'certStore/uploadChangesToServerAction',
             }),
 
-
-
             sendDataToServer(){
                 this.selected = [];
 
@@ -277,10 +275,10 @@
                 if(this.sorting.field === field && this.sorting.asc){
                     this.sorting.asc = false;
                 }
-                else if(this.sorting.field === field && !this.sorting.asc){
-                    this.sorting.field = '';
-                    this.sorting.asc = true;
-                }
+                // else if(this.sorting.field === field && !this.sorting.asc){
+                //     this.sorting.field = '';
+                //     this.sorting.asc = true;
+                // }
                 else{
                     this.sorting.asc = true;
                     this.sorting.field = field;
@@ -379,7 +377,6 @@
                     else if(aField < bField) result = -1;
                     return this.sorting.asc ? result : -result;
                 });
-                console.log(sorted);
                 return sorted;
             }
 
@@ -409,17 +406,9 @@
                 return '(' + station.code + ') ' + station.rusName.toLowerCase();
             },
             formatClient(client){
+                let clientCode = client.railroadCode;
                 return '(' + client.railroadCode + ') ' + client.name;
             },
-
-            sortDocuments(documents){
-                if(this.sorting.field ==='') return documents;
-                return documents.sort((a,b) =>{
-                    let result =  this.sorting.asc ? a[this.sorting.field] < b[this.sorting.field] :
-                        a[this.sorting.field] > b[this.sorting.field];
-                    return result;
-                })
-            }
         }
     }
 </script>

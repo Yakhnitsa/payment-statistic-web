@@ -188,6 +188,11 @@
                 }
             }
         },
+        watch:{
+            payerCode(){
+                this.updateChart();
+            }
+        },
 
         mounted(){
             this.setDefaultPeriod();
