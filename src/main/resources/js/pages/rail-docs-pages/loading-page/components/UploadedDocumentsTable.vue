@@ -100,7 +100,7 @@
                 return '(' + station.code + ') ' + station.rusName;
             },
             formatClient(client){
-                return '(' + client.railroadCode + ') ' + client.name;
+                return '(' + client.code + ') ' + client.name;
             }
         },
         mounted(){

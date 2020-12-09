@@ -1,5 +1,6 @@
 package com.yurets_y.payment_statistic_web.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ public class Client {
     private String name;
 
     @JsonView(Views.ShortView.class)
+
     private Integer railroadCode;
 
     private Integer edrpuCode;
@@ -56,6 +58,7 @@ public class Client {
         this.name = name;
     }
 
+    @JsonProperty("code")
     public Integer getRailroadCode() {
         return railroadCode;
     }

@@ -13,42 +13,50 @@
                     </table-header-with-filter>
                 </th>
                 <th class="sticky-second-column text-center">
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="docDate" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="dateFilter"
                          header="Дата" inputType="date" inputPlaceholder="">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
-                    <!--<sort-icon></sort-icon>-->
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="sendStation" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="sendStationFilter"
                           header="ст Отправления" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
-                    <sort-icon class="mr-1"
-                               @change-sorting="changeSorting"
-                               sort-field="receiveStation"
-                               :sorting="sorting"
-                    ></sort-icon>
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="receiveStation" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="receiveStationFilter"
                         header="ст Назначения" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="cargoSender" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="cargoSenderFilter"
                         header="Отправитель" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="cargoReceiver" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="cargoReceiverFilter"
                         header="Получатель" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="tarifPayer" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="tarifPayerFilter"
                          header="Плательщик" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
                 </th>
                 <th class="text-center">
+                    <sort-icon class="mr-1" @change-sorting="changeSorting"
+                               sort-field="cargoCode" :sorting="sorting"/>
                     <table-header-with-filter :filter.sync="cargoNameFilter"
                         header="Груз" inputType="search" inputPlaceholder="код, название">
                     </table-header-with-filter>
@@ -58,7 +66,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="document in filteredDocuments">
+            <tr v-for="document in sortedDocs">
                 <td class="sticky-checkbox">
                     <input type="checkbox"
                            :value="document" v-model="selectedDocuments">
@@ -154,6 +162,20 @@
                 documents = this.cargoNameFilterFunc(documents);
                 return documents;
             },
+
+            sortedDocs(){
+                if(this.sorting.field ==='') return this.filteredDocuments;
+                return [...this.filteredDocuments].sort((a,b) =>{
+                    let aField = a[this.sorting.field];
+                    aField = aField.hasOwnProperty('code') ? aField.code : aField;
+                    let bField = b[this.sorting.field];
+                    bField = bField.hasOwnProperty('code') ? bField.code : bField;
+                    let result = 0;
+                    if(aField > bField) result = 1;
+                    else if(aField < bField) result = -1;
+                    return this.sorting.asc ? result : -result;
+                });
+            },
             allSelected:{
                 get(){
                     return this.selectedDocuments.length > 0 ?
@@ -188,9 +210,12 @@
                 return railroadDocument.pdfBackupFilePath == null? false : railroadDocument.pdfBackupFilePath !== '';
             },
             changeSorting(field){
-                console.log("changed");
-                if(this.sorting.field === field){
-                    this.sorting.asc = !this.sorting.asc;
+                if(this.sorting.field === field && this.sorting.asc){
+                    this.sorting.asc = false;
+                }
+                else if(this.sorting.field === field && !this.sorting.asc){
+                    this.sorting.field = '';
+                    this.sorting.asc = true;
                 }
                 else{
                     this.sorting.asc = true;
@@ -242,7 +267,7 @@
                 const val = this.cargoSenderFilter.value.toLowerCase();
                 if(val===''|| !this.cargoSenderFilter.active) return documents;
                 return documents.filter(doc => {
-                    return doc.cargoSender.railroadCode.toString().indexOf(val) > -1 ||
+                    return doc.cargoSender.code.toString().indexOf(val) > -1 ||
                         doc.cargoSender.name.toLowerCase().indexOf(val) > -1
                 })
             },
@@ -251,7 +276,7 @@
                 const val = this.cargoReceiverFilter.value.toLowerCase();
                 if(val===''|| !this.cargoReceiverFilter.active) return documents;
                 return documents.filter(doc => {
-                    return doc.cargoReceiver.railroadCode.toString().indexOf(val) > -1 ||
+                    return doc.cargoReceiver.code.toString().indexOf(val) > -1 ||
                         doc.cargoReceiver.name.toLowerCase().indexOf(val) > -1
                 })
             },
@@ -260,7 +285,7 @@
                 const val = this.tarifPayerFilter.value.toLowerCase();
                 if(val===''|| !this.tarifPayerFilter.active) return documents;
                 return documents.filter(doc => {
-                    return doc.tarifPayer.railroadCode.toString().indexOf(val) > -1 ||
+                    return doc.tarifPayer.code.toString().indexOf(val) > -1 ||
                         doc.tarifPayer.name.toLowerCase().indexOf(val) > -1
                 })
             },
@@ -289,7 +314,7 @@
                 return '(' + station.code + ') ' + station.rusName.toLowerCase();
             },
             formatClient(client){
-                return '(' + client.railroadCode + ') ' + client.name;
+                return '(' + client.code + ') ' + client.name;
             }
         }
     }

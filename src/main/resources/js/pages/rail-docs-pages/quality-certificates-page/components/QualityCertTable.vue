@@ -5,8 +5,8 @@
                 <thead>
                 <tr>
                     <th class="text-center">
-                        <!--<sort-icon class="mr-1" @change-sorting="changeSorting"-->
-                                   <!--sort-field="cargoSender" :sorting="sorting"/>-->
+                        <sort-icon class="mr-1" @change-sorting="changeSorting"
+                                   sort-field="cargoSender" :sorting="sorting"/>
                         Отправитель</th>
                     <th class="text-center">
                         <sort-icon class="mr-1"
@@ -78,8 +78,8 @@
                         </table-header-with-filter>
                     </th>
                     <th class="text-center">
-                        <!--<sort-icon class="mr-1" @change-sorting="changeSorting"-->
-                                   <!--sort-field="cargoReceiver" :sorting="sorting"/>-->
+                        <sort-icon class="mr-1" @change-sorting="changeSorting"
+                                   sort-field="cargoReceiver" :sorting="sorting"/>
                         Получатель</th>
                     <th class="text-center">
                         <sort-icon class="mr-1" @change-sorting="changeSorting"
@@ -205,7 +205,17 @@
                 return this.documentsMainFilter(this.railroadDocuments);
             },
             sortedDocs(){
-                return this.sortDocuments(this.filteredDocs);
+                if(this.sorting.field ==='') return this.filteredDocs;
+                return [...this.filteredDocs].sort((a,b) =>{
+                    let aField = a[this.sorting.field];
+                    aField = aField.hasOwnProperty('code') ? aField.code : aField;
+                    let bField = b[this.sorting.field];
+                    bField = bField.hasOwnProperty('code') ? bField.code : bField;
+                    let result = 0;
+                    if(aField > bField) result = 1;
+                    else if(aField < bField) result = -1;
+                    return this.sorting.asc ? result : -result;
+                });
             }
         },
 
@@ -217,6 +227,7 @@
                 downloadPdf: 'railDocsStore/downloadPdfFileAction',
                 uploadChangesToServer: 'certStore/uploadChangesToServerAction',
             }),
+
 
             sendDataToServer(){
                 this.selected = [];
@@ -275,10 +286,10 @@
                 if(this.sorting.field === field && this.sorting.asc){
                     this.sorting.asc = false;
                 }
-                // else if(this.sorting.field === field && !this.sorting.asc){
-                //     this.sorting.field = '';
-                //     this.sorting.asc = true;
-                // }
+                else if(this.sorting.field === field && !this.sorting.asc){
+                    this.sorting.field = '';
+                    this.sorting.asc = true;
+                }
                 else{
                     this.sorting.asc = true;
                     this.sorting.field = field;
@@ -365,21 +376,6 @@
                     )
             },
 
-            sortDocuments(documents){
-                if(this.sorting.field ==='') return documents;
-                const sorted =  documents.sort((a,b) =>{
-                    let aField = a[this.sorting.field];
-                    aField = aField.hasOwnProperty('code') ? aField.code : aField;
-                    let bField = b[this.sorting.field];
-                    bField = bField.hasOwnProperty('code') ? bField.code : bField;
-                    let result = 0;
-                    if(aField > bField) result = 1;
-                    else if(aField < bField) result = -1;
-                    return this.sorting.asc ? result : -result;
-                });
-                return sorted;
-            }
-
         },
         watch:{
             selected(){
@@ -406,8 +402,8 @@
                 return '(' + station.code + ') ' + station.rusName.toLowerCase();
             },
             formatClient(client){
-                let clientCode = client.railroadCode;
-                return '(' + client.railroadCode + ') ' + client.name;
+                let clientCode = client.code;
+                return '(' + client.code + ') ' + client.name;
             },
         }
     }
