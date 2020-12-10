@@ -17,6 +17,8 @@
     <div id="app">
     </div>
 
+    <script th:src="${isDevMode ? 'http://localhost:8000/core-js.js' : '/js/core-js.bungle.js'}"></script>
+    <script th:src="${isDevMode ? 'http://localhost:8000/vuelib.js' : '/js/vuelib.bungle.js'}"></script>
     <script th:src="${isDevMode ? 'http://localhost:8000/payments.js' : '/js/payments.bungle.js'}"></script>
 
 </body>

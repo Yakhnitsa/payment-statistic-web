@@ -450,3 +450,46 @@ The following guides illustrate how to use some features concretely:
         new BundleAnalyzerPlugin()
       ]
     }    
+    
+### Отделяем крупные импорты
+   Во время анализа станет известно, какие максимальные части кода содержит приложение с указанием их размера. 
+   В этом случаи есть смысл отделить эти части кода от основного файла сборки. 
+   Для этого необходимо настроить оптимизацию, а именно splitChunc
+   в webpack.common.js добавляем оптимизацию:
+   
+    module.exports = {
+    ...
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                moment: {
+                    test: /[\\/]node_modules[\\/]moment[\\/]/,
+                    name: 'moment',
+                    chunks: 'all',
+                },
+                //отделяет в отдельный файл содержимое node_modules/chart.js/dist
+                chart: {
+                    test: /[\\/]node_modules[\\/]chart.js[\\/]dist[\\/]/,
+                    name: 'chartjs',
+                    chunks: 'all',
+                },
+                //отделяет в отдельный файл содержимое node_modules/vue
+                vuelib: {
+                    test: /[\\/]node_modules[\\/]vue[\\/]/,
+                    name: 'vuelib',
+                    chunks: 'all',
+                },
+                // sockjs:{
+                //     test: /[\\/]node_modules[\\/]sockjs-client[\\/]/,
+                //     name: 'sockjs',
+                //     chunks: 'all',
+                // }
+            }
+
+        }
+    },
+   Теперь при сборке от основного файла отделяются файлы библиотек, необходимо их отдельно импортировать в темплейт файлы:
+   
+       <script th:src="${isDevMode ? 'http://localhost:8000/core-js.js' : '/js/core-js.bungle.js'}"></script>
+       <script th:src="${isDevMode ? 'http://localhost:8000/vuelib.js' : '/js/vuelib.bungle.js'}"></script>
+       <script th:src="${isDevMode ? 'http://localhost:8000/payments.js' : '/js/payments.bungle.js'}"></script>

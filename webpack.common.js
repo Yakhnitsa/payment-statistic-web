@@ -44,5 +44,39 @@ module.exports = {
             path.join(__dirname, 'src', 'main', 'resources', 'js'),
             path.join(__dirname, 'node_modules'),
         ],
-    }
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                // moment: {
+                //     test: /[\\/]node_modules[\\/]moment[\\/]/,
+                //     name: 'moment',
+                //     chunks: 'all',
+                // },
+                // // отделяет в отдельный файл содержимое node_modules/chart.js/dist
+                // chart: {
+                //     test: /[\\/]node_modules[\\/]chart.js[\\/]/,
+                //     name: 'chartjs',
+                //     chunks: 'all',
+                // },
+                //отделяет в отдельный файл содержимое node_modules/vue
+                vuelib: {
+                    test: /[\\/]node_modules[\\/]vue[\\/]/,
+                    name: 'vuelib',
+                    chunks: 'all',
+                },
+                corejs: {
+                    test: /[\\/]node_modules[\\/]core-js[\\/]/,
+                    name: 'core-js',
+                    chunks: 'all',
+                },
+                // sockjs:{
+                //     test: /[\\/]node_modules[\\/]sockjs-client[\\/]/,
+                //     name: 'sockjs',
+                //     chunks: 'all',
+                // }
+            }
+
+        }
+    },
 };
