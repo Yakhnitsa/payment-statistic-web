@@ -493,3 +493,14 @@ The following guides illustrate how to use some features concretely:
        <script th:src="${isDevMode ? 'http://localhost:8000/core-js.js' : '/js/core-js.bungle.js'}"></script>
        <script th:src="${isDevMode ? 'http://localhost:8000/vuelib.js' : '/js/vuelib.bungle.js'}"></script>
        <script th:src="${isDevMode ? 'http://localhost:8000/payments.js' : '/js/payments.bungle.js'}"></script>
+       
+### Кеширование ресурсов
+    public class WebMvcConfig implements WebMvcConfigurer{
+        .....
+            @Override
+            public void addResourceHandlers(ResourceHandlerRegistry registry) {
+                registry.addResourceHandler("/js/** ** ")
+                        .addResourceLocations("/js/")
+                        .setCacheControl(CacheControl.maxAge(31, TimeUnit.DAYS));
+            }
+    }       
