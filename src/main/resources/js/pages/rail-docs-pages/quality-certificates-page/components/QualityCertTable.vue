@@ -460,10 +460,10 @@
     .dropdown-divider {
         margin: .2rem 0;
     }
-    .custom-control-input {
-        position: inherit;
-        margin-left: 1em;
-    }
+    /*.custom-control-input {*/
+        /*position: inherit;*/
+        /*margin-left: 1em;*/
+    /*}*/
 
 
 </style>

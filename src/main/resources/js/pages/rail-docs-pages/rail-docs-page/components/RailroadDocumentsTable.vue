@@ -336,7 +336,7 @@
     }
     .sticky-second-column {
         min-width: 9em;
-        max-width: 9em;
+        max-width: 11em;
         left: 11em;
     }
     .sticky-first-column, .sticky-second-column, .sticky-checkbox{

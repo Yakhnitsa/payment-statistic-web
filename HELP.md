@@ -435,3 +435,18 @@ The following guides illustrate how to use some features concretely:
           icon: true,
           rtl: false
     });  `
+    
+    
+## Оптимизация ресурсов
+### Проверка ресурсов
+   Используем [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
+   Установка: `npm install --save-dev webpack-bundle-analyzer`
+   Добавляем плагин в конфигурацию webpack:
+   
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+     
+    module.exports = {
+      plugins: [
+        new BundleAnalyzerPlugin()
+      ]
+    }    

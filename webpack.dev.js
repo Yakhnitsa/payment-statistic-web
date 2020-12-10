@@ -1,6 +1,10 @@
-
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const bungleAnalyzerOptions = {
+    analyzerPort: 8081,
+};
 
 module.exports = merge(common, {
     mode: 'development',
@@ -16,4 +20,9 @@ module.exports = merge(common, {
         stats: 'errors-only',
         clientLogLevel: 'error'
     },
-})
+
+    plugins: [
+        new BundleAnalyzerPlugin()
+    ],
+});
+

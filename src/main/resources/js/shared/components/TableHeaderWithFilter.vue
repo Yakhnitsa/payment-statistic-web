@@ -53,6 +53,7 @@
 <style scoped>
     div{
         display: inline-flex;
+        /*flex-wrap: nowrap;*/
     }
     .input-group{
         min-width: 8em;
