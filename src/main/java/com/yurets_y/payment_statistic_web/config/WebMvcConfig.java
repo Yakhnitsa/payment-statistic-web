@@ -32,8 +32,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/js/** ** ")
-                .addResourceLocations("/js/")
-                .setCacheControl(CacheControl.maxAge(31, TimeUnit.DAYS));
+//        registry.addResourceHandler("/js/** ** ")
+//                .addResourceLocations("classpath:/js/")
+//                .setCacheControl(CacheControl.maxAge(31, TimeUnit.DAYS));
+//        registry.addResourceHandler("/js/** ** ")
+//                .addResourceLocations("classpath:/static/")
+//                .setCacheControl(CacheControl.maxAge(31, TimeUnit.DAYS));
+//        registry.addResourceHandler("/**/** ** ")
+//                .addResourceLocations("classpath:/js/")
+//                .setCacheControl(CacheControl.maxAge(31, TimeUnit.DAYS));
+        registry.addResourceHandler("/**/js/*.js")
+                .addResourceLocations("classpath:/static/")
+                .setCacheControl(CacheControl.maxAge(7, TimeUnit.DAYS));
     }
 }

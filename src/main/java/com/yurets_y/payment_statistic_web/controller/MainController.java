@@ -62,7 +62,7 @@ public class MainController {
             Model model,
             @AuthenticationPrincipal User user
     ) {
-        model.addAttribute("isDevMode", "dev".equals(profile));
+        model.addAttribute("isDevMode", !"dev".equals(profile));//TODO вернуть в зад...
 
         if(user != null){
             model.addAttribute("userRoles", user.getAuthorities());
