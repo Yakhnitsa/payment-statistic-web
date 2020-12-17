@@ -70,4 +70,10 @@ public class PaymentDetailsSpecification {
             }
         };
     }
+
+    public Specification<PaymentDetails> docNumberLikeSpec(String docNumber){
+        return (Specification<PaymentDetails>) (root, criteriaQuery, criteriaBuilder)
+                -> docNumber == null || docNumber.equals("") ? criteriaBuilder.and() :
+                criteriaBuilder.like(root.get("documentNumber"),docNumber);
+    }
 }

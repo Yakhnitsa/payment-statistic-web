@@ -57,10 +57,15 @@
                                 <input type="text" v-model="docNumber" class="form-control" id="inputDocNumber"
                                        placeholder="№ документа">
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputPaymentSum">Сумма платежа</label>
-                                <input type="number" v-model="paymentSum" class="form-control" id="inputPaymentSum"
-                                       placeholder="Сумма">
+                            <div class="form-group col-md-2">
+                                <label for="inputPaymentSumFrom">Мин. сумма платежа</label>
+                                <input type="number" v-model="paymentSumFrom" class="form-control" id="inputPaymentSumFrom"
+                                       placeholder="Сумма с НДС">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputPaymentSumTo">Макс. сумма платежа</label>
+                                <input type="number" v-model="paymentSumTo" class="form-control" id="inputPaymentSumTo"
+                                       placeholder="Сумма с НДС">
                             </div>
                         </div>
                     </div>
@@ -70,32 +75,11 @@
 
         </div>
 
-        <div class="row">
+        <div class="row mx-0">
             <div class="float-right mr-4">
                 <div class="row">
                     <!--<span>Страница</span>-->
-                    <nav aria-label="Page nav ">
-                        <ul class="pagination pagination-sm">
-                            <li class="page-item"
-                                :class="{disabled: currentPage <= 1}">
-                                <a @click="currentPage--" class="page-link"><i class="fas fa-caret-left"></i></a>
-                            </li>
-                            <li>
-                                <select
-                                        v-model="currentPage"
-                                        class="form-control form-control-sm" id="inputPageSelect">
-                                    <option
-                                            :value="page"
-                                            v-for="page in pages">{{page}}</option>
-                                </select>
-                            </li>
-                            <li class="page-item"
-                                :class="{disabled: currentPage >= pages}"
-                            >
-                                <a @click="currentPage++"class="page-link"><i class="fas fa-caret-right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <pageable @changePage="changePage" :total-pages="pages" :current-page="currentPage"></pageable>
 
                 </div>
 
@@ -105,7 +89,7 @@
 
 
         <div class="row container-fluid">
-            <payment-details-table></payment-details-table>
+            <payment-details-table :payment-details="paymentDetails"></payment-details-table>
         </div>
 
     </div>
@@ -118,11 +102,12 @@
     import PaymentDetailsTable from "./components/PaymentDetailsTable.vue";
     import paymentDetailsApi from "../../../api/paymentDetailsApi"
     import StationInput from "../../../shared/components/StationInput.vue";
+    import Pageable from "../../../shared/components/Pageable.vue";
 
     export default {
         name: "PaymentDetailsPage",
         props:['redirectParams'],
-        components: {StationInput, PaymentDetailsTable, PaymentDetailsRequestForm},
+        components: {StationInput, PaymentDetailsTable, PaymentDetailsRequestForm, Pageable},
         data() {
             return {
                 station:{code:'',rusName:'',ukrName:''},
@@ -130,9 +115,10 @@
                 paymentType: '',
                 dateFrom: '',
                 dateUntil: '',
-                currentPage: 1,
+                currentPage: 0,
                 docNumber: '',
-                paymentSum: '',
+                paymentSumFrom: '',
+                paymentSumTo: '',
                 paymentTypes: []
             }
         },
@@ -155,6 +141,9 @@
             stations(){
                 return this.$store.getters.stations
             },
+            paymentDetails(){
+                return this.$store.state.paymentDetailsPage.paymentDetails
+            },
             foundTypes(){
                 const regexp = RegExp(this.paymentType, "i");
                 const filteredArray = this.paymentTypes.filter(type => regexp.test(type));
@@ -164,7 +153,6 @@
                     return []
                 }
                 return filteredArray
-
             }
         },
         methods:{
@@ -174,18 +162,23 @@
                     paymentType: this.paymentType,
                     dateFrom: this.dateFrom,
                     dateUntil: this.dateUntil,
-                    pageNumber: this.currentPage -1,
+                    pageNumber: this.currentPage,
                     stationCode: this.stationCode,
                     docNumber: this.docNumber,
-                    paymentSum: this.paymentSum,
+                    paymentSumFrom: this.paymentSumFrom,
+                    paymentSumTo: this.paymentSumTo,
                 };
                 this.$store.dispatch('getPaymentDetailsAction',params);
             },
+            changePage(page){
+                this.currentPage = page;
+                this.submitForm();
+            }
         },
         watch:{
-            currentPage(){
-                this.submitForm()
-            }
+            // currentPage(){
+            //     this.submitForm()
+            // }
         },
         mounted(){
             if(this.redirectParams){

@@ -72,14 +72,17 @@ public class PaymentDetailsController {
         specification = specification.and(paymentDetailsSpec.payerCodeSpec(payerCode));
         specification = specification.and(paymentDetailsSpec.paymentTypeSpec(paymentType));
         specification = specification.and(paymentDetailsSpec.stationSpec(stationCode));
-
-        paymentSumFrom = paymentSumFrom * 100;
-        paymentSumTo = paymentSumTo * 100;
         specification = specification
-                .and(paymentDetailsSpec.totalPaymentSpec(paymentSumFrom.longValue(),paymentSumTo.longValue()));
-
+                .and(paymentDetailsSpec.totalPaymentSpec(floatToLong(paymentSumFrom),floatToLong(paymentSumTo)));
+        specification = specification.and(paymentDetailsSpec.docNumberLikeSpec(docNumber));
 
         Page<PaymentDetails> paymentDetailsPage = paymentDetailsService.getAllBySpecification(specification,pageable);
+
+        if(paymentDetailsPage.getTotalPages() < pageNumber + 1 && pageNumber > 0){
+            pageable = getPageable(0,itemsPerPage,sortBy,sortDirection);
+            paymentDetailsPage = paymentDetailsService.getAllBySpecification(specification,pageable);
+        }
+
 
 //        Page<PaymentDetails> paymentDetailsPage = paymentDetailsService.getAllWithParameters(
 //                payerCode, paymentType, dateFrom,dateUntil, pageRequest,stationCode,docNumber,paymentSum);
@@ -100,4 +103,14 @@ public class PaymentDetailsController {
 
     }
 
+    private Long floatToLong(Float number){
+        if(number == null ) return null;
+        number = number * 100;
+        return number.longValue();
+    }
+
+    @Autowired
+    public void setPaymentDetailsSpec(PaymentDetailsSpecification paymentDetailsSpec) {
+        this.paymentDetailsSpec = paymentDetailsSpec;
+    }
 }

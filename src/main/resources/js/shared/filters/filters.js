@@ -24,6 +24,12 @@ Vue.filter('formatDate', date => {
     return new Date(date).toLocaleDateString()
 });
 
+Vue.filter('capitalizeText', text =>{
+    return text === null ? '':
+        text.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+
+});
+
 Vue.filter('formatTime', dateString =>{
     const date = new Date(dateString);
     const hours  = date.getHours();

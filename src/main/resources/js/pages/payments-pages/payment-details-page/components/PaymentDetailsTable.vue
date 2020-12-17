@@ -18,7 +18,7 @@
                 <td class="text-center">{{item.paymentListNumber}}</td>
                 <td class="text-center">{{item.date | formatDate}}</td>
                 <td class="text-left">{{item.type}}</td>
-                <td class="text-left">({{item.stationCode}}) {{item.stationName}}</td>
+                <td class="text-left text-capitalize">({{item.stationCode}}) {{item.stationName | capitalizeText}}</td>
                 <td class="text-center">{{item.documentNumber}}</td>
                 <td class="text-right">{{item.payment | formatPayment}}</td>
                 <td class="text-right">{{item.taxPayment | formatPayment}}</td>
@@ -32,14 +32,18 @@
 </template>
 
 <script>
-    import PaymentDetailsRequestForm from "./PaymentDetailsRequestForm.vue";
+    // import PaymentDetailsRequestForm from "./PaymentDetailsRequestForm.vue";
     export default {
         name: "PaymentDetailsTable",
-        components: {PaymentDetailsRequestForm},
+        components: {},
+        props:['payment-details'],
         computed:{
-            paymentDetails(){
-                return this.$store.state.paymentDetailsPage.paymentDetails
-            }
+            // paymentDetails(){
+            //     return this.$store.state.paymentDetailsPage.paymentDetails
+            // }
+        },
+        filters:{
+
         }
     }
 </script>
@@ -96,6 +100,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 15em;
+        /*font-size: .9em;*/
+        padding: .15rem .5rem;
     }
 
     td:hover{
