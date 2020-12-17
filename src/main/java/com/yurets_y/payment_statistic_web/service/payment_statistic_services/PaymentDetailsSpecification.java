@@ -34,20 +34,20 @@ public class PaymentDetailsSpecification {
         };
     }
 
-    public Specification<RailroadDocument> payerCodeSpec(Integer payerCode){
-        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+    public Specification<PaymentDetails> payerCodeSpec(Integer payerCode){
+        return (Specification<PaymentDetails>) (root, criteriaQuery, criteriaBuilder)
                 -> payerCode == null ? criteriaBuilder.and() :
                 criteriaBuilder.equal(root.get("paymentList").get("payerCode"), payerCode);
     }
 
-    public Specification<RailroadDocument> stationSpec(Integer stationCode){
-        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+    public Specification<PaymentDetails> stationSpec(Integer stationCode){
+        return (Specification<PaymentDetails>) (root, criteriaQuery, criteriaBuilder)
                 -> stationCode == null ? criteriaBuilder.and() :
                 criteriaBuilder.equal(root.get("stationCode"),stationCode);
     }
 
-    public Specification<RailroadDocument> paymentTypeSpec(String paymentType){
-        return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
+    public Specification<PaymentDetails> paymentTypeSpec(String paymentType){
+        return (Specification<PaymentDetails>) (root, criteriaQuery, criteriaBuilder)
                 -> paymentType == null || paymentType.equals("") ? criteriaBuilder.and() :
                 criteriaBuilder.equal(root.get("type"),paymentType);
     }
