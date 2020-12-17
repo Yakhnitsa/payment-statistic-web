@@ -1,9 +1,8 @@
-package com.yurets_y.payment_statistic_web.service;
+package com.yurets_y.payment_statistic_web.service.payment_statistic_services;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
 import java.util.Collection;
 
 

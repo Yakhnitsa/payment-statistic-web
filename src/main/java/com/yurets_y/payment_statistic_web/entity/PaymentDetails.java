@@ -39,15 +39,20 @@ public class PaymentDetails {
 
     @JsonView(Views.ShortView.class)
     private String documentNumber;
+
     private String paymentCode;
+
     private String paymentDescription;
 
     @JsonView(Views.ShortView.class)
     private long payment;
+
     @JsonView(Views.ShortView.class)
     private long additionalPayment;
+
     @JsonView(Views.ShortView.class)
     private long taxPayment;
+
     @JsonView(Views.ShortView.class)
     private long totalPayment;
 

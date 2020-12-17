@@ -42,6 +42,7 @@ public class RailroadDocumentsSpecification {
                 -> stationCode == null ? criteriaBuilder.and() :
                     criteriaBuilder.equal(root.get("sendStation").get("code"),stationCode);
     }
+
     public Specification<RailroadDocument> receiveStationSpec(Integer stationCode){
         return (Specification<RailroadDocument>) (root, criteriaQuery, criteriaBuilder)
                 -> stationCode == null ? criteriaBuilder.and() :
@@ -80,8 +81,5 @@ public class RailroadDocumentsSpecification {
                 -> cargoCode == null || cargoCode.equals("") ? criteriaBuilder.and() :
                 criteriaBuilder.equal(root.get("cargoCode"),cargoCode);
     }
-
-
-
 
 }

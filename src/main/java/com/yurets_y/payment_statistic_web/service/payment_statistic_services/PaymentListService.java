@@ -1,4 +1,4 @@
-package com.yurets_y.payment_statistic_web.service;
+package com.yurets_y.payment_statistic_web.service.payment_statistic_services;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;

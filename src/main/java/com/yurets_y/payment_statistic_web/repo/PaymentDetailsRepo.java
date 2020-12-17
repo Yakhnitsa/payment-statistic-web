@@ -1,7 +1,9 @@
 package com.yurets_y.payment_statistic_web.repo;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
+import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.Page;
@@ -10,10 +12,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.Date;
 import java.util.List;
 
-public interface PaymentDetailsRepo extends JpaRepository<PaymentDetails,Long> {
+public interface PaymentDetailsRepo extends JpaRepository<PaymentDetails,Long> , JpaSpecificationExecutor<PaymentDetails> {
 
     List<PaymentDetails> findAllByDateBetween(Date from, Date until);
-
 
     @Query("select pd from PaymentDetails pd where " +
             "pd.paymentList.payerCode = :payer_code and " +

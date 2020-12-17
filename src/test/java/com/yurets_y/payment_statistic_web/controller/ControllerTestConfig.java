@@ -2,7 +2,7 @@ package com.yurets_y.payment_statistic_web.controller;
 
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.PaymentListId;
-import com.yurets_y.payment_statistic_web.service.PaymentListService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.PaymentListService;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;

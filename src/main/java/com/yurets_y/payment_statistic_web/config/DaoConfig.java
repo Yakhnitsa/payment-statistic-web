@@ -2,17 +2,7 @@ package com.yurets_y.payment_statistic_web.config;
 
 import com.yurets_y.payment_statistic_web.repo.PaymentDetailsRepo;
 import com.yurets_y.payment_statistic_web.repo.PaymentListRepo;
-import com.yurets_y.payment_statistic_web.service.PaymentListService;
-import com.yurets_y.payment_statistic_web.service.PaymentListServiceRepoImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.annotation.AliasFor;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 @Configuration
 public class DaoConfig {

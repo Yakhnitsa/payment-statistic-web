@@ -5,20 +5,18 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.yurets_y.payment_statistic_web.entity.PaymentList;
 import com.yurets_y.payment_statistic_web.entity.User;
 import com.yurets_y.payment_statistic_web.entity.Views;
-import com.yurets_y.payment_statistic_web.service.PaymentListService;
-import com.yurets_y.payment_statistic_web.service.TempListService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.PaymentListService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.TempListService;
 import com.yurets_y.payment_statistic_web.service.mail_service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.*;
 
 @RestController

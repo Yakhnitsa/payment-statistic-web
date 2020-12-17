@@ -1,20 +1,16 @@
 package com.yurets_y.payment_statistic_web.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.yurets_y.payment_statistic_web.dto.ChartStatisticDto;
-import com.yurets_y.payment_statistic_web.dto.DailyStatisticDto;
 import com.yurets_y.payment_statistic_web.dto.JsonPage;
 import com.yurets_y.payment_statistic_web.entity.PaymentDetails;
 import com.yurets_y.payment_statistic_web.entity.Views;
-import com.yurets_y.payment_statistic_web.service.PaymentDetailsService;
-import com.yurets_y.payment_statistic_web.service.StatisticService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.PaymentDetailsService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 

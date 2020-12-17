@@ -1,9 +1,10 @@
 package com.yurets_y.payment_statistic_web.service;
 
-import com.yurets_y.payment_statistic_web.service.mail_service.MailService;
 import com.yurets_y.payment_statistic_web.service.parser_services.DocParser;
 import com.yurets_y.payment_statistic_web.service.parser_services.HtmlDocParser;
 import com.yurets_y.payment_statistic_web.service.parser_services.XmlDocParser;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.TempListService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.TempListServiceImpl;
 import org.springframework.context.annotation.*;
 
 @Configuration

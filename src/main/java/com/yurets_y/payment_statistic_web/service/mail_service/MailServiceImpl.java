@@ -1,7 +1,7 @@
 package com.yurets_y.payment_statistic_web.service.mail_service;
 
 //import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import com.yurets_y.payment_statistic_web.service.TempListService;
+import com.yurets_y.payment_statistic_web.service.payment_statistic_services.TempListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
