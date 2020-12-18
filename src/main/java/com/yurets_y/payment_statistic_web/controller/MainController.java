@@ -58,7 +58,7 @@ public class MainController {
     }
 
 
-    @GetMapping("payment-statistic")
+    @GetMapping("payment-statistic/**")
     public String paymentStatistic(
             Model model,
             @AuthenticationPrincipal User user
