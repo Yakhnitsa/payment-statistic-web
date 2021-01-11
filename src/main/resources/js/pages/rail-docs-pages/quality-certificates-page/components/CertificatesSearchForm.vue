@@ -91,8 +91,10 @@
                                 </div>
                                 <hr class="separator">
                                 <div class="row">
-                                    <label for="itemsCountInput" class="col-sm-4 col-form-label text-nowrap">Элементов на странице</label>
-                                    <div class="col-sm-2">
+                                    <label for="itemsCountInput" class="col-md-8 col-lg-4 col-form-label text-nowrap">
+                                        Элементов на странице
+                                    </label>
+                                    <div class="col-md-4 col-lg-2">
                                         <select v-model="searchParams.itemsPerPage" class="form-control" id="itemsCountInput">
                                             <option>10</option>
                                             <option>20</option>
@@ -101,8 +103,8 @@
                                         </select>
 
                                     </div>
-                                    <label class="col-sm-2 col-form-label text-nowrap">Сортировка</label>
-                                    <div class="col-sm-4">
+                                    <label class="col-md-6 col-lg-2 col-form-label text-nowrap">Сортировка</label>
+                                    <div class="col-md-6 col-lg-4 mt-1">
                                         <div class="btn-group btn-group-toggle">
                                             <label class="btn btn-outline-secondary"
                                                    :class="{'active': searchParams.sortDirection === 'desc'}">
@@ -235,6 +237,7 @@
     .modal {
         display: flex;
         flex-direction: column;
+        overflow-y: scroll;
     }
     .form-control {
         width: inherit;
