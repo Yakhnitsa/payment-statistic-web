@@ -2,7 +2,7 @@
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal bd-example-modal-lg" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Поиск ЖД накладных</h5>
@@ -82,17 +82,19 @@
                                         Дата документа
                                         <!--<input type="date" v-model="dateFrom" class="form-control" id="inputDateFrom">-->
                                     </div>
-                                    <div class="form-group col-sm-4 my-auto">
+                                    <div class="form-group col-sm-4 my-auto mt-1">
                                         <input type="date" v-model="searchParams.dateFrom" class="form-control" id="inputDateFrom">
                                     </div>
-                                    <div class="form-group col-sm-4 my-auto">
+                                    <div class="form-group col-sm-4 my-auto mt-1">
                                         <input type="date" v-model="searchParams.dateUntil" class="form-control" id="inputDateUntil">
                                     </div>
                                 </div>
                                 <hr class="separator">
                                 <div class="row">
-                                    <label for="itemsCountInput" class="col-sm-4 col-form-label text-nowrap">Элементов на странице</label>
-                                    <div class="col-sm-2">
+                                    <label for="itemsCountInput" class="col-md-8 col-lg-4 col-form-label text-nowrap">
+                                        Элементов на странице
+                                    </label>
+                                    <div class="col-md-4 col-lg-2">
                                         <select v-model="searchParams.itemsPerPage" class="form-control" id="itemsCountInput">
                                             <option>20</option>
                                             <option>50</option>
@@ -103,8 +105,8 @@
                                         </select>
 
                                     </div>
-                                    <label class="col-sm-2 col-form-label text-nowrap">Сортировка</label>
-                                    <div class="col-sm-4">
+                                    <label class="col-md-6 col-lg-2 col-form-label text-nowrap">Сортировка</label>
+                                    <div class="col-md-6 col-lg-4 mt-1">
                                         <div class="btn-group btn-group-toggle">
                                             <label class="btn btn-outline-secondary"
                                                    :class="{'active': searchParams.sortDirection === 'desc'}" >
@@ -243,6 +245,7 @@
     .modal {
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
     }
 
     .modal-fade-enter,
