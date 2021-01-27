@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Service
 public class VagonService {
 
@@ -57,6 +56,5 @@ public class VagonService {
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);
     }
-
 
 }

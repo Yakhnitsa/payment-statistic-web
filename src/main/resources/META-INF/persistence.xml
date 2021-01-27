@@ -43,6 +43,4 @@
         </properties>
     </persistence-unit>
 
-
-
 </persistence>

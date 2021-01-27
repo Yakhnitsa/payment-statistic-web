@@ -88,6 +88,7 @@ public class RailroadDocument extends AuditableEntity {
 
     @JsonView(Views.ShortView.class)
     private String cargoName;
+
     @JsonView(Views.ShortView.class)
     private String cargoCode;
 
@@ -99,6 +100,7 @@ public class RailroadDocument extends AuditableEntity {
 
     @JsonView(Views.NormalView.class)
     private String column7info;
+
     @JsonView(Views.NormalView.class)
     private String column15info;
 

@@ -19,7 +19,6 @@ public class Client {
     private String name;
 
     @JsonView(Views.ShortView.class)
-
     private Integer railroadCode;
 
     private Integer edrpuCode;
