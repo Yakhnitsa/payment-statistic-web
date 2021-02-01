@@ -1,10 +1,10 @@
-package com.yurets_y.payment_statistic_web.service.saver;
+package com.yurets_y.payment_statistic_web.service.railroad_documents_services;
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 
 import java.util.function.BiFunction;
 
-public enum RailDocFields {
+public enum RailDocFields{
     ORDER_NUMBER("№ п/п",(doc,index) -> index),
     DOC_NUMBER("№ накладной",(doc,index) -> doc.getDocNumber()),
     DOC_DATE("Дата документа",(doc,index) -> doc.getDocDate()),
@@ -50,7 +50,7 @@ public enum RailDocFields {
 //
     TARIF_PAYER_NAME("Плательщик",(doc,index) -> doc.getTarifPayer().getName()),
     PAYER_CODE("Код плательщика",(doc,index) -> doc.getTarifPayer().getRailroadCode()),
-    PAYMENT_SUMM("Сумма платежа",(doc,index) -> doc.getPayment()),
+    PAYMENT_SUMM("Сумма платежа",(doc,index) -> (double)doc.getPayment()/100),
     TARIF_DISTANCE("Тарифное расстояние",(doc,index) -> doc.getTarifDistance()),
 //
     VAGON_NUMBER("№ вагона",(doc,index) -> doc.getVagonList().get(index).getNumber()),
@@ -60,16 +60,14 @@ public enum RailDocFields {
     VAGON_CARRYING_CAPASITY("Г/п вагона",(doc,index) -> doc.getVagonList().get(index).getCarryingCapacity()),
     VAGON_ZPU("ЗПУ вагона",(doc,index) -> doc.getVagonList().get(index).getZpuList()),
     VAGON_ZPU_COUNT("Количество ЗПУ",(doc,index) -> doc.getVagonList().get(index).getZpuCount()),
-    VAGON_PAYMENT("Тариф на вагон",(doc,index) -> doc.getVagonList().get(index).getPayment()),
+    VAGON_PAYMENT("Тариф на вагон",(doc,index) -> (double)doc.getVagonList().get(index).getPayment()/100),
 //
     COLUMN_7_INFO("графа7",(doc,index) -> doc.getColumn7info()),
     COLUMN_15_INFO("графа15",(doc,index) -> doc.getColumn15info()),
 //
 //    SPECIAL_CONDITIONS_STAMP("Особые условия, штамп 717"),
 //
-    VOID_SPACE(" ",(doc,index) -> " ")
-;
-
+    VOID_SPACE(" ",(doc,index) -> " ");
 
     private String title;
 
