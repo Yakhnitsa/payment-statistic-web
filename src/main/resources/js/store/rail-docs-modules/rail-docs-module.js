@@ -138,8 +138,8 @@ function getFilenameFromDoc(railDoc,fileExtension) {
     month = month < 10 ? '0' + month : month;
     date = day + '_' + month + '_' + date.getFullYear();
     const docNumber = railDoc.docNumber;
-    const cargoSender = railDoc.cargoSender.railroadCode;
-    const cargoReceiver = railDoc.cargoReceiver.railroadCode;
+    const cargoSender = railDoc.cargoSender.code;
+    const cargoReceiver = railDoc.cargoReceiver.code;
     const sendStation = railDoc.sendStation.rusName;
     const vagCount = railDoc.vagonCount;
     return date + '_(' + cargoSender + ')_' + sendStation + '_' +
