@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
-
 
 @Service
 public class ExcelDocumentWriterService implements ExcelDocumentWriter {
@@ -72,7 +72,17 @@ public class ExcelDocumentWriterService implements ExcelDocumentWriter {
         for(int i = 0; i < fieldsList.size(); i++){
             Cell cell = currentRow.createCell(i);
             Object value = fieldsList.get(i).getField(document,vagonIndex);
-            cell.setCellValue(value.toString());
+            if(value instanceof Double){
+                cell.setCellValue((Double) value);
+            }else if(value instanceof Integer){
+                cell.setCellValue((Integer) value);
+            }else if(value instanceof Date){
+                cell.setCellValue((Date)value);
+            }
+            else{
+                cell.setCellValue(value.toString());
+            }
+
         }
     }
 

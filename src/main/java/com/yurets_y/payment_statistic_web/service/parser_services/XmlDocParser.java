@@ -52,6 +52,11 @@ public class XmlDocParser extends AbstractDocParser{
 
     @Override
     List<PaymentDetails> getPaymentDetailsByType(String type, ListIterator<Element> iterator) {
+        if(type.equals("ПДВ")){
+            return new ArrayList<>();
+        }
+
+
         if(!iterator.hasNext()) return new ArrayList<>();
 
         List<String> elements = parseChartRow(iterator.next());
@@ -139,9 +144,9 @@ public class XmlDocParser extends AbstractDocParser{
 
     @Override
     List<PaymentDetails> getPayments(String type, Iterator<Element> iterator) {
-        List<String> row = parseChartRow(iterator.next());
         List<PaymentDetails> paymentDetailsList = new ArrayList<>();
-        if (row.size() < 1) return paymentDetailsList;
+        List<String> row = parseChartRow(iterator.next());
+        if (row.size() < 1 ) return paymentDetailsList;
         while (iterator.hasNext()) {
             try {
                 if (row.get(0).matches("Дата")) {

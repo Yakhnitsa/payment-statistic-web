@@ -3,6 +3,7 @@ package com.yurets_y.payment_statistic_web.controller.raildoc_controllers;
 
 import com.yurets_y.payment_statistic_web.entity.RailroadDocument;
 import com.yurets_y.payment_statistic_web.entity.RailroadDocumentId;
+import com.yurets_y.payment_statistic_web.service.railroad_documents_services.ExcelDocumentWriter;
 import com.yurets_y.payment_statistic_web.service.railroad_documents_services.RailroadDocumentsService;
 import com.yurets_y.payment_statistic_web.util.MessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,14 @@ public class RailroadDocumentsDownloadController {
 
     private RailroadDocumentsService documentsService;
 
+    private ExcelDocumentWriter excelDocWriter;
+
     private MessageProvider messageProvider;
 
     @Autowired
-    public RailroadDocumentsDownloadController(RailroadDocumentsService documentsService) {
+    public RailroadDocumentsDownloadController(RailroadDocumentsService documentsService, ExcelDocumentWriter excelDocWriter) {
         this.documentsService = documentsService;
+        this.excelDocWriter = excelDocWriter;
     }
 
     @GetMapping("/file")
@@ -109,18 +113,8 @@ public class RailroadDocumentsDownloadController {
     private String getFileNameASCII(RailroadDocument document, String type) {
         return String.format("%1$td_%1$tm_%1$tY__%2$s_.%3$s",
                 document.getDateStamp(), document.getDocNumber(),type);
-//        Date date = document.getDocDate();
-//        String station = document.getSendStation().getRusName();
-//        int vagCount = document.getVagonCount();
-//        int railroadCode = document.getDocNumber();
-//        int receiveCode = document.getCargoReceiver().getRailroadCode();
-//        String filename = String.format("%1$td_%1$tm_%1$tY__%2$s_%3$d_ваг_ЖД_%4$s_(%5$s).%6$s",
-//                date, station, vagCount, railroadCode, receiveCode, type);
-//        try {
-//            return URLEncoder.encode(filename, "UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            return "file." + type;
-//        }
     }
+
+
 
 }
